@@ -5,27 +5,27 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="https://ssiriyang.github.io">
   <title>设计模式 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="观察者模式与发布订阅模式观察者模式猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现，使用观察者模式；（23种设计模式）gdk内部 Observable， 发布订阅模式发布订阅模式（观察者模式升级版）  区别 spring对发布订阅编程的支持  设计思想解读 基于消息中间件实现分布式事务 削峰填谷 限流 解耦 池化技术 hexo g #完整命令为hexo generate,用于生成静态文件 h">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式">
-<meta property="og:url" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:url" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="酉月未央">
 <meta property="og:description" content="观察者模式与发布订阅模式观察者模式猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现，使用观察者模式；（23种设计模式）gdk内部 Observable， 发布订阅模式发布订阅模式（观察者模式升级版）  区别 spring对发布订阅编程的支持  设计思想解读 基于消息中间件实现分布式事务 削峰填谷 限流 解耦 池化技术 hexo g #完整命令为hexo generate,用于生成静态文件 h">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202921.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_203950.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_205212.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_210538.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202921.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_203950.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_205212.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_210538.png">
 <meta property="article:published_time" content="2020-02-07T03:08:04.496Z">
 <meta property="article:modified_time" content="2020-02-06T14:07:20.609Z">
 <meta property="article:author" content="慕李">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png">
+<meta name="twitter:image" content="https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png">
   
     <link rel="alternative" href="/atom.xml" title="酉月未央" type="application/atom+xml">
   
@@ -70,7 +70,7 @@ var _hmt = _hmt || [];
 		  <h1 class="header-author"><a href="/">慕李</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">心只所向，一履以往，&amp;nbsp;&amp;nbsp;&amp;nbsp; 生如逆旅，一苇以航。</p>
+		<p class="header-subtitle">世事慢随流水，算来一梦浮生</p>
 		
 
 		<nav class="header-menu">
@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
 			  <h1 class="header-author js-header-author">慕李</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>心只所向，一履以往，&amp;nbsp;&amp;nbsp;&amp;nbsp; 生如逆旅，一苇以航。<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>世事慢随流水，算来一梦浮生<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -290,7 +290,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ssiriyang.github.io/2020/02/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
