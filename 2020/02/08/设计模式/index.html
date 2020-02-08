@@ -6,18 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ssiriyang.github.io">
-  <title>Archives | 酉月未央</title>
+  <title>设计模式 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java工程师一枚，这是我的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="酉月未央">
-<meta property="og:url" content="https://ssiriyang.github.io/archives/index.html">
+  <meta name="description" content="观察者模式与发布订阅模式观察者模式猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现，使用观察者模式；（23种设计模式）gdk内部 Observable， 发布订阅模式发布订阅模式（观察者模式升级版）  区别 spring对发布订阅编程的支持  设计思想解读 基于消息中间件实现分布式事务 削峰填谷 限流 解耦 池化技术 hexo g #完整命令为hexo generate,用于生成静态文件 h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="Java工程师一枚，这是我的个人博客">
+<meta property="og:description" content="观察者模式与发布订阅模式观察者模式猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现，使用观察者模式；（23种设计模式）gdk内部 Observable， 发布订阅模式发布订阅模式（观察者模式升级版）  区别 spring对发布订阅编程的支持  设计思想解读 基于消息中间件实现分布式事务 削峰填谷 限流 解耦 池化技术 hexo g #完整命令为hexo generate,用于生成静态文件 h">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202921.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_203950.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_205212.png">
+<meta property="og:image" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_210538.png">
+<meta property="article:published_time" content="2020-02-08T12:35:28.753Z">
+<meta property="article:modified_time" content="2020-02-06T14:07:20.609Z">
 <meta property="article:author" content="慕">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png">
   
     <link rel="alternative" href="/atom.xml" title="酉月未央" type="application/atom+xml">
   
@@ -159,149 +167,179 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-设计模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      设计模式
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+
+        
+        <a href="/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
   	<time datetime="2020-02-08T12:35:28.753Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="观察者模式与发布订阅模式"><a href="#观察者模式与发布订阅模式" class="headerlink" title="观察者模式与发布订阅模式"></a>观察者模式与发布订阅模式</h2><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现，使用观察者模式；（23种设计模式）gdk内部 Observable，</p>
+<h3 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h3><p>发布订阅模式（观察者模式升级版）</p>
+<p><img src="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202348.png" alt="2020-02-01_202348"></p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p><img src="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_202921.png" alt=""></p>
+<h3 id="spring对发布订阅编程的支持"><a href="#spring对发布订阅编程的支持" class="headerlink" title="spring对发布订阅编程的支持"></a>spring对发布订阅编程的支持</h3><p><img src="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_203950.png" alt=""></p>
+<p><img src="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_205212.png" alt=""></p>
+<h3 id="设计思想解读"><a href="#设计思想解读" class="headerlink" title="设计思想解读"></a>设计思想解读</h3><p><img src="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.assets/2020-02-01_210538.png" alt=""></p>
+<p>基于消息中间件实现分布式事务</p>
+<p>削峰填谷 限流 解耦</p>
+<p>池化技术</p>
+<p>hexo g #完整命令为hexo generate,用于生成静态文件</p>
+<p>hexo s #完整命令为hexo server,用于启动服务器，主要用来本地预览</p>
+<p>hexo d #完整命令为hexo deploy,用于将本地文件发布到github等git仓库上</p>
+<p>hexo n “my article” #完整命令为hexo new,用于新建一篇名为“my article”的文章</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ssiriyang.github.io/2020/02/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/23/Spring%20Boot%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/23/Spring%20Boot%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2019-12-23T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
-</a>
-        </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/23/Spring%20Boot%E7%AC%94%E8%AE%B0/">SpringBoot</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2014" class="archive-year">2014</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2014/02/12/about-pjax/" class="archive-article-date">
-  	<time datetime="2014-02-12T00:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/02/12/about-pjax/">pjax: 当ajax遇上pushState</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">html5</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -321,8 +359,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
