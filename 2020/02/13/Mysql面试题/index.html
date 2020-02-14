@@ -6,24 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ssiriyang.github.io">
-  <title>JDK 提供的并发容器总结 | 酉月未央</title>
+  <title>Mysql面试题 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[一 JDK 提供的并发容器总结]JDK 提供的这些容器大部分在 java.util.concurrent 包中。  ConcurrentHashMap: 线程安全的 HashMap CopyOnWriteArrayList: 线程安全的 List，在读多写少的场合性能非常好，远远好于 Vector. ConcurrentLinkedQueue: 高效的并发队列，使用链表实现。可以看做一个线程安全">
+  <meta name="description" content="[toc] 说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**关于二者的对比与总结:   count运算上的区别：因为MyISAM缓存有表meta-data（行数等），因此在做COUNT(*)时对于一个结构很好 的查询是不需要消耗多少资源的。而对于InnoDB来说，则没有这种缓存。  是否支持事务和崩溃后的安全恢复： MyISAM 强调的是性能，每次查询具有原子性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDK 提供的并发容器总结">
-<meta property="og:url" content="https://ssiriyang.github.io/2020/02/13/JDK%20%E6%8F%90%E4%BE%9B%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="Mysql面试题">
+<meta property="og:url" content="https://ssiriyang.github.io/2020/02/13/Mysql%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="[一 JDK 提供的并发容器总结]JDK 提供的这些容器大部分在 java.util.concurrent 包中。  ConcurrentHashMap: 线程安全的 HashMap CopyOnWriteArrayList: 线程安全的 List，在读多写少的场合性能非常好，远远好于 Vector. ConcurrentLinkedQueue: 高效的并发队列，使用链表实现。可以看做一个线程安全">
+<meta property="og:description" content="[toc] 说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**关于二者的对比与总结:   count运算上的区别：因为MyISAM缓存有表meta-data（行数等），因此在做COUNT(*)时对于一个结构很好 的查询是不需要消耗多少资源的。而对于InnoDB来说，则没有这种缓存。  是否支持事务和崩溃后的安全恢复： MyISAM 强调的是性能，每次查询具有原子性">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/51622268.jpg">
-<meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/93666217.jpg">
-<meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/32005738.jpg">
-<meta property="article:published_time" content="2020-02-13T02:44:00.000Z">
-<meta property="article:modified_time" content="2020-02-13T03:06:39.707Z">
+<meta property="article:published_time" content="2020-02-13T08:16:00.000Z">
+<meta property="article:modified_time" content="2020-02-14T03:09:44.655Z">
 <meta property="article:author" content="慕">
-<meta property="article:tag" content="Java容器">
+<meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/51622268.jpg">
   
     <link rel="alternative" href="/atom.xml" title="酉月未央" type="application/atom+xml">
   
@@ -161,86 +157,84 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="Post-JDK 提供的并发容器总结" class="article article-type-Post " itemscope itemprop="blogPost">
+            <article id="Post-Mysql面试题" class="article article-type-Post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JDK 提供的并发容器总结
+      Mysql面试题
     </h1>
   
 
         
-        <a href="/2020/02/13/JDK%20%E6%8F%90%E4%BE%9B%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-02-13T02:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-13</time>
+        <a href="/2020/02/13/Mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-02-13T08:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一-JDK-提供的并发容器总结"><a href="#一-JDK-提供的并发容器总结" class="headerlink" title="[一 JDK 提供的并发容器总结]"></a>[一 JDK 提供的并发容器总结]</h2><p>JDK 提供的这些容器大部分在 <code>java.util.concurrent</code> 包中。</p>
+        <p>[toc]</p>
+<h3 id="说说自己对于-MySQL-常见的两种存储引擎：MyISAM与-InnoDB的理解"><a href="#说说自己对于-MySQL-常见的两种存储引擎：MyISAM与-InnoDB的理解" class="headerlink" title="说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**"></a>说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**</h3><p>关于二者的对比与总结: </p>
+<ol>
+<li>count运算上的区别：因为MyISAM缓存有表meta-data（行数等），因此在做COUNT(*)时对于一个结构很好 的查询是不需要消耗多少资源的。而对于InnoDB来说，则没有这种缓存。 </li>
+<li>是否支持事务和崩溃后的安全恢复： MyISAM 强调的是性能，每次查询具有原子性,其执行数度比InnoDB类型 更快，但是不提供事务支持。但是InnoDB 提供事务支持事务，外部键等高级数据库功能。 具有事务 (commit)、回滚(rollback)和崩溃修复能力(crash recovery capabilities)的事务安全(transaction-safe (ACID compliant))型表。</li>
+<li>是否支持外键： MyISAM不支持，而InnoDB支持。 MyISAM更适合读密集的表，而InnoDB更适合写密集的的表。 </li>
+</ol>
+<p>应用：在数据库做主从分离的情况下，经常选择MyISAM作 为主库的存储引擎。 一般来说，如果需要事务支持，并且有较高的并发读取频率(MyISAM的表锁的粒度太大，所以 当该表写并发量较高时，要等待的查询就会很多了)，InnoDB是不错的选择。如果你的数据量很大（MyISAM支持压 缩特性可以减少磁盘的空间占用），而且不需要支持事务时，MyISAM是好的选择</p>
+<h3 id="为什么索引能提高查询速度"><a href="#为什么索引能提高查询速度" class="headerlink" title="为什么索引能提高查询速度"></a><strong>为什么索引能提高查询速度</strong></h3><p>先从 MySQL 的基本存储结构说起<br>MySQL的基本存储结构是页(记录都存在页里边)：<br>各个数据页可以组成一个双向链表 每个数据页中的记录又可以组成一个单向链表 每个数据页都会为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录 中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录 以其他列(非主键)作为搜索条件：只能从小记录开始依次遍历单链表中的每条记录。<br>所以说，如果我们写select * from user where indexname = ‘xxx’这样没有进行任何优化的sql语句，默认会这样 做：</p>
+<ol>
+<li>定位到记录所在的页:需要遍历双向链表，找到所在的页 </li>
+<li>.从所在的页内中查找相应的记录:由于不是根据主键查询，只能遍历所在页的单链表了 很明显，在数据量很大的情况下这样查找会很慢！这样的时间复杂度为O（n）。</li>
+</ol>
+<p>使用索引之后</p>
+<p>索引做了些什么可以让我们查询加快速度呢？</p>
+<p>其实就是将无序的数据变成有序(相对)：<br>很明显的是：没有用索引我们是需要遍历双向链表来定位对应的页，现在通过 “目录” 就可以很快地定位到对应的页 上了！（二分查找，时间复杂度近似为O(logn)）<br>其实底层结构就是B+树，B+树作为树的一种实现，能够让我们很快地查找出对应的记录</p>
+<h3 id="Mysql如何为表字段添加索引？？？"><a href="#Mysql如何为表字段添加索引？？？" class="headerlink" title="Mysql如何为表字段添加索引？？？"></a>Mysql如何为表字段添加索引？？？</h3><p>1.添加PRIMARY KEY（主键索引）</p>
+<p>ALTER TABLE <code>table_name</code> ADD PRIMARY KEY ( <code>column</code> )</p>
+<p>2.添加UNIQUE(唯一索引)</p>
+<p>ALTER TABLE <code>table_name</code> ADD UNIQUE ( <code>column</code> ) </p>
+<p>3.添加INDEX(普通索引)</p>
+<p>ALTER TABLE <code>table_name</code> ADD INDEX index_name ( <code>column</code> )</p>
+<p>4.添加FULLTEXT(全文索引)</p>
+<p>ALTER TABLE <code>table_name</code> ADD FULLTEXT ( <code>column</code>) </p>
+<p>5.添加多列索引</p>
+<p>ALTER TABLE <code>table_name</code> ADD INDEX index_name ( <code>column1</code>, <code>column2</code>, <code>column3</code> )</p>
+<h3 id="当MySQL单表记录数过大时，数据库的CRUD性能会明显下-降，一些常见的优化措施如下"><a href="#当MySQL单表记录数过大时，数据库的CRUD性能会明显下-降，一些常见的优化措施如下" class="headerlink" title="当MySQL单表记录数过大时，数据库的CRUD性能会明显下 降，一些常见的优化措施如下"></a>当MySQL单表记录数过大时，数据库的CRUD性能会明显下 降，一些常见的优化措施如下</h3><p>当MySQL单表记录数过大时，数据库的CRUD性能会明显下降，一些常见的优化措施如下： </p>
+<ol>
+<li>限定数据的范围： 务必禁止不带任何限制数据范围条件的查询语句。比如：我们当用户在查询订单历史的时 候，我们可以控制在一个月的范围内。； </li>
+<li>读/写分离： 经典的数据库拆分方案，主库负责写，从库负责读； </li>
+<li>垂直分区： 根据数据库里面数据表的相关性进行拆分。 例如，用户表中既有用户的登录信息又有用户的基本信 息，可以将用户表拆分成两个单独的表，甚至放到单独的库做分库。简单来说垂直拆分是指数据表列的拆分， 把一张列比较多的表拆分为多张表。 如下图所示，这样来说大家应该就更容易理解了。<br>垂直拆分的优点： 可以使得行数据变小，在查询时减少读取的Block数，减少I/O次数。此外，垂直分区可以简 化表的结构，易于维护。垂直拆分的缺点： 主键会出现冗余，需要管理冗余列，并会引起Join操作，可以通过 在应用层进行Join来解决。此外，垂直分区会让事务变得更加复杂； </li>
+<li>水平分区： 保持数据表结构不变，通过某种策略存储数据分片。这样每一片数据分散到不同的表或者库中，达 到了分布式的目的。 水平拆分可以支撑非常大的数据量。 水平拆分是指数据表行的拆分，表的行数超过200万 行时，就会变慢，这时可以把一张的表的数据拆成多张表来存放。举个例子：我们可以将用户信息表拆分成多 个用户信息表，这样就可以避免单一表数据量过大对性能造成影响。<br>水平拆分可以支持非常大的数据量。需要注意的一点是:分表仅仅是解决了单一表数据过大的问题，但由于表的 数据还是在同一台机器上，其实对于提升MySQL并发能力没有什么意义，所以 水平拆分最好分库 。水平拆分能 够 支持非常大的数据量存储，应用端改造也少，但 分片事务难以解决 ，跨界点Join性能较差，逻辑复杂。 《Java工程师修炼之道》的作者推荐 尽量不要对数据进行分片，因为拆分会带来逻辑、部署、运维的各种复杂 度 ，一般的数据表在优化得当的情况下支撑千万以下的数据量是没有太大问题的。如果实在要分片，尽量选择 客户端分片架构，这样可以减少一次和中间件的网络I/O。</li>
+</ol>
+<p>下面补充一下数据库分片的两种常见方案：<br>客户端代理： 分片逻辑在应用端，封装在jar包中，通过修改或者封装JDBC层来实现。 当当网的 ShardingJDBC 、阿里的TDDL是两种比较常用的实现。 中间件代理： 在应用和数据中间加了一个代理层。分片逻辑统一维护在中间件服务中。 我们现在谈的 Mycat 、360的Atlas、网易的DDB等等都是这种架构的实现。 </p>
+<h3 id="事务隔离级"><a href="#事务隔离级" class="headerlink" title="事务隔离级"></a>事务隔离级</h3><p>什么是事务?<br>事务是逻辑上的一组操作，要么都执行，要么都不执行。<br>事务经典也经常被拿出来说例子就是转账了。假如小明要给小红转账1000元，这个转账会涉及到两个关键操作就 是：将小明的余额减少1000元，将小红的余额增加1000元。万一在这两个操作之间突然出现错误比如银行系统崩 溃，导致小明余额减少而小红的余额没有增加，这样就不对了。事务就是保证这两个关键操作要么都成功，要么都要 失败。 事物的特性(ACID）</p>
+<ol>
+<li>原子性： 事务是小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用； </li>
+<li>一致性： 执行事务前后，数据保持一致，多个事务对同一个数据读取的结果是相同的； </li>
+<li>隔离性： 并发访问数据库时，一个用户的事务不被其他事务所干扰，各并发事务之间数据库是独立的；</li>
+<li>持久性: 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影 响。 </li>
+</ol>
+<h3 id="并发事务带来的问题"><a href="#并发事务带来的问题" class="headerlink" title="并发事务带来的问题"></a>并发事务带来的问题</h3><p>在典型的应用程序中，多个事务并发运行，经常会操作相同的数据来完成各自的任务（多个用户对        统一数据进行操 作）。并发虽然是必须的，但可能会导致以下的问题。</p>
 <ul>
-<li><strong>ConcurrentHashMap:</strong> 线程安全的 HashMap</li>
-<li><strong>CopyOnWriteArrayList:</strong> 线程安全的 List，在读多写少的场合性能非常好，远远好于 Vector.</li>
-<li><strong>ConcurrentLinkedQueue:</strong> 高效的并发队列，使用链表实现。可以看做一个线程安全的 LinkedList，这是一个非阻塞队列。</li>
-<li><strong>BlockingQueue:</strong> 这是一个接口，JDK 内部通过链表、数组等方式实现了这个接口。表示阻塞队列，非常适合用于作为数据共享的通道。</li>
-<li><strong>ConcurrentSkipListMap:</strong> 跳表的实现。这是一个 Map，使用跳表的数据结构进行快速查找。</li>
+<li>脏读（Dirty read）: 当一个事务正在访问数据并且对数据进行了修改，而这种修改还没有提交到数据库中，这 时另外一个事务也访问了这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据，那么另外一个 事务读到的这个数据是“脏数据”，依据“脏数据”所做的操作可能是不正确的。 </li>
+<li>丢失修改（Lost to modify）: 指在一个事务读取一个数据时，另外一个事务也访问了该数据，那么在第一个事 务中修改了这个数据后，第二个事务也修改了这个数据。这样第一个事务内的修改结果就被丢失，因此称为丢失修改。 例如：事务1读取某表中的数据A=20，事务2也读取A=20，事务1修改A=A-1，事务2也修改A=A-1， 终结果A=19，事务1的修改被丢失。 </li>
+<li>不可重复读（Unrepeatableread）: 指在一个事务内多次读同一数据。在这个事务还没有结束时，另一个事务 也访问该数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改导致第一个事务两次读取的 数据可能不太一样。这就发生了在一个事务内两次读到的数据是不一样的情况，因此称为不可重复读。 </li>
+<li>幻读（Phantom read）: 幻读与不可重复读类似。它发生在一个事务（T1）读取了几行数据，接着另一个并发 事务（T2）插入了一些数据时。在随后的查询中，第一个事务（T1）就会发现多了一些原本不存在的记录，就 好像发生了幻觉一样，所以称为幻读。</li>
 </ul>
-<h2 id="二-ConcurrentHashMap"><a href="#二-ConcurrentHashMap" class="headerlink" title="[二 ConcurrentHashMap]"></a>[二 ConcurrentHashMap]</h2><p>我们知道 HashMap 不是线程安全的，在并发场景下如果要保证一种可行的方式是使用 <code>Collections.synchronizedMap()</code> 方法来包装我们的 HashMap。但这是通过使用一个全局的锁来同步不同线程间的并发访问，因此会带来不可忽视的性能问题。</p>
-<p>所以就有了 HashMap 的线程安全版本—— ConcurrentHashMap 的诞生。在 ConcurrentHashMap 中，无论是读操作还是写操作都能保证很高的性能：在进行读操作时(几乎)不需要加锁，而在写操作时通过锁分段技术只对所操作的段加锁而不影响客户端对其它段的访问。</p>
-<p>关于 ConcurrentHashMap 相关问题，我在 <a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/Java集合框架常见面试题.md" target="_blank" rel="noopener">Java 集合框架常见面试题</a> 这篇文章中已经提到过。下面梳理一下关于 ConcurrentHashMap 比较重要的问题：</p>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>SQL 标准定义了四个隔离级别： </p>
 <ul>
-<li><a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/Java集合框架常见面试题.md#concurrenthashmap-和-hashtable-的区别" target="_blank" rel="noopener">ConcurrentHashMap 和 Hashtable 的区别</a></li>
-<li><a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/Java集合框架常见面试题.md#concurrenthashmap线程安全的具体实现方式底层具体实现" target="_blank" rel="noopener">ConcurrentHashMap 线程安全的具体实现方式/底层具体实现</a></li>
+<li>READ-UNCOMMITTED(读取未提交)： 低的隔离级别，允许读取尚未提交的数据变更，可能会导致脏读、幻 读或不可重复读 </li>
+<li>READ-COMMITTED(读取已提交): 允许读取并发事务已经提交的数据，可以阻止脏读，但是幻读或不可重复读 仍有可能发生 </li>
+<li>REPEATABLE-READ（可重复读）: 对同一字段的多次读取结果都是一致的，除非数据是被本身事务自己所修 改，可以阻止脏读和不可重复读，但幻读仍有可能发生。 </li>
+<li>SERIALIZABLE(可串行化): 高的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个执行，这样事务 之间就完全不可能产生干扰，也就是说，该级别可以防止脏读、不可重复读以及幻读。</li>
 </ul>
-<h2 id="三-CopyOnWriteArrayList"><a href="#三-CopyOnWriteArrayList" class="headerlink" title="[三 CopyOnWriteArrayList]"></a>[三 CopyOnWriteArrayList]</h2><h3 id="3-1-CopyOnWriteArrayList-简介"><a href="#3-1-CopyOnWriteArrayList-简介" class="headerlink" title="[3.1 CopyOnWriteArrayList 简介]"></a>[3.1 CopyOnWriteArrayList 简介]</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CopyOnWriteArrayList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">extends</span> <span class="title">Object</span></span></span><br><span class="line"><span class="class"><span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span></span><br></pre></td></tr></table></figure>
-
-<p>在很多应用场景中，读操作可能会远远大于写操作。由于读操作根本不会修改原有的数据，因此对于每次读取都进行加锁其实是一种资源浪费。我们应该允许多个线程同时访问 List 的内部数据，毕竟读取操作是安全的。</p>
-<p>这和我们之前在多线程章节讲过 <code>ReentrantReadWriteLock</code> 读写锁的思想非常类似，也就是读读共享、写写互斥、读写互斥、写读互斥。JDK 中提供了 <code>CopyOnWriteArrayList</code> 类比相比于在读写锁的思想又更进一步。为了将读取的性能发挥到极致，<code>CopyOnWriteArrayList</code> 读取是完全不用加锁的，并且更厉害的是：写入也不会阻塞读取操作。只有写入和写入之间需要进行同步等待。这样一来，读操作的性能就会大幅度提升。<strong>那它是怎么做的呢？</strong></p>
-<h3 id="3-2-CopyOnWriteArrayList-是如何做到的？"><a href="#3-2-CopyOnWriteArrayList-是如何做到的？" class="headerlink" title="[3.2 CopyOnWriteArrayList 是如何做到的？]"></a>[3.2 CopyOnWriteArrayList 是如何做到的？]</h3><p><code>CopyOnWriteArrayList</code> 类的所有可变操作（add，set 等等）都是通过创建底层数组的新副本来实现的。当 List 需要被修改的时候，我并不修改原有内容，而是对原有数据进行一次复制，将修改的内容写入副本。写完之后，再将修改完的副本替换原来的数据，这样就可以保证写操作不会影响读操作了。</p>
-<p>从 <code>CopyOnWriteArrayList</code> 的名字就能看出<code>CopyOnWriteArrayList</code> 是满足<code>CopyOnWrite</code> 的 ArrayList，所谓<code>CopyOnWrite</code> 也就是说：在计算机，如果你想要对一块内存进行修改时，我们不在原有内存块中进行写操作，而是将内存拷贝一份，在新的内存中进行写操作，写完之后呢，就将指向原来内存指针指向新的内存，原来的内存就可以被回收掉了。</p>
-<h3 id="3-3-CopyOnWriteArrayList-读取和写入源码简单分析"><a href="#3-3-CopyOnWriteArrayList-读取和写入源码简单分析" class="headerlink" title="[3.3 CopyOnWriteArrayList 读取和写入源码简单分析]"></a>[3.3 CopyOnWriteArrayList 读取和写入源码简单分析]</h3><h4 id="3-3-1-CopyOnWriteArrayList-读取操作的实现"><a href="#3-3-1-CopyOnWriteArrayList-读取操作的实现" class="headerlink" title="[3.3.1 CopyOnWriteArrayList 读取操作的实现]"></a>[3.3.1 CopyOnWriteArrayList 读取操作的实现]</h4><p>读取操作没有任何同步控制和锁操作，理由就是内部数组 array 不会发生修改，只会被另外一个 array 替换，因此可以保证数据安全。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** The array, accessed only via getArray/setArray. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> Object[] array;</span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> get(getArray(), index);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line"><span class="function"><span class="keyword">private</span> E <span class="title">get</span><span class="params">(Object[] a, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (E) a[index];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">final</span> Object[] getArray() &#123;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-3-2-CopyOnWriteArrayList-写入操作的实现"><a href="#3-3-2-CopyOnWriteArrayList-写入操作的实现" class="headerlink" title="[3.3.2 CopyOnWriteArrayList 写入操作的实现]"></a>[3.3.2 CopyOnWriteArrayList 写入操作的实现]</h4><p>CopyOnWriteArrayList 写入操作 add() 方法在添加集合的时候加了锁，保证了同步，避免了多线程写的时候会 copy 出多个副本出来。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Appends the specified element to the end of this list.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> e element to be appended to this list</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; (as specified by &#123;<span class="doctag">@link</span> Collection#add&#125;)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">    lock.lock();<span class="comment">//加锁</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        <span class="keyword">int</span> len = elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + <span class="number">1</span>);<span class="comment">//拷贝新数组</span></span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();<span class="comment">//释放锁</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="四-ConcurrentLinkedQueue"><a href="#四-ConcurrentLinkedQueue" class="headerlink" title="[四 ConcurrentLinkedQueue]"></a>[四 ConcurrentLinkedQueue]</h2><p>Java 提供的线程安全的 Queue 可以分为<strong>阻塞队列</strong>和<strong>非阻塞队列</strong>，其中阻塞队列的典型例子是 BlockingQueue，非阻塞队列的典型例子是 ConcurrentLinkedQueue，在实际应用中要根据实际需要选用阻塞队列或者非阻塞队列。 <strong>阻塞队列可以通过加锁来实现，非阻塞队列可以通过 CAS 操作实现。</strong></p>
-<p>从名字可以看出，<code>ConcurrentLinkedQueue</code>这个队列使用链表作为其数据结构．ConcurrentLinkedQueue 应该算是在高并发环境中性能最好的队列了。它之所有能有很好的性能，是因为其内部复杂的实现。</p>
-<p>ConcurrentLinkedQueue 内部代码我们就不分析了，大家知道 ConcurrentLinkedQueue 主要使用 CAS 非阻塞算法来实现线程安全就好了。</p>
-<p>ConcurrentLinkedQueue 适合在对性能要求相对较高，同时对队列的读写存在多个线程同时进行的场景，即如果对队列加锁的成本较高则适合使用无锁的 ConcurrentLinkedQueue 来替代。</p>
-<h2 id="五-BlockingQueue"><a href="#五-BlockingQueue" class="headerlink" title="[五 BlockingQueue]"></a>[五 BlockingQueue]</h2><h3 id="5-1-BlockingQueue-简单介绍"><a href="#5-1-BlockingQueue-简单介绍" class="headerlink" title="[5.1 BlockingQueue 简单介绍]"></a>[5.1 BlockingQueue 简单介绍]</h3><p>上面我们己经提到了 ConcurrentLinkedQueue 作为高性能的非阻塞队列。下面我们要讲到的是阻塞队列——BlockingQueue。阻塞队列（BlockingQueue）被广泛使用在“生产者-消费者”问题中，其原因是 BlockingQueue 提供了可阻塞的插入和移除的方法。当队列容器已满，生产者线程会被阻塞，直到队列未满；当队列容器为空时，消费者线程会被阻塞，直至队列非空时为止。</p>
-<p>BlockingQueue 是一个接口，继承自 Queue，所以其实现类也可以作为 Queue 的实现来使用，而 Queue 又继承自 Collection 接口。下面是 BlockingQueue 的相关实现类：</p>
-<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/51622268.jpg" alt="BlockingQueue 的实现类"></p>
-<p><strong>下面主要介绍一下:ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue，这三个 BlockingQueue 的实现类。</strong></p>
-<h3 id="5-2-ArrayBlockingQueue"><a href="#5-2-ArrayBlockingQueue" class="headerlink" title="[5.2 ArrayBlockingQueue]"></a>[5.2 ArrayBlockingQueue]</h3><p><strong>ArrayBlockingQueue</strong> 是 BlockingQueue 接口的有界队列实现类，底层采用<strong>数组</strong>来实现。ArrayBlockingQueue 一旦创建，容量不能改变。其并发控制采用可重入锁来控制，不管是插入操作还是读取操作，都需要获取到锁才能进行操作。当队列容量满时，尝试将元素放入队列将导致操作阻塞;尝试从一个空队列中取一个元素也会同样阻塞。</p>
-<p>ArrayBlockingQueue 默认情况下不能保证线程访问队列的公平性，所谓公平性是指严格按照线程等待的绝对时间顺序，即最先等待的线程能够最先访问到 ArrayBlockingQueue。而非公平性则是指访问 ArrayBlockingQueue 的顺序不是遵守严格的时间顺序，有可能存在，当 ArrayBlockingQueue 可以被访问时，长时间阻塞的线程依然无法访问到 ArrayBlockingQueue。如果保证公平性，通常会降低吞吐量。如果需要获得公平性的 ArrayBlockingQueue，可采用如下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> ArrayBlockingQueue&lt;Integer&gt; blockingQueue = <span class="keyword">new</span> ArrayBlockingQueue&lt;Integer&gt;(<span class="number">10</span>,<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-3-LinkedBlockingQueue"><a href="#5-3-LinkedBlockingQueue" class="headerlink" title="[5.3 LinkedBlockingQueue]"></a>[5.3 LinkedBlockingQueue]</h3><p><strong>LinkedBlockingQueue</strong> 底层基于<strong>单向链表</strong>实现的阻塞队列，可以当做无界队列也可以当做有界队列来使用，同样满足 FIFO 的特性，与 ArrayBlockingQueue 相比起来具有更高的吞吐量，为了防止 LinkedBlockingQueue 容量迅速增，损耗大量内存。通常在创建 LinkedBlockingQueue 对象时，会指定其大小，如果未指定，容量等于 Integer.MAX_VALUE。</p>
-<p><strong>相关构造方法:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *某种意义上的无界队列</span></span><br><span class="line"><span class="comment"> * Creates a &#123;<span class="doctag">@code</span> LinkedBlockingQueue&#125; with a capacity of</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> Integer#MAX_VALUE&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedBlockingQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *有界队列</span></span><br><span class="line"><span class="comment"> * Creates a &#123;<span class="doctag">@code</span> LinkedBlockingQueue&#125; with the given (fixed) capacity.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> capacity the capacity of this queue</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IllegalArgumentException if &#123;<span class="doctag">@code</span> capacity&#125; is not greater</span></span><br><span class="line"><span class="comment"> *         than zero</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedBlockingQueue</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (capacity &lt;= <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">    last = head = <span class="keyword">new</span> Node&lt;E&gt;(<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-4-PriorityBlockingQueue"><a href="#5-4-PriorityBlockingQueue" class="headerlink" title="[5.4 PriorityBlockingQueue]"></a>[5.4 PriorityBlockingQueue]</h3><p><strong>PriorityBlockingQueue</strong> 是一个支持优先级的无界阻塞队列。默认情况下元素采用自然顺序进行排序，也可以通过自定义类实现 <code>compareTo()</code> 方法来指定元素排序规则，或者初始化时通过构造器参数 <code>Comparator</code> 来指定排序规则。</p>
-<p>PriorityBlockingQueue 并发控制采用的是 <strong>ReentrantLock</strong>，队列为无界队列（ArrayBlockingQueue 是有界队列，LinkedBlockingQueue 也可以通过在构造函数中传入 capacity 指定队列最大的容量，但是 PriorityBlockingQueue 只能指定初始的队列大小，后面插入元素的时候，<strong>如果空间不够的话会自动扩容</strong>）。</p>
-<p>简单地说，它就是 PriorityQueue 的线程安全版本。不可以插入 null 值，同时，插入队列的对象必须是可比较大小的（comparable），否则报 ClassCastException 异常。它的插入操作 put 方法不会 block，因为它是无界队列（take 方法在队列为空的时候会阻塞）。</p>
-<p><strong>推荐文章：</strong></p>
-<p>《解读 Java 并发队列 BlockingQueue》</p>
-<p><a href="https://javadoop.com/post/java-concurrent-queue" target="_blank" rel="noopener">https://javadoop.com/post/java-concurrent-queue</a></p>
-<h2 id="六-ConcurrentSkipListMap"><a href="#六-ConcurrentSkipListMap" class="headerlink" title="[六 ConcurrentSkipListMap]"></a>[六 ConcurrentSkipListMap]</h2><p>下面这部分内容参考了极客时间专栏<a href="https://time.geekbang.org/column/intro/126?code=zl3GYeAsRI4rEJIBNu5B/km7LSZsPDlGWQEpAYw5Vu0=&utm_term=SPoster" target="_blank" rel="noopener">《数据结构与算法之美》</a>以及《实战 Java 高并发程序设计》。</p>
-<p><strong>为了引出 ConcurrentSkipListMap，先带着大家简单理解一下跳表。</strong></p>
-<p>对于一个单链表，即使链表是有序的，如果我们想要在其中查找某个数据，也只能从头到尾遍历链表，这样效率自然就会很低，跳表就不一样了。跳表是一种可以用来快速查找的数据结构，有点类似于平衡树。它们都可以对元素进行快速的查找。但一个重要的区别是：对平衡树的插入和删除往往很可能导致平衡树进行一次全局的调整。而对跳表的插入和删除只需要对整个数据结构的局部进行操作即可。这样带来的好处是：在高并发的情况下，你会需要一个全局锁来保证整个平衡树的线程安全。而对于跳表，你只需要部分锁即可。这样，在高并发环境下，你就可以拥有更好的性能。而就查询的性能而言，跳表的时间复杂度也是 <strong>O(logn)</strong> 所以在并发数据结构中，JDK 使用跳表来实现一个 Map。</p>
-<p>跳表的本质是同时维护了多个链表，并且链表是分层的，</p>
-<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/93666217.jpg" alt="2级索引跳表"></p>
-<p>最低层的链表维护了跳表内所有的元素，每上面一层链表都是下面一层的子集。</p>
-<p>跳表内的所有链表的元素都是排序的。查找时，可以从顶级链表开始找。一旦发现被查找的元素大于当前链表中的取值，就会转入下一层链表继续找。这也就是说在查找过程中，搜索是跳跃式的。如上图所示，在跳表中查找元素 18。</p>
-<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/32005738.jpg" alt="在跳表中查找元素18"></p>
-<p>查找 18 的时候原来需要遍历 18 次，现在只需要 7 次即可。针对链表长度比较大的时候，构建索引查找效率的提升就会非常明显。</p>
-<p>从上面很容易看出，<strong>跳表是一种利用空间换时间的算法。</strong></p>
-<p>使用跳表实现 Map 和使用哈希算法实现 Map 的另外一个不同之处是：哈希并不会保存元素的顺序，而跳表内所有的元素都是排序的。因此在对跳表进行遍历时，你会得到一个有序的结果。所以，如果你的应用需要有序性，那么跳表就是你不二的选择。JDK 中实现这一数据结构的类是 ConcurrentSkipListMap。</p>
+<p>MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重读）。我们可以通过 SELECT @@tx_isolation;命令来查看</p>
+<p>这里需要注意的是：与 SQL 标准不同的地方在于InnoDB 存储引擎在 REPEATABLE-READ（可重读）事务隔离级别 下使用的是Next-Key Lock 锁算法，因此可以避免幻读的产生，这与其他数据库系统(如 SQL Server)是不同的。</p>
+<p>所以 说InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重读） 已经可以完全保证事务的隔离性要 求，即达到了 SQL标准的SERIALIZABLE(可串行化)隔离级别。 因为隔离级别越低，事务请求的锁越少，所以大部分数据库系统的隔离级别都是READ-COMMITTED(读取提交内 容):，但是你要知道的是InnoDB 存储引擎默认使用 REPEATABLE-READ（可重读）并不会有任何性能损失。<br>InnoDB 存储引擎在 分布式事务 的情况下一般会用到SERIALIZABLE(可串行化)隔离级别。 </p>
 
       
 
@@ -285,7 +279,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -341,7 +335,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://ssiriyang.github.io/2020/02/13/JDK%20%E6%8F%90%E4%BE%9B%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ssiriyang.github.io/2020/02/13/Mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -355,18 +349,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2020/02/13/JVM%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JVM高频面试题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/12/HashMap%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HashMap 源码学习</div>
+    <a href="/2020/02/13/JVM%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM高频面试题</div>
       <i class="icon-circle-right"></i>
     </a>
   
