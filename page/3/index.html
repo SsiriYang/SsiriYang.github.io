@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ssiriyang.github.io">
-  <title>Tag: Java容器 | 酉月未央</title>
+  <title>酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Java工程师一枚，这是我的个人博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="酉月未央">
-<meta property="og:url" content="https://ssiriyang.github.io/tags/Java%E5%AE%B9%E5%99%A8/index.html">
+<meta property="og:url" content="https://ssiriyang.github.io/page/3/index.html">
 <meta property="og:site_name" content="酉月未央">
 <meta property="og:description" content="Java工程师一枚，这是我的个人博客">
 <meta property="og:locale" content="en_US">
@@ -157,210 +157,171 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="Post-Redis面试" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/13/Redis%E9%9D%A2%E8%AF%95/">Redis</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/13/Redis%E9%9D%A2%E8%AF%95/" class="archive-article-date">
+  	<time datetime="2019-08-13T08:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
+</a>
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="6-1-redis-简介"><a href="#6-1-redis-简介" class="headerlink" title="*6.1 redis 简介 *"></a>*<em>6.1 redis 简介 *</em></h2><p>简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。 </p>
+<h2 id="6-2-为什么要用-redis-为什么要用缓存"><a href="#6-2-为什么要用-redis-为什么要用缓存" class="headerlink" title="6.2 为什么要用 redis /为什么要用缓存"></a>6.2 为什么要用 redis /为什么要用缓存</h2><p>主要从“高性能”和“高并发”这两点来看待这个问题。</p>
+<ol>
+<li>高性能：<br>假如用户第一次访问数据库中的某些数据。这个过程会比较慢，因为是从硬盘上读取的。将该用户访问的数据存在数 缓存中，这样下一次再访问这些数据的时候就可以直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当 快。如果数据库中的对应数据改变的之后，同步改变缓存中相应的数据即可！</li>
+<li>高并发：<br>直接操作缓存能够承受的请求是远远大于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中 去，这样用户的一部分请求会直接到缓存这里而不用经过数据库。</li>
+</ol>
+<h2 id="6-3-为什么要用-redis-而不用-map-guava-做缓存"><a href="#6-3-为什么要用-redis-而不用-map-guava-做缓存" class="headerlink" title="6.3 为什么要用 redis 而不用 map/guava 做缓存?"></a>6.3 为什么要用 redis 而不用 map/guava 做缓存?</h2><p>下面的内容来自 segmentfault 一位网友的提问，地址：<a href="https://segmentfault.com/q/1010000009106416" target="_blank" rel="noopener">https://segmentfault.com/q/1010000009106416</a> </p>
+<p>缓存分为本地缓存和分布式缓存。以 Java 为例，使用自带的 map 或者 guava 实现的是本地缓存，主要的特点是 轻量以及快速，生命周期随着 jvm 的销毁而结束，并且在多实例的情况下，每个实例都需要各自保存一份缓存，缓 存不具有一致性。<br>使用 redis 或 memcached 之类的称为分布式缓存，在多实例的情况下，各实例共用一份缓存数据，缓存具有一致 性。缺点是需要保持 redis 或 memcached服务的高可用，整个程序架构上较为复杂。</p>
+<h2 id="6-4-redis-和-memcached-的区别"><a href="#6-4-redis-和-memcached-的区别" class="headerlink" title="6.4 redis 和 memcached 的区别"></a>6.4 redis 和 memcached 的区别</h2><p>对于 redis 和 memcached 我总结了下面四点。现在公司一般都是用 redis 来实现缓存，而且 redis 自身也越来越强 大了！</p>
+<ol>
+<li><p>redis支持更丰富的数据类型（支持更复杂的应用场景）：Redis不仅仅支持简单的k/v类型的数据，同时还提供 list，set，zset，hash等数据结构的存储。memcache支持简单的数据类型，String。 </p>
+</li>
+<li><p>Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用,而 Memecache把数据全部存在内存之中。 </p>
+</li>
+<li><p>集群模式：memcached没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据；但是 redis 目前 是原生支持 cluster 模式的. </p>
+</li>
+<li><p>Memcached是多线程，非阻塞IO复用的网络模型；Redis使用单线程的多路 IO 复用模型。<br>来自网络上的一张图，这里分享给大家！</p>
+<p><img src="/assets/blogImg/Redis&M.png" alt=""></p>
+</li>
+</ol>
+<h2 id="6-5-redis-常见数据结构以及使用场景分析"><a href="#6-5-redis-常见数据结构以及使用场景分析" class="headerlink" title="6.5 redis 常见数据结构以及使用场景分析"></a>6.5 redis 常见数据结构以及使用场景分析</h2><ol>
+<li><p>String<br><strong>常用命令: set,get,decr,incr,mget 等。</strong> </p>
+<p>String数据结构是简单的key-value类型，value其实不仅可以是String，也可以是数字。 常规key-value缓存应用； 常规计数：微博数，粉丝数等</p>
+</li>
+<li><p>Hash<br><strong>常用命令： hget,hset,hgetall 等。</strong><br>Hash 是一个 string 类型的 ﬁeld 和 value 的映射表，hash 特别适合用于存储对象，后续操作的时候，你可以直接仅 仅修改这个对象中的某个字段的值。 比如我们可以Hash数据结构来存储用户信息，商品信息等等。比如下面我就用 hash 类型存放了我本人的一些信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">key&#x3D;JavaUser293847 </span><br><span class="line">value&#x3D;&#123;  “id”: 1,  “name”: “SnailClimb”,  “age”: 22,  “location”: “Wuhan, Hubei” &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>List<br><strong>常用命令: lpush,rpush,lpop,rpop,lrange等</strong></p>
+<p>list 就是链表，Redis list 的应用场景非常多，也是Redis重要的数据结构之一，比如微博的关注列表，粉丝列表， 消息列表等功能都可以用Redis的 list 结构来实现。 Redis list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销。<br>另外可以通过 lrange 命令，就是从某个元素开始读取多少个元素，可以基于 list 实现分页查询，这个很棒的一个功 能，基于 redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西（一页一页的往下走），性能高。 </p>
+</li>
+<li><p>4.Set<br><strong>常用命令： sadd,spop,smembers,sunion 等</strong> </p>
+<p>set 对外提供的功能与list类似是一个列表的功能，特殊之处在于 set 是可以自动排重的。<br>当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在 一个set集合内的重要接口，这个也是list所不能提供的。可以基于 set 轻易实现交集、并集、差集的操作。 比如：在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis可以非常 方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程，具体命令如下：</p>
+<p>sinterstore key1 key2 key3     将交集存在key1内</p>
+</li>
+<li><p>Sorted Set<br><strong>常用命令： zadd,zrange,zrem,zcard等</strong> </p>
+<p>和set相比，sorted set增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。<br>举例： 在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维 度的消息排行榜）等信息，适合使用 Redis 中的 SortedSet 结构进行存储。 </p>
+</li>
+</ol>
+<h2 id="6-6-redis-设置过期时间"><a href="#6-6-redis-设置过期时间" class="headerlink" title="6.6 redis 设置过期时间"></a>6.6 redis 设置过期时间</h2><p>Redis中有个设置时间过期的功能，即对存储在 redis 数据库中的值可以设置一个过期时间。作为一个缓存数据库， 这是非常实用的。如我们一般项目中的 token 或者一些登录信息，尤其是短信验证码都是有时间限制的，按照传统 的数据库处理方式，一般都是自己判断过期，这样无疑会严重影响项目性能。<br>我们 set key 的时候，都可以给一个 expire time，就是过期时间，通过过期时间我们可以指定这个 key 可以存活的 时间。<br><em>如果假设你设置了一批 key 只能存活1个小时，那么接下来1小时后，redis是怎么对这批key进行删除的？</em><br><strong>定期删除+惰性删除。</strong><br>通过名字大概就能猜出这两个删除方式的意思了。</p>
+<ul>
+<li>定期删除：redis默认是每隔 100ms 就随机抽取一些设置了过期时间的key，检查其是否过期，如果过期就删 除。<code>注意这里是随机抽取的。为什么要随机呢？你想一想假如 redis 存了几十万个 key ，每隔100ms就遍历所 有的设置过期时间的 key 的话，就会给 CPU 带来很大的负载</code></li>
+<li>惰性删除 ：定期删除可能会导致很多过期 key 到了时间并没有被删除掉。所以就有了惰性删除。假如你的过期 key，靠定期删除没有被删除掉，还停留在内存里，除非你的系统去查一下那个 key，才会被redis给删除掉。这 就是所谓的惰性删除，也是够懒的哈！</li>
+</ul>
+<p>但是仅仅通过设置过期时间还是有问题的。我们想一下：如果定期删除漏掉了很多过期 key，然后你也没及时去查， 也就没走惰性删除，此时会怎么样？如果大量过期key堆积在内存里，导致redis内存块耗尽了。怎么解决这个问题 呢？<br><strong>redis 内存淘汰机制。</strong> </p>
+<h2 id="6-7-redis-内存淘汰机制（MySQL里有2000w数据，Redis中只存-20w的数据，如何保证Redis中的数据都是热点数据？）"><a href="#6-7-redis-内存淘汰机制（MySQL里有2000w数据，Redis中只存-20w的数据，如何保证Redis中的数据都是热点数据？）" class="headerlink" title="6.7 redis 内存淘汰机制（MySQL里有2000w数据，Redis中只存 20w的数据，如何保证Redis中的数据都是热点数据？）"></a>6.7 redis 内存淘汰机制（<code>MySQL里有2000w数据，Redis中只存 20w的数据，如何保证Redis中的数据都是热点数据？</code>）</h2><p>redis 配置文件 redis.conf 中有相关注释，我这里就不贴了，大家可以自行查阅或者通过这个网址查看： <a href="http://download.redis.io/redis-stable/redis.conf" target="_blank" rel="noopener">http://download.redis.io/redis-stable/redis.conf</a><br>redis 提供 6种数据淘汰策略： </p>
+<ol>
+<li>volatile-lru：从已设置过期时间的数据集（server.db[i].expires）中挑选近少使用的数据淘汰 </li>
+<li>volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰 </li>
+<li>volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰 </li>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除近少使用的key（这个是常用的）. </li>
+<li>allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰 </li>
+<li>no-eviction：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使 用吧！<br>备注： 关于 redis 设置过期时间以及内存淘汰机制，我这里只是简单的总结一下，后面会专门写一篇文章来总结！ </li>
+</ol>
+<h2 id="6-8-redis-持久化机制（怎么保证-redis-挂掉之后再重启数据可以-进行恢复）"><a href="#6-8-redis-持久化机制（怎么保证-redis-挂掉之后再重启数据可以-进行恢复）" class="headerlink" title="6.8 redis 持久化机制（怎么保证 redis 挂掉之后再重启数据可以 进行恢复）"></a>6.8 redis 持久化机制（怎么保证 redis 挂掉之后再重启数据可以 进行恢复）</h2><p>很多时候我们需要持久化数据也就是将内存中的数据写入到硬盘里面，大部分原因是为了之后重用数据（比如重启机 器、机器故障之后回复数据），或者是为了防止系统故障而将数据备份到一个远程位置。<br>Redis不同于Memcached的很重一点就是，Redis支持持久化，而且支持两种不同的持久化操作。Redis的一种持久 化方式叫快照（snapshotting，RDB）,另一种方式是只追加文件（append-only ﬁle,AOF）.这两种方法各有千 秋，下面我会详细这两种持久化方法是什么，怎么用，如何选择适合自己的持久化方法。<br><strong>快照（snapshotting）持久化（RDB）</strong></p>
+<p> Redis可以通过创建快照来获得存储在内存里面的数据在某个时间点上的副本。Redis创建快照之后，可以对快照进行 备份，可以将快照复制到其他服务器从而创建具有相同数据的服务器副本（Redis主从结构，主要用来提高Redis性 能），还可以将快照留在原地以便重启服务器的时候使用。<br>快照持久化是Redis默认采用的持久化方式，在redis.conf配置文件中默认有此下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1              #在900秒(15分钟)之后，如果至少有1个key发生变化，Redis就会自动触发BGSAVE命令 创建快照。</span><br><span class="line">save 300 10            #在300秒(5分钟)之后，如果至少有10个key发生变化，Redis就会自动触发BGSAVE命令创 建快照。</span><br><span class="line">save 60 10000        #在60秒(1分钟)之后，如果至少有10000个key发生变化，Redis就会自动触发BGSAVE命令创 建快照。</span><br></pre></td></tr></table></figure>
+
+<p><strong>AOF（append-only ﬁle）持久化</strong> </p>
+<p>与快照持久化相比，AOF持久化 的实时性更好，因此已成为主流的持久化方案。默认情况下Redis没有开启 AOF（append only ﬁle）方式的持久化，可以通过appendonly参数开启：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
+
+<p>开启AOF持久化后每执行一条会更改Redis中的数据的命令，Redis就会将该命令写入硬盘中的AOF文件。AOF文件的 保存位置和RDB文件的位置相同，都是通过dir参数设置的，默认的文件名是appendonly.aof。<br>在Redis的配置文件中存在三种不同的 AOF 持久化方式，它们分别是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appendfsync always     #每次有数据修改发生时都会写入AOF文件,这样会严重降低						   #Redis的速度 </span><br><span class="line">appendfsync everysec  #每秒钟同步一次，显示地将多个写命令同步到硬盘</span><br><span class="line">appendfsync no        #让操作系统决定何时进行同步</span><br></pre></td></tr></table></figure>
+
+<p>为了兼顾数据和写入性能，用户可以考虑 appendfsync everysec选项 ，让Redis每秒同步一次AOF文件，Redis性能 几乎没受到任何影响。而且这样即使出现系统崩溃，用户多只会丢失一秒之内产生的数据。当硬盘忙于执行写入操 作的时候，Redis还会优雅的放慢自己的速度以便适应硬盘的大写入速度。 </p>
+<p><strong>Redis 4.0 对于持久化机制的优化</strong><br>Redis 4.0 开始支持 RDB 和 AOF 的混合持久化（默认关闭，可以通过配置项 <code>aof-use-rdb-preamble</code> 开启）。<br>如果把混合持久化打开，AOF 重写的时候就直接把 RDB 的内容写到 AOF 文件开头。这样做的好处是可以结合 RDB 和 AOF 的优点, 快速加载同时避免丢失过多的数据。当然缺点也是有的， AOF 里面的 RDB 部分是压缩格式不再是 AOF 格式，可读性较差。 </p>
+<p><strong>补充内容：AOF 重写</strong> </p>
+<p>AOF重写可以产生一个新的AOF文件，这个新的AOF文件和原有的AOF文件所保存的数据库状态一样，但体积更小。<br>AOF重写是一个有歧义的名字，该功能是通过读取数据库中的键值对来实现的，程序无须对现有AOF文件进行任伺读 入、分析或者写入操作。<br>在执行 BGREWRITEAOF 命令时，Redis 服务器会维护一个 AOF 重写缓冲区，该缓冲区会在子进程创建新AOF文件期 间，记录服务器执行的所有写命令。当子进程完成创建新AOF文件的工作之后，服务器会将重写缓冲区中的所有内容 追加到新AOF文件的末尾，使得新旧两个AOF文件所保存的数据库状态一致。后，服务器用新的AOF文件替换旧的 AOF文件，以此来完成AOF文件重写操作<br>更多内容可以查看我的这篇文章：<br><a href="https://github.com/Snailclimb/JavaGuide/blob/master/数据存储/Redis/Redis持久化.md" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide/blob/master/数据存储/Redis/Redis持久化.md</a> </p>
+<h2 id="6-9-redis-事务"><a href="#6-9-redis-事务" class="headerlink" title="6.9 redis 事务"></a>6.9 redis 事务</h2><p>Redis 通过 <strong>MULTI、EXEC、WATCH</strong> 等命令来实现事务(transaction)功能。事务提供了一种将多个命令请求打包，然 后一次性、按顺序地执行多个命令的机制，并且在事务执行期间，服务器不会中断事务而改去执行其他客户端的命令 请求，它会将事务中的所有命令都执行完毕，然后才去处理其他客户端的命令请求。</p>
+<p>在传统的关系式数据库中，常常用 ACID 性质来检验事务功能的可靠性和安全性。在 Redis 中，事务总是具有原子性 （Atomicity)、一致性(Consistency)和隔离性（Isolation），并且当 Redis 运行在某种特定的持久化模式下时，事务 也具有持久性（Durability）。</p>
+<h2 id="6-10-缓存雪崩和缓存穿透问题解决方案"><a href="#6-10-缓存雪崩和缓存穿透问题解决方案" class="headerlink" title="6.10 缓存雪崩和缓存穿透问题解决方案"></a>6.10 缓存雪崩和缓存穿透问题解决方案</h2><p><strong>缓存雪崩</strong><br>简介：缓存同一时间大面积的失效，所以，后面的请求都会落到数据库上，造成数据库短时间内承受大量请求而崩 掉。<br>解决办法（中华石杉老师在他的视频中提到过，视频地址在后一个问题中有提到）：</p>
+<ul>
+<li>事前：尽量保证整个 redis 集群的高可用性，发现机器宕机尽快补上。选择合适的内存淘汰策略。 </li>
+<li>事中：本地ehcache缓存 + hystrix限流&amp;降级，避免MySQL崩掉 </li>
+</ul>
+<p>事后：利用 redis 持久化机制保存的数据尽快恢复缓存<br><strong>缓存穿透</strong><br>简介：一般是黑客故意去请求缓存中不存在的数据，导致所有的请求都落到数据库上，造成数据库短时间内承受大量 请求而崩掉。<br>解决办法： 有很多种方法可以有效地解决缓存穿透问题，常见的则是采用布隆过滤器，将所有可能存在的数据哈 希到一个足够大的bitmap中，一个一定不存在的数据会被 这个bitmap拦截掉，从而避免了对底层存储系统的查询压 力。另外也有一个更为简单粗暴的方法（我们采用的就是这种），如果一个查询返回的数据为空（不管是数 据不存 在，还是系统故障），我们仍然把这个空结果进行缓存，但它的过期时间会很短，长不超过五分钟。<br>参考：<br><a href="https://blog.csdn.net/zeb_perfect/article/details/54135506enter" target="_blank" rel="noopener">https://blog.csdn.net/zeb_perfect/article/details/54135506enter</a> link description here </p>
+<h2 id="6-11-如何解决-Redis-的并发竞争-Key-问题"><a href="#6-11-如何解决-Redis-的并发竞争-Key-问题" class="headerlink" title="6.11 如何解决 Redis 的并发竞争 Key 问题"></a>6.11 如何解决 Redis 的并发竞争 Key 问题</h2><p>所谓 Redis 的并发竞争 Key 的问题也就是多个系统同时对一个 key 进行操作，但是后执行的顺序和我们期望的顺 序不同，这样也就导致了结果的不同！<br>推荐一种方案：分布式锁（zookeeper 和 redis 都可以实现分布式锁）。（如果不存在 Redis 的并发竞争 Key 问 题，不要使用分布式锁，这样会影响性能）</p>
+<p>基于zookeeper临时有序节点可以实现的分布式锁。大致思想为：每个客户端对某个方法加锁时，在zookeeper上的 与该方法对应的指定节点的目录下，生成一个唯一的瞬时有序节点。 判断是否获取锁的方式很简单，只需要判断有 序节点中序号小的一个。 当释放锁的时候，只需将这个瞬时节点删除即可。同时，其可以避免服务宕机导致的锁 无法释放，而产生的死锁问题。完成业务流程后，删除对应的子节点释放锁。<br>在实践中，当然是从以可靠性为主。所以首推Zookeeper。<br>参考：<br><a href="https://www.jianshu.com/p/8bddd381de06" target="_blank" rel="noopener">https://www.jianshu.com/p/8bddd381de06</a> </p>
+<h2 id="6-12-如何保证缓存与数据库双写时的数据一致性？"><a href="#6-12-如何保证缓存与数据库双写时的数据一致性？" class="headerlink" title="6.12 如何保证缓存与数据库双写时的数据一致性？"></a>6.12 如何保证缓存与数据库双写时的数据一致性？</h2><p>你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如 何解决一致性问题？<br>一般来说，就是如果你的系统不是严格要求缓存+数据库必须一致性的话，缓存可以稍微的跟数据库偶尔有不一致的 情况，好不要做这个方案，读请求和写请求串行化，串到一个内存队列里去，这样就可以保证一定不会出现不一致 的情况<br>串行化之后，就会导致系统的吞吐量会大幅度的降低，用比正常情况下多几倍的机器去支撑线上的一个请求。<br>参考：</p>
+<p>Java工程师面试突击第1季（可能是史上好的Java面试突击课程）-中华石杉老师。</p>
+<p>视频地址见下面！ 链接： <a href="https://pan.baidu.com/s/18pp6g1xKVGCfUATf_nMrOA" target="_blank" rel="noopener">https://pan.baidu.com/s/18pp6g1xKVGCfUATf_nMrOA</a> 密码：5i58</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-Post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/13/JDK%20%E6%8F%90%E4%BE%9B%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-02-13T02:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/13/JDK%20%E6%8F%90%E4%BE%9B%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/">JDK 提供的并发容器总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">-Redis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/13/Redis%E9%9D%A2%E8%AF%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-Post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/HashMap%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2020-02-12T09:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/HashMap%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">HashMap 源码学习</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-Post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/LinkedList%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2020-02-12T08:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/LinkedList%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">LinkedList 源码学习</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-Post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/ArrayList%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2020-02-12T07:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/ArrayList%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">ArrayList 源码学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-Post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/11/Java%E5%AE%B9%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/11/Java%E5%AE%B9%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">Java容器常见面试题/知识点总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
-
-    
 
 
           </div>
@@ -379,10 +340,10 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
