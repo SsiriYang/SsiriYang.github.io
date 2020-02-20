@@ -157,6 +157,388 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="Post-Java线程池学习总结" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">java线程池学习总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=一-使用线程池的好处" target="_blank" rel="noopener">一 使用线程池的好处</a></li>
+<li>二 Executor 框架<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=21-简介" target="_blank" rel="noopener">2.1 简介</a></li>
+<li>2.2 Executor 框架结构(主要由三大部分组成)<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=1-任务runnable-callable" target="_blank" rel="noopener">1) 任务(<code>Runnable</code> /<code>Callable</code>)</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=2-任务的执行executor" target="_blank" rel="noopener">2) 任务的执行(<code>Executor</code>)</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=3-异步计算的结果future" target="_blank" rel="noopener">3) 异步计算的结果(<code>Future</code>)</a></li>
+</ul>
+</li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=23-executor-框架的使用示意图" target="_blank" rel="noopener">2.3 Executor 框架的使用示意图</a></li>
+</ul>
+</li>
+<li>三 (重要)ThreadPoolExecutor 类简单介绍<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=31-threadpoolexecutor-类分析" target="_blank" rel="noopener">3.1 ThreadPoolExecutor 类分析</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=32-推荐使用-threadpoolexecutor-构造函数创建线程池" target="_blank" rel="noopener">3.2 推荐使用 <code>ThreadPoolExecutor</code> 构造函数创建线程池</a></li>
+</ul>
+</li>
+<li>四 (重要)ThreadPoolExecutor 使用示例<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=41-示例代码runnablethreadpoolexecutor" target="_blank" rel="noopener">4.1 示例代码:<code>Runnable</code>+<code>ThreadPoolExecutor</code></a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=42-线程池原理分析" target="_blank" rel="noopener">4.2 线程池原理分析</a></li>
+<li>4.3 几个常见的对比<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=431-runnable-vs-callable" target="_blank" rel="noopener">4.3.1 <code>Runnable</code> vs <code>Callable</code></a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=432-execute-vs-submit" target="_blank" rel="noopener">4.3.2 <code>execute()</code> vs <code>submit()</code></a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=433-shutdownvsshutdownnow" target="_blank" rel="noopener">4.3.3 <code>shutdown()</code>VS<code>shutdownNow()</code></a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=432-isterminated-vs-isshutdown" target="_blank" rel="noopener">4.3.2 <code>isTerminated()</code> VS <code>isShutdown()</code></a></li>
+</ul>
+</li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=44-加餐callablethreadpoolexecutor示例代码" target="_blank" rel="noopener">4.4 加餐:<code>Callable</code>+<code>ThreadPoolExecutor</code>示例代码</a></li>
+</ul>
+</li>
+<li>五 几种常见的线程池详解<ul>
+<li>5.1 FixedThreadPool<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=511-介绍" target="_blank" rel="noopener">5.1.1 介绍</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=512-执行任务过程介绍" target="_blank" rel="noopener">5.1.2 执行任务过程介绍</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=513-为什么不推荐使用fixedthreadpool" target="_blank" rel="noopener">5.1.3 为什么不推荐使用<code>FixedThreadPool</code>？</a></li>
+</ul>
+</li>
+<li>5.2 SingleThreadExecutor 详解<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=521-介绍" target="_blank" rel="noopener">5.2.1 介绍</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=522-执行任务过程介绍" target="_blank" rel="noopener">5.2.2 执行任务过程介绍</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=523-为什么不推荐使用fixedthreadpool" target="_blank" rel="noopener">5.2.3 为什么不推荐使用<code>FixedThreadPool</code>？</a></li>
+</ul>
+</li>
+<li>5.3 CachedThreadPool 详解<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=531-介绍" target="_blank" rel="noopener">5.3.1 介绍</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=532-执行任务过程介绍" target="_blank" rel="noopener">5.3.2 执行任务过程介绍</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=533-为什么不推荐使用cachedthreadpool" target="_blank" rel="noopener">5.3.3 为什么不推荐使用<code>CachedThreadPool</code>？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>六 ScheduledThreadPoolExecutor 详解<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=61-简介" target="_blank" rel="noopener">6.1 简介</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=62-运行机制" target="_blank" rel="noopener">6.2 运行机制</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=63-scheduledthreadpoolexecutor-执行周期任务的步骤" target="_blank" rel="noopener">6.3 ScheduledThreadPoolExecutor 执行周期任务的步骤</a></li>
+</ul>
+</li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=七-线程池大小确定" target="_blank" rel="noopener">七 线程池大小确定</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=八-参考" target="_blank" rel="noopener">八 参考</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=九-其他推荐阅读" target="_blank" rel="noopener">九 其他推荐阅读</a></li>
+</ul>
+<h2 id="一-使用线程池的好处"><a href="#一-使用线程池的好处" class="headerlink" title="一 使用线程池的好处"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=一-使用线程池的好处" target="_blank" rel="noopener">一 使用线程池的好处</a></h2><blockquote>
+<p><strong>池化技术相比大家已经屡见不鲜了，线程池、数据库连接池、Http 连接池等等都是对这个思想的应用。池化技术的思想主要是为了减少每次获取资源的消耗，提高对资源的利用率。</strong></p>
+</blockquote>
+<p><strong>线程池</strong>提供了一种限制和管理资源（包括执行一个任务）。 每个<strong>线程池</strong>还维护一些基本统计信息，例如已完成任务的数量。</p>
+<p>这里借用《Java 并发编程的艺术》提到的来说一下<strong>使用线程池的好处</strong>：</p>
+<ul>
+<li><strong>降低资源消耗</strong>。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</li>
+<li><strong>提高响应速度</strong>。当任务到达时，任务可以不需要的等到线程创建就能立即执行。</li>
+<li><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
+</ul>
+<h2 id="二-Executor-框架"><a href="#二-Executor-框架" class="headerlink" title="二 Executor 框架"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=二-executor-框架" target="_blank" rel="noopener">二 Executor 框架</a></h2><h3 id="2-1-简介"><a href="#2-1-简介" class="headerlink" title="2.1 简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_21-简介" target="_blank" rel="noopener">2.1 简介</a></h3><p>Executor 框架是 Java5 之后引进的，在 Java 5 之后，通过 Executor 来启动线程比使用 Thread 的 start 方法更好，除了更易管理，效率更好（用线程池实现，节约开销）外，还有关键的一点：有助于避免 this 逃逸问题。</p>
+<blockquote>
+<p>补充：this 逃逸是指在构造函数返回之前其他线程就持有该对象的引用. 调用尚未构造完全的对象的方法可能引发令人疑惑的错误。</p>
+</blockquote>
+<p>Executor 框架不仅包括了线程池的管理，还提供了线程工厂、队列以及拒绝策略等，Executor 框架让并发编程变得更加简单。</p>
+<h3 id="2-2-Executor-框架结构-主要由三大部分组成"><a href="#2-2-Executor-框架结构-主要由三大部分组成" class="headerlink" title="2.2 Executor 框架结构(主要由三大部分组成)"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_22-executor-框架结构主要由三大部分组成" target="_blank" rel="noopener">2.2 Executor 框架结构(主要由三大部分组成)</a></h3><h4 id="1-任务-Runnable-Callable"><a href="#1-任务-Runnable-Callable" class="headerlink" title="1) 任务(Runnable /Callable)"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_1-任务runnable-callable" target="_blank" rel="noopener">1) 任务(<code>Runnable</code> /<code>Callable</code>)</a></h4><p>执行任务需要实现的 <strong><code>Runnable</code> 接口</strong> 或 <strong><code>Callable</code>接口</strong>。<strong><code>Runnable</code> 接口</strong>或 <strong><code>Callable</code> 接口</strong> 实现类都可以被 <strong><code>ThreadPoolExecutor</code></strong> 或 <strong><code>ScheduledThreadPoolExecutor</code></strong> 执行。</p>
+<h4 id="2-任务的执行-Executor"><a href="#2-任务的执行-Executor" class="headerlink" title="2) 任务的执行(Executor)"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_2-任务的执行executor" target="_blank" rel="noopener">2) 任务的执行(<code>Executor</code>)</a></h4><p>如下图所示，包括任务执行机制的核心接口 <strong><code>Executor</code></strong> ，以及继承自 <code>Executor</code> 接口的 <strong><code>ExecutorService</code> 接口。<code>ThreadPoolExecutor</code></strong> 和 <strong><code>ScheduledThreadPoolExecutor</code></strong> 这两个关键类实现了 <strong>ExecutorService 接口</strong>。</p>
+<p><strong>这里提了很多底层的类关系，但是，实际上我们需要更多关注的是 <code>ThreadPoolExecutor</code> 这个类，这个类在我们实际使用线程池的过程中，使用频率还是非常高的。</strong></p>
+<blockquote>
+<p><strong>注意：</strong> 通过查看 <code>ScheduledThreadPoolExecutor</code> 源代码我们发现 <code>ScheduledThreadPoolExecutor</code> 实际上是继承了 <code>ThreadPoolExecutor</code> 并实现了 ScheduledExecutorService ，而 <code>ScheduledExecutorService</code> 又实现了 <code>ExecutorService</code>，正如我们下面给出的类关系图显示的一样。</p>
+</blockquote>
+<p><strong><code>ThreadPoolExecutor</code> 类描述:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//AbstractExecutorService实现了ExecutorService接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolExecutor</span> <span class="keyword">extends</span> <span class="title">AbstractExecutorService</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>ScheduledThreadPoolExecutor</code> 类描述:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ScheduledExecutorService实现了ExecutorService接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledThreadPoolExecutor</span></span></span><br><span class="line"><span class="class">        <span class="keyword">extends</span> <span class="title">ThreadPoolExecutor</span></span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">ScheduledExecutorService</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%89%A7%E8%A1%8C%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3.png" alt="任务的执行相关接口"></p>
+<h4 id="3-异步计算的结果-Future"><a href="#3-异步计算的结果-Future" class="headerlink" title="3) 异步计算的结果(Future)"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_3-异步计算的结果future" target="_blank" rel="noopener">3) 异步计算的结果(<code>Future</code>)</a></h4><p><strong><code>Future</code></strong> 接口以及 <code>Future</code> 接口的实现类 <strong><code>FutureTask</code></strong> 类都可以代表异步计算的结果。</p>
+<p>当我们把 <strong><code>Runnable</code>接口</strong> 或 <strong><code>Callable</code> 接口</strong> 的实现类提交给 <strong><code>ThreadPoolExecutor</code></strong> 或 <strong><code>ScheduledThreadPoolExecutor</code></strong> 执行。（调用 <code>submit()</code> 方法时会返回一个 <strong><code>FutureTask</code></strong> 对象）</p>
+<h3 id="2-3-Executor-框架的使用示意图"><a href="#2-3-Executor-框架的使用示意图" class="headerlink" title="2.3 Executor 框架的使用示意图"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_23-executor-框架的使用示意图" target="_blank" rel="noopener">2.3 Executor 框架的使用示意图</a></h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC01LTMwLzg0ODIzMzMwLmpwZw?x-oss-process=image/format,png" alt="Executor 框架的使用示意图"></p>
+<ol>
+<li><strong>主线程首先要创建实现 <code>Runnable</code> 或者 <code>Callable</code> 接口的任务对象。</strong></li>
+<li><strong>把创建完成的实现 <code>Runnable</code>/<code>Callable</code>接口的 对象直接交给 <code>ExecutorService</code> 执行</strong>: <code>ExecutorService.execute（Runnable command）</code>）或者也可以把 <code>Runnable</code> 对象或<code>Callable</code> 对象提交给 <code>ExecutorService</code> 执行（<code>ExecutorService.submit（Runnable task）</code>或 <code>ExecutorService.submit（Callable  task）</code>）。</li>
+<li><strong>如果执行 <code>ExecutorService.submit（…）</code>，<code>ExecutorService</code> 将返回一个实现<code>Future</code>接口的对象</strong>（我们刚刚也提到过了执行 <code>execute()</code>方法和 <code>submit()</code>方法的区别，<code>submit()</code>会返回一个 <code>FutureTask 对象）。由于 FutureTask</code> 实现了 <code>Runnable</code>，我们也可以创建 <code>FutureTask</code>，然后直接交给 <code>ExecutorService</code> 执行。</li>
+<li><strong>最后，主线程可以执行 <code>FutureTask.get()</code>方法来等待任务执行完成。主线程也可以执行 <code>FutureTask.cancel（boolean mayInterruptIfRunning）</code>来取消此任务的执行。</strong></li>
+</ol>
+<h2 id="三-重要-ThreadPoolExecutor-类简单介绍"><a href="#三-重要-ThreadPoolExecutor-类简单介绍" class="headerlink" title="三 (重要)ThreadPoolExecutor 类简单介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=三-重要threadpoolexecutor-类简单介绍" target="_blank" rel="noopener">三 (重要)ThreadPoolExecutor 类简单介绍</a></h2><p><strong>线程池实现类 <code>ThreadPoolExecutor</code> 是 <code>Executor</code> 框架最核心的类。</strong></p>
+<h3 id="3-1-ThreadPoolExecutor-类分析"><a href="#3-1-ThreadPoolExecutor-类分析" class="headerlink" title="3.1 ThreadPoolExecutor 类分析"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_31-threadpoolexecutor-类分析" target="_blank" rel="noopener">3.1 ThreadPoolExecutor 类分析</a></h3><p><code>ThreadPoolExecutor</code> 类中提供的四个构造方法。我们来看最长的那个，其余三个都是在这个构造方法的基础上产生（其他几个构造方法说白点都是给定某些默认参数的构造方法比如默认制定拒绝策略是什么），这里就不贴代码讲了，比较简单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用给定的初始参数创建一个新的ThreadPoolExecutor。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,//线程池的核心线程数量</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,//线程池的最大线程数</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,//当线程数大于核心线程数时，多余的空闲线程存活的最长时间</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,//时间单位</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,//任务队列，用来储存等待执行任务的队列</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,//线程工厂，用来创建线程，一般默认即可</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler//拒绝策略，当提交的任务过多而不能及时处理时，我们可以定制策略来处理任务</span></span></span><br><span class="line"><span class="function"><span class="params">                           )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == <span class="keyword">null</span> || threadFactory == <span class="keyword">null</span> || handler == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    <span class="keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>下面这些对创建 非常重要，在后面使用线程池的过程中你一定会用到！所以，务必拿着小本本记清楚。</strong></p>
+<p><strong><code>ThreadPoolExecutor</code> 3 个最重要的参数：</strong></p>
+<ul>
+<li><strong><code>corePoolSize</code> :</strong> 核心线程数线程数定义了最小可以同时运行的线程数量。</li>
+<li><strong><code>maximumPoolSize</code> :</strong> 当队列中存放的任务达到队列容量的时候，当前可以同时运行的线程数量变为最大线程数。</li>
+<li><strong><code>workQueue</code>:</strong> 当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，信任就会被存放在队列中。</li>
+</ul>
+<p><code>ThreadPoolExecutor</code>其他常见参数:</p>
+<ol>
+<li><strong><code>keepAliveTime</code></strong>:当线程池中的线程数量大于 <code>corePoolSize</code> 的时候，如果这时没有新的任务提交，核心线程外的线程不会立即销毁，而是会等待，直到等待的时间超过了 <code>keepAliveTime</code>才会被回收销毁；</li>
+<li><strong><code>unit</code></strong> : <code>keepAliveTime</code> 参数的时间单位。</li>
+<li><strong><code>threadFactory</code></strong> :executor 创建新线程的时候会用到。</li>
+<li><strong><code>handler</code></strong> :饱和策略。关于饱和策略下面单独介绍一下。</li>
+</ol>
+<p>下面这张图可以加深你对线程池中各个参数的相互关系的理解（图片来源：《Java性能调优实战》）：</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%90%84%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB.jpg" alt="线程池各个参数的关系"></p>
+<p><strong><code>ThreadPoolExecutor</code> 饱和策略定义:</strong></p>
+<p>如果当前同时运行的线程数量达到最大线程数量并且队列也已经被放满了任时，<code>ThreadPoolTaskExecutor</code> 定义一些策略:</p>
+<ul>
+<li><strong><code>ThreadPoolExecutor.AbortPolicy</code></strong>：抛出 <code>RejectedExecutionException</code>来拒绝新任务的处理。</li>
+<li><strong><code>ThreadPoolExecutor.CallerRunsPolicy</code></strong>：调用执行自己的线程运行任务，也就是直接在调用<code>execute</code>方法的线程中运行(<code>run</code>)被拒绝的任务，如果执行程序已关闭，则会丢弃该任务。因此这种策略会降低对于新任务提交速度，影响程序的整体性能。另外，这个策略喜欢增加队列容量。如果您的应用程序可以承受此延迟并且你不能任务丢弃任何一个任务请求的话，你可以选择这个策略。</li>
+<li><strong><code>ThreadPoolExecutor.DiscardPolicy</code>：</strong> 不处理新任务，直接丢弃掉。</li>
+<li><strong><code>ThreadPoolExecutor.DiscardOldestPolicy</code>：</strong> 此策略将丢弃最早的未处理的任务请求。</li>
+</ul>
+<p>举个例子：</p>
+<blockquote>
+<p>Spring 通过 <code>ThreadPoolTaskExecutor</code> 或者我们直接通过 <code>ThreadPoolExecutor</code> 的构造函数创建线程池的时候，当我们不指定 <code>RejectedExecutionHandler</code> 饱和策略的话来配置线程池的时候默认使用的是 <code>ThreadPoolExecutor.AbortPolicy</code>。在默认情况下，<code>ThreadPoolExecutor</code> 将抛出 <code>RejectedExecutionException</code> 来拒绝新来的任务 ，这代表你将丢失对这个任务的处理。 对于可伸缩的应用程序，建议使用 <code>ThreadPoolExecutor.CallerRunsPolicy</code>。当最大池被填满时，此策略为我们提供可伸缩队列。（这个直接查看 <code>ThreadPoolExecutor</code> 的构造函数源码就可以看出，比较简单的原因，这里就不贴代码了。）</p>
+</blockquote>
+<h3 id="3-2-推荐使用-ThreadPoolExecutor-构造函数创建线程池"><a href="#3-2-推荐使用-ThreadPoolExecutor-构造函数创建线程池" class="headerlink" title="3.2 推荐使用 ThreadPoolExecutor 构造函数创建线程池"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_32-推荐使用-threadpoolexecutor-构造函数创建线程池" target="_blank" rel="noopener">3.2 推荐使用 <code>ThreadPoolExecutor</code> 构造函数创建线程池</a></h3><p><strong>在《阿里巴巴 Java 开发手册》“并发处理”这一章节，明确指出线程资源必须通过线程池提供，不允许在应用中自行显示创建线程。</strong></p>
+<p><strong>为什么呢？</strong></p>
+<blockquote>
+<p><strong>使用线程池的好处是减少在创建和销毁线程上所消耗的时间以及系统资源开销，解决资源不足的问题。如果不使用线程池，有可能会造成系统创建大量同类线程而导致消耗完内存或者“过度切换”的问题。</strong></p>
+</blockquote>
+<p><strong>另外《阿里巴巴 Java 开发手册》中强制线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 构造函数的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险</strong></p>
+<blockquote>
+<p>Executors 返回线程池对象的弊端如下：</p>
+<ul>
+<li><strong><code>FixedThreadPool</code> 和 <code>SingleThreadExecutor</code></strong> ： 允许请求的队列长度为 Integer.MAX_VALUE,可能堆积大量的请求，从而导致 OOM。</li>
+<li><strong>CachedThreadPool 和 ScheduledThreadPool</strong> ： 允许创建的线程数量为 Integer.MAX_VALUE ，可能会创建大量线程，从而导致 OOM。</li>
+</ul>
+</blockquote>
+<p><strong>方式一：通过<code>ThreadPoolExecutor</code>构造函数实现（推荐）</strong> <img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzE3ODU4MjMwLmpwZw?x-oss-process=image/format,png" alt="通过构造方法实现"> <strong>方式二：通过 Executor 框架的工具类 Executors 来实现</strong> 我们可以创建三种类型的 ThreadPoolExecutor：</p>
+<ul>
+<li><strong>FixedThreadPool</strong></li>
+<li><strong>SingleThreadExecutor</strong></li>
+<li><strong>CachedThreadPool</strong></li>
+</ul>
+<p>对应 Executors 工具类中的方法如图所示： <img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzEzMjk2OTAxLmpwZw?x-oss-process=image/format,png" alt="通过Executor 框架的工具类Executors来实现"></p>
+<h2 id="四-重要-ThreadPoolExecutor-使用示例"><a href="#四-重要-ThreadPoolExecutor-使用示例" class="headerlink" title="四 (重要)ThreadPoolExecutor 使用示例"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=四-重要threadpoolexecutor-使用示例" target="_blank" rel="noopener">四 (重要)ThreadPoolExecutor 使用示例</a></h2><p>我们上面讲解了 <code>Executor</code>框架以及 <code>ThreadPoolExecutor</code> 类，下面让我们实战一下，来通过写一个 <code>ThreadPoolExecutor</code> 的小 Demo 来回顾上面的内容。</p>
+<h3 id="4-1-示例代码-Runnable-ThreadPoolExecutor"><a href="#4-1-示例代码-Runnable-ThreadPoolExecutor" class="headerlink" title="4.1 示例代码:Runnable+ThreadPoolExecutor"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_41-示例代码runnablethreadpoolexecutor" target="_blank" rel="noopener">4.1 示例代码:<code>Runnable</code>+<code>ThreadPoolExecutor</code></a></h3><p>首先创建一个 <code>Runnable</code> 接口的实现类（当然也可以是 <code>Callable</code> 接口，我们上面也说了两者的区别。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">MyRunnable.java</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 这是一个简单的Runnable类，需要大约5秒钟来执行其任务。</span><br><span class="line"> * @author shuang.kou</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class MyRunnable implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">    private String command;</span><br><span class="line"></span><br><span class="line">    public MyRunnable(String s) &#123;</span><br><span class="line">        this.command &#x3D; s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot; Start. Time &#x3D; &quot; + new Date());</span><br><span class="line">        processCommand();</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot; End. Time &#x3D; &quot; + new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void processCommand() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(5000);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return this.command;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写测试程序，我们这里以阿里巴巴推荐的使用 <code>ThreadPoolExecutor</code> 构造函数自定义参数的方式来创建线程池。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutorDemo.java</span><br><span class="line">import java.util.concurrent.ArrayBlockingQueue;</span><br><span class="line">import java.util.concurrent.ThreadPoolExecutor;</span><br><span class="line">import java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line">public class ThreadPoolExecutorDemo &#123;</span><br><span class="line"></span><br><span class="line">    private static final int CORE_POOL_SIZE &#x3D; 5;</span><br><span class="line">    private static final int MAX_POOL_SIZE &#x3D; 10;</span><br><span class="line">    private static final int QUEUE_CAPACITY &#x3D; 100;</span><br><span class="line">    private static final Long KEEP_ALIVE_TIME &#x3D; 1L;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;使用阿里巴巴推荐的创建线程池的方式</span><br><span class="line">        &#x2F;&#x2F;通过ThreadPoolExecutor构造函数自定义参数创建</span><br><span class="line">        ThreadPoolExecutor executor &#x3D; new ThreadPoolExecutor(</span><br><span class="line">                CORE_POOL_SIZE,</span><br><span class="line">                MAX_POOL_SIZE,</span><br><span class="line">                KEEP_ALIVE_TIME,</span><br><span class="line">                TimeUnit.SECONDS,</span><br><span class="line">                new ArrayBlockingQueue&lt;&gt;(QUEUE_CAPACITY),</span><br><span class="line">                new ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">            &#x2F;&#x2F;创建WorkerThread对象（WorkerThread类实现了Runnable 接口）</span><br><span class="line">            Runnable worker &#x3D; new MyRunnable(&quot;&quot; + i);</span><br><span class="line">            &#x2F;&#x2F;执行Runnable</span><br><span class="line">            executor.execute(worker);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;终止线程池</span><br><span class="line">        executor.shutdown();</span><br><span class="line">        while (!executor.isTerminated()) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;Finished all threads&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到我们上面的代码指定了：</p>
+<ol>
+<li><code>corePoolSize</code>: 核心线程数为 5。</li>
+<li><code>maximumPoolSize</code> ：最大线程数 10</li>
+<li><code>keepAliveTime</code> : 等待时间为 1L。</li>
+<li><code>unit</code>: 等待时间的单位为 TimeUnit.SECONDS。</li>
+<li><code>workQueue</code>：任务队列为 <code>ArrayBlockingQueue</code>，并且容量为 100;</li>
+<li><code>handler</code>:饱和策略为 <code>CallerRunsPolicy</code>。</li>
+</ol>
+<p><strong>Output：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">pool-1-thread-2 Start. Time &#x3D; Tue Nov 12 20:59:44 CST 2019</span><br><span class="line">pool-1-thread-5 Start. Time &#x3D; Tue Nov 12 20:59:44 CST 2019</span><br><span class="line">pool-1-thread-4 Start. Time &#x3D; Tue Nov 12 20:59:44 CST 2019</span><br><span class="line">pool-1-thread-1 Start. Time &#x3D; Tue Nov 12 20:59:44 CST 2019</span><br><span class="line">pool-1-thread-3 Start. Time &#x3D; Tue Nov 12 20:59:44 CST 2019</span><br><span class="line">pool-1-thread-5 End. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-3 End. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-2 End. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-4 End. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-1 End. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-2 Start. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-1 Start. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-4 Start. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-3 Start. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-5 Start. Time &#x3D; Tue Nov 12 20:59:49 CST 2019</span><br><span class="line">pool-1-thread-2 End. Time &#x3D; Tue Nov 12 20:59:54 CST 2019</span><br><span class="line">pool-1-thread-3 End. Time &#x3D; Tue Nov 12 20:59:54 CST 2019</span><br><span class="line">pool-1-thread-4 End. Time &#x3D; Tue Nov 12 20:59:54 CST 2019</span><br><span class="line">pool-1-thread-5 End. Time &#x3D; Tue Nov 12 20:59:54 CST 2019</span><br><span class="line">pool-1-thread-1 End. Time &#x3D; Tue Nov 12 20:59:54 CST 2019</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-线程池原理分析"><a href="#4-2-线程池原理分析" class="headerlink" title="4.2 线程池原理分析"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_42-线程池原理分析" target="_blank" rel="noopener">4.2 线程池原理分析</a></h3><p>承接 4.1 节，我们通过代码输出结果可以看出：<strong>线程池每次会同时执行 5 个任务，这 5 个任务执行完之后，剩余的 5 个任务才会被执行。</strong> 大家可以先通过上面讲解的内容，分析一下到底是咋回事？（自己独立思考一会）</p>
+<p>现在，我们就分析上面的输出内容来简单分析一下线程池原理。</p>
+<p><strong>为了搞懂线程池的原理，我们需要首先分析一下 <code>execute</code>方法。</strong>在 4.1 节中的 Demo 中我们使用 <code>executor.execute(worker)</code>来提交一个任务到线程池中去，这个方法非常重要，下面我们来看看它的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 存放线程池的运行状态 (runState) 和线程池内有效线程的数量 (workerCount)</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger ctl = <span class="keyword">new</span> AtomicInteger(ctlOf(RUNNING, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">workerCountOf</span><span class="params">(<span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> c &amp; CAPACITY;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; workQueue;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span> </span>&#123;</span><br><span class="line">     <span class="comment">// 如果任务为null，则抛出异常。</span></span><br><span class="line">     <span class="keyword">if</span> (command == <span class="keyword">null</span>)</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">     <span class="comment">// ctl 中保存的线程池当前的一些状态信息</span></span><br><span class="line">     <span class="keyword">int</span> c = ctl.get();</span><br><span class="line"></span><br><span class="line">     <span class="comment">//  下面会涉及到 3 步 操作</span></span><br><span class="line">     <span class="comment">// 1.首先判断当前线程池中之行的任务数量是否小于 corePoolSize</span></span><br><span class="line">     <span class="comment">// 如果小于的话，通过addWorker(command, true)新建一个线程，并将任务(command)添加到该线程中；然后，启动该线程从而执行任务。</span></span><br><span class="line">     <span class="keyword">if</span> (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">         <span class="keyword">if</span> (addWorker(command, <span class="keyword">true</span>))</span><br><span class="line">             <span class="keyword">return</span>;</span><br><span class="line">         c = ctl.get();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// 2.如果当前之行的任务数量大于等于 corePoolSize 的时候就会走到这里</span></span><br><span class="line">     <span class="comment">// 通过 isRunning 方法判断线程池状态，线程池处于 RUNNING 状态才会被并且队列可以加入任务，该任务才会被加入进去</span></span><br><span class="line">     <span class="keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">         <span class="keyword">int</span> recheck = ctl.get();</span><br><span class="line">         <span class="comment">// 再次获取线程池状态，如果线程池状态不是 RUNNING 状态就需要从任务队列中移除任务，并尝试判断线程是否全部执行完毕。同时执行拒绝策略。</span></span><br><span class="line">         <span class="keyword">if</span> (!isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">             reject(command);</span><br><span class="line">             <span class="comment">// 如果当前线程池为空就新创建一个线程并执行。</span></span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (workerCountOf(recheck) == <span class="number">0</span>)</span><br><span class="line">             addWorker(<span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">//3. 通过addWorker(command, false)新建一个线程，并将任务(command)添加到该线程中；然后，启动该线程从而执行任务。</span></span><br><span class="line">     <span class="comment">//如果addWorker(command, false)执行失败，则通过reject()执行相应的拒绝策略的内容。</span></span><br><span class="line">     <span class="keyword">else</span> <span class="keyword">if</span> (!addWorker(command, <span class="keyword">false</span>))</span><br><span class="line">         reject(command);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过下图可以更好的对上面这 3 步做一个展示，下图是我为了省事直接从网上找到，原地址不明。</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/%E5%9B%BE%E8%A7%A3%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.png" alt="图解线程池实现原理"></p>
+<p>现在，让我们在回到 4.1 节我们写的 Demo， 现在应该是不是很容易就可以搞懂它的原理了呢？</p>
+<p>没搞懂的话，也没关系，可以看看我的分析：</p>
+<blockquote>
+<p>我们在代码中模拟了 10 个任务，我们配置的核心线程数为 5 、等待队列容量为 100 ，所以每次只可能存在 5 个任务同时执行，剩下的 5 个任务会被放到等待队列中去。当前的 5 个任务之行完成后，才会之行剩下的 5 个任务。</p>
+</blockquote>
+<h3 id="4-3-几个常见的对比"><a href="#4-3-几个常见的对比" class="headerlink" title="4.3 几个常见的对比"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_43-几个常见的对比" target="_blank" rel="noopener">4.3 几个常见的对比</a></h3><h4 id="4-3-1-Runnable-vs-Callable"><a href="#4-3-1-Runnable-vs-Callable" class="headerlink" title="4.3.1 Runnable vs Callable"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_431-runnable-vs-callable" target="_blank" rel="noopener">4.3.1 <code>Runnable</code> vs <code>Callable</code></a></h4><p><code>Runnable</code>自 Java 1.0 以来一直存在，但<code>Callable</code>仅在 Java 1.5 中引入,目的就是为了来处理<code>Runnable</code>不支持的用例。<strong><code>Runnable</code> 接口</strong>不会返回结果或抛出检查异常，但是<strong><code>Callable</code> 接口</strong>可以。所以，如果任务不需要返回结果或抛出异常推荐使用 <strong><code>Runnable</code> 接口</strong>，这样代码看起来会更加简洁。</p>
+<p>工具类 <code>Executors</code> 可以实现 <code>Runnable</code> 对象和 <code>Callable</code> 对象之间的相互转换。（<code>Executors.callable（Runnable task</code>）或 <code>Executors.callable（Runnable task，Object resule）</code>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Runnable.java</span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface Runnable &#123;</span><br><span class="line">   &#x2F;**</span><br><span class="line">    * 被线程执行，没有返回值也无法抛出异常</span><br><span class="line">    *&#x2F;</span><br><span class="line">    public abstract void run();</span><br><span class="line">&#125;</span><br><span class="line">Callable.java</span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface Callable&lt;V&gt; &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 计算结果，或在无法这样做时抛出异常。</span><br><span class="line">     * @return 计算得出的结果</span><br><span class="line">     * @throws 如果无法计算结果，则抛出异常</span><br><span class="line">     *&#x2F;</span><br><span class="line">    V call() throws Exception;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-2-execute-vs-submit"><a href="#4-3-2-execute-vs-submit" class="headerlink" title="4.3.2 execute() vs submit()"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_432-execute-vs-submit" target="_blank" rel="noopener">4.3.2 <code>execute()</code> vs <code>submit()</code></a></h4><ol>
+<li><strong><code>execute()</code>方法用于提交不需要返回值的任务，所以无法判断任务是否被线程池执行成功与否；</strong></li>
+<li><strong><code>submit()</code>方法用于提交需要返回值的任务。线程池会返回一个 <code>Future</code> 类型的对象，通过这个 <code>Future</code> 对象可以判断任务是否执行成功</strong>，并且可以通过 <code>Future</code> 的 <code>get()</code>方法来获取返回值，<code>get()</code>方法会阻塞当前线程直到任务完成，而使用 <code>get（long timeout，TimeUnit unit）</code>方法则会阻塞当前线程一段时间后立即返回，这时候有可能任务没有执行完。</li>
+</ol>
+<p>我们以<strong><code>AbstractExecutorService</code></strong>接口中的一个 <code>submit</code> 方法为例子来看看源代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Future&lt;?&gt; submit(Runnable task) &#123;</span><br><span class="line">    <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, <span class="keyword">null</span>);</span><br><span class="line">    execute(ftask);</span><br><span class="line">    <span class="keyword">return</span> ftask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面方法调用的 <code>newTaskFor</code> 方法返回了一个 <code>FutureTask</code> 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> &lt;T&gt; <span class="function">RunnableFuture&lt;T&gt; <span class="title">newTaskFor</span><span class="params">(Runnable runnable, T value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FutureTask&lt;T&gt;(runnable, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们再来看看<code>execute()</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-3-shutdown-VSshutdownNow"><a href="#4-3-3-shutdown-VSshutdownNow" class="headerlink" title="4.3.3 shutdown()VSshutdownNow()"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_433-shutdownvsshutdownnow" target="_blank" rel="noopener">4.3.3 <code>shutdown()</code>VS<code>shutdownNow()</code></a></h4><ul>
+<li><strong><code>shutdown（）</code></strong> :关闭线程池，线程池的状态变为 <code>SHUTDOWN</code>。线程池不再接受新任务了，但是队列里的任务得执行完毕。</li>
+<li><strong><code>shutdownNow（）</code></strong> :关闭线程池，线程的状态变为 <code>STOP</code>。线程池会终止当前正在运行的任务，并停止处理排队的任务并返回正在等待执行的 List。</li>
+</ul>
+<h4 id="4-3-2-isTerminated-VS-isShutdown"><a href="#4-3-2-isTerminated-VS-isShutdown" class="headerlink" title="4.3.2 isTerminated() VS isShutdown()"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_432-isterminated-vs-isshutdown" target="_blank" rel="noopener">4.3.2 <code>isTerminated()</code> VS <code>isShutdown()</code></a></h4><ul>
+<li><strong><code>isShutDown</code></strong> 当调用 <code>shutdown()</code> 方法后返回为 true。</li>
+<li><strong><code>isTerminated</code></strong> 当调用 <code>shutdown()</code> 方法后，并且所有提交的任务完成后返回为 true</li>
+</ul>
+<h3 id="4-4-加餐-Callable-ThreadPoolExecutor示例代码"><a href="#4-4-加餐-Callable-ThreadPoolExecutor示例代码" class="headerlink" title="4.4 加餐:Callable+ThreadPoolExecutor示例代码"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_44-加餐callablethreadpoolexecutor示例代码" target="_blank" rel="noopener">4.4 加餐:<code>Callable</code>+<code>ThreadPoolExecutor</code>示例代码</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">MyCallable.java</span><br><span class="line">import java.util.concurrent.Callable;</span><br><span class="line"></span><br><span class="line">public class MyCallable implements Callable&lt;String&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String call() throws Exception &#123;</span><br><span class="line">        Thread.sleep(1000);</span><br><span class="line">        &#x2F;&#x2F;返回执行当前 Callable 的线程名字</span><br><span class="line">        return Thread.currentThread().getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">CallableDemo.java</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.concurrent.ArrayBlockingQueue;</span><br><span class="line">import java.util.concurrent.Callable;</span><br><span class="line">import java.util.concurrent.ExecutionException;</span><br><span class="line">import java.util.concurrent.Future;</span><br><span class="line">import java.util.concurrent.ThreadPoolExecutor;</span><br><span class="line">import java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line">public class CallableDemo &#123;</span><br><span class="line"></span><br><span class="line">    private static final int CORE_POOL_SIZE &#x3D; 5;</span><br><span class="line">    private static final int MAX_POOL_SIZE &#x3D; 10;</span><br><span class="line">    private static final int QUEUE_CAPACITY &#x3D; 100;</span><br><span class="line">    private static final Long KEEP_ALIVE_TIME &#x3D; 1L;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;使用阿里巴巴推荐的创建线程池的方式</span><br><span class="line">        &#x2F;&#x2F;通过ThreadPoolExecutor构造函数自定义参数创建</span><br><span class="line">        ThreadPoolExecutor executor &#x3D; new ThreadPoolExecutor(</span><br><span class="line">                CORE_POOL_SIZE,</span><br><span class="line">                MAX_POOL_SIZE,</span><br><span class="line">                KEEP_ALIVE_TIME,</span><br><span class="line">                TimeUnit.SECONDS,</span><br><span class="line">                new ArrayBlockingQueue&lt;&gt;(QUEUE_CAPACITY),</span><br><span class="line">                new ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line"></span><br><span class="line">        List&lt;Future&lt;String&gt;&gt; futureList &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        Callable&lt;String&gt; callable &#x3D; new MyCallable();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">            &#x2F;&#x2F;提交任务到线程池</span><br><span class="line">            Future&lt;String&gt; future &#x3D; executor.submit(callable);</span><br><span class="line">            &#x2F;&#x2F;将返回值 future 添加到 list，我们可以通过 future 获得 执行 Callable 得到的返回值</span><br><span class="line">            futureList.add(future);</span><br><span class="line">        &#125;</span><br><span class="line">        for (Future&lt;String&gt; fut : futureList) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                System.out.println(new Date() + &quot;::&quot; + fut.get());</span><br><span class="line">            &#125; catch (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;关闭线程池</span><br><span class="line">        executor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Wed Nov 13 13:40:41 CST 2019::pool-1-thread-1</span><br><span class="line">Wed Nov 13 13:40:42 CST 2019::pool-1-thread-2</span><br><span class="line">Wed Nov 13 13:40:42 CST 2019::pool-1-thread-3</span><br><span class="line">Wed Nov 13 13:40:42 CST 2019::pool-1-thread-4</span><br><span class="line">Wed Nov 13 13:40:42 CST 2019::pool-1-thread-5</span><br><span class="line">Wed Nov 13 13:40:42 CST 2019::pool-1-thread-3</span><br><span class="line">Wed Nov 13 13:40:43 CST 2019::pool-1-thread-2</span><br><span class="line">Wed Nov 13 13:40:43 CST 2019::pool-1-thread-1</span><br><span class="line">Wed Nov 13 13:40:43 CST 2019::pool-1-thread-4</span><br><span class="line">Wed Nov 13 13:40:43 CST 2019::pool-1-thread-5</span><br></pre></td></tr></table></figure>
+
+<h2 id="五-几种常见的线程池详解"><a href="#五-几种常见的线程池详解" class="headerlink" title="五 几种常见的线程池详解"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=五-几种常见的线程池详解" target="_blank" rel="noopener">五 几种常见的线程池详解</a></h2><h3 id="5-1-FixedThreadPool"><a href="#5-1-FixedThreadPool" class="headerlink" title="5.1 FixedThreadPool"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_51-fixedthreadpool" target="_blank" rel="noopener">5.1 FixedThreadPool</a></h3><h4 id="5-1-1-介绍"><a href="#5-1-1-介绍" class="headerlink" title="5.1.1 介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_511-介绍" target="_blank" rel="noopener">5.1.1 介绍</a></h4><p><code>FixedThreadPool</code> 被称为可重用固定线程数的线程池。通过 Executors 类中的相关源代码来看一下相关实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 创建一个可重用固定数量线程的线程池</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads, ThreadFactory threadFactory)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                   <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                   <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(),</span><br><span class="line">                                   threadFactory);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外还有一个 <code>FixedThreadPool</code> 的实现方法，和上面的类似，所以这里不多做阐述：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>从上面源代码可以看出新创建的 <code>FixedThreadPool</code> 的 <code>corePoolSize</code> 和 <code>maximumPoolSize</code> 都被设置为 nThreads，这个 nThreads 参数是我们使用的时候自己传递的。</strong></p>
+<h4 id="5-1-2-执行任务过程介绍"><a href="#5-1-2-执行任务过程介绍" class="headerlink" title="5.1.2 执行任务过程介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_512-执行任务过程介绍" target="_blank" rel="noopener">5.1.2 执行任务过程介绍</a></h4><p><code>FixedThreadPool</code> 的 <code>execute()</code> 方法运行示意图（该图片来源：《Java 并发编程的艺术》）：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzcxMzc1OTYzLmpwZw?x-oss-process=image/format,png" alt="FixedThreadPool的execute()方法运行示意图"></p>
+<p><strong>上图说明：</strong></p>
+<ol>
+<li>如果当前运行的线程数小于 corePoolSize， 如果再来新任务的话，就创建新的线程来执行任务；</li>
+<li>当前运行的线程数等于 corePoolSize 后， 如果再来新任务的话，会将任务加入 <code>LinkedBlockingQueue</code>；</li>
+<li>线程池中的线程执行完 手头的任务后，会在循环中反复从 <code>LinkedBlockingQueue</code> 中获取任务来执行；</li>
+</ol>
+<h4 id="5-1-3-为什么不推荐使用FixedThreadPool？"><a href="#5-1-3-为什么不推荐使用FixedThreadPool？" class="headerlink" title="5.1.3 为什么不推荐使用FixedThreadPool？"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_513-为什么不推荐使用fixedthreadpool？" target="_blank" rel="noopener">5.1.3 为什么不推荐使用<code>FixedThreadPool</code>？</a></h4><p><strong><code>FixedThreadPool</code> 使用无界队列 <code>LinkedBlockingQueue</code>（队列的容量为 Intger.MAX_VALUE）作为线程池的工作队列会对线程池带来如下影响 ：</strong></p>
+<ol>
+<li>当线程池中的线程数达到 <code>corePoolSize</code> 后，新任务将在无界队列中等待，因此线程池中的线程数不会超过 corePoolSize；</li>
+<li>由于使用无界队列时 <code>maximumPoolSize</code> 将是一个无效参数，因为不可能存在任务队列满的情况。所以，通过创建 <code>FixedThreadPool</code>的源码可以看出创建的 <code>FixedThreadPool</code> 的 <code>corePoolSize</code> 和 <code>maximumPoolSize</code> 被设置为同一个值。</li>
+<li>由于 1 和 2，使用无界队列时 <code>keepAliveTime</code> 将是一个无效参数；</li>
+<li>运行中的 <code>FixedThreadPool</code>（未执行 <code>shutdown()</code>或 <code>shutdownNow()</code>）不会拒绝任务，在任务比较多的时候会导致 OOM（内存溢出）。</li>
+</ol>
+<h3 id="5-2-SingleThreadExecutor-详解"><a href="#5-2-SingleThreadExecutor-详解" class="headerlink" title="5.2 SingleThreadExecutor 详解"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_52-singlethreadexecutor-详解" target="_blank" rel="noopener">5.2 SingleThreadExecutor 详解</a></h3><h4 id="5-2-1-介绍"><a href="#5-2-1-介绍" class="headerlink" title="5.2.1 介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_521-介绍" target="_blank" rel="noopener">5.2.1 介绍</a></h4><p><code>SingleThreadExecutor</code> 是只有一个线程的线程池。下面看看<strong>SingleThreadExecutor 的实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *返回只有一个线程的线程池</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">(ThreadFactory threadFactory)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">         (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                 <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                 <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(),</span><br><span class="line">                                 threadFactory));</span><br><span class="line"> &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">         (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                 <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                 <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面源代码可以看出新创建的 <code>SingleThreadExecutor</code> 的 <code>corePoolSize</code> 和 <code>maximumPoolSize</code> 都被设置为 1.其他参数和 <code>FixedThreadPool</code> 相同。</p>
+<h4 id="5-2-2-执行任务过程介绍"><a href="#5-2-2-执行任务过程介绍" class="headerlink" title="5.2.2 执行任务过程介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_522-执行任务过程介绍" target="_blank" rel="noopener">5.2.2 执行任务过程介绍</a></h4><p><strong><code>SingleThreadExecutor</code> 的运行示意图（该图片来源：《Java 并发编程的艺术》）：</strong> <img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzgyMjc2NDU4LmpwZw?x-oss-process=image/format,png" alt="SingleThreadExecutor的运行示意图"></p>
+<p><strong>上图说明;</strong></p>
+<ol>
+<li>如果当前运行的线程数少于 corePoolSize，则创建一个新的线程执行任务；</li>
+<li>当前线程池中有一个运行的线程后，将任务加入 <code>LinkedBlockingQueue</code></li>
+<li>线程执行完当前的任务后，会在循环中反复从<code>LinkedBlockingQueue</code> 中获取任务来执行；</li>
+</ol>
+<h4 id="5-2-3-为什么不推荐使用SingleThreadExecutor？"><a href="#5-2-3-为什么不推荐使用SingleThreadExecutor？" class="headerlink" title="5.2.3 为什么不推荐使用SingleThreadExecutor？"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_523-为什么不推荐使用singlethreadexecutor？" target="_blank" rel="noopener">5.2.3 为什么不推荐使用<code>SingleThreadExecutor</code>？</a></h4><p><code>SingleThreadExecutor</code> 使用无界队列 <code>LinkedBlockingQueue</code> 作为线程池的工作队列（队列的容量为 Intger.MAX_VALUE）。<code>SingleThreadExecutor</code> 使用无界队列作为线程池的工作队列会对线程池带来的影响与 <code>FixedThreadPool</code> 相同。说简单点就是可能会导致 OOM，</p>
+<h3 id="5-3-CachedThreadPool-详解"><a href="#5-3-CachedThreadPool-详解" class="headerlink" title="5.3 CachedThreadPool 详解"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_53-cachedthreadpool-详解" target="_blank" rel="noopener">5.3 CachedThreadPool 详解</a></h3><h4 id="5-3-1-介绍"><a href="#5-3-1-介绍" class="headerlink" title="5.3.1 介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_531-介绍" target="_blank" rel="noopener">5.3.1 介绍</a></h4><p><code>CachedThreadPool</code> 是一个会根据需要创建新线程的线程池。下面通过源码来看看 <code>CachedThreadPool</code> 的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建一个线程池，根据需要创建新线程，但会在先前构建的线程可用时重用它。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">(ThreadFactory threadFactory)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;(),</span><br><span class="line">                                  threadFactory);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CachedThreadPool</code> 的<code>corePoolSize</code> 被设置为空（0），<code>maximumPoolSize</code>被设置为 Integer.MAX.VALUE，即它是无界的，这也就意味着如果主线程提交任务的速度高于 <code>maximumPool</code> 中线程处理任务的速度时，<code>CachedThreadPool</code> 会不断创建新的线程。极端情况下，这样会导致耗尽 cpu 和内存资源。</p>
+<h4 id="5-3-2-执行任务过程介绍"><a href="#5-3-2-执行任务过程介绍" class="headerlink" title="5.3.2 执行任务过程介绍"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_532-执行任务过程介绍" target="_blank" rel="noopener">5.3.2 执行任务过程介绍</a></h4><p><strong>CachedThreadPool 的 execute()方法的执行示意图（该图片来源：《Java 并发编程的艺术》）：</strong> <img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzE4NjExNzY3LmpwZw?x-oss-process=image/format,png" alt="CachedThreadPool的execute()方法的执行示意图"></p>
+<p><strong>上图说明：</strong></p>
+<ol>
+<li>首先执行 <code>SynchronousQueue.offer(Runnable task)</code> 提交任务到任务队列。如果当前 <code>maximumPool</code> 中有闲线程正在执行 <code>SynchronousQueue.poll(keepAliveTime,TimeUnit.NANOSECONDS)</code>，那么主线程执行 offer 操作与空闲线程执行的 <code>poll</code> 操作配对成功，主线程把任务交给空闲线程执行，<code>execute()</code>方法执行完成，否则执行下面的步骤 2；</li>
+<li>当初始 <code>maximumPool</code> 为空，或者 <code>maximumPool</code> 中没有空闲线程时，将没有线程执行 <code>SynchronousQueue.poll(keepAliveTime,TimeUnit.NANOSECONDS)</code>。这种情况下，步骤 1 将失败，此时 <code>CachedThreadPool</code> 会创建新线程执行任务，execute 方法执行完成；</li>
+</ol>
+<h4 id="5-3-3-为什么不推荐使用CachedThreadPool？"><a href="#5-3-3-为什么不推荐使用CachedThreadPool？" class="headerlink" title="5.3.3 为什么不推荐使用CachedThreadPool？"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_533-为什么不推荐使用cachedthreadpool？" target="_blank" rel="noopener">5.3.3 为什么不推荐使用<code>CachedThreadPool</code>？</a></h4><p><code>CachedThreadPool</code>允许创建的线程数量为 Integer.MAX_VALUE ，可能会创建大量线程，从而导致 OOM。</p>
+<h2 id="六-ScheduledThreadPoolExecutor-详解"><a href="#六-ScheduledThreadPoolExecutor-详解" class="headerlink" title="六 ScheduledThreadPoolExecutor 详解"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=六-scheduledthreadpoolexecutor-详解" target="_blank" rel="noopener">六 ScheduledThreadPoolExecutor 详解</a></h2><p><strong><code>ScheduledThreadPoolExecutor</code> 主要用来在给定的延迟后运行任务，或者定期执行任务。</strong> 这个在实际项目中基本不会被用到，所以对这部分大家只需要简单了解一下它的思想。关于如何在Spring Boot 中 实现定时任务，可以查看这篇文章<a href="https://github.com/Snailclimb/springboot-guide/blob/master/docs/advanced/SpringBoot-ScheduleTasks.md" target="_blank" rel="noopener">《5分钟搞懂如何在Spring Boot中Schedule Tasks》</a>。</p>
+<h3 id="6-1-简介"><a href="#6-1-简介" class="headerlink" title="6.1 简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_61-简介" target="_blank" rel="noopener">6.1 简介</a></h3><p><strong><code>ScheduledThreadPoolExecutor</code> 使用的任务队列 <code>DelayQueue</code> 封装了一个 <code>PriorityQueue</code>，<code>PriorityQueue</code> 会对队列中的任务进行排序，执行所需时间短的放在前面先被执行(<code>ScheduledFutureTask</code> 的 <code>time</code> 变量小的先执行)，如果执行所需时间相同则先提交的任务将被先执行(<code>ScheduledFutureTask</code> 的 <code>squenceNumber</code> 变量小的先执行)。</strong></p>
+<p><strong><code>ScheduledThreadPoolExecutor</code> 和 <code>Timer</code> 的比较：</strong></p>
+<ul>
+<li><code>Timer</code> 对系统时钟的变化敏感，<code>ScheduledThreadPoolExecutor</code>不是；</li>
+<li><code>Timer</code> 只有一个执行线程，因此长时间运行的任务可以延迟其他任务。 <code>ScheduledThreadPoolExecutor</code> 可以配置任意数量的线程。 此外，如果你想（通过提供 ThreadFactory），你可以完全控制创建的线程;</li>
+<li>在<code>TimerTask</code> 中抛出的运行时异常会杀死一个线程，从而导致 <code>Timer</code> 死机:-( …即计划任务将不再运行。<code>ScheduledThreadExecutor</code> 不仅捕获运行时异常，还允许您在需要时处理它们（通过重写 <code>afterExecute</code> 方法<code>ThreadPoolExecutor</code>）。抛出异常的任务将被取消，但其他任务将继续运行。</li>
+</ul>
+<p><strong>综上，在 JDK1.5 之后，你没有理由再使用 Timer 进行任务调度了。</strong></p>
+<blockquote>
+<p><strong>备注：</strong> Quartz 是一个由 java 编写的任务调度库，由 OpenSymphony 组织开源出来。在实际项目开发中使用 Quartz 的还是居多，比较推荐使用 Quartz。因为 Quartz 理论上能够同时对上万个任务进行调度，拥有丰富的功能特性，包括任务调度、任务持久化、可集群化、插件等等。</p>
+</blockquote>
+<h3 id="6-2-运行机制"><a href="#6-2-运行机制" class="headerlink" title="6.2 运行机制"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_62-运行机制" target="_blank" rel="noopener">6.2 运行机制</a></h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzkyNTk0Njk4LmpwZw?x-oss-process=image/format,png" alt="ScheduledThreadPoolExecutor运行机制"></p>
+<p><strong><code>ScheduledThreadPoolExecutor</code> 的执行主要分为两大部分：</strong></p>
+<ol>
+<li>当调用 <code>ScheduledThreadPoolExecutor</code> 的 <strong><code>scheduleAtFixedRate()</code></strong> 方法或者<strong><code>scheduleWirhFixedDelay()</code></strong> 方法时，会向 <code>ScheduledThreadPoolExecutor</code> 的 <strong><code>DelayQueue</code></strong> 添加一个实现了 <strong><code>RunnableScheduledFuture</code></strong> 接口的 <strong><code>ScheduledFutureTask</code></strong> 。</li>
+<li>线程池中的线程从 <code>DelayQueue</code> 中获取 <code>ScheduledFutureTask</code>，然后执行任务。</li>
+</ol>
+<p><strong><code>ScheduledThreadPoolExecutor</code> 为了实现周期性的执行任务，对 <code>ThreadPoolExecutor</code>做了如下修改：</strong></p>
+<ul>
+<li>使用 <strong><code>DelayQueue</code></strong> 作为任务队列；</li>
+<li>获取任务的方不同</li>
+<li>执行周期任务后，增加了额外的处理</li>
+</ul>
+<h3 id="6-3-ScheduledThreadPoolExecutor-执行周期任务的步骤"><a href="#6-3-ScheduledThreadPoolExecutor-执行周期任务的步骤" class="headerlink" title="6.3 ScheduledThreadPoolExecutor 执行周期任务的步骤"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=_63-scheduledthreadpoolexecutor-执行周期任务的步骤" target="_blank" rel="noopener">6.3 ScheduledThreadPoolExecutor 执行周期任务的步骤</a></h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC01LTMwLzU5OTE2Mzg5LmpwZw?x-oss-process=image/format,png" alt="ScheduledThreadPoolExecutor执行周期任务的步骤"></p>
+<ol>
+<li>线程 1 从 <code>DelayQueue</code> 中获取已到期的 <code>ScheduledFutureTask（DelayQueue.take()）</code>。到期任务是指 <code>ScheduledFutureTask</code>的 time 大于等于当前系统的时间；</li>
+<li>线程 1 执行这个 <code>ScheduledFutureTask</code>；</li>
+<li>线程 1 修改 <code>ScheduledFutureTask</code> 的 time 变量为下次将要被执行的时间；</li>
+<li>线程 1 把这个修改 time 之后的 <code>ScheduledFutureTask</code> 放回 <code>DelayQueue</code> 中（<code>DelayQueue.add()</code>)。</li>
+</ol>
+<h2 id="七-线程池大小确定"><a href="#七-线程池大小确定" class="headerlink" title="七 线程池大小确定"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=七-线程池大小确定" target="_blank" rel="noopener">七 线程池大小确定</a></h2><p><strong>线程池数量的确定一直是困扰着程序员的一个难题，大部分程序员在设定线程池大小的时候就是随心而定。我们并没有考虑过这样大小的配置是否会带来什么问题，我自己就是这大部分程序员中的一个代表。</strong></p>
+<p>由于笔主对如何确定线程池大小也没有什么实际经验，所以，这部分内容参考了网上很多文章/书籍。</p>
+<p><strong>首先，可以肯定的一点是线程池大小设置过大或者过小都会有问题。合适的才是最好，貌似在 95 % 的场景下都是合适的。</strong></p>
+<p>如果阅读过我的上一篇关于线程池的文章的话，你一定知道：</p>
+<p><strong>如果我们设置的线程池数量太小的话，如果同一时间有大量任务/请求需要处理，可能会导致大量的请求/任务在任务队列中排队等待执行，甚至会出现任务队列满了之后任务/请求无法处理的情况，或者大量任务堆积在任务队列导致 OOM。这样很明显是有问题的！ CPU 根本没有得到充分利用。</strong></p>
+<p><strong>但是，如果我们设置线程数量太大，大量线程可能会同时在争取 CPU 资源，这样会导致大量的上下文切换，从而增加线程的执行时间，影响了整体执行效率。</strong></p>
+<blockquote>
+<p>上下文切换：</p>
+<p>多线程编程中一般线程的个数都大于 CPU 核心的个数，而一个 CPU 核心在任意时刻只能被一个线程使用，为了让这些线程都能得到有效执行，CPU 采取的策略是为每个线程分配时间片并轮转的形式。当一个线程的时间片用完的时候就会重新处于就绪状态让给其他线程使用，这个过程就属于一次上下文切换。概括来说就是：当前任务在执行完 CPU 时间片切换到另一个任务之前会先保存自己的状态，以便下次再切换回这个任务时，可以再加载这个任务的状态。<strong>任务从保存到再加载的过程就是一次上下文切换</strong>。</p>
+<p>上下文切换通常是计算密集型的。也就是说，它需要相当可观的处理器时间，在每秒几十上百次的切换中，每次切换都需要纳秒量级的时间。所以，上下文切换对系统来说意味着消耗大量的 CPU 时间，事实上，可能是操作系统中时间消耗最大的操作。</p>
+<p>Linux 相比与其他操作系统（包括其他类 Unix 系统）有很多的优点，其中有一项就是，其上下文切换和模式切换的时间消耗非常少。</p>
+</blockquote>
+<p>有一个简单并且适用面比较广的公式：</p>
+<ul>
+<li><strong>CPU 密集型任务(N+1)：</strong> 这种任务消耗的主要是 CPU 资源，可以将线程数设置为 N（CPU 核心数）+1，比 CPU 核心数多出来的一个线程是为了防止线程偶发的缺页中断，或者其它原因导致的任务暂停而带来的影响。一旦任务暂停，CPU 就会处于空闲状态，而在这种情况下多出来的一个线程就可以充分利用 CPU 的空闲时间。</li>
+<li><strong>I/O 密集型任务(2N)：</strong> 这种任务应用起来，系统会用大部分的时间来处理 I/O 交互，而线程在处理 I/O 的时间段内不会占用 CPU 来处理，这时就可以将 CPU 交出给其它线程使用。因此在 I/O 密集型任务的应用中，我们可以多配置一些线程，具体的计算方法是 2N。</li>
+</ul>
+<h2 id="九-其他推荐阅读"><a href="#九-其他推荐阅读" class="headerlink" title="九 其他推荐阅读"></a><a href="https://snailclimb.gitee.io/javaguide/#/./docs/java/Multithread/java线程池学习总结?id=九-其他推荐阅读" target="_blank" rel="noopener">九 其他推荐阅读</a></h2><ul>
+<li><a href="https://www.cnblogs.com/warehouse/p/10720781.html" target="_blank" rel="noopener">Java 并发（三）线程池原理</a></li>
+<li><a href="https://github.com/crossoverJie/JCSprout/blob/master/MD/ThreadPoolExecutor.md" target="_blank" rel="noopener">如何优雅的使用和理解线程池</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">池化技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-Java容器常见知识点总结" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -409,191 +791,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/02/11/Java%E5%AE%B9%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-Java疑难点" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">Java疑难点</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_1-基础" target="_blank" rel="noopener">1. 基础</a></h1><h2 id="1-1-正确使用-equals-方法"><a href="#1-1-正确使用-equals-方法" class="headerlink" title="1.1. 正确使用 equals 方法"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_11-正确使用-equals-方法" target="_blank" rel="noopener">1.1. 正确使用 equals 方法</a></h2><p>Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。</p>
-<p>举个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不能使用一个值为null的引用类型变量来调用非静态方法，否则会抛出异常</span></span><br><span class="line">String str = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (str.equals(<span class="string">"SnailClimb"</span>)) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行上面的程序会抛出空指针异常，但是我们把第二行的条件判断语句改为下面这样的话，就不会抛出空指针异常，else 语句块得到执行。：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"SnailClimb"</span>.equals(str);<span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>不过更推荐使用 <code>java.util.Objects#equals</code>(JDK7 引入的工具类)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Objects.equals(<span class="keyword">null</span>,<span class="string">"SnailClimb"</span>);<span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>我们看一下<code>java.util.Objects#equals</code>的源码就知道原因了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object a, Object b)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 可以避免空指针异常。如果a==null的话此时a.equals(b)就不会得到执行，避免出现空指针异常。</span></span><br><span class="line">        <span class="keyword">return</span> (a == b) || (a != <span class="keyword">null</span> &amp;&amp; a.equals(b));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong></p>
-<p>Reference:<a href="https://blog.csdn.net/tick_tock97/article/details/72824894" target="_blank" rel="noopener">Java中equals方法造成空指针异常的原因及解决方案</a></p>
-<ul>
-<li>每种原始类型都有默认值一样，如int默认值为 0，boolean 的默认值为 false，null 是任何引用类型的默认值，不严格的说是所有 Object 类型的默认值。</li>
-<li>可以使用 == 或者 != 操作来比较null值，但是不能使用其他算法或者逻辑操作。在Java中<code>null == null</code>将返回true。</li>
-<li>不能使用一个值为null的引用类型变量来调用非静态方法，否则会抛出异常</li>
-</ul>
-<h2 id="1-2-整型包装类值的比较"><a href="#1-2-整型包装类值的比较" class="headerlink" title="1.2. 整型包装类值的比较"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_12-整型包装类值的比较" target="_blank" rel="noopener">1.2. 整型包装类值的比较</a></h2><p>所有整型包装类对象值的比较必须使用equals方法。</p>
-<p>先看下面这个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer x = <span class="number">3</span>;</span><br><span class="line">Integer y = <span class="number">3</span>;</span><br><span class="line">System.out.println(x == y);<span class="comment">// true</span></span><br><span class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">3</span>);</span><br><span class="line">Integer b = <span class="keyword">new</span> Integer(<span class="number">3</span>);</span><br><span class="line">System.out.println(a == b);<span class="comment">//false</span></span><br><span class="line">System.out.println(a.equals(b));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-<p>当使用自动装箱方式创建一个Integer对象时，当数值在-128 ~127时，会将创建的 Integer 对象缓存起来，当下次再出现该数值时，直接从缓存中取出对应的Integer对象。所以上述代码中，x和y引用的是相同的Integer对象。</p>
-<p><strong>注意：</strong>如果你的IDE(IDEA/Eclipse)上安装了阿里巴巴的p3c插件，这个插件如果检测到你用 ==的话会报错提示，推荐安装一个这个插件，很不错。</p>
-<h2 id="1-3-BigDecimal"><a href="#1-3-BigDecimal" class="headerlink" title="1.3. BigDecimal"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_13-bigdecimal" target="_blank" rel="noopener">1.3. BigDecimal</a></h2><h3 id="1-3-1-BigDecimal-的用处"><a href="#1-3-1-BigDecimal-的用处" class="headerlink" title="1.3.1. BigDecimal 的用处"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_131-bigdecimal-的用处" target="_blank" rel="noopener">1.3.1. BigDecimal 的用处</a></h3><p>《阿里巴巴Java开发手册》中提到：<strong>浮点数之间的等值判断，基本数据类型不能用==来比较，包装数据类型不能用 equals 来判断。</strong> 具体原理和浮点数的编码方式有关，这里就不多提了，我们下面直接上实例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> a = <span class="number">1.0f</span> - <span class="number">0.9f</span>;</span><br><span class="line"><span class="keyword">float</span> b = <span class="number">0.9f</span> - <span class="number">0.8f</span>;</span><br><span class="line">System.out.println(a);<span class="comment">// 0.100000024</span></span><br><span class="line">System.out.println(b);<span class="comment">// 0.099999964</span></span><br><span class="line">System.out.println(a == b);<span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>具有基本数学知识的我们很清楚的知道输出并不是我们想要的结果（<strong>精度丢失</strong>），我们如何解决这个问题呢？一种很常用的方法是：<strong>使用使用 BigDecimal 来定义浮点数的值，再进行浮点数的运算操作。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal a = <span class="keyword">new</span> BigDecimal(<span class="string">"1.0"</span>);</span><br><span class="line">BigDecimal b = <span class="keyword">new</span> BigDecimal(<span class="string">"0.9"</span>);</span><br><span class="line">BigDecimal c = <span class="keyword">new</span> BigDecimal(<span class="string">"0.8"</span>);</span><br><span class="line">BigDecimal x = a.subtract(b);<span class="comment">// 0.1</span></span><br><span class="line">BigDecimal y = b.subtract(c);<span class="comment">// 0.1</span></span><br><span class="line">System.out.println(x.equals(y));<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-2-BigDecimal-的大小比较"><a href="#1-3-2-BigDecimal-的大小比较" class="headerlink" title="1.3.2. BigDecimal 的大小比较"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_132-bigdecimal-的大小比较" target="_blank" rel="noopener">1.3.2. BigDecimal 的大小比较</a></h3><p><code>a.compareTo(b)</code> : 返回 -1 表示小于，0 表示 等于， 1表示 大于。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal a = <span class="keyword">new</span> BigDecimal(<span class="string">"1.0"</span>);</span><br><span class="line">BigDecimal b = <span class="keyword">new</span> BigDecimal(<span class="string">"0.9"</span>);</span><br><span class="line">System.out.println(a.compareTo(b));<span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-3-BigDecimal-保留几位小数"><a href="#1-3-3-BigDecimal-保留几位小数" class="headerlink" title="1.3.3. BigDecimal 保留几位小数"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_133-bigdecimal-保留几位小数" target="_blank" rel="noopener">1.3.3. BigDecimal 保留几位小数</a></h3><p>通过 <code>setScale</code>方法设置保留几位小数以及保留规则。保留规则有挺多种，不需要记，IDEA会提示。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal m = <span class="keyword">new</span> BigDecimal(<span class="string">"1.255433"</span>);</span><br><span class="line">BigDecimal n = m.setScale(<span class="number">3</span>,BigDecimal.ROUND_HALF_DOWN);</span><br><span class="line">System.out.println(n);<span class="comment">// 1.255</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-4-BigDecimal-的使用注意事项"><a href="#1-3-4-BigDecimal-的使用注意事项" class="headerlink" title="1.3.4. BigDecimal 的使用注意事项"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_134-bigdecimal-的使用注意事项" target="_blank" rel="noopener">1.3.4. BigDecimal 的使用注意事项</a></h3><p>注意：我们在使用BigDecimal时，为了防止精度丢失，推荐使用它的 <strong>BigDecimal(String)</strong> 构造方法来创建对象。《阿里巴巴Java开发手册》对这部分内容也有提到如下图所示。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019/7/BigDecimal.png" alt="《阿里巴巴Java开发手册》对这部分BigDecimal的描述"></p>
-<h3 id="1-3-5-总结"><a href="#1-3-5-总结" class="headerlink" title="1.3.5. 总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_135-总结" target="_blank" rel="noopener">1.3.5. 总结</a></h3><p>BigDecimal 主要用来操作（大）浮点数，BigInteger 主要用来操作大整数（超过 long 类型）。</p>
-<p>BigDecimal 的实现利用到了 BigInteger, 所不同的是 BigDecimal 加入了小数位的概念</p>
-<h2 id="1-4-基本数据类型与包装数据类型的使用标准"><a href="#1-4-基本数据类型与包装数据类型的使用标准" class="headerlink" title="1.4. 基本数据类型与包装数据类型的使用标准"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_14-基本数据类型与包装数据类型的使用标准" target="_blank" rel="noopener">1.4. 基本数据类型与包装数据类型的使用标准</a></h2><p>Reference:《阿里巴巴Java开发手册》</p>
-<ul>
-<li>【强制】所有的 POJO 类属性必须使用包装数据类型。</li>
-<li>【强制】RPC 方法的返回值和参数必须使用包装数据类型。</li>
-<li>【推荐】所有的局部变量使用基本数据类型。</li>
-</ul>
-<p>比如我们如果自定义了一个Student类,其中有一个属性是成绩score,如果用Integer而不用int定义,一次考试,学生可能没考,值是null,也可能考了,但考了0分,值是0,这两个表达的状态明显不一样.</p>
-<p><strong>说明</strong> :POJO 类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，任何 NPE 问题，或者入库检查，都由使用者来保证。</p>
-<p><strong>正例</strong> : 数据库的查询结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险。</p>
-<p><strong>反例</strong> : 比如显示成交总额涨跌情况，即正负 x%，x 为基本数据类型，调用的 RPC 服务，调用不成功时，返回的是默认值，页面显示为 0%，这是不合理的，应该显示成中划线。所以包装数据类型的 null 值，能够表示额外的信息，如:远程调用失败，异常退出。</p>
-<h1 id="2-集合"><a href="#2-集合" class="headerlink" title="2. 集合"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_2-集合" target="_blank" rel="noopener">2. 集合</a></h1><h2 id="2-1-Arrays-asList-使用指南"><a href="#2-1-Arrays-asList-使用指南" class="headerlink" title="2.1. Arrays.asList()使用指南"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_21-arraysaslist使用指南" target="_blank" rel="noopener">2.1. Arrays.asList()使用指南</a></h2><p>最近使用<code>Arrays.asList()</code>遇到了一些坑，然后在网上看到这篇文章：<a href="http://javadevnotes.com/java-array-to-list-examples" target="_blank" rel="noopener">Java Array to List Examples</a> 感觉挺不错的，但是还不是特别全面。所以，自己对于这块小知识点进行了简单的总结。</p>
-<h3 id="2-1-1-简介"><a href="#2-1-1-简介" class="headerlink" title="2.1.1. 简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_211-简介" target="_blank" rel="noopener">2.1.1. 简介</a></h3><p><code>Arrays.asList()</code>在平时开发中还是比较常见的，我们可以使用它将一个数组转换为一个List集合。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] myArray = &#123; <span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span> &#125;； </span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(myArray);</span><br><span class="line"><span class="comment">//上面两个语句等价于下面一条语句</span></span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(<span class="string">"Apple"</span>,<span class="string">"Banana"</span>, <span class="string">"Orange"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>JDK 源码对于这个方法的说明：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *返回由指定数组支持的固定大小的列表。此方法作为基于数组和基于集合的API之间的桥梁，与           Collection.toArray()结合使用。返回的List是可序列化并实现RandomAccess接口。</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">asList</span><span class="params">(T... a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1-2-《阿里巴巴Java-开发手册》对其的描述"><a href="#2-1-2-《阿里巴巴Java-开发手册》对其的描述" class="headerlink" title="2.1.2. 《阿里巴巴Java 开发手册》对其的描述"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_212-《阿里巴巴java-开发手册》对其的描述" target="_blank" rel="noopener">2.1.2. 《阿里巴巴Java 开发手册》对其的描述</a></h3><p><code>Arrays.asList()</code>将数组转换为集合后,底层其实还是数组，《阿里巴巴Java 开发手册》对于这个方法有如下描述：</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B-Arrays.asList()%E6%96%B9%E6%B3%95.png" alt="阿里巴巴Java开发手-Arrays.asList()方法"></p>
-<h3 id="2-1-3-使用时的注意事项总结"><a href="#2-1-3-使用时的注意事项总结" class="headerlink" title="2.1.3. 使用时的注意事项总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_213-使用时的注意事项总结" target="_blank" rel="noopener">2.1.3. 使用时的注意事项总结</a></h3><p><strong>传递的数组必须是对象数组，而不是基本类型。</strong></p>
-<p><code>Arrays.asList()</code>是泛型方法，传入的对象必须是对象数组。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List myList = Arrays.asList(myArray);</span><br><span class="line">System.out.println(myList.size());<span class="comment">//1</span></span><br><span class="line">System.out.println(myList.get(<span class="number">0</span>));<span class="comment">//数组地址值</span></span><br><span class="line">System.out.println(myList.get(<span class="number">1</span>));<span class="comment">//报错：ArrayIndexOutOfBoundsException</span></span><br><span class="line"><span class="keyword">int</span> [] array=(<span class="keyword">int</span>[]) myList.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(array[<span class="number">0</span>]);<span class="comment">//1</span></span><br></pre></td></tr></table></figure>
-
-<p>当传入一个原生数据类型数组时，<code>Arrays.asList()</code> 的真正得到的参数就不是数组中的元素，而是数组对象本身！此时List 的唯一元素就是这个数组，这也就解释了上面的代码。</p>
-<p>我们使用包装类型数组就可以解决这个问题。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer[] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>使用集合的修改方法:<code>add()</code>、<code>remove()</code>、<code>clear()</code>会抛出异常。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List myList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">myList.add(<span class="number">4</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.remove(<span class="number">1</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.clear();<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
-
-<p><code>Arrays.asList()</code> 方法返回的并不是 <code>java.util.ArrayList</code> ，而是 <code>java.util.Arrays</code> 的一个内部类,这个内部类并没有实现集合的修改方法或者说并没有重写这些方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List myList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">System.out.println(myList.getClass());<span class="comment">//class java.util.Arrays$ArrayList</span></span><br></pre></td></tr></table></figure>
-
-<p>下图是<code>java.util.Arrays$ArrayList</code>的简易源码，我们可以看到这个类重写的方法有哪些。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">      <span class="keyword">implements</span> <span class="title">RandomAccess</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class">  </span>&#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forEach</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; action)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">replaceAll</span><span class="params">(UnaryOperator&lt;E&gt; operator)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparator&lt;? <span class="keyword">super</span> E&gt; c)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们再看一下<code>java.util.AbstractList</code>的<code>remove()</code>方法，这样我们就明白为啥会抛出<code>UnsupportedOperationException</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1-4-如何正确的将数组转换为ArrayList"><a href="#2-1-4-如何正确的将数组转换为ArrayList" class="headerlink" title="2.1.4. 如何正确的将数组转换为ArrayList?"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_214-如何正确的将数组转换为arraylist" target="_blank" rel="noopener">2.1.4. 如何正确的将数组转换为ArrayList?</a></h3><p>stackoverflow：<a href="https://dwz.cn/vcBkTiTW" target="_blank" rel="noopener">https://dwz.cn/vcBkTiTW</a></p>
-<p><strong>1. 自己动手实现（教育目的）</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JDK1.5+</span></span><br><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">arrayToList</span><span class="params">(<span class="keyword">final</span> T[] array)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> List&lt;T&gt; l = <span class="keyword">new</span> ArrayList&lt;T&gt;(array.length);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">final</span> T s : array) &#123;</span><br><span class="line">    l.add(s);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (l);</span><br><span class="line">&#125;</span><br><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">System.out.println(arrayToList(myArray).getClass());<span class="comment">//class java.util.ArrayList</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 最简便的方法(推荐)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>))</span><br></pre></td></tr></table></figure>
-
-<p><strong>3. 使用 Java8 的Stream(推荐)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List myList = Arrays.stream(myArray).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//基本类型也可以实现转换（依赖boxed的装箱操作）</span></span><br><span class="line"><span class="keyword">int</span> [] myArray2 = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List myList = Arrays.stream(myArray2).boxed().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
-
-<p><strong>4. 使用 Guava(推荐)</strong></p>
-<p>对于不可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java" target="_blank" rel="noopener"><code>ImmutableList</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java#L101" target="_blank" rel="noopener"><code>of()</code></a>与<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java#L225" target="_blank" rel="noopener"><code>copyOf()</code></a>工厂方法：（参数不能为空）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; il = ImmutableList.of(<span class="string">"string"</span>, <span class="string">"elements"</span>);  <span class="comment">// from varargs</span></span><br><span class="line">List&lt;String&gt; il = ImmutableList.copyOf(aStringArray);      <span class="comment">// from array</span></span><br></pre></td></tr></table></figure>
-
-<p>对于可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java" target="_blank" rel="noopener"><code>Lists</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java#L87" target="_blank" rel="noopener"><code>newArrayList()</code></a>工厂方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; l1 = Lists.newArrayList(anotherListOrCollection);    <span class="comment">// from collection</span></span><br><span class="line">List&lt;String&gt; l2 = Lists.newArrayList(aStringArray);               <span class="comment">// from array</span></span><br><span class="line">List&lt;String&gt; l3 = Lists.newArrayList(<span class="string">"or"</span>, <span class="string">"string"</span>, <span class="string">"elements"</span>); <span class="comment">// from varargs</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>5. 使用 Apache Commons Collections</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">CollectionUtils.addAll(list, str);</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-Collection-toArray-方法使用的坑-amp-如何反转数组"><a href="#2-2-Collection-toArray-方法使用的坑-amp-如何反转数组" class="headerlink" title="2.2. Collection.toArray()方法使用的坑&amp;如何反转数组"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_22-collectiontoarray方法使用的坑amp如何反转数组" target="_blank" rel="noopener">2.2. Collection.toArray()方法使用的坑&amp;如何反转数组</a></h2><p>该方法是一个泛型方法：<code>T[] toArray(T[] a);</code> 如果<code>toArray</code>方法中没有传递任何参数的话返回的是<code>Object</code>类型数组。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String [] s= <span class="keyword">new</span> String[]&#123;</span><br><span class="line">    <span class="string">"dog"</span>, <span class="string">"lazy"</span>, <span class="string">"a"</span>, <span class="string">"over"</span>, <span class="string">"jumps"</span>, <span class="string">"fox"</span>, <span class="string">"brown"</span>, <span class="string">"quick"</span>, <span class="string">"A"</span></span><br><span class="line">&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(s);</span><br><span class="line">Collections.reverse(list);</span><br><span class="line">s=list.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);<span class="comment">//没有指定类型的话会报错</span></span><br></pre></td></tr></table></figure>
-
-<p>由于JVM优化，<code>new String[0]</code>作为<code>Collection.toArray()</code>方法的参数现在使用更好，<code>new String[0]</code>就是起一个模板的作用，指定了返回数组的类型，0是为了节省空间，因为它只是为了说明返回的类型。详见：<a href="https://shipilev.net/blog/2016/arrays-wisdom-ancients/" target="_blank" rel="noopener">https://shipilev.net/blog/2016/arrays-wisdom-ancients/</a></p>
-<h2 id="2-3-不要在-foreach-循环里进行元素的-remove-add-操作"><a href="#2-3-不要在-foreach-循环里进行元素的-remove-add-操作" class="headerlink" title="2.3. 不要在 foreach 循环里进行元素的 remove/add 操作"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_23-不要在-foreach-循环里进行元素的-removeadd-操作" target="_blank" rel="noopener">2.3. 不要在 foreach 循环里进行元素的 remove/add 操作</a></h2><p>如果要进行<code>remove</code>操作，可以调用迭代器的 <code>remove</code>方法而不是集合类的 remove 方法。因为如果列表在任何时间从结构上修改创建迭代器之后，以任何方式除非通过迭代器自身<code>remove/add</code>方法，迭代器都将抛出一个<code>ConcurrentModificationException</code>,这就是单线程状态下产生的 <strong>fail-fast 机制</strong>。</p>
-<blockquote>
-<p><strong>fail-fast 机制</strong> ：多个线程对 fail-fast 集合进行修改的时，可能会抛出ConcurrentModificationException，单线程下也会出现这种情况，上面已经提到过。</p>
-</blockquote>
-<p><code>java.util</code>包下面的所有的集合类都是fail-fast的，而<code>java.util.concurrent</code>包下面的所有的类都是fail-safe的。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019/7/foreach-remove:add.png" alt="不要在 foreach 循环里进行元素的 remove/add 操作"></p>
-<p>转自<a href="https://snailclimb.gitee.io/javaguide" target="_blank" rel="noopener">https://snailclimb.gitee.io/javaguide</a> 备份</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">展开全文 >></a>
         </p>
       
 
@@ -1300,127 +1497,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/12/24/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-synchronized 关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/"> synchronized 关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2019-12-23T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-1-说一说自己对于-synchronized-关键字的了解"><a href="#1-1-说一说自己对于-synchronized-关键字的了解" class="headerlink" title="1.1. 说一说自己对于 synchronized 关键字的了解"></a>1.1. 说一说自己对于 synchronized 关键字的了解</h3><p>synchronized关键字解决的是多个线程之间访问资源的同步性，synchronized关键字可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。</p>
-<h3 id="1-2-说说自己是怎么使用-synchronized-关键字，在项目中用到了吗"><a href="#1-2-说说自己是怎么使用-synchronized-关键字，在项目中用到了吗" class="headerlink" title="1.2. 说说自己是怎么使用 synchronized 关键字，在项目中用到了吗"></a>1.2. 说说自己是怎么使用 synchronized 关键字，在项目中用到了吗</h3><p><strong>synchronized关键字最主要的三种使用方式：</strong></p>
-<ul>
-<li><strong>修饰实例方法:</strong> 作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁</li>
-<li><strong>修饰静态方法:</strong> 也就是给当前类加锁，会作用于类的所有对象实例，因为静态成员不属于任何一个实例对象，是类成员（ static 表明这是该类的一个静态资源，不管new了多少个对象，只有一份）。所以如果一个线程A调用一个实例对象的非静态 synchronized 方法，而线程B需要调用这个实例对象所属类的静态 synchronized 方法，是允许的，不会发生互斥现象，<strong>因为访问静态 synchronized 方法占用的锁是当前类的锁，而访问非静态 synchronized 方法占用的锁是当前实例对象锁</strong>。</li>
-<li><strong>修饰代码块:</strong> 指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
-</ul>
-<p><strong>总结：</strong> synchronized 关键字加到 static 静态方法和 synchronized(class)代码块上都是是给 Class 类上锁。synchronized 关键字加到实例方法上是给对象实例上锁。尽量不要使用 synchronized(String a) 因为JVM中，字符串常量池具有缓存功能！</p>
-<p>下面我以一个常见的面试题为例讲解一下 synchronized 关键字的具体使用。</p>
-<p>面试中面试官经常会说：“单例模式了解吗？来给我手写一下！给我解释一下双重检验锁方式实现单例模式的原理呗！”</p>
-<p><strong>双重校验锁实现对象单例（线程安全）</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getUniqueInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span></span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//类对象加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外，需要注意 uniqueInstance 采用 volatile 关键字修饰也是很有必要。</p>
-<p>uniqueInstance 采用 volatile 关键字修饰也是很有必要的， uniqueInstance = new Singleton(); 这段代码其实是分为三步执行：</p>
-<ol>
-<li>为 uniqueInstance 分配内存空间</li>
-<li>初始化 uniqueInstance</li>
-<li>将 uniqueInstance 指向分配的内存地址</li>
-</ol>
-<p>但是由于 JVM 具有指令重排的特性，执行顺序有可能变成 1-&gt;3-&gt;2。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 1 和 3，此时 T2 调用 getUniqueInstance() 后发现 uniqueInstance 不为空，因此返回 uniqueInstance，但此时 uniqueInstance 还未被初始化。</p>
-<p>使用 volatile 可以禁止 JVM 的指令重排，保证在多线程环境下也能正常运行。</p>
-<h3 id="1-3-讲一下-synchronized-关键字的底层原理"><a href="#1-3-讲一下-synchronized-关键字的底层原理" class="headerlink" title="1.3. 讲一下 synchronized 关键字的底层原理"></a>1.3. 讲一下 synchronized 关键字的底层原理</h3><p><strong>synchronized 关键字底层原理属于 JVM 层面。</strong></p>
-<p><strong>① synchronized 同步语句块的情况</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"synchronized 代码块"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过 JDK 自带的 javap 命令查看 SynchronizedDemo 类的相关字节码信息：首先切换到类的对应目录执行 <code>javac SynchronizedDemo.java</code> 命令生成编译后的 .class 文件，然后执行<code>javap -c -s -v -l SynchronizedDemo.class</code>。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%86.png" alt="synchronized关键字原理"></p>
-<p>从上面我们可以看出：</p>
-<p><strong>synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置。</strong> 当执行 monitorenter 指令时，线程试图获取锁也就是获取 monitor(monitor对象存在于每个Java对象的对象头中，synchronized 锁便是通过这种方式获取锁的，也是为什么Java中任意对象可以作为锁的原因) 的持有权。当计数器为0则可以成功获取，获取后将锁计数器设为1也就是加1。相应的在执行 monitorexit 指令后，将锁计数器设为0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
-<p><strong>② synchronized 修饰方法的的情况</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"synchronized 方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%862.png" alt="synchronized关键字原理"></p>
-<p>synchronized 修饰的方法并没有 monitorenter 指令和 monitorexit 指令，取得代之的确实是 ACC_SYNCHRONIZED 标识，该标识指明了该方法是一个同步方法，JVM 通过该 ACC_SYNCHRONIZED 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。</p>
-<h3 id="1-4谈谈-synchronized和ReentrantLock-的区别"><a href="#1-4谈谈-synchronized和ReentrantLock-的区别" class="headerlink" title="1.4谈谈 synchronized和ReentrantLock 的区别"></a>1.4谈谈 synchronized和ReentrantLock 的区别</h3><p><strong>① 两者都是可重入锁</strong></p>
-<p>两者都是可重入锁。“可重入锁”概念是：自己可以再次获取自己的内部锁。比如一个线程获得了某个对象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不可锁重入的话，就会造成死锁。同一个线程每次获取锁，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。</p>
-<p><strong>② synchronized 依赖于 JVM 而 ReentrantLock 依赖于 API</strong></p>
-<p>synchronized 是依赖于 JVM 实现的，前面我们也讲到了 虚拟机团队在 JDK1.6 为 synchronized 关键字进行了很多优化，但是这些优化都是在虚拟机层面实现的，并没有直接暴露给我们。ReentrantLock 是 JDK 层面实现的（也就是 API 层面，需要 lock() 和 unlock() 方法配合 try/finally 语句块来完成），所以我们可以通过查看它的源代码，来看它是如何实现的。</p>
-<p><strong>③ ReentrantLock 比 synchronized 增加了一些高级功能</strong></p>
-<p>相比synchronized，ReentrantLock增加了一些高级功能。主要来说主要有三点：<strong>①等待可中断；②可实现公平锁；③可实现选择性通知（锁可以绑定多个条件）</strong></p>
-<ul>
-<li><strong>ReentrantLock提供了一种能够中断等待锁的线程的机制</strong>，通过lock.lockInterruptibly()来实现这个机制。也就是说正在等待的线程可以选择放弃等待，改为处理其他事情。</li>
-<li><strong>ReentrantLock可以指定是公平锁还是非公平锁。而synchronized只能是非公平锁。所谓的公平锁就是先等待的线程先获得锁。</strong> ReentrantLock默认情况是非公平的，可以通过 ReentrantLock类的<code>ReentrantLock(boolean fair)</code>构造方法来制定是否是公平的。</li>
-<li>synchronized关键字与wait()和notify()/notifyAll()方法相结合可以实现等待/通知机制，ReentrantLock类当然也可以实现，但是需要借助于Condition接口与newCondition() 方法。Condition是JDK1.5之后才有的，它具有很好的灵活性，比如可以实现多路通知功能也就是在一个Lock对象中可以创建多个Condition实例（即对象监视器），<strong>线程对象可以注册在指定的Condition中，从而可以有选择性的进行线程通知，在调度线程上更加灵活。 在使用notify()/notifyAll()方法进行通知时，被通知的线程是由 JVM 选择的，用ReentrantLock类结合Condition实例可以实现“选择性通知”</strong> ，这个功能非常重要，而且是Condition接口默认提供的。而synchronized关键字就相当于整个Lock对象中只有一个Condition实例，所有的线程都注册在它一个身上。如果执行notifyAll()方法的话就会通知所有处于等待状态的线程这样会造成很大的效率问题，而Condition实例的signalAll()方法 只会唤醒注册在该Condition实例中的所有等待线程。</li>
-</ul>
-<p>如果你想使用上述功能，那么选择ReentrantLock是一个不错的选择。</p>
-<p><strong>④ 性能已不是选择标准</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">关键字解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
         </p>
       
 
@@ -2735,6 +2811,127 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-synchronized 关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/"> synchronized 关键字</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2019-12-23T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-1-说一说自己对于-synchronized-关键字的了解"><a href="#1-1-说一说自己对于-synchronized-关键字的了解" class="headerlink" title="1.1. 说一说自己对于 synchronized 关键字的了解"></a>1.1. 说一说自己对于 synchronized 关键字的了解</h3><p>synchronized关键字解决的是多个线程之间访问资源的同步性，synchronized关键字可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。</p>
+<h3 id="1-2-说说自己是怎么使用-synchronized-关键字，在项目中用到了吗"><a href="#1-2-说说自己是怎么使用-synchronized-关键字，在项目中用到了吗" class="headerlink" title="1.2. 说说自己是怎么使用 synchronized 关键字，在项目中用到了吗"></a>1.2. 说说自己是怎么使用 synchronized 关键字，在项目中用到了吗</h3><p><strong>synchronized关键字最主要的三种使用方式：</strong></p>
+<ul>
+<li><strong>修饰实例方法:</strong> 作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁</li>
+<li><strong>修饰静态方法:</strong> 也就是给当前类加锁，会作用于类的所有对象实例，因为静态成员不属于任何一个实例对象，是类成员（ static 表明这是该类的一个静态资源，不管new了多少个对象，只有一份）。所以如果一个线程A调用一个实例对象的非静态 synchronized 方法，而线程B需要调用这个实例对象所属类的静态 synchronized 方法，是允许的，不会发生互斥现象，<strong>因为访问静态 synchronized 方法占用的锁是当前类的锁，而访问非静态 synchronized 方法占用的锁是当前实例对象锁</strong>。</li>
+<li><strong>修饰代码块:</strong> 指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
+</ul>
+<p><strong>总结：</strong> synchronized 关键字加到 static 静态方法和 synchronized(class)代码块上都是是给 Class 类上锁。synchronized 关键字加到实例方法上是给对象实例上锁。尽量不要使用 synchronized(String a) 因为JVM中，字符串常量池具有缓存功能！</p>
+<p>下面我以一个常见的面试题为例讲解一下 synchronized 关键字的具体使用。</p>
+<p>面试中面试官经常会说：“单例模式了解吗？来给我手写一下！给我解释一下双重检验锁方式实现单例模式的原理呗！”</p>
+<p><strong>双重校验锁实现对象单例（线程安全）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getUniqueInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span></span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//类对象加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，需要注意 uniqueInstance 采用 volatile 关键字修饰也是很有必要。</p>
+<p>uniqueInstance 采用 volatile 关键字修饰也是很有必要的， uniqueInstance = new Singleton(); 这段代码其实是分为三步执行：</p>
+<ol>
+<li>为 uniqueInstance 分配内存空间</li>
+<li>初始化 uniqueInstance</li>
+<li>将 uniqueInstance 指向分配的内存地址</li>
+</ol>
+<p>但是由于 JVM 具有指令重排的特性，执行顺序有可能变成 1-&gt;3-&gt;2。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 1 和 3，此时 T2 调用 getUniqueInstance() 后发现 uniqueInstance 不为空，因此返回 uniqueInstance，但此时 uniqueInstance 还未被初始化。</p>
+<p>使用 volatile 可以禁止 JVM 的指令重排，保证在多线程环境下也能正常运行。</p>
+<h3 id="1-3-讲一下-synchronized-关键字的底层原理"><a href="#1-3-讲一下-synchronized-关键字的底层原理" class="headerlink" title="1.3. 讲一下 synchronized 关键字的底层原理"></a>1.3. 讲一下 synchronized 关键字的底层原理</h3><p><strong>synchronized 关键字底层原理属于 JVM 层面。</strong></p>
+<p><strong>① synchronized 同步语句块的情况</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"synchronized 代码块"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 JDK 自带的 javap 命令查看 SynchronizedDemo 类的相关字节码信息：首先切换到类的对应目录执行 <code>javac SynchronizedDemo.java</code> 命令生成编译后的 .class 文件，然后执行<code>javap -c -s -v -l SynchronizedDemo.class</code>。</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%86.png" alt="synchronized关键字原理"></p>
+<p>从上面我们可以看出：</p>
+<p><strong>synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置。</strong> 当执行 monitorenter 指令时，线程试图获取锁也就是获取 monitor(monitor对象存在于每个Java对象的对象头中，synchronized 锁便是通过这种方式获取锁的，也是为什么Java中任意对象可以作为锁的原因) 的持有权。当计数器为0则可以成功获取，获取后将锁计数器设为1也就是加1。相应的在执行 monitorexit 指令后，将锁计数器设为0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
+<p><strong>② synchronized 修饰方法的的情况</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"synchronized 方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%862.png" alt="synchronized关键字原理"></p>
+<p>synchronized 修饰的方法并没有 monitorenter 指令和 monitorexit 指令，取得代之的确实是 ACC_SYNCHRONIZED 标识，该标识指明了该方法是一个同步方法，JVM 通过该 ACC_SYNCHRONIZED 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。</p>
+<h3 id="1-4谈谈-synchronized和ReentrantLock-的区别"><a href="#1-4谈谈-synchronized和ReentrantLock-的区别" class="headerlink" title="1.4谈谈 synchronized和ReentrantLock 的区别"></a>1.4谈谈 synchronized和ReentrantLock 的区别</h3><p><strong>① 两者都是可重入锁</strong></p>
+<p>两者都是可重入锁。“可重入锁”概念是：自己可以再次获取自己的内部锁。比如一个线程获得了某个对象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不可锁重入的话，就会造成死锁。同一个线程每次获取锁，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。</p>
+<p><strong>② synchronized 依赖于 JVM 而 ReentrantLock 依赖于 API</strong></p>
+<p>synchronized 是依赖于 JVM 实现的，前面我们也讲到了 虚拟机团队在 JDK1.6 为 synchronized 关键字进行了很多优化，但是这些优化都是在虚拟机层面实现的，并没有直接暴露给我们。ReentrantLock 是 JDK 层面实现的（也就是 API 层面，需要 lock() 和 unlock() 方法配合 try/finally 语句块来完成），所以我们可以通过查看它的源代码，来看它是如何实现的。</p>
+<p><strong>③ ReentrantLock 比 synchronized 增加了一些高级功能</strong></p>
+<p>相比synchronized，ReentrantLock增加了一些高级功能。主要来说主要有三点：<strong>①等待可中断；②可实现公平锁；③可实现选择性通知（锁可以绑定多个条件）</strong></p>
+<ul>
+<li><strong>ReentrantLock提供了一种能够中断等待锁的线程的机制</strong>，通过lock.lockInterruptibly()来实现这个机制。也就是说正在等待的线程可以选择放弃等待，改为处理其他事情。</li>
+<li><strong>ReentrantLock可以指定是公平锁还是非公平锁。而synchronized只能是非公平锁。所谓的公平锁就是先等待的线程先获得锁。</strong> ReentrantLock默认情况是非公平的，可以通过 ReentrantLock类的<code>ReentrantLock(boolean fair)</code>构造方法来制定是否是公平的。</li>
+<li>synchronized关键字与wait()和notify()/notifyAll()方法相结合可以实现等待/通知机制，ReentrantLock类当然也可以实现，但是需要借助于Condition接口与newCondition() 方法。Condition是JDK1.5之后才有的，它具有很好的灵活性，比如可以实现多路通知功能也就是在一个Lock对象中可以创建多个Condition实例（即对象监视器），<strong>线程对象可以注册在指定的Condition中，从而可以有选择性的进行线程通知，在调度线程上更加灵活。 在使用notify()/notifyAll()方法进行通知时，被通知的线程是由 JVM 选择的，用ReentrantLock类结合Condition实例可以实现“选择性通知”</strong> ，这个功能非常重要，而且是Condition接口默认提供的。而synchronized关键字就相当于整个Lock对象中只有一个Condition实例，所有的线程都注册在它一个身上。如果执行notifyAll()方法的话就会通知所有处于等待状态的线程这样会造成很大的效率问题，而Condition实例的signalAll()方法 只会唤醒注册在该Condition实例中的所有等待线程。</li>
+</ul>
+<p>如果你想使用上述功能，那么选择ReentrantLock是一个不错的选择。</p>
+<p><strong>④ 性能已不是选择标准</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">关键字解析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="get-排序算法" class="article article-type-get  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2969,23 +3166,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java容器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2993,11 +3174,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">池化技术</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3005,11 +3186,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java容器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">池化技术</a>
               </li>
             
             <div class="clearfix"></div>
