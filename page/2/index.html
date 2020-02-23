@@ -157,6 +157,191 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="Post-Java疑难点" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">Java疑难点</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_1-基础" target="_blank" rel="noopener">1. 基础</a></h1><h2 id="1-1-正确使用-equals-方法"><a href="#1-1-正确使用-equals-方法" class="headerlink" title="1.1. 正确使用 equals 方法"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_11-正确使用-equals-方法" target="_blank" rel="noopener">1.1. 正确使用 equals 方法</a></h2><p>Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。</p>
+<p>举个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不能使用一个值为null的引用类型变量来调用非静态方法，否则会抛出异常</span></span><br><span class="line">String str = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (str.equals(<span class="string">"SnailClimb"</span>)) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行上面的程序会抛出空指针异常，但是我们把第二行的条件判断语句改为下面这样的话，就不会抛出空指针异常，else 语句块得到执行。：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"SnailClimb"</span>.equals(str);<span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>不过更推荐使用 <code>java.util.Objects#equals</code>(JDK7 引入的工具类)。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Objects.equals(<span class="keyword">null</span>,<span class="string">"SnailClimb"</span>);<span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>我们看一下<code>java.util.Objects#equals</code>的源码就知道原因了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object a, Object b)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 可以避免空指针异常。如果a==null的话此时a.equals(b)就不会得到执行，避免出现空指针异常。</span></span><br><span class="line">        <span class="keyword">return</span> (a == b) || (a != <span class="keyword">null</span> &amp;&amp; a.equals(b));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>Reference:<a href="https://blog.csdn.net/tick_tock97/article/details/72824894" target="_blank" rel="noopener">Java中equals方法造成空指针异常的原因及解决方案</a></p>
+<ul>
+<li>每种原始类型都有默认值一样，如int默认值为 0，boolean 的默认值为 false，null 是任何引用类型的默认值，不严格的说是所有 Object 类型的默认值。</li>
+<li>可以使用 == 或者 != 操作来比较null值，但是不能使用其他算法或者逻辑操作。在Java中<code>null == null</code>将返回true。</li>
+<li>不能使用一个值为null的引用类型变量来调用非静态方法，否则会抛出异常</li>
+</ul>
+<h2 id="1-2-整型包装类值的比较"><a href="#1-2-整型包装类值的比较" class="headerlink" title="1.2. 整型包装类值的比较"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_12-整型包装类值的比较" target="_blank" rel="noopener">1.2. 整型包装类值的比较</a></h2><p>所有整型包装类对象值的比较必须使用equals方法。</p>
+<p>先看下面这个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer x = <span class="number">3</span>;</span><br><span class="line">Integer y = <span class="number">3</span>;</span><br><span class="line">System.out.println(x == y);<span class="comment">// true</span></span><br><span class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">3</span>);</span><br><span class="line">Integer b = <span class="keyword">new</span> Integer(<span class="number">3</span>);</span><br><span class="line">System.out.println(a == b);<span class="comment">//false</span></span><br><span class="line">System.out.println(a.equals(b));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>当使用自动装箱方式创建一个Integer对象时，当数值在-128 ~127时，会将创建的 Integer 对象缓存起来，当下次再出现该数值时，直接从缓存中取出对应的Integer对象。所以上述代码中，x和y引用的是相同的Integer对象。</p>
+<p><strong>注意：</strong>如果你的IDE(IDEA/Eclipse)上安装了阿里巴巴的p3c插件，这个插件如果检测到你用 ==的话会报错提示，推荐安装一个这个插件，很不错。</p>
+<h2 id="1-3-BigDecimal"><a href="#1-3-BigDecimal" class="headerlink" title="1.3. BigDecimal"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_13-bigdecimal" target="_blank" rel="noopener">1.3. BigDecimal</a></h2><h3 id="1-3-1-BigDecimal-的用处"><a href="#1-3-1-BigDecimal-的用处" class="headerlink" title="1.3.1. BigDecimal 的用处"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_131-bigdecimal-的用处" target="_blank" rel="noopener">1.3.1. BigDecimal 的用处</a></h3><p>《阿里巴巴Java开发手册》中提到：<strong>浮点数之间的等值判断，基本数据类型不能用==来比较，包装数据类型不能用 equals 来判断。</strong> 具体原理和浮点数的编码方式有关，这里就不多提了，我们下面直接上实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> a = <span class="number">1.0f</span> - <span class="number">0.9f</span>;</span><br><span class="line"><span class="keyword">float</span> b = <span class="number">0.9f</span> - <span class="number">0.8f</span>;</span><br><span class="line">System.out.println(a);<span class="comment">// 0.100000024</span></span><br><span class="line">System.out.println(b);<span class="comment">// 0.099999964</span></span><br><span class="line">System.out.println(a == b);<span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>具有基本数学知识的我们很清楚的知道输出并不是我们想要的结果（<strong>精度丢失</strong>），我们如何解决这个问题呢？一种很常用的方法是：<strong>使用使用 BigDecimal 来定义浮点数的值，再进行浮点数的运算操作。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal a = <span class="keyword">new</span> BigDecimal(<span class="string">"1.0"</span>);</span><br><span class="line">BigDecimal b = <span class="keyword">new</span> BigDecimal(<span class="string">"0.9"</span>);</span><br><span class="line">BigDecimal c = <span class="keyword">new</span> BigDecimal(<span class="string">"0.8"</span>);</span><br><span class="line">BigDecimal x = a.subtract(b);<span class="comment">// 0.1</span></span><br><span class="line">BigDecimal y = b.subtract(c);<span class="comment">// 0.1</span></span><br><span class="line">System.out.println(x.equals(y));<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-2-BigDecimal-的大小比较"><a href="#1-3-2-BigDecimal-的大小比较" class="headerlink" title="1.3.2. BigDecimal 的大小比较"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_132-bigdecimal-的大小比较" target="_blank" rel="noopener">1.3.2. BigDecimal 的大小比较</a></h3><p><code>a.compareTo(b)</code> : 返回 -1 表示小于，0 表示 等于， 1表示 大于。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal a = <span class="keyword">new</span> BigDecimal(<span class="string">"1.0"</span>);</span><br><span class="line">BigDecimal b = <span class="keyword">new</span> BigDecimal(<span class="string">"0.9"</span>);</span><br><span class="line">System.out.println(a.compareTo(b));<span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-3-BigDecimal-保留几位小数"><a href="#1-3-3-BigDecimal-保留几位小数" class="headerlink" title="1.3.3. BigDecimal 保留几位小数"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_133-bigdecimal-保留几位小数" target="_blank" rel="noopener">1.3.3. BigDecimal 保留几位小数</a></h3><p>通过 <code>setScale</code>方法设置保留几位小数以及保留规则。保留规则有挺多种，不需要记，IDEA会提示。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal m = <span class="keyword">new</span> BigDecimal(<span class="string">"1.255433"</span>);</span><br><span class="line">BigDecimal n = m.setScale(<span class="number">3</span>,BigDecimal.ROUND_HALF_DOWN);</span><br><span class="line">System.out.println(n);<span class="comment">// 1.255</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-4-BigDecimal-的使用注意事项"><a href="#1-3-4-BigDecimal-的使用注意事项" class="headerlink" title="1.3.4. BigDecimal 的使用注意事项"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_134-bigdecimal-的使用注意事项" target="_blank" rel="noopener">1.3.4. BigDecimal 的使用注意事项</a></h3><p>注意：我们在使用BigDecimal时，为了防止精度丢失，推荐使用它的 <strong>BigDecimal(String)</strong> 构造方法来创建对象。《阿里巴巴Java开发手册》对这部分内容也有提到如下图所示。</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019/7/BigDecimal.png" alt="《阿里巴巴Java开发手册》对这部分BigDecimal的描述"></p>
+<h3 id="1-3-5-总结"><a href="#1-3-5-总结" class="headerlink" title="1.3.5. 总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_135-总结" target="_blank" rel="noopener">1.3.5. 总结</a></h3><p>BigDecimal 主要用来操作（大）浮点数，BigInteger 主要用来操作大整数（超过 long 类型）。</p>
+<p>BigDecimal 的实现利用到了 BigInteger, 所不同的是 BigDecimal 加入了小数位的概念</p>
+<h2 id="1-4-基本数据类型与包装数据类型的使用标准"><a href="#1-4-基本数据类型与包装数据类型的使用标准" class="headerlink" title="1.4. 基本数据类型与包装数据类型的使用标准"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_14-基本数据类型与包装数据类型的使用标准" target="_blank" rel="noopener">1.4. 基本数据类型与包装数据类型的使用标准</a></h2><p>Reference:《阿里巴巴Java开发手册》</p>
+<ul>
+<li>【强制】所有的 POJO 类属性必须使用包装数据类型。</li>
+<li>【强制】RPC 方法的返回值和参数必须使用包装数据类型。</li>
+<li>【推荐】所有的局部变量使用基本数据类型。</li>
+</ul>
+<p>比如我们如果自定义了一个Student类,其中有一个属性是成绩score,如果用Integer而不用int定义,一次考试,学生可能没考,值是null,也可能考了,但考了0分,值是0,这两个表达的状态明显不一样.</p>
+<p><strong>说明</strong> :POJO 类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，任何 NPE 问题，或者入库检查，都由使用者来保证。</p>
+<p><strong>正例</strong> : 数据库的查询结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险。</p>
+<p><strong>反例</strong> : 比如显示成交总额涨跌情况，即正负 x%，x 为基本数据类型，调用的 RPC 服务，调用不成功时，返回的是默认值，页面显示为 0%，这是不合理的，应该显示成中划线。所以包装数据类型的 null 值，能够表示额外的信息，如:远程调用失败，异常退出。</p>
+<h1 id="2-集合"><a href="#2-集合" class="headerlink" title="2. 集合"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_2-集合" target="_blank" rel="noopener">2. 集合</a></h1><h2 id="2-1-Arrays-asList-使用指南"><a href="#2-1-Arrays-asList-使用指南" class="headerlink" title="2.1. Arrays.asList()使用指南"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_21-arraysaslist使用指南" target="_blank" rel="noopener">2.1. Arrays.asList()使用指南</a></h2><p>最近使用<code>Arrays.asList()</code>遇到了一些坑，然后在网上看到这篇文章：<a href="http://javadevnotes.com/java-array-to-list-examples" target="_blank" rel="noopener">Java Array to List Examples</a> 感觉挺不错的，但是还不是特别全面。所以，自己对于这块小知识点进行了简单的总结。</p>
+<h3 id="2-1-1-简介"><a href="#2-1-1-简介" class="headerlink" title="2.1.1. 简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_211-简介" target="_blank" rel="noopener">2.1.1. 简介</a></h3><p><code>Arrays.asList()</code>在平时开发中还是比较常见的，我们可以使用它将一个数组转换为一个List集合。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] myArray = &#123; <span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span> &#125;； </span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(myArray);</span><br><span class="line"><span class="comment">//上面两个语句等价于下面一条语句</span></span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(<span class="string">"Apple"</span>,<span class="string">"Banana"</span>, <span class="string">"Orange"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>JDK 源码对于这个方法的说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *返回由指定数组支持的固定大小的列表。此方法作为基于数组和基于集合的API之间的桥梁，与           Collection.toArray()结合使用。返回的List是可序列化并实现RandomAccess接口。</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">asList</span><span class="params">(T... a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-2-《阿里巴巴Java-开发手册》对其的描述"><a href="#2-1-2-《阿里巴巴Java-开发手册》对其的描述" class="headerlink" title="2.1.2. 《阿里巴巴Java 开发手册》对其的描述"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_212-《阿里巴巴java-开发手册》对其的描述" target="_blank" rel="noopener">2.1.2. 《阿里巴巴Java 开发手册》对其的描述</a></h3><p><code>Arrays.asList()</code>将数组转换为集合后,底层其实还是数组，《阿里巴巴Java 开发手册》对于这个方法有如下描述：</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B-Arrays.asList()%E6%96%B9%E6%B3%95.png" alt="阿里巴巴Java开发手-Arrays.asList()方法"></p>
+<h3 id="2-1-3-使用时的注意事项总结"><a href="#2-1-3-使用时的注意事项总结" class="headerlink" title="2.1.3. 使用时的注意事项总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_213-使用时的注意事项总结" target="_blank" rel="noopener">2.1.3. 使用时的注意事项总结</a></h3><p><strong>传递的数组必须是对象数组，而不是基本类型。</strong></p>
+<p><code>Arrays.asList()</code>是泛型方法，传入的对象必须是对象数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List myList = Arrays.asList(myArray);</span><br><span class="line">System.out.println(myList.size());<span class="comment">//1</span></span><br><span class="line">System.out.println(myList.get(<span class="number">0</span>));<span class="comment">//数组地址值</span></span><br><span class="line">System.out.println(myList.get(<span class="number">1</span>));<span class="comment">//报错：ArrayIndexOutOfBoundsException</span></span><br><span class="line"><span class="keyword">int</span> [] array=(<span class="keyword">int</span>[]) myList.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(array[<span class="number">0</span>]);<span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<p>当传入一个原生数据类型数组时，<code>Arrays.asList()</code> 的真正得到的参数就不是数组中的元素，而是数组对象本身！此时List 的唯一元素就是这个数组，这也就解释了上面的代码。</p>
+<p>我们使用包装类型数组就可以解决这个问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer[] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用集合的修改方法:<code>add()</code>、<code>remove()</code>、<code>clear()</code>会抛出异常。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List myList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">myList.add(<span class="number">4</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.remove(<span class="number">1</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.clear();<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Arrays.asList()</code> 方法返回的并不是 <code>java.util.ArrayList</code> ，而是 <code>java.util.Arrays</code> 的一个内部类,这个内部类并没有实现集合的修改方法或者说并没有重写这些方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List myList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">System.out.println(myList.getClass());<span class="comment">//class java.util.Arrays$ArrayList</span></span><br></pre></td></tr></table></figure>
+
+<p>下图是<code>java.util.Arrays$ArrayList</code>的简易源码，我们可以看到这个类重写的方法有哪些。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">      <span class="keyword">implements</span> <span class="title">RandomAccess</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class">  </span>&#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forEach</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; action)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">replaceAll</span><span class="params">(UnaryOperator&lt;E&gt; operator)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparator&lt;? <span class="keyword">super</span> E&gt; c)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们再看一下<code>java.util.AbstractList</code>的<code>remove()</code>方法，这样我们就明白为啥会抛出<code>UnsupportedOperationException</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-4-如何正确的将数组转换为ArrayList"><a href="#2-1-4-如何正确的将数组转换为ArrayList" class="headerlink" title="2.1.4. 如何正确的将数组转换为ArrayList?"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_214-如何正确的将数组转换为arraylist" target="_blank" rel="noopener">2.1.4. 如何正确的将数组转换为ArrayList?</a></h3><p>stackoverflow：<a href="https://dwz.cn/vcBkTiTW" target="_blank" rel="noopener">https://dwz.cn/vcBkTiTW</a></p>
+<p><strong>1. 自己动手实现（教育目的）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JDK1.5+</span></span><br><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">arrayToList</span><span class="params">(<span class="keyword">final</span> T[] array)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> List&lt;T&gt; l = <span class="keyword">new</span> ArrayList&lt;T&gt;(array.length);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">final</span> T s : array) &#123;</span><br><span class="line">    l.add(s);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (l);</span><br><span class="line">&#125;</span><br><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">System.out.println(arrayToList(myArray).getClass());<span class="comment">//class java.util.ArrayList</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 最简便的方法(推荐)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 使用 Java8 的Stream(推荐)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List myList = Arrays.stream(myArray).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//基本类型也可以实现转换（依赖boxed的装箱操作）</span></span><br><span class="line"><span class="keyword">int</span> [] myArray2 = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">List myList = Arrays.stream(myArray2).boxed().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 使用 Guava(推荐)</strong></p>
+<p>对于不可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java" target="_blank" rel="noopener"><code>ImmutableList</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java#L101" target="_blank" rel="noopener"><code>of()</code></a>与<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/ImmutableList.java#L225" target="_blank" rel="noopener"><code>copyOf()</code></a>工厂方法：（参数不能为空）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; il = ImmutableList.of(<span class="string">"string"</span>, <span class="string">"elements"</span>);  <span class="comment">// from varargs</span></span><br><span class="line">List&lt;String&gt; il = ImmutableList.copyOf(aStringArray);      <span class="comment">// from array</span></span><br></pre></td></tr></table></figure>
+
+<p>对于可变集合，你可以使用<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java" target="_blank" rel="noopener"><code>Lists</code></a>类及其<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Lists.java#L87" target="_blank" rel="noopener"><code>newArrayList()</code></a>工厂方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; l1 = Lists.newArrayList(anotherListOrCollection);    <span class="comment">// from collection</span></span><br><span class="line">List&lt;String&gt; l2 = Lists.newArrayList(aStringArray);               <span class="comment">// from array</span></span><br><span class="line">List&lt;String&gt; l3 = Lists.newArrayList(<span class="string">"or"</span>, <span class="string">"string"</span>, <span class="string">"elements"</span>); <span class="comment">// from varargs</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 使用 Apache Commons Collections</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">CollectionUtils.addAll(list, str);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-Collection-toArray-方法使用的坑-amp-如何反转数组"><a href="#2-2-Collection-toArray-方法使用的坑-amp-如何反转数组" class="headerlink" title="2.2. Collection.toArray()方法使用的坑&amp;如何反转数组"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_22-collectiontoarray方法使用的坑amp如何反转数组" target="_blank" rel="noopener">2.2. Collection.toArray()方法使用的坑&amp;如何反转数组</a></h2><p>该方法是一个泛型方法：<code>T[] toArray(T[] a);</code> 如果<code>toArray</code>方法中没有传递任何参数的话返回的是<code>Object</code>类型数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String [] s= <span class="keyword">new</span> String[]&#123;</span><br><span class="line">    <span class="string">"dog"</span>, <span class="string">"lazy"</span>, <span class="string">"a"</span>, <span class="string">"over"</span>, <span class="string">"jumps"</span>, <span class="string">"fox"</span>, <span class="string">"brown"</span>, <span class="string">"quick"</span>, <span class="string">"A"</span></span><br><span class="line">&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(s);</span><br><span class="line">Collections.reverse(list);</span><br><span class="line">s=list.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);<span class="comment">//没有指定类型的话会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>由于JVM优化，<code>new String[0]</code>作为<code>Collection.toArray()</code>方法的参数现在使用更好，<code>new String[0]</code>就是起一个模板的作用，指定了返回数组的类型，0是为了节省空间，因为它只是为了说明返回的类型。详见：<a href="https://shipilev.net/blog/2016/arrays-wisdom-ancients/" target="_blank" rel="noopener">https://shipilev.net/blog/2016/arrays-wisdom-ancients/</a></p>
+<h2 id="2-3-不要在-foreach-循环里进行元素的-remove-add-操作"><a href="#2-3-不要在-foreach-循环里进行元素的-remove-add-操作" class="headerlink" title="2.3. 不要在 foreach 循环里进行元素的 remove/add 操作"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_23-不要在-foreach-循环里进行元素的-removeadd-操作" target="_blank" rel="noopener">2.3. 不要在 foreach 循环里进行元素的 remove/add 操作</a></h2><p>如果要进行<code>remove</code>操作，可以调用迭代器的 <code>remove</code>方法而不是集合类的 remove 方法。因为如果列表在任何时间从结构上修改创建迭代器之后，以任何方式除非通过迭代器自身<code>remove/add</code>方法，迭代器都将抛出一个<code>ConcurrentModificationException</code>,这就是单线程状态下产生的 <strong>fail-fast 机制</strong>。</p>
+<blockquote>
+<p><strong>fail-fast 机制</strong> ：多个线程对 fail-fast 集合进行修改的时，可能会抛出ConcurrentModificationException，单线程下也会出现这种情况，上面已经提到过。</p>
+</blockquote>
+<p><code>java.util</code>包下面的所有的集合类都是fail-fast的，而<code>java.util.concurrent</code>包下面的所有的类都是fail-safe的。</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019/7/foreach-remove:add.png" alt="不要在 foreach 循环里进行元素的 remove/add 操作"></p>
+<p>转自<a href="https://snailclimb.gitee.io/javaguide" target="_blank" rel="noopener">https://snailclimb.gitee.io/javaguide</a> 备份</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-Java线程池学习总结" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -820,6 +1005,80 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="Post-小知识点" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">小知识点</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2020-02-11T03:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@Transaction</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-Java基础知识回顾" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1189,80 +1448,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/02/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-小知识点" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">小知识点</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2020-02-11T03:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@Transaction</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">展开全文 >></a>
         </p>
       
 
@@ -2771,7 +2956,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -2811,19 +2996,19 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-synchronized 关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-SpringBoot常用注解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/"> synchronized 关键字</a>
+      <a class="article-title" href="/2019/12/23/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">SpringBoot常用注解</a>
     </h1>
   
 
         
-        <a href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+        <a href="/2019/12/23/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="archive-article-date">
   	<time datetime="2019-12-23T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
 </a>
         
@@ -2831,198 +3016,76 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-1-说一说自己对于-synchronized-关键字的了解"><a href="#1-1-说一说自己对于-synchronized-关键字的了解" class="headerlink" title="1.1. 说一说自己对于 synchronized 关键字的了解"></a>1.1. 说一说自己对于 synchronized 关键字的了解</h3><p>synchronized关键字解决的是多个线程之间访问资源的同步性，synchronized关键字可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。</p>
-<h3 id="1-2-说说自己是怎么使用-synchronized-关键字，在项目中用到了吗"><a href="#1-2-说说自己是怎么使用-synchronized-关键字，在项目中用到了吗" class="headerlink" title="1.2. 说说自己是怎么使用 synchronized 关键字，在项目中用到了吗"></a>1.2. 说说自己是怎么使用 synchronized 关键字，在项目中用到了吗</h3><p><strong>synchronized关键字最主要的三种使用方式：</strong></p>
-<ul>
-<li><strong>修饰实例方法:</strong> 作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁</li>
-<li><strong>修饰静态方法:</strong> 也就是给当前类加锁，会作用于类的所有对象实例，因为静态成员不属于任何一个实例对象，是类成员（ static 表明这是该类的一个静态资源，不管new了多少个对象，只有一份）。所以如果一个线程A调用一个实例对象的非静态 synchronized 方法，而线程B需要调用这个实例对象所属类的静态 synchronized 方法，是允许的，不会发生互斥现象，<strong>因为访问静态 synchronized 方法占用的锁是当前类的锁，而访问非静态 synchronized 方法占用的锁是当前实例对象锁</strong>。</li>
-<li><strong>修饰代码块:</strong> 指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
-</ul>
-<p><strong>总结：</strong> synchronized 关键字加到 static 静态方法和 synchronized(class)代码块上都是是给 Class 类上锁。synchronized 关键字加到实例方法上是给对象实例上锁。尽量不要使用 synchronized(String a) 因为JVM中，字符串常量池具有缓存功能！</p>
-<p>下面我以一个常见的面试题为例讲解一下 synchronized 关键字的具体使用。</p>
-<p>面试中面试官经常会说：“单例模式了解吗？来给我手写一下！给我解释一下双重检验锁方式实现单例模式的原理呗！”</p>
-<p><strong>双重校验锁实现对象单例（线程安全）</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getUniqueInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span></span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//类对象加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外，需要注意 uniqueInstance 采用 volatile 关键字修饰也是很有必要。</p>
-<p>uniqueInstance 采用 volatile 关键字修饰也是很有必要的， uniqueInstance = new Singleton(); 这段代码其实是分为三步执行：</p>
-<ol>
-<li>为 uniqueInstance 分配内存空间</li>
-<li>初始化 uniqueInstance</li>
-<li>将 uniqueInstance 指向分配的内存地址</li>
-</ol>
-<p>但是由于 JVM 具有指令重排的特性，执行顺序有可能变成 1-&gt;3-&gt;2。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 1 和 3，此时 T2 调用 getUniqueInstance() 后发现 uniqueInstance 不为空，因此返回 uniqueInstance，但此时 uniqueInstance 还未被初始化。</p>
-<p>使用 volatile 可以禁止 JVM 的指令重排，保证在多线程环境下也能正常运行。</p>
-<h3 id="1-3-讲一下-synchronized-关键字的底层原理"><a href="#1-3-讲一下-synchronized-关键字的底层原理" class="headerlink" title="1.3. 讲一下 synchronized 关键字的底层原理"></a>1.3. 讲一下 synchronized 关键字的底层原理</h3><p><strong>synchronized 关键字底层原理属于 JVM 层面。</strong></p>
-<p><strong>① synchronized 同步语句块的情况</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"synchronized 代码块"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过 JDK 自带的 javap 命令查看 SynchronizedDemo 类的相关字节码信息：首先切换到类的对应目录执行 <code>javac SynchronizedDemo.java</code> 命令生成编译后的 .class 文件，然后执行<code>javap -c -s -v -l SynchronizedDemo.class</code>。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%86.png" alt="synchronized关键字原理"></p>
-<p>从上面我们可以看出：</p>
-<p><strong>synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置。</strong> 当执行 monitorenter 指令时，线程试图获取锁也就是获取 monitor(monitor对象存在于每个Java对象的对象头中，synchronized 锁便是通过这种方式获取锁的，也是为什么Java中任意对象可以作为锁的原因) 的持有权。当计数器为0则可以成功获取，获取后将锁计数器设为1也就是加1。相应的在执行 monitorexit 指令后，将锁计数器设为0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
-<p><strong>② synchronized 修饰方法的的情况</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"synchronized 方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%862.png" alt="synchronized关键字原理"></p>
-<p>synchronized 修饰的方法并没有 monitorenter 指令和 monitorexit 指令，取得代之的确实是 ACC_SYNCHRONIZED 标识，该标识指明了该方法是一个同步方法，JVM 通过该 ACC_SYNCHRONIZED 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。</p>
-<h3 id="1-4谈谈-synchronized和ReentrantLock-的区别"><a href="#1-4谈谈-synchronized和ReentrantLock-的区别" class="headerlink" title="1.4谈谈 synchronized和ReentrantLock 的区别"></a>1.4谈谈 synchronized和ReentrantLock 的区别</h3><p><strong>① 两者都是可重入锁</strong></p>
-<p>两者都是可重入锁。“可重入锁”概念是：自己可以再次获取自己的内部锁。比如一个线程获得了某个对象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不可锁重入的话，就会造成死锁。同一个线程每次获取锁，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。</p>
-<p><strong>② synchronized 依赖于 JVM 而 ReentrantLock 依赖于 API</strong></p>
-<p>synchronized 是依赖于 JVM 实现的，前面我们也讲到了 虚拟机团队在 JDK1.6 为 synchronized 关键字进行了很多优化，但是这些优化都是在虚拟机层面实现的，并没有直接暴露给我们。ReentrantLock 是 JDK 层面实现的（也就是 API 层面，需要 lock() 和 unlock() 方法配合 try/finally 语句块来完成），所以我们可以通过查看它的源代码，来看它是如何实现的。</p>
-<p><strong>③ ReentrantLock 比 synchronized 增加了一些高级功能</strong></p>
-<p>相比synchronized，ReentrantLock增加了一些高级功能。主要来说主要有三点：<strong>①等待可中断；②可实现公平锁；③可实现选择性通知（锁可以绑定多个条件）</strong></p>
-<ul>
-<li><strong>ReentrantLock提供了一种能够中断等待锁的线程的机制</strong>，通过lock.lockInterruptibly()来实现这个机制。也就是说正在等待的线程可以选择放弃等待，改为处理其他事情。</li>
-<li><strong>ReentrantLock可以指定是公平锁还是非公平锁。而synchronized只能是非公平锁。所谓的公平锁就是先等待的线程先获得锁。</strong> ReentrantLock默认情况是非公平的，可以通过 ReentrantLock类的<code>ReentrantLock(boolean fair)</code>构造方法来制定是否是公平的。</li>
-<li>synchronized关键字与wait()和notify()/notifyAll()方法相结合可以实现等待/通知机制，ReentrantLock类当然也可以实现，但是需要借助于Condition接口与newCondition() 方法。Condition是JDK1.5之后才有的，它具有很好的灵活性，比如可以实现多路通知功能也就是在一个Lock对象中可以创建多个Condition实例（即对象监视器），<strong>线程对象可以注册在指定的Condition中，从而可以有选择性的进行线程通知，在调度线程上更加灵活。 在使用notify()/notifyAll()方法进行通知时，被通知的线程是由 JVM 选择的，用ReentrantLock类结合Condition实例可以实现“选择性通知”</strong> ，这个功能非常重要，而且是Condition接口默认提供的。而synchronized关键字就相当于整个Lock对象中只有一个Condition实例，所有的线程都注册在它一个身上。如果执行notifyAll()方法的话就会通知所有处于等待状态的线程这样会造成很大的效率问题，而Condition实例的signalAll()方法 只会唤醒注册在该Condition实例中的所有等待线程。</li>
-</ul>
-<p>如果你想使用上述功能，那么选择ReentrantLock是一个不错的选择。</p>
-<p><strong>④ 性能已不是选择标准</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">关键字解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+        <h2 id="1-SpringBoot-spring"><a href="#1-SpringBoot-spring" class="headerlink" title="1.SpringBoot/spring"></a><strong><em>1.SpringBoot/spring</em></strong></h2><h3 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication:"></a><strong>@SpringBootApplication:</strong></h3><p>包含@Configuration、@EnableAutoConfiguration、@ComponentScan通常用在主类上；</p>
+<h3 id="Repository"><a href="#Repository" class="headerlink" title="@Repository:"></a><strong>@Repository:</strong></h3><p>用于标注数据访问组件，即DAO组件；</p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="@Service:"></a><strong>@Service:</strong></h3><p>用于标注业务层组件；</p>
+<h3 id="RestController"><a href="#RestController" class="headerlink" title="@RestController:"></a><strong>@RestController:</strong></h3><p>用于标注控制层组件(如struts中的action)，包含@Controller和@ResponseBody；</p>
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="@Controller:"></a><strong>@Controller:</strong></h3><p>用于标注是控制层组件，需要返回页面时请用@Controller而不是@RestController；</p>
+<h3 id="Component"><a href="#Component" class="headerlink" title="@Component:"></a><strong>@Component:</strong></h3><p>泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注；</p>
+<h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody:"></a><strong>@ResponseBody:</strong></h3><p>表示该方法的返回结果直接写入HTTP response body中，一般在异步获取数据时使用，在使用@RequestMapping后，返回值通常解析为跳转路径，</p>
+<p>加上@responsebody后返回结果不会被解析为跳转路径，而是直接写入HTTP response body中；比如异步获取json数据，加上@responsebody后，会直接返回json数据；</p>
+<h3 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody:"></a><strong>@RequestBody:</strong></h3><p>参数前加上这个注解之后，认为该参数必填。表示接受json字符串转为对象 List等；</p>
+<h3 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="@ComponentScan:"></a><strong>@ComponentScan:</strong></h3><p>组件扫描。个人理解相当于，如果扫描到有@Component @Controller @Service等这些注解的类，则把这些类注册为bean*；</p>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration:"></a><strong>@Configuration:</strong></h3><p>指出该类是 Bean 配置的信息源，相当于XML中的，一般加在主类上；</p>
+<h3 id="Bean"><a href="#Bean" class="headerlink" title="@Bean:"></a><strong>@Bean:</strong></h3><p>相当于XML中的,放在方法的上面，而不是类，意思是产生一个bean,并交给spring管理；</p>
+<h3 id="EnableAutoConfiguration"><a href="#EnableAutoConfiguration" class="headerlink" title="@EnableAutoConfiguration:"></a><strong>@EnableAutoConfiguration:</strong></h3><p>让 Spring Boot 根据应用所声明的依赖来对 Spring 框架进行自动配置，一般加在主类上；</p>
+<h3 id="AutoWired"><a href="#AutoWired" class="headerlink" title="@AutoWired:"></a><strong>@AutoWired:</strong></h3><p>byType方式。把配置好的Bean拿来用，完成属性、方法的组装，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作；</p>
+<p>当加上（required=false）时，就算找不到bean也不报错；</p>
+<h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier:"></a><strong>@Qualifier:</strong></h3><p>当有多个同一类型的Bean时，可以用@Qualifier(“name”)来指定。与@Autowired配合使用；</p>
+<h3 id="Resource-name-”name”-type-”type”-："><a href="#Resource-name-”name”-type-”type”-：" class="headerlink" title="@Resource(name=”name”,type=”type”)："></a><strong>@Resource(name=”name”,type=”type”)：</strong></h3><p>没有括号内内容的话，默认byName。与@Autowired干类似的事；</p>
+<h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping:"></a><strong>@RequestMapping:</strong></h3><h3 id="RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；"><a href="#RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；" class="headerlink" title="RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；"></a>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；</h3><blockquote>
+<p>该注解有六个属性: </p>
+<p>params:指定request中必须包含某些参数值是，才让该方法处理。</p>
+<p>headers:指定request中必须包含某些指定的header值，才能让该方法处理请求。 </p>
+<p>value:指定请求的实际地址，指定的地址可以是URI Template 模式 </p>
+<p>method:指定请求的method类型， GET、POST、PUT、DELETE等 </p>
+<p>consumes:指定处理请求的提交内容类型（Content-Type），如application/json,text/html; </p>
+<p>produces:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回。</p>
+</blockquote>
+<h3 id="GetMapping、-PostMapping等"><a href="#GetMapping、-PostMapping等" class="headerlink" title="@GetMapping、@PostMapping等:"></a><strong>@GetMapping、@PostMapping等:</strong></h3><p>相当于@RequestMapping（value=”/”，method=RequestMethod.Get\Post\Put\Delete等） 。是个组合注解；</p>
+<h3 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam:"></a><strong>@RequestParam:</strong></h3><p>用在方法的参数前面。相当于 request.getParameter()；</p>
+<h3 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable:"></a><strong>@PathVariable:</strong></h3><p>路径变量。如 RequestMapping(“user/get/mac/{macAddress}”) ；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public String getByMacAddress(</span><br><span class="line">@PathVariable(“macAddress”) String macAddress)&#123;</span><br><span class="line">&#x2F;&#x2F;do something;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-
-  
-    <article id="get-排序算法" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-10-08T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="冒泡排序：越小的元素会经由交换慢慢“浮”到数列的顶端"><a href="#冒泡排序：越小的元素会经由交换慢慢“浮”到数列的顶端" class="headerlink" title="冒泡排序：越小的元素会经由交换慢慢“浮”到数列的顶端"></a>冒泡排序<code>：越小的元素会经由交换慢慢“浮”到数列的顶端</code></h3><p>​    <strong>算法描述：</strong></p>
-<ol>
-<li><p>比较相邻的元素。如果第一个比第二个大，就交换它们两个；</p>
-</li>
-<li><p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；</p>
-</li>
-<li><p>针对所有的元素重复以上的步骤，除了最后一个；</p>
-</li>
-<li><p>重复步骤1~3，直到排序完成。</p>
-<p><strong>动画演示</strong></p>
-</li>
-</ol>
-<p>​    <img src="/assets/blogImg/%E5%86%92%E6%B3%A1.gif" alt=""></p>
-<p>​    Java实现</p>
-<p>​            </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">maopao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numbers[] = &#123;<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">5</span>,<span class="number">13</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> number[] = maopao(numbers);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;number.length;i++)&#123;</span><br><span class="line">            System.out.println(number[i]+<span class="string">"-----"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] maopao(<span class="keyword">int</span>[] numbers)&#123;</span><br><span class="line">        <span class="keyword">int</span> size = numbers.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;size;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(numbers[i]&lt;numbers[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">                    numbers[i]=numbers[j];</span><br><span class="line">                    numbers[j]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numbers;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="选择排序：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕"><a href="#选择排序：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕" class="headerlink" title="选择排序：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕"></a>选择排序：<code>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕</code></h3><p>​        <strong>算法描述</strong></p>
-<p>​        n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果。</p>
-<p>具体算法描述如下：</p>
-<ul>
-<li><p>初始状态：无序区为R[1…n]，有序区为空；</p>
-</li>
-<li><p>第i趟排序(i=1,2,3…n-1)开始时，当前有序区和无序区分别为R[1…i-1]和R(i…n）。该趟排序从当前无序区中-选出关键字最小的记录  R[k]，将它与无序区的第1个记录R交换，使R[1…i]和R[i+1…n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；</p>
-</li>
-<li><p>n-1趟结束，数组有序化了。</p>
-<p><strong>动画演示</strong></p>
-<p><img src="/assets/blogImg/%E9%80%89%E6%8B%A9.gif" alt=""></p>
-</li>
-</ul>
-<p>​              Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">xuanze</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numbers[] = &#123;<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">5</span>,<span class="number">13</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> number[] = selectSort(numbers);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;number.length;i++)&#123;</span><br><span class="line">            System.out.println(number[i]+<span class="string">"-----"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//选择排序：每一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] selectSort(<span class="keyword">int</span>[] numbers)&#123;</span><br><span class="line">        <span class="keyword">int</span> size =numbers.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> k =i;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=size-<span class="number">1</span>;j&gt;i;j--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(numbers[j]&lt;numbers[k])</span><br><span class="line">                    k=j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">            numbers[i] = numbers[k];</span><br><span class="line">            numbers[k] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numbers;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="插入排序：（Insertion-Sort）它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。"><a href="#插入排序：（Insertion-Sort）它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。" class="headerlink" title="插入排序：（Insertion-Sort）它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。"></a>插入排序：（<code>Insertion-Sort）它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入</code>。</h3><p>​            <strong>算法描述</strong></p>
-<p>一般来说，插入排序都采用in-place在数组上实现。</p>
-<ol>
-<li><p>从第一个元素开始，该元素可以认为已经被排序；</p>
-</li>
-<li><p>取出下一个元素，在已经排序的元素序列中从后向前扫描；</p>
-</li>
-<li><p>如果该元素（已排序）大于新元素，将该元素移到下一位置；</p>
-</li>
-<li><p>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；</p>
-</li>
-<li><p>将新元素插入到该位置后；</p>
-</li>
-<li><p>重复步骤2~5。</p>
-<p><strong>动画演示</strong></p>
-<p><img src="/assets/blogImg/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.gif" alt=""></p>
-</li>
-</ol>
-<p>​    Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//插入排序：每次都与左边的值比较，若小于/大于就像左边移动</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] insertSort(<span class="keyword">int</span>[] numbers)&#123;</span><br><span class="line">       <span class="keyword">int</span> size = numbers.length;</span><br><span class="line">       <span class="keyword">int</span> temp,j;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; size; i++)&#123;</span><br><span class="line">           temp = numebrs[i];</span><br><span class="line">           <span class="keyword">for</span>(j = i;j&gt;<span class="number">0</span> &amp;&amp; temp &lt; numbers[j - <span class="number">1</span>];j--)&#123;</span><br><span class="line">               numbers[j] = numbers[j - <span class="number">1</span>];</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//移动后面把自己放进去</span></span><br><span class="line">               numbers[j] = temp;  </span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> numbers;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="快速排序：快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。"><a href="#快速排序：快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。" class="headerlink" title="快速排序：快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。"></a>快速排序：快速排序的基本思想：通过一趟排序将待排记录<strong>分隔成独立的两部分</strong>，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。</h3><p><strong>算法描述</strong></p>
-<p>快速排序使用<strong>分治法</strong>来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：</p>
-<ul>
-<li><p>从数列中挑出一个元素，称为 “基准”（pivot）；</p>
-</li>
-<li><p>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</p>
-</li>
-<li><p>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
-<p><strong>动画演示</strong></p>
-<p><img src="/assets/blogImg/%E5%BF%AB%E6%8E%92.gif" alt=""></p>
-</li>
-</ul>
-<p>Java实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">6</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">10</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        QuickSort(arr,arr.length,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i :arr) System.out.print(i+<span class="string">","</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span>[] data,<span class="keyword">int</span> length,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start==end) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> index=quickSort(data,length,start,end);</span><br><span class="line">        <span class="keyword">if</span>(index&gt;start)&#123;</span><br><span class="line">            QuickSort(data,length,start,index-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index&lt;end)&#123;</span><br><span class="line">            QuickSort(data,length,index+<span class="number">1</span>,end);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"><span class="comment">//      //假如是要求第K个数或者第K个数组的集合的</span></span><br><span class="line"><span class="comment">//      int index = quickSort(data,length,start,end);</span></span><br><span class="line"><span class="comment">//      if(index = k-1) &#123;</span></span><br><span class="line"><span class="comment">//          System.out.println(data[index]); //即为第k个数</span></span><br><span class="line"><span class="comment">//          for(int i=0;i&lt;index;++) &#123;</span></span><br><span class="line"><span class="comment">//              System.out.println(data[i]); //即为大于index和小于index的数</span></span><br><span class="line"><span class="comment">//          &#125;</span></span><br><span class="line"><span class="comment">//      &#125;else if(index&gt;start) &#123;</span></span><br><span class="line"><span class="comment">//          QuickSort(data,length,start,index-1);</span></span><br><span class="line"><span class="comment">//      &#125;else if(index&lt;end) &#123;</span></span><br><span class="line"><span class="comment">//          QuickSort(data,length,index+1,end);</span></span><br><span class="line"><span class="comment">//      &#125;</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> length,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index=<span class="number">0</span>;</span><br><span class="line">        swap(arr,index,end);</span><br><span class="line">        <span class="keyword">int</span> small = start-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(index=start;index&lt;end;++index)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[index]&lt;arr[end])&#123;</span><br><span class="line">              ++ small;</span><br><span class="line">            <span class="keyword">if</span>(small!=index)&#123;</span><br><span class="line">                swap(arr,small,index);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">            ++small;</span><br><span class="line">            swap(arr,small,end);</span><br><span class="line">        <span class="keyword">return</span> small;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp=arr[index];</span><br><span class="line">        arr[index]=arr[end];</span><br><span class="line">        arr[end]=temp;      </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<p>参数与大括号里的名字相同的话，注解后括号里的内容可以不填。</p>
+<h2 id="2-Jpa"><a href="#2-Jpa" class="headerlink" title="2.Jpa"></a><strong><em>2.Jpa</em></strong></h2><hr>
+<hr>
+<h3 id="Entity"><a href="#Entity" class="headerlink" title="@Entity:"></a><strong>@Entity:</strong></h3><h3 id="Table-name-”“"><a href="#Table-name-”“" class="headerlink" title="@Table(name=”“):"></a><strong>@Table(name=”“):</strong></h3><p>表明这是一个实体类。一般用于jpa ，这两个注解一般一块使用，但是如果表名和实体类名相同的话，@Table可以省略；</p>
+<h3 id="MappedSuperClass"><a href="#MappedSuperClass" class="headerlink" title="@MappedSuperClass:"></a><strong>@MappedSuperClass:</strong></h3><p>用在确定是父类的entity上。父类的属性子类可以继承；</p>
+<h3 id="NoRepositoryBean"><a href="#NoRepositoryBean" class="headerlink" title="@NoRepositoryBean:"></a><strong>@NoRepositoryBean:</strong></h3><p>一般用作父类的repository，有这个注解，spring不会去实例化该repository；</p>
+<h3 id="Column"><a href="#Column" class="headerlink" title="@Column:"></a><strong>@Column:</strong></h3><p>如果字段名与列名相同，则可以省略；</p>
+<h3 id="Id"><a href="#Id" class="headerlink" title="@Id:"></a><strong>@Id:</strong></h3><p>表示该属性为主键；</p>
+<h3 id="GeneratedValue-strategy-GenerationType-SEQUENCE-generator-“repair-seq”"><a href="#GeneratedValue-strategy-GenerationType-SEQUENCE-generator-“repair-seq”" class="headerlink" title="@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = “repair_seq”):"></a><strong>@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = “repair_seq”):</strong></h3><p>表示主键生成策略是sequence（可以为Auto、IDENTITY、native等，Auto表示可在多个数据库间切换），指定sequence的名字是repair_seq；</p>
+<h3 id="SequenceGeneretor-name-“repair-seq”-sequenceName-“seq-repair”-allocationSize-1"><a href="#SequenceGeneretor-name-“repair-seq”-sequenceName-“seq-repair”-allocationSize-1" class="headerlink" title="@SequenceGeneretor(name = “repair_seq”, sequenceName = “seq_repair”, allocationSize = 1):"></a><strong>@SequenceGeneretor(name = “repair_seq”, sequenceName = “seq_repair”, allocationSize = 1):</strong></h3><p>name为sequence的名称，以便使用，sequenceName为数据库的sequence名称，两个名称可以一致；</p>
+<h3 id="Transient"><a href="#Transient" class="headerlink" title="@Transient:"></a><strong>@Transient:</strong></h3><p>表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性. </p>
+<p>如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic；</p>
+<h3 id="Basic-fetch-FetchType-LAZY"><a href="#Basic-fetch-FetchType-LAZY" class="headerlink" title="@Basic(fetch=FetchType.LAZY):"></a><strong>@Basic(fetch=FetchType.LAZY):</strong></h3><p>标记可以指定实体属性的加载方式；</p>
+<h3 id="JsonIgnore"><a href="#JsonIgnore" class="headerlink" title="@JsonIgnore:"></a><strong>@JsonIgnore:</strong></h3><p>作用是json序列化时将java bean中的一些属性忽略掉,序列化和反序列化都受影响；</p>
+<h3 id="JoinColumn-name-”loginId”"><a href="#JoinColumn-name-”loginId”" class="headerlink" title="@JoinColumn(name=”loginId”):"></a><strong>@JoinColumn(name=”loginId”):</strong></h3><p>一对一：本表中指向另一个表的外键。</p>
+<p>一对多：另一个表指向本表的外键。</p>
+<h3 id="OneToOne"><a href="#OneToOne" class="headerlink" title="@OneToOne"></a><strong>@OneToOne</strong></h3><h3 id="OneToMany"><a href="#OneToMany" class="headerlink" title="@OneToMany"></a><strong>@OneToMany</strong></h3><h3 id="ManyToOne"><a href="#ManyToOne" class="headerlink" title="@ManyToOne:"></a><strong>@ManyToOne:</strong></h3><p>对应Hibernate配置文件中的一对一，一对多，多对一。</p>
+<h2 id="3-全局异常处理"><a href="#3-全局异常处理" class="headerlink" title="3.全局异常处理"></a><strong><em>3.全局异常处理</em></strong></h2><hr>
+<hr>
+<h3 id="ControllerAdvice"><a href="#ControllerAdvice" class="headerlink" title="@ControllerAdvice:"></a><strong>@ControllerAdvice:</strong></h3><p>包含@Component。可以被扫描到。统一处理异常；</p>
+<h3 id="ExceptionHandler-Exception-class"><a href="#ExceptionHandler-Exception-class" class="headerlink" title="@ExceptionHandler(Exception.class):"></a><strong>@ExceptionHandler(Exception.class):</strong></h3><p>用在方法上面表示遇到这个异常就执行以下方法。</p>
+<h2 id="4-springcloud"><a href="#4-springcloud" class="headerlink" title="4.springcloud\"></a><strong><em>4.springcloud\</em></strong></h2><hr>
+<p>***</p>
+<h3 id="EnableEurekaServer"><a href="#EnableEurekaServer" class="headerlink" title="@EnableEurekaServer:"></a><strong>@EnableEurekaServer:</strong></h3><p>用在springboot启动类上，表示这是一个eureka服务注册中心；</p>
+<h3 id="EnableDiscoveryClient"><a href="#EnableDiscoveryClient" class="headerlink" title="@EnableDiscoveryClient:"></a><strong>@EnableDiscoveryClient:</strong></h3><p>用在springboot启动类上，表示这是一个服务，可以被注册中心找到；</p>
+<h3 id="LoadBalanced"><a href="#LoadBalanced" class="headerlink" title="@LoadBalanced:"></a><strong>@LoadBalanced:</strong></h3><p>开启负载均衡能力；</p>
+<h3 id="EnableCircuitBreaker"><a href="#EnableCircuitBreaker" class="headerlink" title="@EnableCircuitBreaker:"></a><strong>@EnableCircuitBreaker:</strong></h3><p>用在启动类上，开启断路器功能；</p>
+<h3 id="HystrixCommand-fallbackMethod-”backMethod”"><a href="#HystrixCommand-fallbackMethod-”backMethod”" class="headerlink" title="@HystrixCommand(fallbackMethod=”backMethod”):"></a><strong>@HystrixCommand(fallbackMethod=”backMethod”):</strong></h3><p>用在方法上，fallbackMethod指定断路回调方法；</p>
+<h3 id="EnableConfigServer"><a href="#EnableConfigServer" class="headerlink" title="@EnableConfigServer:"></a><strong>@EnableConfigServer:</strong></h3><p>用在启动类上，表示这是一个配置中心，开启Config Server；</p>
+<h3 id="EnableZuulProxy"><a href="#EnableZuulProxy" class="headerlink" title="@EnableZuulProxy:"></a><strong>@EnableZuulProxy:</strong></h3><p>开启zuul路由，用在启动类上；</p>
+<h3 id="SpringCloudApplication"><a href="#SpringCloudApplication" class="headerlink" title="@SpringCloudApplication:"></a><strong>@SpringCloudApplication:</strong></h3><p>包含</p>
+<p>@SpringBootApplication </p>
+<p>@EnableDiscovertyClient</p>
+<p>@EnableCircuitBreaker</p>
+<p>分别是SpringBoot注解、注册服务中心Eureka注解、断路器注解。对于SpringCloud来说，这是每一微服务必须应有的三个注解，所以才推出了@SpringCloudApplication这一注解集合。</p>
+<hr>
+<p>待补充</p>
 
       
 
@@ -3036,7 +3099,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -3046,7 +3109,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/23/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">展开全文 >></a>
         </p>
       
 
@@ -3207,6 +3270,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">池化技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JSTL</a>
               </li>
             
             <div class="clearfix"></div>
