@@ -157,6 +157,149 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SpringBoot常用注解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/28/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">SpringBoot常用注解</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/28/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2019-12-28T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-SpringBoot-spring"><a href="#1-SpringBoot-spring" class="headerlink" title="1.SpringBoot/spring"></a><strong><em>1.SpringBoot/spring</em></strong></h2><h3 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication:"></a><strong>@SpringBootApplication:</strong></h3><p>包含@Configuration、@EnableAutoConfiguration、@ComponentScan通常用在主类上；</p>
+<h3 id="Repository"><a href="#Repository" class="headerlink" title="@Repository:"></a><strong>@Repository:</strong></h3><p>用于标注数据访问组件，即DAO组件；</p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="@Service:"></a><strong>@Service:</strong></h3><p>用于标注业务层组件；</p>
+<h3 id="RestController"><a href="#RestController" class="headerlink" title="@RestController:"></a><strong>@RestController:</strong></h3><p>用于标注控制层组件(如struts中的action)，包含@Controller和@ResponseBody；</p>
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="@Controller:"></a><strong>@Controller:</strong></h3><p>用于标注是控制层组件，需要返回页面时请用@Controller而不是@RestController；</p>
+<h3 id="Component"><a href="#Component" class="headerlink" title="@Component:"></a><strong>@Component:</strong></h3><p>泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注；</p>
+<h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody:"></a><strong>@ResponseBody:</strong></h3><p>表示该方法的返回结果直接写入HTTP response body中，一般在异步获取数据时使用，在使用@RequestMapping后，返回值通常解析为跳转路径，</p>
+<p>加上@responsebody后返回结果不会被解析为跳转路径，而是直接写入HTTP response body中；比如异步获取json数据，加上@responsebody后，会直接返回json数据；</p>
+<h3 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody:"></a><strong>@RequestBody:</strong></h3><p>参数前加上这个注解之后，认为该参数必填。表示接受json字符串转为对象 List等；</p>
+<h3 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="@ComponentScan:"></a><strong>@ComponentScan:</strong></h3><p>组件扫描。个人理解相当于，如果扫描到有@Component @Controller @Service等这些注解的类，则把这些类注册为bean*；</p>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration:"></a><strong>@Configuration:</strong></h3><p>指出该类是 Bean 配置的信息源，相当于XML中的，一般加在主类上；</p>
+<h3 id="Bean"><a href="#Bean" class="headerlink" title="@Bean:"></a><strong>@Bean:</strong></h3><p>相当于XML中的,放在方法的上面，而不是类，意思是产生一个bean,并交给spring管理；</p>
+<h3 id="EnableAutoConfiguration"><a href="#EnableAutoConfiguration" class="headerlink" title="@EnableAutoConfiguration:"></a><strong>@EnableAutoConfiguration:</strong></h3><p>让 Spring Boot 根据应用所声明的依赖来对 Spring 框架进行自动配置，一般加在主类上；</p>
+<h3 id="AutoWired"><a href="#AutoWired" class="headerlink" title="@AutoWired:"></a><strong>@AutoWired:</strong></h3><p>byType方式。把配置好的Bean拿来用，完成属性、方法的组装，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作；</p>
+<p>当加上（required=false）时，就算找不到bean也不报错；</p>
+<h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier:"></a><strong>@Qualifier:</strong></h3><p>当有多个同一类型的Bean时，可以用@Qualifier(“name”)来指定。与@Autowired配合使用；</p>
+<h3 id="Resource-name-”name”-type-”type”-："><a href="#Resource-name-”name”-type-”type”-：" class="headerlink" title="@Resource(name=”name”,type=”type”)："></a><strong>@Resource(name=”name”,type=”type”)：</strong></h3><p>没有括号内内容的话，默认byName。与@Autowired干类似的事；</p>
+<h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping:"></a><strong>@RequestMapping:</strong></h3><h3 id="RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；"><a href="#RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；" class="headerlink" title="RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；"></a>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径；</h3><blockquote>
+<p>该注解有六个属性: </p>
+<p>params:指定request中必须包含某些参数值是，才让该方法处理。</p>
+<p>headers:指定request中必须包含某些指定的header值，才能让该方法处理请求。 </p>
+<p>value:指定请求的实际地址，指定的地址可以是URI Template 模式 </p>
+<p>method:指定请求的method类型， GET、POST、PUT、DELETE等 </p>
+<p>consumes:指定处理请求的提交内容类型（Content-Type），如application/json,text/html; </p>
+<p>produces:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回。</p>
+</blockquote>
+<h3 id="GetMapping、-PostMapping等"><a href="#GetMapping、-PostMapping等" class="headerlink" title="@GetMapping、@PostMapping等:"></a><strong>@GetMapping、@PostMapping等:</strong></h3><p>相当于@RequestMapping（value=”/”，method=RequestMethod.Get\Post\Put\Delete等） 。是个组合注解；</p>
+<h3 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam:"></a><strong>@RequestParam:</strong></h3><p>用在方法的参数前面。相当于 request.getParameter()；</p>
+<h3 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable:"></a><strong>@PathVariable:</strong></h3><p>路径变量。如 RequestMapping(“user/get/mac/{macAddress}”) ；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public String getByMacAddress(</span><br><span class="line">@PathVariable(“macAddress”) String macAddress)&#123;</span><br><span class="line">&#x2F;&#x2F;do something;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参数与大括号里的名字相同的话，注解后括号里的内容可以不填。</p>
+<h2 id="2-Jpa"><a href="#2-Jpa" class="headerlink" title="2.Jpa"></a><strong><em>2.Jpa</em></strong></h2><hr>
+<hr>
+<h3 id="Entity"><a href="#Entity" class="headerlink" title="@Entity:"></a><strong>@Entity:</strong></h3><h3 id="Table-name-”“"><a href="#Table-name-”“" class="headerlink" title="@Table(name=”“):"></a><strong>@Table(name=”“):</strong></h3><p>表明这是一个实体类。一般用于jpa ，这两个注解一般一块使用，但是如果表名和实体类名相同的话，@Table可以省略；</p>
+<h3 id="MappedSuperClass"><a href="#MappedSuperClass" class="headerlink" title="@MappedSuperClass:"></a><strong>@MappedSuperClass:</strong></h3><p>用在确定是父类的entity上。父类的属性子类可以继承；</p>
+<h3 id="NoRepositoryBean"><a href="#NoRepositoryBean" class="headerlink" title="@NoRepositoryBean:"></a><strong>@NoRepositoryBean:</strong></h3><p>一般用作父类的repository，有这个注解，spring不会去实例化该repository；</p>
+<h3 id="Column"><a href="#Column" class="headerlink" title="@Column:"></a><strong>@Column:</strong></h3><p>如果字段名与列名相同，则可以省略；</p>
+<h3 id="Id"><a href="#Id" class="headerlink" title="@Id:"></a><strong>@Id:</strong></h3><p>表示该属性为主键；</p>
+<h3 id="GeneratedValue-strategy-GenerationType-SEQUENCE-generator-“repair-seq”"><a href="#GeneratedValue-strategy-GenerationType-SEQUENCE-generator-“repair-seq”" class="headerlink" title="@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = “repair_seq”):"></a><strong>@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = “repair_seq”):</strong></h3><p>表示主键生成策略是sequence（可以为Auto、IDENTITY、native等，Auto表示可在多个数据库间切换），指定sequence的名字是repair_seq；</p>
+<h3 id="SequenceGeneretor-name-“repair-seq”-sequenceName-“seq-repair”-allocationSize-1"><a href="#SequenceGeneretor-name-“repair-seq”-sequenceName-“seq-repair”-allocationSize-1" class="headerlink" title="@SequenceGeneretor(name = “repair_seq”, sequenceName = “seq_repair”, allocationSize = 1):"></a><strong>@SequenceGeneretor(name = “repair_seq”, sequenceName = “seq_repair”, allocationSize = 1):</strong></h3><p>name为sequence的名称，以便使用，sequenceName为数据库的sequence名称，两个名称可以一致；</p>
+<h3 id="Transient"><a href="#Transient" class="headerlink" title="@Transient:"></a><strong>@Transient:</strong></h3><p>表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性. </p>
+<p>如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic；</p>
+<h3 id="Basic-fetch-FetchType-LAZY"><a href="#Basic-fetch-FetchType-LAZY" class="headerlink" title="@Basic(fetch=FetchType.LAZY):"></a><strong>@Basic(fetch=FetchType.LAZY):</strong></h3><p>标记可以指定实体属性的加载方式；</p>
+<h3 id="JsonIgnore"><a href="#JsonIgnore" class="headerlink" title="@JsonIgnore:"></a><strong>@JsonIgnore:</strong></h3><p>作用是json序列化时将java bean中的一些属性忽略掉,序列化和反序列化都受影响；</p>
+<h3 id="JoinColumn-name-”loginId”"><a href="#JoinColumn-name-”loginId”" class="headerlink" title="@JoinColumn(name=”loginId”):"></a><strong>@JoinColumn(name=”loginId”):</strong></h3><p>一对一：本表中指向另一个表的外键。</p>
+<p>一对多：另一个表指向本表的外键。</p>
+<h3 id="OneToOne"><a href="#OneToOne" class="headerlink" title="@OneToOne"></a><strong>@OneToOne</strong></h3><h3 id="OneToMany"><a href="#OneToMany" class="headerlink" title="@OneToMany"></a><strong>@OneToMany</strong></h3><h3 id="ManyToOne"><a href="#ManyToOne" class="headerlink" title="@ManyToOne:"></a><strong>@ManyToOne:</strong></h3><p>对应Hibernate配置文件中的一对一，一对多，多对一。</p>
+<h2 id="3-全局异常处理"><a href="#3-全局异常处理" class="headerlink" title="3.全局异常处理"></a><strong><em>3.全局异常处理</em></strong></h2><hr>
+<hr>
+<h3 id="ControllerAdvice"><a href="#ControllerAdvice" class="headerlink" title="@ControllerAdvice:"></a><strong>@ControllerAdvice:</strong></h3><p>包含@Component。可以被扫描到。统一处理异常；</p>
+<h3 id="ExceptionHandler-Exception-class"><a href="#ExceptionHandler-Exception-class" class="headerlink" title="@ExceptionHandler(Exception.class):"></a><strong>@ExceptionHandler(Exception.class):</strong></h3><p>用在方法上面表示遇到这个异常就执行以下方法。</p>
+<h2 id="4-springcloud"><a href="#4-springcloud" class="headerlink" title="4.springcloud\"></a><strong><em>4.springcloud\</em></strong></h2><hr>
+<p>***</p>
+<h3 id="EnableEurekaServer"><a href="#EnableEurekaServer" class="headerlink" title="@EnableEurekaServer:"></a><strong>@EnableEurekaServer:</strong></h3><p>用在springboot启动类上，表示这是一个eureka服务注册中心；</p>
+<h3 id="EnableDiscoveryClient"><a href="#EnableDiscoveryClient" class="headerlink" title="@EnableDiscoveryClient:"></a><strong>@EnableDiscoveryClient:</strong></h3><p>用在springboot启动类上，表示这是一个服务，可以被注册中心找到；</p>
+<h3 id="LoadBalanced"><a href="#LoadBalanced" class="headerlink" title="@LoadBalanced:"></a><strong>@LoadBalanced:</strong></h3><p>开启负载均衡能力；</p>
+<h3 id="EnableCircuitBreaker"><a href="#EnableCircuitBreaker" class="headerlink" title="@EnableCircuitBreaker:"></a><strong>@EnableCircuitBreaker:</strong></h3><p>用在启动类上，开启断路器功能；</p>
+<h3 id="HystrixCommand-fallbackMethod-”backMethod”"><a href="#HystrixCommand-fallbackMethod-”backMethod”" class="headerlink" title="@HystrixCommand(fallbackMethod=”backMethod”):"></a><strong>@HystrixCommand(fallbackMethod=”backMethod”):</strong></h3><p>用在方法上，fallbackMethod指定断路回调方法；</p>
+<h3 id="EnableConfigServer"><a href="#EnableConfigServer" class="headerlink" title="@EnableConfigServer:"></a><strong>@EnableConfigServer:</strong></h3><p>用在启动类上，表示这是一个配置中心，开启Config Server；</p>
+<h3 id="EnableZuulProxy"><a href="#EnableZuulProxy" class="headerlink" title="@EnableZuulProxy:"></a><strong>@EnableZuulProxy:</strong></h3><p>开启zuul路由，用在启动类上；</p>
+<h3 id="SpringCloudApplication"><a href="#SpringCloudApplication" class="headerlink" title="@SpringCloudApplication:"></a><strong>@SpringCloudApplication:</strong></h3><p>包含</p>
+<p>@SpringBootApplication </p>
+<p>@EnableDiscovertyClient</p>
+<p>@EnableCircuitBreaker</p>
+<p>分别是SpringBoot注解、注册服务中心Eureka注解、断路器注解。对于SpringCloud来说，这是每一微服务必须应有的三个注解，所以才推出了@SpringCloudApplication这一注解集合。</p>
+<hr>
+<p>待补充</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/28/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-volatile关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2200,6 +2343,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Docker - Linux</a>
               </li>
             
             <div class="clearfix"></div>
