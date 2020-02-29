@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/1.png">
 <meta property="article:published_time" content="2020-02-12T03:07:00.000Z">
-<meta property="article:modified_time" content="2020-02-12T03:08:21.807Z">
+<meta property="article:modified_time" content="2020-02-29T09:05:29.334Z">
 <meta property="article:author" content="慕">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,8 @@ var _hmt = _hmt || [];
 <li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=实现会话跟踪的技术有哪些" target="_blank" rel="noopener">实现会话跟踪的技术有哪些</a></li>
 <li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=cookie和session的的区别" target="_blank" rel="noopener">Cookie和Session的的区别</a></li>
 </ul>
-<h2 id="Servlet总结"><a href="#Servlet总结" class="headerlink" title="Servlet总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet总结" target="_blank" rel="noopener">Servlet总结</a></h2><p>在Java Web程序中，<strong>Servlet</strong>主要负责接收用户请求 <code>HttpServletRequest</code>,在<code>doGet()</code>,<code>doPost()</code>中做相应的处理，并将回应<code>HttpServletResponse</code>反馈给用户。<strong>Servlet</strong> 可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用<code>init()</code>方法，销毁时调用<code>destroy()</code>方法<strong>。</strong>Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），<strong>一个Servlet可以设置多个URL访问</strong>。<strong>Servlet不是线程安全</strong>，因此要谨慎使用类变量。</p>
+<h2 id="Servlet总结"><a href="#Servlet总结" class="headerlink" title="Servlet总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet总结" target="_blank" rel="noopener">Servlet总结</a></h2><a id="more"></a>在Java Web程序中，**Servlet**主要负责接收用户请求 `HttpServletRequest`,在`doGet()`,`doPost()`中做相应的处理，并将回应`HttpServletResponse`反馈给用户。**Servlet** 可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用`init()`方法，销毁时调用`destroy()`方法**。**Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），**一个Servlet可以设置多个URL访问**。**Servlet不是线程安全**，因此要谨慎使用类变量。
+
 <h2 id="阐述Servlet和CGI的区别"><a href="#阐述Servlet和CGI的区别" class="headerlink" title="阐述Servlet和CGI的区别?"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=阐述servlet和cgi的区别" target="_blank" rel="noopener">阐述Servlet和CGI的区别?</a></h2><h3 id="CGI的不足之处"><a href="#CGI的不足之处" class="headerlink" title="CGI的不足之处:"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=cgi的不足之处" target="_blank" rel="noopener">CGI的不足之处:</a></h3><p>1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。</p>
 <p>2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销</p>
 <p>3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。</p>

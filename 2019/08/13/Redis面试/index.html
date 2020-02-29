@@ -9,16 +9,16 @@
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <title>Redis | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] *6.1 redis 简介 *简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。  6.2 为什么要">
+  <meta name="description" content="[TOC] *6.1 redis 简介 *简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis">
 <meta property="og:url" content="https://ssiriyang.github.io/2019/08/13/Redis%E9%9D%A2%E8%AF%95/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="[TOC] *6.1 redis 简介 *简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。  6.2 为什么要">
+<meta property="og:description" content="[TOC] *6.1 redis 简介 *简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ssiriyang.github.io/assets/blogImg/Redis&M.png">
 <meta property="article:published_time" content="2019-08-13T08:16:00.000Z">
-<meta property="article:modified_time" content="2020-02-14T04:19:13.103Z">
+<meta property="article:modified_time" content="2020-02-29T09:06:34.726Z">
 <meta property="article:author" content="慕">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -195,7 +195,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>[TOC]</p>
-<h2 id="6-1-redis-简介"><a href="#6-1-redis-简介" class="headerlink" title="*6.1 redis 简介 *"></a>*<em>6.1 redis 简介 *</em></h2><p>简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。 </p>
+<h2 id="6-1-redis-简介"><a href="#6-1-redis-简介" class="headerlink" title="*6.1 redis 简介 *"></a>*<em>6.1 redis 简介 *</em></h2><p>简单来说 redis 就是一个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以存写速度非常快， 因此 redis 被广泛应用于缓存方向。另外，redis 也经常用来做分布式锁。redis 提供了多种数据类型来支持不同的业 务场景。除此之外，redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。<a id="more"></a> </p>
 <h2 id="6-2-为什么要用-redis-为什么要用缓存"><a href="#6-2-为什么要用-redis-为什么要用缓存" class="headerlink" title="6.2 为什么要用 redis /为什么要用缓存"></a>6.2 为什么要用 redis /为什么要用缓存</h2><p>主要从“高性能”和“高并发”这两点来看待这个问题。</p>
 <ol>
 <li>高性能：<br>假如用户第一次访问数据库中的某些数据。这个过程会比较慢，因为是从硬盘上读取的。将该用户访问的数据存在数 缓存中，这样下一次再访问这些数据的时候就可以直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当 快。如果数据库中的对应数据改变的之后，同步改变缓存中相应的数据即可！</li>

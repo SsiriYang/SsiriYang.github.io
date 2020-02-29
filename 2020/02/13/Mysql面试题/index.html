@@ -9,15 +9,15 @@
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <title>Mysql面试题 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc] 说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**关于二者的对比与总结:   count运算上的区别：因为MyISAM缓存有表meta-data（行数等），因此在做COUNT(*)时对于一个结构很好 的查询是不需要消耗多少资源的。而对于InnoDB来说，则没有这种缓存。  是否支持事务和崩溃后的安全恢复： MyISAM 强调的是性能，每次查询具有原子性">
+  <meta name="description" content="[toc] 说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**关于二者的对比与总结:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql面试题">
 <meta property="og:url" content="https://ssiriyang.github.io/2020/02/13/Mysql%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="[toc] 说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**关于二者的对比与总结:   count运算上的区别：因为MyISAM缓存有表meta-data（行数等），因此在做COUNT(*)时对于一个结构很好 的查询是不需要消耗多少资源的。而对于InnoDB来说，则没有这种缓存。  是否支持事务和崩溃后的安全恢复： MyISAM 强调的是性能，每次查询具有原子性">
+<meta property="og:description" content="[toc] 说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**关于二者的对比与总结:">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-13T08:16:00.000Z">
-<meta property="article:modified_time" content="2020-02-14T03:09:44.655Z">
+<meta property="article:modified_time" content="2020-02-29T09:06:31.660Z">
 <meta property="article:author" content="慕">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>[toc]</p>
-<h3 id="说说自己对于-MySQL-常见的两种存储引擎：MyISAM与-InnoDB的理解"><a href="#说说自己对于-MySQL-常见的两种存储引擎：MyISAM与-InnoDB的理解" class="headerlink" title="说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**"></a>说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**</h3><p>关于二者的对比与总结: </p>
+<h3 id="说说自己对于-MySQL-常见的两种存储引擎：MyISAM与-InnoDB的理解"><a href="#说说自己对于-MySQL-常见的两种存储引擎：MyISAM与-InnoDB的理解" class="headerlink" title="说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**"></a>说说自己对于 MySQL 常见的两种存储引擎：MyISAM与 InnoDB的理解**</h3><p>关于二者的对比与总结: <a id="more"></a></p>
 <ol>
 <li>count运算上的区别：因为MyISAM缓存有表meta-data（行数等），因此在做COUNT(*)时对于一个结构很好 的查询是不需要消耗多少资源的。而对于InnoDB来说，则没有这种缓存。 </li>
 <li>是否支持事务和崩溃后的安全恢复： MyISAM 强调的是性能，每次查询具有原子性,其执行数度比InnoDB类型 更快，但是不提供事务支持。但是InnoDB 提供事务支持事务，外部键等高级数据库功能。 具有事务 (commit)、回滚(rollback)和崩溃修复能力(crash recovery capabilities)的事务安全(transaction-safe (ACID compliant))型表。</li>

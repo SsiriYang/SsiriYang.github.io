@@ -9,12 +9,12 @@
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <title>观察者模式与发布订阅模式 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="观察者模式与发布订阅模式**问题：猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现？** 观察者模式当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。 问题解析： 观察者模式三要素: 目标–&gt;猫   观察者—&gt;老鼠、人    事件– &gt;猫大叫一声 ； 在java.util中observable">
+  <meta name="description" content="观察者模式与发布订阅模式**问题：猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现？** 观察者模式当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。 问题解析： 观察者模式三要素: 目标–&gt;猫   观察者—&gt;老鼠、人    事件– &gt;猫大叫一声 ；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="观察者模式与发布订阅模式">
 <meta property="og:url" content="https://ssiriyang.github.io/2020/02/20/%E8%A7%82%E5%AF%9F%E8%80%85%E4%B8%8E%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="观察者模式与发布订阅模式**问题：猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现？** 观察者模式当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。 问题解析： 观察者模式三要素: 目标–&gt;猫   观察者—&gt;老鼠、人    事件– &gt;猫大叫一声 ； 在java.util中observable">
+<meta property="og:description" content="观察者模式与发布订阅模式**问题：猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现？** 观察者模式当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。 问题解析： 观察者模式三要素: 目标–&gt;猫   观察者—&gt;老鼠、人    事件– &gt;猫大叫一声 ；">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ssiriyang.github.io/images/2020-02-01_202348.png">
 <meta property="og:image" content="https://ssiriyang.github.io/images/2020-02-01_202921.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://ssiriyang.github.io/images/2020-02-01_205212.png">
 <meta property="og:image" content="https://ssiriyang.github.io/images/2020-02-01_210538.png">
 <meta property="article:published_time" content="2020-02-20T03:45:10.776Z">
-<meta property="article:modified_time" content="2020-02-26T16:20:13.771Z">
+<meta property="article:modified_time" content="2020-02-29T09:04:24.351Z">
 <meta property="article:author" content="慕">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
@@ -201,7 +201,7 @@ var _hmt = _hmt || [];
         <h2 id="观察者模式与发布订阅模式"><a href="#观察者模式与发布订阅模式" class="headerlink" title="观察者模式与发布订阅模式"></a>观察者模式与发布订阅模式</h2><p><code>**问题：猫大叫了一声，所有老鼠都开始逃跑，主人被惊醒，如何实现？**</code></p>
 <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>当对象间存在<strong>一对多</strong>关系时，则使用<strong>观察者模式</strong>（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。</p>
 <p>问题解析：</p>
-<p>观察者模式三要素: 目标–&gt;猫   观察者—&gt;老鼠、人    事件– &gt;猫大叫一声 ；</p>
+<p>观察者模式三要素: 目标–&gt;猫   观察者—&gt;老鼠、人    事件– &gt;猫大叫一声 ；<a id="more"></a></p>
 <p>在java.util中observable实现了观察者模式,!有个vector类属性是一个数组,把所有观察者都放在里面 .有个observer(观察者).update方法触发自己的行为,观察是需要注册,通过obs.addElement()方法注册,当发生事件的时候, 去通知观察者,有个notify方法. </p>
 <h3 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h3><p>发布订阅模式（观察者模式升级版）</p>
 <p>应用场景：</p>
