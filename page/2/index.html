@@ -166,6 +166,84 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="Post-HashMap 源码学习" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/12/HashMap%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">HashMap 源码学习</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/12/HashMap%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2020-02-12T09:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HashMap-简介"><a href="#HashMap-简介" class="headerlink" title="HashMap 简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/HashMap?id=hashmap-简介" target="_blank" rel="noopener">HashMap 简介</a></h2><p>HashMap 主要用来存放键值对，它基于哈希表的Map接口实现，是常用的Java集合之一。</p>
+<p>JDK1.8 之前 HashMap 由 数组+链表 组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）.JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时，将链表转化为红黑树（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树），以减少搜索时间，具体可以参考 <code>treeifyBin</code>方法。
+        
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/12/HashMap%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-LinkedList 源码学习" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -202,8 +280,6 @@ var _hmt = _hmt || [];
 <li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/LinkedList?id=linkedlist类常用方法测试" target="_blank" rel="noopener">LinkedList类常用方法测试：</a></li>
 </ul>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/LinkedList?id=font-face楷体-id1简介" target="_blank" rel="noopener">简介</a></h2><p>LinkedList是一个实现了List接口和Deque接口的双端链表。 LinkedList底层的链表结构使它支持高效的插入和删除操作，另外它实现了Deque接口，使得LinkedList类也具有队列的特性; LinkedList不是线程安全的，如果想使LinkedList变成线程安全的，可以调用静态类Collections类中的synchronizedList方法：
-        
-          <a class="article-more-a" href="/2020/02/12/LinkedList%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/#more">more >></a>
         
       
 	  
@@ -281,8 +357,6 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="ArrayList简介"><a href="#ArrayList简介" class="headerlink" title="ArrayList简介"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/ArrayList?id=arraylist简介" target="_blank" rel="noopener">ArrayList简介</a></h3><p>　　ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用<code>ensureCapacity</code>操作来增加 ArrayList 实例的容量。这可以减少递增式再分配的数量。
-        
-          <a class="article-more-a" href="/2020/02/12/ArrayList%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/#more">more >></a>
         
       
 	  
@@ -386,8 +460,6 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="Servlet总结"><a href="#Servlet总结" class="headerlink" title="Servlet总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet总结" target="_blank" rel="noopener">Servlet总结</a></h2>
         
-          <a class="article-more-a" href="/2020/02/12/J2EE%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/#more">more >></a>
-        
       
 	  
       
@@ -472,8 +544,6 @@ var _hmt = _hmt || [];
 <li>MyBatis，玩数据库必不可少的组件</li>
 </ul>
 <p><img src="/assets/blogImg/Java_1.png" alt="img"></p>
-        
-          <a class="article-more-a" href="/2020/02/12/Java%E8%BF%9B%E9%98%B6/#more">more >></a>
         
       
 	  
@@ -596,8 +666,6 @@ var _hmt = _hmt || [];
 </ul>
 <h1 id="剖析面试最常见问题之Java集合框架"><a href="#剖析面试最常见问题之Java集合框架" class="headerlink" title="剖析面试最常见问题之Java集合框架"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/Java集合框架常见面试题?id=剖析面试最常见问题之java集合框架" target="_blank" rel="noopener">剖析面试最常见问题之Java集合框架</a></h1><h2 id="说说List-Set-Map三者的区别？"><a href="#说说List-Set-Map三者的区别？" class="headerlink" title="说说List,Set,Map三者的区别？"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/Java集合框架常见面试题?id=说说listsetmap三者的区别？" target="_blank" rel="noopener">说说List,Set,Map三者的区别？</a></h2><ul>
 <li><strong>List(对付顺序的好帮手)：</strong> List接口存储一组不唯一（可以有多个元素引用相同的对象），有序的对象
-        
-          <a class="article-more-a" href="/2020/02/11/Java%E5%AE%B9%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/#more">more >></a>
         
       
 	  
@@ -741,8 +809,6 @@ var _hmt = _hmt || [];
 </blockquote>
 <p><strong>线程池</strong>提供了一种限制和管理资源（包括执行一个任务）。 每个<strong>线程池</strong>还维护一些基本统计信息，例如已完成任务的数量。
         
-          <a class="article-more-a" href="/2020/02/11/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#more">more >></a>
-        
       
 	  
       
@@ -820,8 +886,6 @@ var _hmt = _hmt || [];
       
         <h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_1-基础" target="_blank" rel="noopener">1. 基础</a></h1><h2 id="1-1-正确使用-equals-方法"><a href="#1-1-正确使用-equals-方法" class="headerlink" title="1.1. 正确使用 equals 方法"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_11-正确使用-equals-方法" target="_blank" rel="noopener">1.1. 正确使用 equals 方法</a></h2><p>Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。</p>
 <p>举个例子：
-        
-          <a class="article-more-a" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/#more">more >></a>
         
       
 	  
@@ -966,8 +1030,6 @@ var _hmt = _hmt || [];
 <h2 id="1-面向对象和面向过程的区别"><a href="#1-面向对象和面向过程的区别" class="headerlink" title="1. 面向对象和面向过程的区别"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java基础知识?id=_1-面向对象和面向过程的区别" target="_blank" rel="noopener">1. 面向对象和面向过程的区别</a></h2><ul>
 <li><strong>面向过程</strong> ：<strong>面向过程性能比面向对象高。</strong> 因为类调用时需要实例化，开销比较大，比较消耗资源，所以当性能是最重要的考量因素的时候，比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发。但是，<strong>面向过程没有面向对象易维护、易复用、易扩展。</strong>
         
-          <a class="article-more-a" href="/2020/02/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/#more">more >></a>
-        
       
 	  
       
@@ -1068,83 +1130,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/01/18/%E9%9A%8F%E7%AC%942020-2-11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="get-随笔2020-1-8" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/08/%E9%9A%8F%E7%AC%942020-1-8/">我在未来等你</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/01/08/%E9%9A%8F%E7%AC%942020-1-8/" class="archive-article-date">
-  	<time datetime="2020-01-08T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>人的改变根本不需要质变，你敢做任何一件平时不敢做的事，你就应该开始变化了。  日记更像是自己给自己创造的一个隔空对话的机会，每天记录的事情并非关键，多年后看着自己的转变才是重点。 补发第六页  很想回到过去，也许都是因为现在不够好  这句话很经典很准确，人长大了总爱回忆过去，包括美好的还有不好的，以前觉得很幸福的事情依旧觉得美好，以前觉得当时无论如何也迈不过去的坎儿在现在看来都是一种珍贵的体验，从失到得…<img src="/assets/blogImg/a.jpg" alt=""></p>
-
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/08/%E9%9A%8F%E7%AC%942020-1-8/">展开全文 >></a>
         </p>
       
 
@@ -1336,6 +1321,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">池化技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">好文</a>
               </li>
             
             <div class="clearfix"></div>
