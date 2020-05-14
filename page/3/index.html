@@ -167,6 +167,218 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="Post-ConcurrentHashMap学习心得" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/12/ConcurrentHashMap%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/">ConcurrentHashMap学习心得</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/12/ConcurrentHashMap%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/" class="archive-article-date">
+  	<time datetime="2020-02-12T07:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>ConcurrentHshMap利用CAS+Synchronized来保证并发更新安全，底层依然使用数组+链表+红黑树的存储结构</strong></p>
+<h2 id="主要属性"><a href="#主要属性" class="headerlink" title="主要属性"></a>主要属性</h2><h4 id="table-：-默认为NULL，初始化发生在第一次插入操作，默认大小为16的数组，用来储存Node节点数据，扩容时大小总是2的幂次方。"><a href="#table-：-默认为NULL，初始化发生在第一次插入操作，默认大小为16的数组，用来储存Node节点数据，扩容时大小总是2的幂次方。" class="headerlink" title="*table *： 默认为NULL，初始化发生在第一次插入操作，默认大小为16的数组，用来储存Node节点数据，扩容时大小总是2的幂次方。"></a>*<em>table *</em>： 默认为NULL，初始化发生在第一次插入操作，默认大小为16的数组，用来储存Node节点数据，扩容时大小总是2的幂次方。</h4><h4 id="nextTable：默认为NULL，扩容时新生成的数组，大小为原数组的两倍。"><a href="#nextTable：默认为NULL，扩容时新生成的数组，大小为原数组的两倍。" class="headerlink" title="nextTable：默认为NULL，扩容时新生成的数组，大小为原数组的两倍。"></a><strong>nextTable：默认为NULL，扩容时新生成的数组，大小为原数组的两倍。</strong></h4><h4 id="sizeCtl-（控制标识符）：默认为0，用来控制table的初始化和扩容操作"><a href="#sizeCtl-（控制标识符）：默认为0，用来控制table的初始化和扩容操作" class="headerlink" title="sizeCtl （控制标识符）：默认为0，用来控制table的初始化和扩容操作"></a>sizeCtl （控制标识符）：默认为0，用来控制table的初始化和扩容操作</h4><p>*  -1 代表table正在初始化</p>
+<p>*  -N 正有N-1个线程正在进行扩容操作</p>
+<p>*  N 下一次需要扩容的临界值，与HashMap中的临界值一样</p>
+<h4 id="Node节点类"><a href="#Node节点类" class="headerlink" title="Node节点类"></a>Node节点类</h4><p>final int hash；</p>
+<p>final K key；</p>
+<h4 id="volatile-V-val；-用volatile修饰的value和next-保证了并发内存的可见性"><a href="#volatile-V-val；-用volatile修饰的value和next-保证了并发内存的可见性" class="headerlink" title="volatile V val；   用volatile修饰的value和next 保证了并发内存的可见性"></a>volatile V val；   用volatile修饰的value和next 保证了并发内存的可见性</h4><p>volatile Node&lt;K,V&gt; next;</p>
+<blockquote>
+<p>ForwardingNode </p>
+<p>final Node&lt;K,V&gt; [] nextTable;</p>
+<p>super (-1,NULL,NULL,NULL,NULL) hash值为-1其它为NULL</p>
+<p>// ForwardingNode 只在扩容是发挥作用，负责表示当前节点以被copy走了。</p>
+</blockquote>
+<h2 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h2><p>计算key的hashcode在hash得出index数组中存放的位置</p>
+<p>检查数组是否初始化若未初始化则进行初始化</p>
+<p>1若table[index]==null ,该节点为空 ，利用CAS操作插入数据</p>
+<p>2若table[index]!=null ,该位置已有节点，发生碰撞  </p>
+<p>​                   a . 检查该节点的hash值是否为-1 ，若为-1则说明有线程正在进行扩容操作 ，调用helpTransfer帮助其扩容</p>
+<p>​                   b . 该节点hash值不为-1 ，锁定hash值相同的链表头结点 ，进行插入或者更新操作，链表过长变为红黑树</p>
+<h2 id="trypersize扩容方法"><a href="#trypersize扩容方法" class="headerlink" title="trypersize扩容方法"></a>trypersize扩容方法</h2><p>CAS操作把sizeCtl变为-1，表示正在进行初始化 确保只有一个线程进行初始化。</p>
+<p>创建nextTable 数组大小为table2倍 ，容量为原来1.5倍</p>
+<p>调用transfer方法 把数据复制到新数组 </p>
+<h2 id="transfer方法"><a href="#transfer方法" class="headerlink" title="transfer方法"></a>transfer方法</h2><h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>1 在工作内存中每次使用变量必须从主内存刷新最新的值</p>
+<p>2 每次修改后必须立刻同步会主内存</p>
+<p>3 禁止指令从排序</p>
+<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>compare and swap  比较并交换 有三个参数 1内存中的值  2预期的值  3 改变后的值</p>
+<p>乐观锁的一种体现 先操作后检查。非阻塞式同步</p>
+<p>如何保证操作和检测两个步骤具备原子性，如果用锁那就是去意义了</p>
+<p>靠硬件来完成原子性，这两个操作通过一条处理器指令来完成保证了原子性。</p>
+<p>缺点：造成ABA问题，初次读值为A，并且在准备赋值时检测到它仍为A，也不能保证它没有变过，可能在这段期间内变为B</p>
+<p>版本号来解决ABA问题，AtomicStampedReference 给变量加上版本号改变一次版本加一 </p>
+<p>通过检查版本号来确定变量改变过没有。</p>
+<p>版本号的原理在MySQL innodb引擎也有体现 innodb 通过MVCC多版本并发实现高并发。</p>
+<p>作者：聚在散里<br>链接：<a href="https://www.jianshu.com/p/1dc086c2cf83" target="_blank" rel="noopener">https://www.jianshu.com/p/1dc086c2cf83</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/12/ConcurrentHashMap%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="Post-J2EE知识回顾" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/12/J2EE%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/">J2EE知识回顾</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/12/J2EE%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/" class="archive-article-date">
+  	<time datetime="2020-02-12T03:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet总结" target="_blank" rel="noopener">Servlet总结</a></li>
+<li>阐述Servlet和CGI的区别?<ul>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=cgi的不足之处" target="_blank" rel="noopener">CGI的不足之处:</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet的优点" target="_blank" rel="noopener">Servlet的优点：</a></li>
+</ul>
+</li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet接口中有哪些方法及servlet生命周期探秘" target="_blank" rel="noopener">Servlet接口中有哪些方法及Servlet生命周期探秘</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=get和post请求的区别" target="_blank" rel="noopener">get和post请求的区别</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=什么情况下调用doget和dopost" target="_blank" rel="noopener">什么情况下调用doGet()和doPost()</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=转发forward和重定向redirect的区别" target="_blank" rel="noopener">转发（Forward）和重定向（Redirect）的区别</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=自动刷新refresh" target="_blank" rel="noopener">自动刷新(Refresh)</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet与线程安全" target="_blank" rel="noopener">Servlet与线程安全</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=jsp和servlet是什么关系" target="_blank" rel="noopener">JSP和Servlet是什么关系</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=jsp工作原理" target="_blank" rel="noopener">JSP工作原理</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=jsp有哪些内置对象、作用分别是什么" target="_blank" rel="noopener">JSP有哪些内置对象、作用分别是什么</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=request对象的主要方法有哪些" target="_blank" rel="noopener">Request对象的主要方法有哪些</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=requestgetattribute和-requestgetparameter有何区别" target="_blank" rel="noopener">request.getAttribute()和 request.getParameter()有何区别</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=include指令include的行为的区别" target="_blank" rel="noopener">include指令include的行为的区别</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=jsp九大内置对象，七大动作，三大指令" target="_blank" rel="noopener">JSP九大内置对象，七大动作，三大指令</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=讲解jsp中的四种作用域" target="_blank" rel="noopener">讲解JSP中的四种作用域</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=如何实现jsp或servlet的单线程模式" target="_blank" rel="noopener">如何实现JSP或Servlet的单线程模式</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=实现会话跟踪的技术有哪些" target="_blank" rel="noopener">实现会话跟踪的技术有哪些</a></li>
+<li><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=cookie和session的的区别" target="_blank" rel="noopener">Cookie和Session的的区别</a></li>
+</ul>
+<h2 id="Servlet总结"><a href="#Servlet总结" class="headerlink" title="Servlet总结"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/J2EE基础知识?id=servlet总结" target="_blank" rel="noopener">Servlet总结</a></h2>
+        
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/12/J2EE%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-Java进阶" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -221,84 +433,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/02/12/Java%E8%BF%9B%E9%98%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-Java疑难点" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">Java疑难点</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_1-基础" target="_blank" rel="noopener">1. 基础</a></h1><h2 id="1-1-正确使用-equals-方法"><a href="#1-1-正确使用-equals-方法" class="headerlink" title="1.1. 正确使用 equals 方法"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_11-正确使用-equals-方法" target="_blank" rel="noopener">1.1. 正确使用 equals 方法</a></h2><p>Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。</p>
-<p>举个例子：
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">展开全文 >></a>
         </p>
       
 
@@ -452,20 +586,20 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="Post-Java集合" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+    <article id="Post-Java疑难点" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/Java%E9%9B%86%E5%90%88/">Java集合</a>
+      <a class="article-title" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">Java疑难点</a>
     </h1>
   
 
         
         
-<a href="/2020/02/11/Java%E9%9B%86%E5%90%88/" class="archive-article-date">
+<a href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/" class="archive-article-date">
   	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
 </a>
         
@@ -473,332 +607,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>集合===容器（存，取）</strong></p>
-<p><strong>Collection ：单个存放</strong></p>
-<p><strong>Map:成对存放 key  value</strong> </p>
-<h1 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h1><p>存放单个数据</p>
-<p><img src="/assets/blogImg/collection.png" alt=""></p>
-<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>基于数组实现的非线程安全的集合。查询元素快，插入，删除中间元素慢。</p>
-<h3 id="ArrayList的构造函数"><a href="#ArrayList的构造函数" class="headerlink" title="ArrayList的构造函数"></a>ArrayList的构造函数</h3><p>ArrayList类支持3个构造方法。</p>
-<ul>
-<li><code>Arraylist()</code></li>
-</ul>
-<p>这个构造方法构造了一个空的链表。</p>
-<ul>
-<li><code>ArrayList(Collection c)</code></li>
-</ul>
-<p>这个构造方法构造了一个包含指定元素集合的链表。</p>
-<ul>
-<li><code>ArrayList(int initialCapacity)</code></li>
-</ul>
-<p>这是第三个构造方法，构造了一个指定大小但内容为空的链表。initialCapacity参数就是初始容量大小。</p>
-<p>举例来说，如果你要创建一个空的数组链表，用来存放String类型的对象，那么你可以像下面这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list &#x3D; new ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>如果你需要创建一个指定初始容量的数组链表，你可以像下面这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;(7);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="ArrayList常用方法"><a href="#ArrayList常用方法" class="headerlink" title="ArrayList常用方法"></a>ArrayList常用方法</h3><p>下面是是一些比较常用的ArrayList类成员方法：</p>
-<h4 id="增添元素"><a href="#增添元素" class="headerlink" title="增添元素"></a>增添元素</h4><ul>
-<li><p><code>boolean add(Element e)</code></p>
-<pre><code>增加指定元素到链表尾部.</code></pre></li>
-<li><p><code>void add(int index, Element e)</code></p>
-<pre><code>增加指定元素到链表指定位置.</code></pre></li>
-</ul>
-<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><ul>
-<li><p><code>void clear()</code></p>
-<pre><code>从链表中删除所有元素.</code></pre></li>
-<li><p><code>E remove(int index)</code></p>
-<pre><code>删除链表中指定位置的元素.</code></pre></li>
-<li><p><code>protected void removeRange(int start, int end)</code></p>
-<pre><code>删除链表中从某一个位置开始到某一个位置结束的元素。</code></pre></li>
-</ul>
-<h4 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h4><ul>
-<li><p><code>E get(int index)</code></p>
-<pre><code>获取链表中指定位置处的元素.</code></pre></li>
-<li><p><code>boolean contains(Object o)</code></p>
-<pre><code>如果链表包含指定元素，返回true.</code></pre></li>
-<li><p><code>int indexOf(Object o)</code></p>
-<pre><code>返回元素在链表中第一次出现的位置，如果返回-1，表示链表中没有这个元素。</code></pre></li>
-<li><p><code>int lastIndexOf(Object o)</code></p>
-<pre><code>返回元素在链表中最后一次出现的位置，如果返回-1，表示链表中没有这个元素。</code></pre></li>
-</ul>
-<h4 id="修改某个元素"><a href="#修改某个元素" class="headerlink" title="修改某个元素"></a>修改某个元素</h4><ul>
-<li><code>E set(int index, E element)</code><pre><code>将链表中指定位置上的元素替换成新元素。</code></pre></li>
-</ul>
-<h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h4><ul>
-<li><p>检查链表是否为空</p>
-<ul>
-<li><code>boolean isEmpty()</code><pre><code>返回true表示链表中没有任何元素.</code></pre></li>
-</ul>
-</li>
-<li><p>获取链表大小</p>
-<ul>
-<li><code>int size()</code><pre><code>返回链表长度（链表包含元素的个数）.</code></pre></li>
-</ul>
-</li>
-<li><p>将链表转换为一个数组</p>
-</li>
-</ul>
-<p><code>Object[] toArray()</code><br>     获取一个数组，数组中所有元素是链表中的元素.（即将链表转换为一个数组）</p>
-<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>基于链表实现的非线程安全的集合。查询元素慢，插入，删除中间元素快。</p>
-<h3 id="LinkedList的构造函数"><a href="#LinkedList的构造函数" class="headerlink" title="LinkedList的构造函数"></a>LinkedList的构造函数</h3><p>LinkedList类中有两个构造方法。</p>
-<ul>
-<li><p><code>LinkedList()</code></p>
-<p>这个构造方法创建一个空链表</p>
-</li>
-<li><p><code>LinkedList(Collection c)</code></p>
-<p>由给定集合创建一个链表</p>
-</li>
-</ul>
-<h3 id="LinkedList常用方法"><a href="#LinkedList常用方法" class="headerlink" title="LinkedList常用方法"></a>LinkedList常用方法</h3><h4 id="增添元素-1"><a href="#增添元素-1" class="headerlink" title="增添元素"></a>增添元素</h4><ul>
-<li><code>boolean add(E e)</code>：将指定元素添加到链表末尾</li>
-<li><code>void add(int index, E e)</code>：将指定元素插入到链表的指定位置</li>
-<li><code>boolean addAll(Collection c)</code>：将指定集合中的所有元素添加到链表末尾</li>
-<li><code>boolean addAll(int index, Collection c)</code>：将指定集合中的所有元素从指定位置开始插入链表</li>
-<li><code>void addFirst(E e)</code>：将指定元素插入到链表的开始</li>
-<li><code>void addLast(E e)</code>：将指定元素添加到链表的末尾</li>
-</ul>
-<h4 id="删除元素-1"><a href="#删除元素-1" class="headerlink" title="删除元素"></a>删除元素</h4><ul>
-<li><code>void clear()</code>：移除链表中的所有元素</li>
-<li><code>E remove()</code>：移除链表的第一个元素，并返回该元素</li>
-<li><code>E remove(int index)</code>：移除链表中指定位置处的元素，并返回该元素</li>
-<li><code>boolean remove(E e)</code>：若元素存在则从链表中该元素第一次出现的位置移除该元素</li>
-<li><code>E removeFirst()</code>：移除链表的第一个元素，并返回该元素</li>
-<li><code>boolean removeFirstOccourence(E e)</code>：从链表中移除指定元素第一次出现位置处的元素（以正序遍历）</li>
-<li><code>E removeLast()</code>：移除链表最后一个元素，并返回该元素</li>
-<li><code>boolean removeLastOccourence(E e)</code>：从链表中移除指定元素最后一次出现位置处的元素（以正序遍历）</li>
-</ul>
-<h4 id="查找元素-1"><a href="#查找元素-1" class="headerlink" title="查找元素"></a>查找元素</h4><ul>
-<li><code>boolean contains(E e)</code>：判断链表中是否存在指定元素</li>
-<li><code>E get(int index)</code>：返回链表中指定位置的元素</li>
-<li><code>E getFirst()</code>：返回链表的第一个元素</li>
-<li><code>E getLast()</code>：返回链表的最后一个元素</li>
-<li><code>int indexOf(E e)</code>：返回指定元素在链表中第一次出现的位置，若未找到则返回-1</li>
-<li><code>int lastIndexOf(E e)</code>：返回指定元素在链表中最后一次出现的位置，若未找到则返回-1</li>
-</ul>
-<h4 id="修改元素"><a href="#修改元素" class="headerlink" title="修改元素"></a>修改元素</h4><ul>
-<li><code>E set(int index, E e)</code>：将链表中指定位置处的元素修改为指定的元素，返回被替换的元素</li>
-</ul>
-<h4 id="其他方法-1"><a href="#其他方法-1" class="headerlink" title="其他方法"></a>其他方法</h4><ul>
-<li><code>int size()</code>：返回链表中包含的元素的数量</li>
-<li><code>Object clone()</code>：返回该链表的浅拷贝</li>
-<li><code>Object[] toArray()</code>：以适当的顺序（从第一个元素到最后一个元素）返回包含此链表中所有元素的数组</li>
-</ul>
-<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><p>数组存储，先进后出。</p>
-<h3 id="Stack的构造方法"><a href="#Stack的构造方法" class="headerlink" title="Stack的构造方法"></a>Stack的构造方法</h3><p>Stack只有默认的无参构造方法</p>
-<h3 id="Stack的常用方法"><a href="#Stack的常用方法" class="headerlink" title="Stack的常用方法"></a>Stack的常用方法</h3><ol>
-<li>top()：返回一个栈顶元素的引用，类型为 T&amp;。如果栈为空，返回值未定义。</li>
-<li>push(const T&amp; obj)：可以将对象副本压入栈顶。这是通过调用底层容器的 push_back() 函数完成的。</li>
-<li>push(T&amp;&amp; obj)：以移动对象的方式将对象压入栈顶。这是通过调用底层容器的有右值引用参数的 push_back() 函数完成的。</li>
-<li>pop()：弹出栈顶元素，直接删除栈顶元素，并没有返回该值哦。</li>
-<li>size()：返回栈中元素的个数。</li>
-<li>empty()：在栈中没有元素的情况下返回 true。</li>
-<li>emplace()：用传入的参数调用构造函数，在栈顶生成对象。</li>
-<li>swap(stack &amp; other_stack)：将当前栈中的元素和参数中的元素交换。参数所包含元素的类型必须和当前栈的相同。对于 stack 对象有一个特例化的全局函数 swap() 可以使用。</li>
-</ol>
-<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><p>底层用HashMap实现，是一个无序，不可重复的数组散列。</p>
-<h3 id="HashSet的构造方法"><a href="#HashSet的构造方法" class="headerlink" title="HashSet的构造方法"></a>HashSet的构造方法</h3><p>HashSet提供了四个构造方法:</p>
-<ul>
-<li><p>HashSet（）</p>
-<p>无参数的构造函数，此构造函数创建一个大小为16的容器，加载因子为0.75</p>
-</li>
-<li><p>HashSet(Collection&lt;? extends E&gt; c)<br>构造一个包含指定集合中的元素的新集合。  </p>
-</li>
-<li><p>HashSet(int initialCapacity)<br>构造一个新的空集合; 背景HashMap实例具有指定的初始容量和默认负载因子（0.75）</p>
-</li>
-<li><p>HashSet(int initialCapacity, float loadFactor)<br>构造一个新的空集合; 背景HashMap实例具有指定的初始容量和指定的负载因子。 </p>
-</li>
-</ul>
-<h3 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h3><ul>
-<li><p>add(Object obj)方法（详述）：向Set集合中添加元素，添加成功返回true，否则返回false</p>
-</li>
-<li><p>size() 方法：返回Set集合中的元素个数</p>
-</li>
-<li><p>remove(Object  obj)方法 ： 删除Set集合中的元素，删除成功返回true，否则返回false。</p>
-</li>
-<li><p>isEmpty()方法 ：如果Set不包含元素，则返回 true ，否则返回false</p>
-</li>
-<li><p>clear() 方法： 移除此Set中的所有元素</p>
-</li>
-<li><p>iterator() 迭代器：（它不保证 set 的迭代顺序；特别是它不保证该顺序恒久不变）</p>
-<ul>
-<li>hashNext如果仍有元素可以返回就返回true</li>
-<li>Next()返回迭代的下一个元素</li>
-<li>remove()从迭代器指向的的collection中移除迭代器返回的最后一个元素</li>
-</ul>
-</li>
-<li><p>contains(Object o)方法：如果Set包含指定的元素，则返回 true，否则返回false</p>
-</li>
-</ul>
-<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><p>底层用TreeMap实现的。是一个有序不可重复的二叉树</p>
-<h3 id="TreeSet的构造方法"><a href="#TreeSet的构造方法" class="headerlink" title="TreeSet的构造方法"></a>TreeSet的构造方法</h3><p>TreeSet提供了四个构造方法:</p>
-<ul>
-<li><p>TreeSet()</p>
-<p>默认构造函数。使用该构造函数，TreeSet中的元素按照自然排序进行排列。</p>
-</li>
-<li><p>TreeSet(Collection&lt;? extends E&gt; collection)</p>
-<p>此构造函数生成树的集合，它包含的元素的集合 c。</p>
-</li>
-<li><p>TreeSet(Comparator&lt;? super E&gt; comparator)</p>
-<p>此构造函数构造一个空树集，将根据给定的比较器进行排序。</p>
-</li>
-<li><p>TreeSet(SortedSet set)</p>
-<p>此构造函数生成包含给定 SortedSet 的元素 TreeSet</p>
-</li>
-</ul>
-<h3 id="TreeSet的常用方法"><a href="#TreeSet的常用方法" class="headerlink" title="TreeSet的常用方法"></a>TreeSet的常用方法</h3><ul>
-<li>add()：向Set集合中添加元素，添加成功返回true，否则返回false</li>
-<li>addAll()：将指定集合中的所有元素添加到此集合中。</li>
-<li>remove()：删除Set集合中的元素，删除成功返回true，否则返回false。</li>
-<li>size()：    返回此集合中的元素数。</li>
-<li>isEmpty()：set判空</li>
-<li>ceiling()：返回此set中大于或等于给定元素的最小元素，或者null如果没有这样的元素。</li>
-<li>floor()：返回此set中小于或等于给定元素的最大元素，或者null如果没有这样的元素。</li>
-<li>lower()：返回此集合中的最大元素严格小于给定元素，或者null如果没有这样的元素。</li>
-<li>contains（Object  o）：如果Set包含指定的元素，则返回 true，否则返回false</li>
-</ul>
-<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><ul>
-<li>addAll(Collection&lt;? super T&gt; c, T… elements) </li>
-</ul>
-<p>​     将所有指定元素添加到指定 collection 中。</p>
-<ul>
-<li>binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list, T key) </li>
-</ul>
-<p>​     使用二分搜索法搜索指定列表，以获得指定对象。</p>
-<ul>
-<li>copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src) </li>
-</ul>
-<p>​     将所有元素从一个列表复制到另一个列表。</p>
-<ul>
-<li>fill(List&lt;? super T&gt; list, T obj) </li>
-</ul>
-<p>​     使用指定元素替换指定列表中的所有元素。</p>
-<ul>
-<li>max(Collection&lt;? extends T&gt; coll) </li>
-</ul>
-<p>​     根据元素的自然顺序，返回给定 collection 的最大元素。</p>
-<ul>
-<li>replaceAll(List<T> list, T oldVal, T newVal) </li>
-</ul>
-<p>​     使用另一个值替换列表中出现的所有某一指定值。</p>
-<ul>
-<li>reverse(List&lt;?&gt; list) </li>
-</ul>
-<p>​     反转指定列表中元素的顺序。</p>
-<ul>
-<li>shuffle(List&lt;?&gt; list) </li>
-</ul>
-<p>​     使用默认随机源对指定列表进行置换。</p>
-<ul>
-<li>sort(List<T> list) </li>
-</ul>
-<p>​     根据元素的自然顺序 对指定列表按升序进行排序。  </p>
-<ul>
-<li>sort(List<T> list, Comparator&lt;? super T&gt; c) </li>
-</ul>
-<p>​     根据指定比较器产生的顺序对指定列表进行排序。  </p>
-<ul>
-<li>swap(List&lt;?&gt; list, int i, int j) </li>
-</ul>
-<p>​     在指定列表的指定位置处交换元素。</p>
-<h2 id="Comparator比较器"><a href="#Comparator比较器" class="headerlink" title="Comparator比较器"></a>Comparator比较器</h2><p>Comparable 内部比较器，需要对象去实现该接口，重写其方法</p>
-<p>Comparator  外部比较器，不需要参与比较的对象去实现该接口</p>
-<h2 id="Arrays工具类"><a href="#Arrays工具类" class="headerlink" title="Arrays工具类"></a>Arrays工具类</h2><p>操作数组的工具类</p>
-<ul>
-<li>inarySearch(byte[] a, byte key) </li>
-</ul>
-<p>​     使用二分搜索法来搜索指定的 byte 型数组，以获得指定的值。</p>
-<ul>
-<li>asList(T… a) </li>
-</ul>
-<p>​     返回一个受指定数组支持的固定大小的列表。</p>
-<ul>
-<li>copyOf(boolean[] original, int newLength) </li>
-</ul>
-<p>​     复制指定的数组，截取或用 false 填充（如有必要），以使副本具有指定的长度。</p>
-<ul>
-<li>copyOfRange(boolean[] original, int from, int to) </li>
-</ul>
-<p>​     将指定数组的指定范围复制到一个新数组。</p>
-<ul>
-<li>equals(boolean[] a, boolean[] a2) </li>
-</ul>
-<p>​     如果两个指定的 boolean 型数组彼此相等，则返回 true。</p>
-<ul>
-<li>fill(boolean[] a, boolean val) </li>
-</ul>
-<p>​     将指定的 boolean 值分配给指定 boolean 型数组的每个元素。</p>
-<ul>
-<li>sort(long[] a) </li>
-</ul>
-<p>​     对指定的 long 型数组按数字升序进行排序。</p>
-<ul>
-<li>sort(T[] a, Comparator&lt;? super T&gt; c) </li>
-</ul>
-<p>​      根据指定比较器产生的顺序对指定对象数组进行排序。</p>
-<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>成对存放(key,value)</p>
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>无序不可重复的数组散列</p>
-<h3 id="HashMap的构造方法"><a href="#HashMap的构造方法" class="headerlink" title="HashMap的构造方法"></a>HashMap的构造方法</h3><p>HashMap提供了四个构造方法：</p>
-<ul>
-<li><p>HashMap()</p>
-<p>无参构造方法</p>
-</li>
-<li><p>HashMap(int initialCapacity)</p>
-<p>有一个初始容量参数的构造方法</p>
-</li>
-<li><p>HashMap(int initialCapacity, float loadFactor)</p>
-<p>参数：initialCapacity 初始容量</p>
-<p>参数：loadFactor 负载因子</p>
-</li>
-<li><p>HashMap(Map&lt;? extends K, ? extends V&gt; m)</p>
-<p>有一个Map类型的参数的构造方法</p>
-</li>
-</ul>
-<h3 id="HashMap的常用方法"><a href="#HashMap的常用方法" class="headerlink" title="HashMap的常用方法"></a>HashMap的常用方法</h3><ul>
-<li>put(K key, V value)：存放键值对</li>
-<li>containsKey(Object key)：键中是否包含这个数据</li>
-<li>get(Object key)：通过键拿值</li>
-<li>isEmpty()：判空、</li>
-<li>remove(Object key)：从键值中删除</li>
-<li>keySet()：获取key的集合</li>
-<li>map.values()：获取value的集合</li>
-<li>map.entrySet():获取映射集合（键值的集合）</li>
-<li>clear()：清空</li>
-</ul>
-<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p>有序不可重复的二叉树</p>
-<p>TreeMap的排序 是排的Key，和value没有任何关系 </p>
-<p>TreeMap要求 key必须是可排序的</p>
-<h3 id="TreeMap的构造方法"><a href="#TreeMap的构造方法" class="headerlink" title="TreeMap的构造方法"></a>TreeMap的构造方法</h3><ul>
-<li><p>TreeMap()</p>
-<p> 默认构造函数。使用该构造函数，TreeMap中的元素按照自然排序进行排列。</p>
-</li>
-<li><p>TreeMap(Map&lt;? extends K, ? extends V&gt; copyFrom)</p>
-<p>该构造函数会调用putAll()将m中的所有元素添加到TreeMap中</p>
-</li>
-<li><p>TreeMap(Comparator&lt;? super K&gt; comparator)</p>
-<p>指定Tree的比较器</p>
-</li>
-<li><p>TreeMap(SortedMap&lt;K, ? extends V&gt; copyFrom)</p>
-<p>带SortedMap的构造函数，SortedMap会成为TreeMap的子集</p>
-</li>
-</ul>
-<h3 id="TreeMap的常用方法"><a href="#TreeMap的常用方法" class="headerlink" title="TreeMap的常用方法"></a>TreeMap的常用方法</h3><ul>
-<li><strong>ceilingEntry</strong>(K key)：返回指定的Key大于或等于的最小值的元素，如果没有，则返回null</li>
-<li><strong>ceilingKey</strong>(K key)： 返回指定的Key大于或等于的最小值的Key，如果没有，则返回null</li>
-<li><strong>clone</strong>()：返回集合的副本</li>
-<li><strong>comparator</strong>()：如果使用默认的比较器，就返回null，如果使用其他的比较器，则返回比较器的哈希码值</li>
-<li><strong>descendingKeySet</strong>()：返回集合的全部Key，并且是逆序的</li>
-<li><strong>descendingMap</strong>()：把集合逆序返回</li>
-<li><strong>firstEntry</strong>()：返回集合中最小Key的元素</li>
-<li><strong>firstKey</strong>()：返回集合中最小Key的key</li>
-<li><strong>floorEntry</strong>(K key)：与ceilingEntry()方法相反，是返回小于等于key的最大Key的元素</li>
-<li><strong>floorKey</strong>(K key)：返回小于等于key的最大Key的key</li>
-<li><strong>headMap</strong>(K toKey)：返回Key小于toKey的所有元素</li>
-</ul>
-
+        <h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_1-基础" target="_blank" rel="noopener">1. 基础</a></h1><h2 id="1-1-正确使用-equals-方法"><a href="#1-1-正确使用-equals-方法" class="headerlink" title="1.1. 正确使用 equals 方法"></a><a href="https://snailclimb.gitee.io/javaguide/#/docs/java/Java疑难点?id=_11-正确使用-equals-方法" target="_blank" rel="noopener">1.1. 正确使用 equals 方法</a></h2><p>Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。</p>
+<p>举个例子：
+        
       
 	  
       
@@ -811,7 +622,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java集合</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
         		</li>
       		
 		</ul>
@@ -821,7 +632,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/Java%E9%9B%86%E5%90%88/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/11/Java%E7%96%91%E9%9A%BE%E7%82%B9/">展开全文 >></a>
         </p>
       
 
@@ -964,123 +775,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/02/11/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-Java异常处理" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">Java异常处理</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java的异常"><a href="#Java的异常" class="headerlink" title="Java的异常"></a>Java的异常</h1><p><img src="/assets/blogImg/yichang.png" alt=""></p>
-<p>这是异常的类图。</p>
-<p><strong>Throwable</strong>是Error和Exception的父类，用来定义所有可以作为异常被抛出来的类。</p>
-<p><strong>Erro</strong>r和<strong>Exception</strong>区分：</p>
-<p><strong>Error</strong>:编译时错误和系统错误，系统错误在除特殊情况下，都不需要你来关心，基本不会出现。而编译时错误，如果你使用了编译器，那么编译器会提示。</p>
-<p><strong>Exception</strong>:是可以被抛出的基本类型，我们需要主要关心的也是这个类。</p>
-<p>Exception又分为RunTimeException和其他Exception。</p>
-<p>RunTimeException和其他Exception区分：</p>
-<ol>
-<li>其他Exception，受检查异常。可以理解为错误，必须要开发者解决以后才能编译通过，解决的方法有两种，1：throw到上层，2，try-catch处理。</li>
-<li>RunTimeException：运行时异常，又称不受检查异常，所以在代码中可能会有RunTimeException时Java编译检查时不会告诉你有这个异常，但是在实际运行代码时则会暴露出来，比如经典的1/0，空指针等。如果不处理也会被Java自己处理。</li>
-</ol>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>通常使用try catch finally；</p>
-<h2 id="try-catch"><a href="#try-catch" class="headerlink" title="try/catch"></a>try/catch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">   &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="throws-throw"><a href="#throws-throw" class="headerlink" title="throws/throw"></a>throws/throw</h2><ul>
-<li>如果一个方法没有捕获一个检查性异常，那么该方法必须使用 throws 关键字来声明</li>
-<li>throws 关键字放在方法签名的尾部</li>
-<li>也可以使用 throw 关键字抛出一个异常</li>
-<li>一个方法可以声明抛出多个异常，多个异常之间用逗号隔开</li>
-</ul>
-<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><ul>
-<li>finally 关键字用来创建在 try 代码块后面执行的代码块。</li>
-<li>无论是否发生异常，finally 代码块中的代码总会被执行。</li>
-<li>在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。</li>
-<li>finally 代码块出现在 catch 代码块最后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Throwable下有两个方法需要常用"><a href="#Throwable下有两个方法需要常用" class="headerlink" title="Throwable下有两个方法需要常用"></a>Throwable下有两个方法需要常用</h2><ul>
-<li>public String getMessage() //返回关于发生的异常的详细信息</li>
-<li>public void printStackTrace()//打印toString()结果和栈层次到System.err，即错误输出流</li>
-</ul>
-<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><p>一般会选择继承Exception和RuntimeException，如果不要求调用者一定要处理抛出的异常，就继承RuntimeException。</p>
-<p>Student类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//给Student类的setAge方法做判断</span></span><br><span class="line">        <span class="keyword">if</span>(age&lt;<span class="number">0</span> || age&gt;<span class="number">130</span>)&#123;</span><br><span class="line">            <span class="comment">//throw new ArithmeticException("年龄输入不符合规则");</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AgeException(<span class="string">"年龄输入不符合规则"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>自定义的异常类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeException</span><span class="params">(String msg)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        stu.setAge(-<span class="number">150</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"程序运行结束"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">com.codeyang.jrxtraining.ExceptionStudy.AgeException: 年龄输入不符合规则</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.Student.setAge(Student.java:<span class="number">20</span>)</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.DiyExceptionDemo.main(DiyExceptionDemo.java:<span class="number">13</span>)</span><br><span class="line">程序运行结束</span><br></pre></td></tr></table></figure>
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java异常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">展开全文 >></a>
         </p>
       
 
