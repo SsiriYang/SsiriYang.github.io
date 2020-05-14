@@ -7,18 +7,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ssiriyang.github.io">
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <title>Tag: 消息队列 | 酉月未央</title>
+  <title>Java集合 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java工程师一枚，这是我的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="酉月未央">
-<meta property="og:url" content="https://ssiriyang.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
+  <meta name="description" content="集合&#x3D;&#x3D;&#x3D;容器（存，取） Collection ：单个存放 Map:成对存放 key  value  Collection存放单个数据  ArrayList基于数组实现的非线程安全的集合。查询元素快，插入，删除中间元素慢。 ArrayList的构造函数ArrayList类支持3个构造方法。  Arraylist()  这个构造方法构造了一个空的链表。  ArrayList(Collection c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合">
+<meta property="og:url" content="https://ssiriyang.github.io/2020/02/11/Java%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="Java工程师一枚，这是我的个人博客">
+<meta property="og:description" content="集合&#x3D;&#x3D;&#x3D;容器（存，取） Collection ：单个存放 Map:成对存放 key  value  Collection存放单个数据  ArrayList基于数组实现的非线程安全的集合。查询元素快，插入，删除中间元素慢。 ArrayList的构造函数ArrayList类支持3个构造方法。  Arraylist()  这个构造方法构造了一个空的链表。  ArrayList(Collection c">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ssiriyang.github.io/assets/blogImg/collection.png">
+<meta property="article:published_time" content="2020-02-11T08:44:00.000Z">
+<meta property="article:modified_time" content="2020-05-14T16:34:53.872Z">
 <meta property="article:author" content="慕">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Java集合">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ssiriyang.github.io/assets/blogImg/collection.png">
   
     <link rel="alternative" href="/atom.xml" title="酉月未央" type="application/atom+xml">
   
@@ -165,62 +169,532 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="Post-Java集合" class="article article-type-Post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-get">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/17/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-03-17T14:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/17/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">消息队列学习笔记</a>
+    <h1 class="article-title" itemprop="name">
+      Java集合
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/02/11/Java%E9%9B%86%E5%90%88/" class="archive-article-date">
+  	<time datetime="2020-02-11T08:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>集合===容器（存，取）</strong></p>
+<p><strong>Collection ：单个存放</strong></p>
+<p><strong>Map:成对存放 key  value</strong> </p>
+<h1 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h1><p>存放单个数据</p>
+<p><img src="/assets/blogImg/collection.png" alt=""></p>
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>基于数组实现的非线程安全的集合。查询元素快，插入，删除中间元素慢。</p>
+<h3 id="ArrayList的构造函数"><a href="#ArrayList的构造函数" class="headerlink" title="ArrayList的构造函数"></a>ArrayList的构造函数</h3><p>ArrayList类支持3个构造方法。</p>
+<ul>
+<li><code>Arraylist()</code></li>
+</ul>
+<p>这个构造方法构造了一个空的链表。</p>
+<ul>
+<li><code>ArrayList(Collection c)</code></li>
+</ul>
+<p>这个构造方法构造了一个包含指定元素集合的链表。</p>
+<ul>
+<li><code>ArrayList(int initialCapacity)</code></li>
+</ul>
+<p>这是第三个构造方法，构造了一个指定大小但内容为空的链表。initialCapacity参数就是初始容量大小。</p>
+<p>举例来说，如果你要创建一个空的数组链表，用来存放String类型的对象，那么你可以像下面这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list &#x3D; new ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>如果你需要创建一个指定初始容量的数组链表，你可以像下面这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;(7);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="ArrayList常用方法"><a href="#ArrayList常用方法" class="headerlink" title="ArrayList常用方法"></a>ArrayList常用方法</h3><p>下面是是一些比较常用的ArrayList类成员方法：</p>
+<h4 id="增添元素"><a href="#增添元素" class="headerlink" title="增添元素"></a>增添元素</h4><ul>
+<li><p><code>boolean add(Element e)</code></p>
+<pre><code>增加指定元素到链表尾部.</code></pre></li>
+<li><p><code>void add(int index, Element e)</code></p>
+<pre><code>增加指定元素到链表指定位置.</code></pre></li>
+</ul>
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><ul>
+<li><p><code>void clear()</code></p>
+<pre><code>从链表中删除所有元素.</code></pre></li>
+<li><p><code>E remove(int index)</code></p>
+<pre><code>删除链表中指定位置的元素.</code></pre></li>
+<li><p><code>protected void removeRange(int start, int end)</code></p>
+<pre><code>删除链表中从某一个位置开始到某一个位置结束的元素。</code></pre></li>
+</ul>
+<h4 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h4><ul>
+<li><p><code>E get(int index)</code></p>
+<pre><code>获取链表中指定位置处的元素.</code></pre></li>
+<li><p><code>boolean contains(Object o)</code></p>
+<pre><code>如果链表包含指定元素，返回true.</code></pre></li>
+<li><p><code>int indexOf(Object o)</code></p>
+<pre><code>返回元素在链表中第一次出现的位置，如果返回-1，表示链表中没有这个元素。</code></pre></li>
+<li><p><code>int lastIndexOf(Object o)</code></p>
+<pre><code>返回元素在链表中最后一次出现的位置，如果返回-1，表示链表中没有这个元素。</code></pre></li>
+</ul>
+<h4 id="修改某个元素"><a href="#修改某个元素" class="headerlink" title="修改某个元素"></a>修改某个元素</h4><ul>
+<li><code>E set(int index, E element)</code><pre><code>将链表中指定位置上的元素替换成新元素。</code></pre></li>
+</ul>
+<h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h4><ul>
+<li><p>检查链表是否为空</p>
+<ul>
+<li><code>boolean isEmpty()</code><pre><code>返回true表示链表中没有任何元素.</code></pre></li>
+</ul>
+</li>
+<li><p>获取链表大小</p>
+<ul>
+<li><code>int size()</code><pre><code>返回链表长度（链表包含元素的个数）.</code></pre></li>
+</ul>
+</li>
+<li><p>将链表转换为一个数组</p>
+</li>
+</ul>
+<p><code>Object[] toArray()</code><br>     获取一个数组，数组中所有元素是链表中的元素.（即将链表转换为一个数组）</p>
+<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>基于链表实现的非线程安全的集合。查询元素慢，插入，删除中间元素快。</p>
+<h3 id="LinkedList的构造函数"><a href="#LinkedList的构造函数" class="headerlink" title="LinkedList的构造函数"></a>LinkedList的构造函数</h3><p>LinkedList类中有两个构造方法。</p>
+<ul>
+<li><p><code>LinkedList()</code></p>
+<p>这个构造方法创建一个空链表</p>
+</li>
+<li><p><code>LinkedList(Collection c)</code></p>
+<p>由给定集合创建一个链表</p>
+</li>
+</ul>
+<h3 id="LinkedList常用方法"><a href="#LinkedList常用方法" class="headerlink" title="LinkedList常用方法"></a>LinkedList常用方法</h3><h4 id="增添元素-1"><a href="#增添元素-1" class="headerlink" title="增添元素"></a>增添元素</h4><ul>
+<li><code>boolean add(E e)</code>：将指定元素添加到链表末尾</li>
+<li><code>void add(int index, E e)</code>：将指定元素插入到链表的指定位置</li>
+<li><code>boolean addAll(Collection c)</code>：将指定集合中的所有元素添加到链表末尾</li>
+<li><code>boolean addAll(int index, Collection c)</code>：将指定集合中的所有元素从指定位置开始插入链表</li>
+<li><code>void addFirst(E e)</code>：将指定元素插入到链表的开始</li>
+<li><code>void addLast(E e)</code>：将指定元素添加到链表的末尾</li>
+</ul>
+<h4 id="删除元素-1"><a href="#删除元素-1" class="headerlink" title="删除元素"></a>删除元素</h4><ul>
+<li><code>void clear()</code>：移除链表中的所有元素</li>
+<li><code>E remove()</code>：移除链表的第一个元素，并返回该元素</li>
+<li><code>E remove(int index)</code>：移除链表中指定位置处的元素，并返回该元素</li>
+<li><code>boolean remove(E e)</code>：若元素存在则从链表中该元素第一次出现的位置移除该元素</li>
+<li><code>E removeFirst()</code>：移除链表的第一个元素，并返回该元素</li>
+<li><code>boolean removeFirstOccourence(E e)</code>：从链表中移除指定元素第一次出现位置处的元素（以正序遍历）</li>
+<li><code>E removeLast()</code>：移除链表最后一个元素，并返回该元素</li>
+<li><code>boolean removeLastOccourence(E e)</code>：从链表中移除指定元素最后一次出现位置处的元素（以正序遍历）</li>
+</ul>
+<h4 id="查找元素-1"><a href="#查找元素-1" class="headerlink" title="查找元素"></a>查找元素</h4><ul>
+<li><code>boolean contains(E e)</code>：判断链表中是否存在指定元素</li>
+<li><code>E get(int index)</code>：返回链表中指定位置的元素</li>
+<li><code>E getFirst()</code>：返回链表的第一个元素</li>
+<li><code>E getLast()</code>：返回链表的最后一个元素</li>
+<li><code>int indexOf(E e)</code>：返回指定元素在链表中第一次出现的位置，若未找到则返回-1</li>
+<li><code>int lastIndexOf(E e)</code>：返回指定元素在链表中最后一次出现的位置，若未找到则返回-1</li>
+</ul>
+<h4 id="修改元素"><a href="#修改元素" class="headerlink" title="修改元素"></a>修改元素</h4><ul>
+<li><code>E set(int index, E e)</code>：将链表中指定位置处的元素修改为指定的元素，返回被替换的元素</li>
+</ul>
+<h4 id="其他方法-1"><a href="#其他方法-1" class="headerlink" title="其他方法"></a>其他方法</h4><ul>
+<li><code>int size()</code>：返回链表中包含的元素的数量</li>
+<li><code>Object clone()</code>：返回该链表的浅拷贝</li>
+<li><code>Object[] toArray()</code>：以适当的顺序（从第一个元素到最后一个元素）返回包含此链表中所有元素的数组</li>
+</ul>
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><p>数组存储，先进后出。</p>
+<h3 id="Stack的构造方法"><a href="#Stack的构造方法" class="headerlink" title="Stack的构造方法"></a>Stack的构造方法</h3><p>Stack只有默认的无参构造方法</p>
+<h3 id="Stack的常用方法"><a href="#Stack的常用方法" class="headerlink" title="Stack的常用方法"></a>Stack的常用方法</h3><ol>
+<li>top()：返回一个栈顶元素的引用，类型为 T&amp;。如果栈为空，返回值未定义。</li>
+<li>push(const T&amp; obj)：可以将对象副本压入栈顶。这是通过调用底层容器的 push_back() 函数完成的。</li>
+<li>push(T&amp;&amp; obj)：以移动对象的方式将对象压入栈顶。这是通过调用底层容器的有右值引用参数的 push_back() 函数完成的。</li>
+<li>pop()：弹出栈顶元素，直接删除栈顶元素，并没有返回该值哦。</li>
+<li>size()：返回栈中元素的个数。</li>
+<li>empty()：在栈中没有元素的情况下返回 true。</li>
+<li>emplace()：用传入的参数调用构造函数，在栈顶生成对象。</li>
+<li>swap(stack &amp; other_stack)：将当前栈中的元素和参数中的元素交换。参数所包含元素的类型必须和当前栈的相同。对于 stack 对象有一个特例化的全局函数 swap() 可以使用。</li>
+</ol>
+<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><p>底层用HashMap实现，是一个无序，不可重复的数组散列。</p>
+<h3 id="HashSet的构造方法"><a href="#HashSet的构造方法" class="headerlink" title="HashSet的构造方法"></a>HashSet的构造方法</h3><p>HashSet提供了四个构造方法:</p>
+<ul>
+<li><p>HashSet（）</p>
+<p>无参数的构造函数，此构造函数创建一个大小为16的容器，加载因子为0.75</p>
+</li>
+<li><p>HashSet(Collection&lt;? extends E&gt; c)<br>构造一个包含指定集合中的元素的新集合。  </p>
+</li>
+<li><p>HashSet(int initialCapacity)<br>构造一个新的空集合; 背景HashMap实例具有指定的初始容量和默认负载因子（0.75）</p>
+</li>
+<li><p>HashSet(int initialCapacity, float loadFactor)<br>构造一个新的空集合; 背景HashMap实例具有指定的初始容量和指定的负载因子。 </p>
+</li>
+</ul>
+<h3 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h3><ul>
+<li><p>add(Object obj)方法（详述）：向Set集合中添加元素，添加成功返回true，否则返回false</p>
+</li>
+<li><p>size() 方法：返回Set集合中的元素个数</p>
+</li>
+<li><p>remove(Object  obj)方法 ： 删除Set集合中的元素，删除成功返回true，否则返回false。</p>
+</li>
+<li><p>isEmpty()方法 ：如果Set不包含元素，则返回 true ，否则返回false</p>
+</li>
+<li><p>clear() 方法： 移除此Set中的所有元素</p>
+</li>
+<li><p>iterator() 迭代器：（它不保证 set 的迭代顺序；特别是它不保证该顺序恒久不变）</p>
+<ul>
+<li>hashNext如果仍有元素可以返回就返回true</li>
+<li>Next()返回迭代的下一个元素</li>
+<li>remove()从迭代器指向的的collection中移除迭代器返回的最后一个元素</li>
+</ul>
+</li>
+<li><p>contains(Object o)方法：如果Set包含指定的元素，则返回 true，否则返回false</p>
+</li>
+</ul>
+<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><p>底层用TreeMap实现的。是一个有序不可重复的二叉树</p>
+<h3 id="TreeSet的构造方法"><a href="#TreeSet的构造方法" class="headerlink" title="TreeSet的构造方法"></a>TreeSet的构造方法</h3><p>TreeSet提供了四个构造方法:</p>
+<ul>
+<li><p>TreeSet()</p>
+<p>默认构造函数。使用该构造函数，TreeSet中的元素按照自然排序进行排列。</p>
+</li>
+<li><p>TreeSet(Collection&lt;? extends E&gt; collection)</p>
+<p>此构造函数生成树的集合，它包含的元素的集合 c。</p>
+</li>
+<li><p>TreeSet(Comparator&lt;? super E&gt; comparator)</p>
+<p>此构造函数构造一个空树集，将根据给定的比较器进行排序。</p>
+</li>
+<li><p>TreeSet(SortedSet set)</p>
+<p>此构造函数生成包含给定 SortedSet 的元素 TreeSet</p>
+</li>
+</ul>
+<h3 id="TreeSet的常用方法"><a href="#TreeSet的常用方法" class="headerlink" title="TreeSet的常用方法"></a>TreeSet的常用方法</h3><ul>
+<li>add()：向Set集合中添加元素，添加成功返回true，否则返回false</li>
+<li>addAll()：将指定集合中的所有元素添加到此集合中。</li>
+<li>remove()：删除Set集合中的元素，删除成功返回true，否则返回false。</li>
+<li>size()：    返回此集合中的元素数。</li>
+<li>isEmpty()：set判空</li>
+<li>ceiling()：返回此set中大于或等于给定元素的最小元素，或者null如果没有这样的元素。</li>
+<li>floor()：返回此set中小于或等于给定元素的最大元素，或者null如果没有这样的元素。</li>
+<li>lower()：返回此集合中的最大元素严格小于给定元素，或者null如果没有这样的元素。</li>
+<li>contains（Object  o）：如果Set包含指定的元素，则返回 true，否则返回false</li>
+</ul>
+<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><ul>
+<li>addAll(Collection&lt;? super T&gt; c, T… elements) </li>
+</ul>
+<p>​     将所有指定元素添加到指定 collection 中。</p>
+<ul>
+<li>binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list, T key) </li>
+</ul>
+<p>​     使用二分搜索法搜索指定列表，以获得指定对象。</p>
+<ul>
+<li>copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src) </li>
+</ul>
+<p>​     将所有元素从一个列表复制到另一个列表。</p>
+<ul>
+<li>fill(List&lt;? super T&gt; list, T obj) </li>
+</ul>
+<p>​     使用指定元素替换指定列表中的所有元素。</p>
+<ul>
+<li>max(Collection&lt;? extends T&gt; coll) </li>
+</ul>
+<p>​     根据元素的自然顺序，返回给定 collection 的最大元素。</p>
+<ul>
+<li>replaceAll(List<T> list, T oldVal, T newVal) </li>
+</ul>
+<p>​     使用另一个值替换列表中出现的所有某一指定值。</p>
+<ul>
+<li>reverse(List&lt;?&gt; list) </li>
+</ul>
+<p>​     反转指定列表中元素的顺序。</p>
+<ul>
+<li>shuffle(List&lt;?&gt; list) </li>
+</ul>
+<p>​     使用默认随机源对指定列表进行置换。</p>
+<ul>
+<li>sort(List<T> list) </li>
+</ul>
+<p>​     根据元素的自然顺序 对指定列表按升序进行排序。  </p>
+<ul>
+<li>sort(List<T> list, Comparator&lt;? super T&gt; c) </li>
+</ul>
+<p>​     根据指定比较器产生的顺序对指定列表进行排序。  </p>
+<ul>
+<li>swap(List&lt;?&gt; list, int i, int j) </li>
+</ul>
+<p>​     在指定列表的指定位置处交换元素。</p>
+<h2 id="Comparator比较器"><a href="#Comparator比较器" class="headerlink" title="Comparator比较器"></a>Comparator比较器</h2><p>Comparable 内部比较器，需要对象去实现该接口，重写其方法</p>
+<p>Comparator  外部比较器，不需要参与比较的对象去实现该接口</p>
+<h2 id="Arrays工具类"><a href="#Arrays工具类" class="headerlink" title="Arrays工具类"></a>Arrays工具类</h2><p>操作数组的工具类</p>
+<ul>
+<li>inarySearch(byte[] a, byte key) </li>
+</ul>
+<p>​     使用二分搜索法来搜索指定的 byte 型数组，以获得指定的值。</p>
+<ul>
+<li>asList(T… a) </li>
+</ul>
+<p>​     返回一个受指定数组支持的固定大小的列表。</p>
+<ul>
+<li>copyOf(boolean[] original, int newLength) </li>
+</ul>
+<p>​     复制指定的数组，截取或用 false 填充（如有必要），以使副本具有指定的长度。</p>
+<ul>
+<li>copyOfRange(boolean[] original, int from, int to) </li>
+</ul>
+<p>​     将指定数组的指定范围复制到一个新数组。</p>
+<ul>
+<li>equals(boolean[] a, boolean[] a2) </li>
+</ul>
+<p>​     如果两个指定的 boolean 型数组彼此相等，则返回 true。</p>
+<ul>
+<li>fill(boolean[] a, boolean val) </li>
+</ul>
+<p>​     将指定的 boolean 值分配给指定 boolean 型数组的每个元素。</p>
+<ul>
+<li>sort(long[] a) </li>
+</ul>
+<p>​     对指定的 long 型数组按数字升序进行排序。</p>
+<ul>
+<li>sort(T[] a, Comparator&lt;? super T&gt; c) </li>
+</ul>
+<p>​      根据指定比较器产生的顺序对指定对象数组进行排序。</p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>成对存放(key,value)</p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>无序不可重复的数组散列</p>
+<h3 id="HashMap的构造方法"><a href="#HashMap的构造方法" class="headerlink" title="HashMap的构造方法"></a>HashMap的构造方法</h3><p>HashMap提供了四个构造方法：</p>
+<ul>
+<li><p>HashMap()</p>
+<p>无参构造方法</p>
+</li>
+<li><p>HashMap(int initialCapacity)</p>
+<p>有一个初始容量参数的构造方法</p>
+</li>
+<li><p>HashMap(int initialCapacity, float loadFactor)</p>
+<p>参数：initialCapacity 初始容量</p>
+<p>参数：loadFactor 负载因子</p>
+</li>
+<li><p>HashMap(Map&lt;? extends K, ? extends V&gt; m)</p>
+<p>有一个Map类型的参数的构造方法</p>
+</li>
+</ul>
+<h3 id="HashMap的常用方法"><a href="#HashMap的常用方法" class="headerlink" title="HashMap的常用方法"></a>HashMap的常用方法</h3><ul>
+<li>put(K key, V value)：存放键值对</li>
+<li>containsKey(Object key)：键中是否包含这个数据</li>
+<li>get(Object key)：通过键拿值</li>
+<li>isEmpty()：判空、</li>
+<li>remove(Object key)：从键值中删除</li>
+<li>keySet()：获取key的集合</li>
+<li>map.values()：获取value的集合</li>
+<li>map.entrySet():获取映射集合（键值的集合）</li>
+<li>clear()：清空</li>
+</ul>
+<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p>有序不可重复的二叉树</p>
+<p>TreeMap的排序 是排的Key，和value没有任何关系 </p>
+<p>TreeMap要求 key必须是可排序的</p>
+<h3 id="TreeMap的构造方法"><a href="#TreeMap的构造方法" class="headerlink" title="TreeMap的构造方法"></a>TreeMap的构造方法</h3><ul>
+<li><p>TreeMap()</p>
+<p> 默认构造函数。使用该构造函数，TreeMap中的元素按照自然排序进行排列。</p>
+</li>
+<li><p>TreeMap(Map&lt;? extends K, ? extends V&gt; copyFrom)</p>
+<p>该构造函数会调用putAll()将m中的所有元素添加到TreeMap中</p>
+</li>
+<li><p>TreeMap(Comparator&lt;? super K&gt; comparator)</p>
+<p>指定Tree的比较器</p>
+</li>
+<li><p>TreeMap(SortedMap&lt;K, ? extends V&gt; copyFrom)</p>
+<p>带SortedMap的构造函数，SortedMap会成为TreeMap的子集</p>
+</li>
+</ul>
+<h3 id="TreeMap的常用方法"><a href="#TreeMap的常用方法" class="headerlink" title="TreeMap的常用方法"></a>TreeMap的常用方法</h3><ul>
+<li><strong>ceilingEntry</strong>(K key)：返回指定的Key大于或等于的最小值的元素，如果没有，则返回null</li>
+<li><strong>ceilingKey</strong>(K key)： 返回指定的Key大于或等于的最小值的Key，如果没有，则返回null</li>
+<li><strong>clone</strong>()：返回集合的副本</li>
+<li><strong>comparator</strong>()：如果使用默认的比较器，就返回null，如果使用其他的比较器，则返回比较器的哈希码值</li>
+<li><strong>descendingKeySet</strong>()：返回集合的全部Key，并且是逆序的</li>
+<li><strong>descendingMap</strong>()：把集合逆序返回</li>
+<li><strong>firstEntry</strong>()：返回集合中最小Key的元素</li>
+<li><strong>firstKey</strong>()：返回集合中最小Key的key</li>
+<li><strong>floorEntry</strong>(K key)：与ceilingEntry()方法相反，是返回小于等于key的最大Key的元素</li>
+<li><strong>floorKey</strong>(K key)：返回小于等于key的最大Key的key</li>
+<li><strong>headMap</strong>(K toKey)：返回Key小于toKey的所有元素</li>
+</ul>
+
+      
+	  
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+		
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">消息队列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java集合</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
   </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ssiriyang.github.io/2020/02/11/Java%E9%9B%86%E5%90%88/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/02/11/Java%E5%AE%B9%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java容器常见面试题/知识点总结
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/02/11/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java线程池学习总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Collection"><span class="toc-number">1.</span> <span class="toc-text">Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList"><span class="toc-number">1.1.</span> <span class="toc-text">ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList的构造函数"><span class="toc-number">1.1.1.</span> <span class="toc-text">ArrayList的构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList常用方法"><span class="toc-number">1.1.2.</span> <span class="toc-text">ArrayList常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#增添元素"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">增添元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除元素"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">删除元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找元素"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">查找元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改某个元素"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">修改某个元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他方法"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">其他方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkedList"><span class="toc-number">1.2.</span> <span class="toc-text">LinkedList</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedList的构造函数"><span class="toc-number">1.2.1.</span> <span class="toc-text">LinkedList的构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedList常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">LinkedList常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#增添元素-1"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">增添元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除元素-1"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">删除元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找元素-1"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">查找元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改元素"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">修改元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他方法-1"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">其他方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">1.3.</span> <span class="toc-text">Stack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack的构造方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">Stack的构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack的常用方法"><span class="toc-number">1.3.2.</span> <span class="toc-text">Stack的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashSet"><span class="toc-number">1.4.</span> <span class="toc-text">HashSet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HashSet的构造方法"><span class="toc-number">1.4.1.</span> <span class="toc-text">HashSet的构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashSet的常用方法"><span class="toc-number">1.4.2.</span> <span class="toc-text">HashSet的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeSet"><span class="toc-number">1.5.</span> <span class="toc-text">TreeSet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeSet的构造方法"><span class="toc-number">1.5.1.</span> <span class="toc-text">TreeSet的构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeSet的常用方法"><span class="toc-number">1.5.2.</span> <span class="toc-text">TreeSet的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collections工具类"><span class="toc-number">1.6.</span> <span class="toc-text">Collections工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparator比较器"><span class="toc-number">1.7.</span> <span class="toc-text">Comparator比较器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Arrays工具类"><span class="toc-number">1.8.</span> <span class="toc-text">Arrays工具类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map"><span class="toc-number">2.</span> <span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap"><span class="toc-number">2.1.</span> <span class="toc-text">HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap的构造方法"><span class="toc-number">2.1.1.</span> <span class="toc-text">HashMap的构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap的常用方法"><span class="toc-number">2.1.2.</span> <span class="toc-text">HashMap的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeMap"><span class="toc-number">2.2.</span> <span class="toc-text">TreeMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap的构造方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">TreeMap的构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap的常用方法"><span class="toc-number">2.2.2.</span> <span class="toc-text">TreeMap的常用方法</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
 
           </div>
@@ -253,9 +727,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -382,11 +856,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">零碎知识点</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">零碎知识点</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java集合</a>
               </li>
             
             <div class="clearfix"></div>

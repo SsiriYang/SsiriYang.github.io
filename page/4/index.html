@@ -167,28 +167,29 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-synchronized 关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-volatile关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/"> synchronized 关键字</a>
+      <a class="article-title" href="/2019/12/24/volatile%E5%85%B3%E9%94%AE%E5%AD%97/"> volatile关键字</a>
     </h1>
   
 
         
         
-<a href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2019-12-23T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
+<a href="/2019/12/24/volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2019-12-24T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-1-说一说自己对于-synchronized-关键字的了解"><a href="#1-1-说一说自己对于-synchronized-关键字的了解" class="headerlink" title="1.1. 说一说自己对于 synchronized 关键字的了解"></a>1.1. 说一说自己对于 synchronized 关键字的了解</h3><p>synchronized关键字解决的是多个线程之间访问资源的同步性，synchronized关键字可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。</p>
+        <p>[toc]</p>
+<h3 id="2-1-讲一下Java内存模型"><a href="#2-1-讲一下Java内存模型" class="headerlink" title="2.1. 讲一下Java内存模型"></a>2.1. 讲一下Java内存模型</h3><p>在 JDK1.2 之前，Java的内存模型实现总是从<strong>主存</strong>（即共享内存）读取变量，是不需要进行特别的注意的。而在当前的 Java 内存模型下，线程可以把变量保存<strong>本地内存</strong>（比如机器的寄存器）中，而不是直接在主存中进行读写。这就可能造成一个线程在主存中修改了一个变量的值，而另外一个线程还继续使用它在寄存器中的变量值的拷贝，造成<strong>数据的不一致</strong>。
         
       
 	  
@@ -212,7 +213,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/24/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
         </p>
       
 
@@ -293,6 +294,83 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/12/23/Spring%20Boot%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-synchronized 关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/"> synchronized 关键字</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2019-12-23T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-1-说一说自己对于-synchronized-关键字的了解"><a href="#1-1-说一说自己对于-synchronized-关键字的了解" class="headerlink" title="1.1. 说一说自己对于 synchronized 关键字的了解"></a>1.1. 说一说自己对于 synchronized 关键字的了解</h3><p>synchronized关键字解决的是多个线程之间访问资源的同步性，synchronized关键字可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。</p>
+        
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">关键字解析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/23/synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
         </p>
       
 
@@ -733,11 +811,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">零碎知识点</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">零碎知识点</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java集合</a>
               </li>
             
             <div class="clearfix"></div>
