@@ -242,41 +242,41 @@ var _hmt = _hmt || [];
 
 <h4 id="ArrayList常用方法"><a href="#ArrayList常用方法" class="headerlink" title="ArrayList常用方法"></a>ArrayList常用方法</h4><p>下面是是一些比较常用的ArrayList类成员方法：</p>
 <h5 id="增添元素"><a href="#增添元素" class="headerlink" title="增添元素"></a>增添元素</h5><ul>
-<li><p><code>boolean add(Element e)</code></p>
-<pre><code>增加指定元素到链表尾部.</code></pre></li>
-<li><p><code>void add(int index, Element e)</code></p>
-<pre><code>增加指定元素到链表指定位置.</code></pre></li>
+<li><p><code>boolean add(Element e)</code><br>增加指定元素到链表尾部.</p>
+</li>
+<li><p><code>void add(int index, Element e)</code><br>增加指定元素到链表指定位置.</p>
+</li>
 </ul>
 <h5 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h5><ul>
-<li><p><code>void clear()</code></p>
-<pre><code>从链表中删除所有元素.</code></pre></li>
-<li><p><code>E remove(int index)</code></p>
-<pre><code>删除链表中指定位置的元素.</code></pre></li>
-<li><p><code>protected void removeRange(int start, int end)</code></p>
-<pre><code>删除链表中从某一个位置开始到某一个位置结束的元素。</code></pre></li>
+<li><p><code>void clear()</code><br>从链表中删除所有元素.</p>
+</li>
+<li><p><code>E remove(int index)</code><br>删除链表中指定位置的元素.</p>
+</li>
+<li><p><code>protected void removeRange(int start, int end)</code><br>删除链表中从某一个位置开始到某一个位置结束的元素。</p>
+</li>
 </ul>
 <h5 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h5><ul>
-<li><p><code>E get(int index)</code></p>
-<pre><code>获取链表中指定位置处的元素.</code></pre></li>
-<li><p><code>boolean contains(Object o)</code></p>
-<pre><code>如果链表包含指定元素，返回true.</code></pre></li>
-<li><p><code>int indexOf(Object o)</code></p>
-<pre><code>返回元素在链表中第一次出现的位置，如果返回-1，表示链表中没有这个元素。</code></pre></li>
-<li><p><code>int lastIndexOf(Object o)</code></p>
-<pre><code>返回元素在链表中最后一次出现的位置，如果返回-1，表示链表中没有这个元素。</code></pre></li>
+<li><p><code>E get(int index)</code><br>获取链表中指定位置处的元素.</p>
+</li>
+<li><p><code>boolean contains(Object o)</code><br>如果链表包含指定元素，返回true.</p>
+</li>
+<li><p><code>int indexOf(Object o)</code><br>返回元素在链表中第一次出现的位置，如果返回-1，表示链表中没有这个元素。</p>
+</li>
+<li><p><code>int lastIndexOf(Object o)</code><br>返回元素在链表中最后一次出现的位置，如果返回-1，表示链表中没有这个元素。</p>
+</li>
 </ul>
 <h5 id="修改某个元素"><a href="#修改某个元素" class="headerlink" title="修改某个元素"></a>修改某个元素</h5><ul>
-<li><code>E set(int index, E element)</code><pre><code>将链表中指定位置上的元素替换成新元素。</code></pre></li>
+<li><code>E set(int index, E element)</code><br>将链表中指定位置上的元素替换成新元素。</li>
 </ul>
 <h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><ul>
 <li><p>检查链表是否为空</p>
 <ul>
-<li><code>boolean isEmpty()</code><pre><code>返回true表示链表中没有任何元素.</code></pre></li>
+<li><code>boolean isEmpty()</code><br>返回true表示链表中没有任何元素.</li>
 </ul>
 </li>
 <li><p>获取链表大小</p>
 <ul>
-<li><code>int size()</code><pre><code>返回链表长度（链表包含元素的个数）.</code></pre></li>
+<li><code>int size()</code><br>返回链表长度（链表包含元素的个数）.</li>
 </ul>
 </li>
 <li><p>将链表转换为一个数组</p>
@@ -470,6 +470,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//声明一个PriorityQueue</span></span><br><span class="line">    PriorityQueue priorityQueue = <span class="keyword">new</span> PriorityQueue();</span><br><span class="line">    priorityQueue.offer(<span class="number">6</span>);<span class="comment">//入队</span></span><br><span class="line">    priorityQueue.offer(-<span class="number">3</span>);</span><br><span class="line">    priorityQueue.offer(<span class="number">20</span>);</span><br><span class="line">    priorityQueue.offer(<span class="number">18</span>);</span><br><span class="line">    System.out.println(priorityQueue);</span><br><span class="line">    <span class="comment">//队列不为空取出元素</span></span><br><span class="line">    <span class="keyword">while</span>(!priorityQueue.isEmpty())&#123;</span><br><span class="line">		<span class="comment">//poll方法取出且删除</span></span><br><span class="line">        <span class="comment">//peek()方法取出队列头部元素时候，不删除该元素</span></span><br><span class="line">        System.out.println(priorityQueue.poll());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
 <h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><ul>
 <li>addAll(Collection&lt;? super T&gt; c, T… elements) </li>
 </ul>
@@ -604,7 +605,7 @@ var _hmt = _hmt || [];
 <p>TreeMap要求 key必须是可排序的</p>
 <h3 id="TreeMap的构造方法"><a href="#TreeMap的构造方法" class="headerlink" title="TreeMap的构造方法"></a>TreeMap的构造方法</h3><ul>
 <li><p>TreeMap()</p>
-<p> 默认构造函数。使用该构造函数，TreeMap中的元素按照自然排序进行排列。</p>
+<p>默认构造函数。使用该构造函数，TreeMap中的元素按照自然排序进行排列。</p>
 </li>
 <li><p>TreeMap(Map&lt;? extends K, ? extends V&gt; copyFrom)</p>
 <p>该构造函数会调用putAll()将m中的所有元素添加到TreeMap中</p>
@@ -638,7 +639,149 @@ var _hmt = _hmt || [];
 <h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><p>类图：</p>
 <p><img src="/assets/blogImg/LinkedHashMap.png" alt=""></p>
 <p>LinkedHashMap与HashMap非常类似，唯一的不同在于前者的Entry在HashMap.Entry的基础上增加了到前一个插入和后一个插入的Entry的引用，以实现能够按Entry的插入顺序进行遍历。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><table>
+    <tr>
+        <th>分类</th>
+        <th>实现</th>
+        <th>是否线程安全</th>  
+        <th>排序</th>  
+        <th>特点</th>  
+    </tr >
+    <tr >
+        <td rowspan="4">List</td>
+        <td>ArrayList</td>
+        <td>否</td>
+        <td>插入顺序</td>
+        <td>随机访问性能高</td>
+    </tr>
+    <tr>
+        <td>LinkList</td>
+        <td>否</td>
+        <td>插入顺序</td>
+        <td>随机访问性能低，头尾操作性能高，不占用冗余空间</td>
+    </tr>
+    <tr>
+        <td>Vector</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>并发性能不高，线程越多性能越差</td>
+    </tr>
+    <tr>
+        <td>CopyOnWriteArrayList</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>并发读性能高，占用冗余内存空间</td>
+    </tr>
+    <tr >
+        <td rowspan="6">Map</td>
+        <td>HashMap</td>
+        <td>否</td>
+        <td>无序</td>
+        <td>读写性能高，接近o(1)</td>
+    </tr>
+    <tr>
+        <td>LinkHashMap</td>
+        <td>否</td>
+        <td>插入顺序</td>
+        <td>可按照插入顺序遍历，性能与HashMap接近</td>
+    </tr>
+    <tr>
+        <td>HashTabel</td>
+        <td>是</td>
+        <td>无序</td>
+        <td>并发性能不高</td>
+    </tr>
+    <tr>
+        <td>ConcurrentHashMap</td>
+        <td>是</td>
+        <td>无序</td>
+        <td>并发性能比Table高</td>
+    </tr>
+    <tr>
+        <td>TreeMap</td>
+        <td>否</td>
+        <td>key升序或降序</td>
+        <td>有序读写性能o(logN)</td>
+    </tr>
+    <tr>
+        <td>ConcurrentSkipListMap</td>
+        <td>是</td>
+        <td>key升序或降序</td>
+        <td>线程安全，性能与线程数无关，占用内存空间较大</td>
+    </tr>
+    <tr >
+        <td rowspan="4">Set</td>
+        <td>HashSet</td>
+        <td>否</td>
+        <td>无序</td>
+        <td>同hashMap</td>
+    </tr>
+    <tr>
+        <td>LinkedHashSet</td>
+        <td>否</td>
+        <td>插入顺序</td>
+        <td>同LinkedHashMap</td>
+    </tr>
+     <tr>
+        <td>TreeSet</td>
+        <td>否</td>
+        <td>对象升序或者降序</td>
+        <td>同TreeMap</td>
+    </tr>
+     <tr>
+        <td>ConcurrentSkipListSet</td>
+        <td>否</td>
+        <td>无序</td>
+        <td>同ConcurrentSkipListMap    </td>
+    </tr>
+    <tr >
+        <td rowspan="5">Queue</td>
+        <td>ConcurrentLinkedQueue</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>非阻塞</td>
+    </tr>
+    <tr>
+        <td>LinkedBlockingQueue</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>阻塞无界</td>
+    </tr>
+    <tr>
+        <td>ArrayBlockingQueue</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>阻塞有界</td>
+    </tr>
+    <tr>
+        <td>SynchronousQueue</td>
+        <td>是</td>
+        <td>--</td>
+        <td>向其中插入元素的线程会阻塞，直到有另一个线程将这个元素取走，反之从其中取元素的线程也会阻塞，直到有另一个线程插入元素</td>
+    </tr>
+    <tr>
+        <td>PriorityQueue</td>
+        <td>否</td>
+        <td>对象自然序，或自定义排序</td>
+        <td>根据优先级排序，保证自然序或者自定义序的最小对象先出列</td>
+    </tr>
+     <tr >
+        <td rowspan="2">DeQueue</td>
+        <td>ConcurrentLinkedDeQueue</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>非阻塞</td>
+    </tr>
+    <tr>
+        <td>LinkedBlockingDeQueue</td>
+        <td>是</td>
+        <td>插入顺序</td>
+        <td>阻塞无界</td>
+    </tr>
 
+<p>​    </p>
+<p>​<br>​    </p>
+<pre><code>&lt;/table&gt;</code></pre>
       
 	  
       
