@@ -7,18 +7,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ssiriyang.github.io">
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <title>酉月未央</title>
+  <title>JavaMaven学习 | 酉月未央</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java工程师一枚，这是我的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="酉月未央">
-<meta property="og:url" content="https://ssiriyang.github.io/index.html">
+  <meta name="description" content="一、Maven坐标　　maven坐标概念：每个构件都有自己的一个标识（唯一的），它由groupId,artifactId,version等信息组成，因此maven就可以对构件进行版本控制、管理。 　　备注： 　　groupId ：公司名称或者组织名称； 　　artifactId：项目名称； 　　version：当前项目的版本号。 　　上边定义maven的概念时提到了构件，那么什么是构件呢? 　　—">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaMaven学习">
+<meta property="og:url" content="https://ssiriyang.github.io/2020/05/15/JavaMaven/index.html">
 <meta property="og:site_name" content="酉月未央">
-<meta property="og:description" content="Java工程师一枚，这是我的个人博客">
+<meta property="og:description" content="一、Maven坐标　　maven坐标概念：每个构件都有自己的一个标识（唯一的），它由groupId,artifactId,version等信息组成，因此maven就可以对构件进行版本控制、管理。 　　备注： 　　groupId ：公司名称或者组织名称； 　　artifactId：项目名称； 　　version：当前项目的版本号。 　　上边定义maven的概念时提到了构件，那么什么是构件呢? 　　—">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://images2018.cnblogs.com/blog/1211355/201807/1211355-20180718181431365-251189813.png">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/3/166da042d4e79f31?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/3/166da042d5995b94?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/3/166da042d5aa0e90?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="article:published_time" content="2020-05-14T17:44:00.000Z">
+<meta property="article:modified_time" content="2020-05-15T05:52:49.960Z">
 <meta property="article:author" content="慕">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Maven(Java Util包)">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images2018.cnblogs.com/blog/1211355/201807/1211355-20180718181431365-251189813.png">
   
     <link rel="alternative" href="/atom.xml" title="酉月未央" type="application/atom+xml">
   
@@ -165,21 +172,24 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="Post-JavaMaven" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+            <article id="Post-JavaMaven" class="article article-type-Post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/15/JavaMaven/">JavaMaven学习</a>
+    <h1 class="article-title" itemprop="name">
+      JavaMaven学习
     </h1>
   
 
         
         
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2020/05/15/JavaMaven/" class="archive-article-date">
   	<time datetime="2020-05-14T17:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
 </a>
@@ -365,6 +375,38 @@ var _hmt = _hmt || [];
       
 	  
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+		
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -383,11 +425,58 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/15/JavaMaven/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ssiriyang.github.io/2020/05/15/JavaMaven/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
@@ -395,6 +484,18 @@ var _hmt = _hmt || [];
 
 
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/15/Java%E9%9B%86%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java集合</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -409,1398 +510,33 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-Java集合" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/15/Java%E9%9B%86%E5%90%88/">Java集合</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/05/15/Java%E9%9B%86%E5%90%88/" class="archive-article-date">
-  	<time datetime="2020-05-14T16:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Java</strong>集合类的四个体系，由两大接口衍生而来，Collection接口和Map接口。</p>
-<p><strong>Collection ：</strong>单个存放</p>
-<p><strong>Map:成对存放 key  value</strong> </p>
-<h1 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h1><p>单个存取。</p>
-<p>接口定义的主要方法：</p>
-<ul>
-<li>size() - 集合内的对象数量</li>
-<li>add(E)/addAll(Collection) - 向集合内添加单个/批量对象</li>
-<li>remove(Object)/removeAll(Collection) - 从集合内删除单个/批量对象</li>
-<li>contains(Object)/containsAll(Collection) - 判断集合中是否存在某个/某些对象</li>
-<li>toArray() - 返回包含集合内所有对象的数组</li>
-</ul>
-<p>等。</p>
-<h2 id="List类集合"><a href="#List类集合" class="headerlink" title="List类集合"></a>List类集合</h2><p>List接口继承自Collection,List接口为集合中的每个对象分配了一个索引(index)，标记该对象在List中的位置，并可以通过index定位到指定位置的对象。</p>
-<p>List在Collection基础上增加的主要方法包括：</p>
-<ul>
-<li><p>get(int) - 返回指定index位置上的对象</p>
-</li>
-<li><p>add(E)/add(int, E) - 在List末尾/指定index位置上插入一个对象</p>
-</li>
-<li><p>set(int, E) - 替换置于List指定index位置上的对象</p>
-</li>
-<li><p>indexOf(Object) - 返回指定对象在List中的index位置</p>
-</li>
-<li><p>subList(int,int) - 返回指定起始index到终止index的子List对象</p>
-<p>等。</p>
-</li>
-</ul>
-<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><p>类图：</p>
-<p><img src="/assets/blogImg/ArrayList.png" alt=""></p>
-<p>基于数组实现的非线程安全的集合。查询元素快，插入，删除中间元素慢。</p>
-<h4 id="ArrayList的构造函数"><a href="#ArrayList的构造函数" class="headerlink" title="ArrayList的构造函数"></a>ArrayList的构造函数</h4><p>ArrayList类支持3个构造方法。</p>
-<ul>
-<li><code>Arraylist()</code></li>
-</ul>
-<p>这个构造方法构造了一个空的链表。</p>
-<ul>
-<li><code>ArrayList(Collection c)</code></li>
-</ul>
-<p>这个构造方法构造了一个包含指定元素集合的链表。</p>
-<ul>
-<li><code>ArrayList(int initialCapacity)</code></li>
-</ul>
-<p>这是第三个构造方法，构造了一个指定大小但内容为空的链表。initialCapacity参数就是初始容量大小。</p>
-<p>举例来说，如果你要创建一个空的数组链表，用来存放String类型的对象，那么你可以像下面这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list &#x3D; new ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>如果你需要创建一个指定初始容量的数组链表，你可以像下面这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;(7);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="ArrayList常用方法"><a href="#ArrayList常用方法" class="headerlink" title="ArrayList常用方法"></a>ArrayList常用方法</h4><p>下面是是一些比较常用的ArrayList类成员方法：</p>
-<h5 id="增添元素"><a href="#增添元素" class="headerlink" title="增添元素"></a>增添元素</h5><ul>
-<li><p><code>boolean add(Element e)</code><br>增加指定元素到链表尾部.</p>
-</li>
-<li><p><code>void add(int index, Element e)</code><br>增加指定元素到链表指定位置.</p>
-</li>
-</ul>
-<h5 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h5><ul>
-<li><p><code>void clear()</code><br>从链表中删除所有元素.</p>
-</li>
-<li><p><code>E remove(int index)</code><br>删除链表中指定位置的元素.</p>
-</li>
-<li><p><code>protected void removeRange(int start, int end)</code><br>删除链表中从某一个位置开始到某一个位置结束的元素。</p>
-</li>
-</ul>
-<h5 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h5><ul>
-<li><p><code>E get(int index)</code><br>获取链表中指定位置处的元素.</p>
-</li>
-<li><p><code>boolean contains(Object o)</code><br>如果链表包含指定元素，返回true.</p>
-</li>
-<li><p><code>int indexOf(Object o)</code><br>返回元素在链表中第一次出现的位置，如果返回-1，表示链表中没有这个元素。</p>
-</li>
-<li><p><code>int lastIndexOf(Object o)</code><br>返回元素在链表中最后一次出现的位置，如果返回-1，表示链表中没有这个元素。</p>
-</li>
-</ul>
-<h5 id="修改某个元素"><a href="#修改某个元素" class="headerlink" title="修改某个元素"></a>修改某个元素</h5><ul>
-<li><code>E set(int index, E element)</code><br>将链表中指定位置上的元素替换成新元素。</li>
-</ul>
-<h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><ul>
-<li><p>检查链表是否为空</p>
-<ul>
-<li><code>boolean isEmpty()</code><br>返回true表示链表中没有任何元素.</li>
-</ul>
-</li>
-<li><p>获取链表大小</p>
-<ul>
-<li><code>int size()</code><br>返回链表长度（链表包含元素的个数）.</li>
-</ul>
-</li>
-<li><p>将链表转换为一个数组</p>
-</li>
-</ul>
-<p><code>Object[] toArray()</code><br>     获取一个数组，数组中所有元素是链表中的元素.（即将链表转换为一个数组）</p>
-<h4 id="ArrayList学习Demo"><a href="#ArrayList学习Demo" class="headerlink" title="ArrayList学习Demo:"></a>ArrayList学习Demo:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个空的数组链表对象list，list用来存放String类型的数据</span></span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        <span class="comment">// 增加元素到list对象中</span></span><br><span class="line">        list.add(<span class="string">"One"</span>);</span><br><span class="line">        list.add(<span class="string">"Two"</span>);</span><br><span class="line">        list.add(<span class="number">2</span>, <span class="string">"Three"</span>); <span class="comment">// 此条语句将会把“Item3”字符串增加到list的第3个位置。</span></span><br><span class="line">        list.add(<span class="string">"Four"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 显示数组链表中的内容</span></span><br><span class="line">        System.out.println(<span class="string">"数组链表中的内容是: "</span></span><br><span class="line">                + list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检索元素的位置</span></span><br><span class="line">        <span class="keyword">int</span> pos = list.indexOf(<span class="string">"Two"</span>);</span><br><span class="line">        System.out.println(<span class="string">" Two 再数组链表中的位置: "</span> + pos);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查数组链表是否为空</span></span><br><span class="line">        <span class="keyword">boolean</span> check = list.isEmpty();</span><br><span class="line">        System.out.println(<span class="string">"检查数组链表是否为空: "</span> + check);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取链表的大小</span></span><br><span class="line">        <span class="keyword">int</span> size = list.size();</span><br><span class="line">        System.out.println(<span class="string">"链表的大小: "</span> + size);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查数组链表中是否包含某元素</span></span><br><span class="line">        <span class="keyword">boolean</span> element = list.contains(<span class="string">"Five"</span>);</span><br><span class="line">        System.out</span><br><span class="line">                .println(<span class="string">"数组链表中是否包含'Five'元素: "</span></span><br><span class="line">                        + element);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取指定位置上的元素</span></span><br><span class="line">        String item = list.get(<span class="number">0</span>);</span><br><span class="line">        System.out.println(<span class="string">"数组链表中索引为零元素: "</span> + item);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历arraylist中的元素</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第1种方法: 循环使用元素的索引和链表的大小</span></span><br><span class="line">        System.out.println(<span class="string">"循环使用元素的索引和链表的大小"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Index: "</span> + i + <span class="string">" - Item: "</span> + list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第2种方法:使用foreach循环</span></span><br><span class="line">        System.out.println(<span class="string">"使用foreach循环"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String str : list) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Item is: "</span> + str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第三种方法:使用迭代器</span></span><br><span class="line">        <span class="comment">// hasNext(): 返回true表示链表链表中还有元素</span></span><br><span class="line">        <span class="comment">// next(): 返回下一个元素</span></span><br><span class="line">        System.out.println(<span class="string">"使用迭代器遍历:"</span>);</span><br><span class="line">        <span class="keyword">for</span> (Iterator&lt;String&gt; it = list.iterator(); it.hasNext();) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Item is: "</span> + it.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 替换元素</span></span><br><span class="line">        list.set(<span class="number">1</span>, <span class="string">"NewOne"</span>);</span><br><span class="line">        System.out.println(<span class="string">"替换过后的数组链表是 "</span> + list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 移除元素</span></span><br><span class="line">        <span class="comment">// 移除第0个位置上的元素</span></span><br><span class="line">        list.remove(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 移除第一次找到的 "Item3"元素</span></span><br><span class="line">        list.remove(<span class="string">"Three"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"The final contents of the arraylist are: "</span> + list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 转换 ArrayList 为 Array</span></span><br><span class="line">        String[] simpleArray = list.toArray(<span class="keyword">new</span> String[list.size()]);</span><br><span class="line">        System.out.println(<span class="string">"arraylist的最终内容是: "</span></span><br><span class="line">                + Arrays.toString(simpleArray));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>类图：</p>
-<p><img src="/assets/blogImg/LinkedList.png" alt=""></p>
-<p>基于链表实现的非线程安全的集合。查询元素慢，插入，删除中间元素快。</p>
-<h4 id="LinkedList的构造函数"><a href="#LinkedList的构造函数" class="headerlink" title="LinkedList的构造函数"></a>LinkedList的构造函数</h4><p>LinkedList类中有两个构造方法。</p>
-<ul>
-<li><p><code>LinkedList()</code></p>
-<p>这个构造方法创建一个空链表</p>
-</li>
-<li><p><code>LinkedList(Collection c)</code></p>
-<p>由给定集合创建一个链表</p>
-</li>
-</ul>
-<h4 id="LinkedList常用方法"><a href="#LinkedList常用方法" class="headerlink" title="LinkedList常用方法"></a>LinkedList常用方法</h4><h5 id="增添元素-1"><a href="#增添元素-1" class="headerlink" title="增添元素"></a>增添元素</h5><ul>
-<li><code>boolean add(E e)</code>：将指定元素添加到链表末尾</li>
-<li><code>void add(int index, E e)</code>：将指定元素插入到链表的指定位置</li>
-<li><code>boolean addAll(Collection c)</code>：将指定集合中的所有元素添加到链表末尾</li>
-<li><code>boolean addAll(int index, Collection c)</code>：将指定集合中的所有元素从指定位置开始插入链表</li>
-<li><code>void addFirst(E e)</code>：将指定元素插入到链表的开始</li>
-<li><code>void addLast(E e)</code>：将指定元素添加到链表的末尾</li>
-</ul>
-<h5 id="删除元素-1"><a href="#删除元素-1" class="headerlink" title="删除元素"></a>删除元素</h5><ul>
-<li><code>void clear()</code>：移除链表中的所有元素</li>
-<li><code>E remove()</code>：移除链表的第一个元素，并返回该元素</li>
-<li><code>E remove(int index)</code>：移除链表中指定位置处的元素，并返回该元素</li>
-<li><code>boolean remove(E e)</code>：若元素存在则从链表中该元素第一次出现的位置移除该元素</li>
-<li><code>E removeFirst()</code>：移除链表的第一个元素，并返回该元素</li>
-<li><code>boolean removeFirstOccourence(E e)</code>：从链表中移除指定元素第一次出现位置处的元素（以正序遍历）</li>
-<li><code>E removeLast()</code>：移除链表最后一个元素，并返回该元素</li>
-<li><code>boolean removeLastOccourence(E e)</code>：从链表中移除指定元素最后一次出现位置处的元素（以正序遍历）</li>
-</ul>
-<h5 id="查找元素-1"><a href="#查找元素-1" class="headerlink" title="查找元素"></a>查找元素</h5><ul>
-<li><code>boolean contains(E e)</code>：判断链表中是否存在指定元素</li>
-<li><code>E get(int index)</code>：返回链表中指定位置的元素</li>
-<li><code>E getFirst()</code>：返回链表的第一个元素</li>
-<li><code>E getLast()</code>：返回链表的最后一个元素</li>
-<li><code>int indexOf(E e)</code>：返回指定元素在链表中第一次出现的位置，若未找到则返回-1</li>
-<li><code>int lastIndexOf(E e)</code>：返回指定元素在链表中最后一次出现的位置，若未找到则返回-1</li>
-</ul>
-<h5 id="修改元素"><a href="#修改元素" class="headerlink" title="修改元素"></a>修改元素</h5><ul>
-<li><code>E set(int index, E e)</code>：将链表中指定位置处的元素修改为指定的元素，返回被替换的元素</li>
-</ul>
-<h5 id="其他方法-1"><a href="#其他方法-1" class="headerlink" title="其他方法"></a>其他方法</h5><ul>
-<li><code>int size()</code>：返回链表中包含的元素的数量</li>
-<li><code>Object clone()</code>：返回该链表的浅拷贝</li>
-<li><code>Object[] toArray()</code>：以适当的顺序（从第一个元素到最后一个元素）返回包含此链表中所有元素的数组</li>
-</ul>
-<h4 id="LinkedList学习Demo"><a href="#LinkedList学习Demo" class="headerlink" title="LinkedList学习Demo:"></a>LinkedList学习Demo:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个空的双向链表对象linkedList</span></span><br><span class="line">        LinkedList&lt;String&gt; linkedList = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        System.out.println(<span class="string">"新建的linkedList："</span>+linkedList);</span><br><span class="line">        <span class="comment">//添加一个元素a</span></span><br><span class="line">        <span class="keyword">boolean</span> result = linkedList.add(<span class="string">"a"</span>);</span><br><span class="line">        System.out.println(<span class="string">"添加元素a至链表末尾："</span>+linkedList);</span><br><span class="line">        <span class="comment">//向头部插入一个元素b</span></span><br><span class="line">        linkedList.addFirst(<span class="string">"b"</span>);</span><br><span class="line">        System.out.println(<span class="string">"添加b元素至链表头部尾："</span>+linkedList);</span><br><span class="line">        <span class="comment">//向指定位置插入一个元素c</span></span><br><span class="line">        linkedList.add(<span class="number">1</span>, <span class="string">"c"</span>);</span><br><span class="line">        System.out.println(<span class="string">"向索引1处添加c："</span>+linkedList);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将指定集合中的所有元素添加到链表末尾</span></span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">"a"</span>);</span><br><span class="line">        list.add(<span class="string">"b"</span>);</span><br><span class="line">        list.add(<span class="string">"c"</span>);</span><br><span class="line">        result = linkedList.addAll(list);</span><br><span class="line">        System.out.println(<span class="string">"将一个集合添加至链表末尾："</span>+linkedList);</span><br><span class="line">        <span class="comment">//移除链表的第一个元素，并返回该元素</span></span><br><span class="line">        String firstElement = linkedList.remove();</span><br><span class="line">        System.out.println(<span class="string">"移除链表的第一个元素，并返回该元素："</span>+firstElement);</span><br><span class="line">        <span class="comment">//移除链表中指定位置处的元素，并返回该元素</span></span><br><span class="line">        String specifiedIndexElement = linkedList.remove(<span class="number">3</span>);</span><br><span class="line">        System.out.println(<span class="string">"移除链表中指定位置处的元素，并返回该元素："</span>+specifiedIndexElement);</span><br><span class="line">        <span class="comment">//若元素存在则从链表中该元素第一次出现的位置移除该元素</span></span><br><span class="line">        result = linkedList.remove(<span class="string">"a"</span>);</span><br><span class="line">        <span class="comment">//判断链表中是否存在指定元素</span></span><br><span class="line">        result = linkedList.contains(<span class="string">"b"</span>);</span><br><span class="line">        System.out.println(<span class="string">"判断链表中是否存在'b'元素："</span>+result);</span><br><span class="line">        <span class="comment">//返回链表中指定位置的元素</span></span><br><span class="line">        String specifiedElement = linkedList.get(<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">"返回链表中位置2的元素："</span>+result);</span><br><span class="line">        <span class="comment">//返回链表的最后一个元素</span></span><br><span class="line">        String lastElement = linkedList.getLast();</span><br><span class="line">        System.out.println(<span class="string">"返回链表的最后一个元素："</span>+lastElement);</span><br><span class="line">        <span class="comment">//返回指定元素在链表中第一次出现的位置，若未找到则返回-1</span></span><br><span class="line">        <span class="keyword">int</span> index = linkedList.indexOf(<span class="string">"b"</span>);</span><br><span class="line">        <span class="comment">//将链表中指定位置处的元素修改为指定的元素，返回被替换的元素</span></span><br><span class="line">        String element = linkedList.set(<span class="number">1</span>, <span class="string">"a"</span>);</span><br><span class="line">        <span class="comment">//返回链表中包含的元素的数量</span></span><br><span class="line">        <span class="keyword">int</span> sizeOfLinkedList = linkedList.size();</span><br><span class="line">        System.out.println(<span class="string">"返回链表中包含的元素的数量："</span>+sizeOfLinkedList);</span><br><span class="line">        <span class="comment">//以适当的顺序（从第一个元素到最后一个元素）返回包含此链表中所有元素的数组</span></span><br><span class="line">        Object[] elements = linkedList.toArray();</span><br><span class="line"><span class="comment">//        System.out.println("将链表转为数组："+elements[1]);</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><p>类图：</p>
-<p><img src="/assets/blogImg/Vector.png" alt=""></p>
-<p>Vector和ArrayList很像，都是基于数组实现的集合，它和ArrayList的主要区别在于</p>
-<ul>
-<li>Vector是线程安全的，而ArrayList不是</li>
-<li>由于Vector中的方法基本都是synchronized的，其性能低于ArrayList</li>
-<li>Vector可以定义数组长度扩容的因子，ArrayList不能</li>
-</ul>
-<p>Vector再实际中已基本不被使用，不做过多了解。</p>
-<h3 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h3><p>类图：</p>
-<p><img src="/assets/blogImg/CopyOnWriteArrayList.png" alt=""></p>
-<p>与 Vector一样，CopyOnWriteArrayList也可以认为是ArrayList的线程安全版，不同之处在于 CopyOnWriteArrayList在写操作时会先复制出一个副本，在新副本上执行写操作，然后再修改引用。这种机制让 CopyOnWriteArrayList可以对读操作不加锁，这就使CopyOnWriteArrayList的读效率远高于Vector。 CopyOnWriteArrayList的理念比较类似读写分离，适合读多写少的多线程场景。但要注意，CopyOnWriteArrayList只能保证数据的最终一致性，并不能保证数据的实时一致性，如果一个写操作正在进行中且并未完成，此时的读操作无法保证能读到这个写操作的结果。</p>
-<p><strong>Vector 和 CopyOnWriteArrayList异同</strong>：</p>
-<p>二者均是线程安全的、基于数组实现的List</p>
-<p>Vector是【绝对】线程安全的，CopyOnWriteArrayList只能保证读线程会读到【已完成】的写结果，但无法像Vector一样实现读操作的【等待写操作完成后再读最新值】的能力</p>
-<p>CopyOnWriteArrayList读性能远高于Vector，并发线程越多优势越明显</p>
-<p>CopyOnWriteArrayList占用更多的内存空间</p>
-<h2 id="Set类集合"><a href="#Set类集合" class="headerlink" title="Set类集合"></a>Set类集合</h2><p>Set 接口继承Collection，用于存储不含重复元素的集合。几乎所有的Set实现都是基于同类型Map的，简单地说，Set是阉割版的Map。每一个Set内都有一个同类型的Map实例（CopyOnWriteArraySet除外，它内置的是CopyOnWriteArrayList实例），Set把元素作为key存储在自己的Map实例中，value则是一个空的Object。Set的常用实现也包括 HashSet、TreeSet、ConcurrentSkipListSet等，原理和对应的Map实现完全一致。</p>
-<h3 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h3><p>类图：</p>
-<p><img src="/assets/blogImg/HashSet.png" alt=""></p>
-<p>底层用HashMap实现，是一个无序，不可重复的数组散列。</p>
-<h4 id="HashSet的构造方法"><a href="#HashSet的构造方法" class="headerlink" title="HashSet的构造方法"></a>HashSet的构造方法</h4><p>HashSet提供了四个构造方法:</p>
-<ul>
-<li><p>HashSet（）</p>
-<p>无参数的构造函数，此构造函数创建一个大小为16的容器，加载因子为0.75</p>
-</li>
-<li><p>HashSet(Collection&lt;? extends E&gt; c)<br>构造一个包含指定集合中的元素的新集合。  </p>
-</li>
-<li><p>HashSet(int initialCapacity)<br>构造一个新的空集合; 背景HashMap实例具有指定的初始容量和默认负载因子（0.75）</p>
-</li>
-<li><p>HashSet(int initialCapacity, float loadFactor)<br>构造一个新的空集合; 背景HashMap实例具有指定的初始容量和指定的负载因子。 </p>
-</li>
-</ul>
-<h4 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h4><ul>
-<li><p>add(Object obj)方法（详述）：向Set集合中添加元素，添加成功返回true，否则返回false</p>
-</li>
-<li><p>size() 方法：返回Set集合中的元素个数</p>
-</li>
-<li><p>remove(Object  obj)方法 ： 删除Set集合中的元素，删除成功返回true，否则返回false。</p>
-</li>
-<li><p>isEmpty()方法 ：如果Set不包含元素，则返回 true ，否则返回false</p>
-</li>
-<li><p>clear() 方法： 移除此Set中的所有元素</p>
-</li>
-<li><p>iterator() 迭代器：（它不保证 set 的迭代顺序；特别是它不保证该顺序恒久不变）</p>
-<ul>
-<li>hashNext如果仍有元素可以返回就返回true</li>
-<li>Next()返回迭代的下一个元素</li>
-<li>remove()从迭代器指向的的collection中移除迭代器返回的最后一个元素</li>
-</ul>
-</li>
-<li><p>contains(Object o)方法：如果Set包含指定的元素，则返回 true，否则返回false</p>
-</li>
-</ul>
-<h4 id="HashSet的学习Demo"><a href="#HashSet的学习Demo" class="headerlink" title="HashSet的学习Demo"></a>HashSet的学习Demo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    HashSet&lt;String&gt; hashSet &#x3D; new HashSet&lt;String&gt;();</span><br><span class="line">    hashSet.add(&quot;张三&quot;);</span><br><span class="line">    hashSet.add(&quot;李四&quot;);</span><br><span class="line">    hashSet.add(&quot;王五&quot;);</span><br><span class="line">    &#x2F;&#x2F;打印当前set的size</span><br><span class="line">    System.out.println(hashSet.size());</span><br><span class="line">    Iterator it &#x3D; hashSet.iterator();</span><br><span class="line">    while (it.hasNext())&#123;</span><br><span class="line">        System.out.println(it.next());</span><br><span class="line">    &#125;</span><br><span class="line">    for (String name : hashSet) &#123;    &#x2F;&#x2F;输出set集合中的元素</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    Boolean res &#x3D; hashSet.add(&quot;王五&quot;);</span><br><span class="line">    System.out.println(&quot;插入重复元素结果：&quot;+res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h3><p>类图：</p>
-<p><img src="/assets/blogImg/TreeSet.png" alt=""></p>
-<p>底层用TreeMap实现的。是一个有序不可重复的二叉树</p>
-<h4 id="TreeSet的构造方法"><a href="#TreeSet的构造方法" class="headerlink" title="TreeSet的构造方法"></a>TreeSet的构造方法</h4><p>TreeSet提供了四个构造方法:</p>
-<ul>
-<li><p>TreeSet()</p>
-<p>默认构造函数。使用该构造函数，TreeSet中的元素按照自然排序进行排列。</p>
-</li>
-<li><p>TreeSet(Collection&lt;? extends E&gt; collection)</p>
-<p>此构造函数生成树的集合，它包含的元素的集合 c。</p>
-</li>
-<li><p>TreeSet(Comparator&lt;? super E&gt; comparator)</p>
-<p>此构造函数构造一个空树集，将根据给定的比较器进行排序。</p>
-</li>
-<li><p>TreeSet(SortedSet set)</p>
-<p>此构造函数生成包含给定 SortedSet 的元素 TreeSet</p>
-</li>
-</ul>
-<h4 id="TreeSet的常用方法"><a href="#TreeSet的常用方法" class="headerlink" title="TreeSet的常用方法"></a>TreeSet的常用方法</h4><ul>
-<li>add()：向Set集合中添加元素，添加成功返回true，否则返回false</li>
-<li>addAll()：将指定集合中的所有元素添加到此集合中。</li>
-<li>remove()：删除Set集合中的元素，删除成功返回true，否则返回false。</li>
-<li>size()：    返回此集合中的元素数。</li>
-<li>isEmpty()：set判空</li>
-<li>ceiling()：返回此set中大于或等于给定元素的最小元素，或者null如果没有这样的元素。</li>
-<li>floor()：返回此set中小于或等于给定元素的最大元素，或者null如果没有这样的元素。</li>
-<li>lower()：返回此集合中的最大元素严格小于给定元素，或者null如果没有这样的元素。</li>
-<li>contains（Object  o）：如果Set包含指定的元素，则返回 true，否则返回false\</li>
-</ul>
-<h4 id="TreeSet的学习Demo"><a href="#TreeSet的学习Demo" class="headerlink" title="TreeSet的学习Demo"></a>TreeSet的学习Demo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">public static void testTreeSetAPIs() &#123;</span><br><span class="line">    String val;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 新建TreeSet</span><br><span class="line">    TreeSet tSet &#x3D; new TreeSet();</span><br><span class="line">    &#x2F;&#x2F; 将元素添加到TreeSet中</span><br><span class="line">    tSet.add(&quot;aaa&quot;);</span><br><span class="line">    &#x2F;&#x2F; Set中不允许重复元素，所以只会保存一个“aaa”</span><br><span class="line">    tSet.add(&quot;aaa&quot;);</span><br><span class="line">    tSet.add(&quot;bbb&quot;);</span><br><span class="line">    tSet.add(&quot;eee&quot;);</span><br><span class="line">    tSet.add(&quot;ddd&quot;);</span><br><span class="line">    tSet.add(&quot;ccc&quot;);</span><br><span class="line">    System.out.println(&quot;TreeSet:&quot;+tSet);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 打印TreeSet的实际大小</span><br><span class="line">    System.out.printf(&quot;size : %d\n&quot;, tSet.size());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 导航方法</span><br><span class="line">    &#x2F;&#x2F; floor(小于、等于)</span><br><span class="line">    System.out.printf(&quot;floor bbb: %s\n&quot;, tSet.floor(&quot;bbb&quot;));</span><br><span class="line">    &#x2F;&#x2F; lower(小于)</span><br><span class="line">    System.out.printf(&quot;lower bbb: %s\n&quot;, tSet.lower(&quot;bbb&quot;));</span><br><span class="line">    &#x2F;&#x2F; ceiling(大于、等于)</span><br><span class="line">    System.out.printf(&quot;ceiling bbb: %s\n&quot;, tSet.ceiling(&quot;bbb&quot;));</span><br><span class="line">    System.out.printf(&quot;ceiling eee: %s\n&quot;, tSet.ceiling(&quot;eee&quot;));</span><br><span class="line">    &#x2F;&#x2F; ceiling(大于)</span><br><span class="line">    System.out.printf(&quot;higher bbb: %s\n&quot;, tSet.higher(&quot;bbb&quot;));</span><br><span class="line">    &#x2F;&#x2F; subSet()</span><br><span class="line">    System.out.printf(&quot;subSet(aaa, true, ccc, true): %s\n&quot;, tSet.subSet(&quot;aaa&quot;, true, &quot;ccc&quot;, true));</span><br><span class="line">    System.out.printf(&quot;subSet(aaa, true, ccc, false): %s\n&quot;, tSet.subSet(&quot;aaa&quot;, true, &quot;ccc&quot;, false));</span><br><span class="line">    System.out.printf(&quot;subSet(aaa, false, ccc, true): %s\n&quot;, tSet.subSet(&quot;aaa&quot;, false, &quot;ccc&quot;, true));</span><br><span class="line">    System.out.printf(&quot;subSet(aaa, false, ccc, false): %s\n&quot;, tSet.subSet(&quot;aaa&quot;, false, &quot;ccc&quot;, false));</span><br><span class="line">    &#x2F;&#x2F; headSet()</span><br><span class="line">    System.out.printf(&quot;headSet(ccc, true): %s\n&quot;, tSet.headSet(&quot;ccc&quot;, true));</span><br><span class="line">    System.out.printf(&quot;headSet(ccc, false): %s\n&quot;, tSet.headSet(&quot;ccc&quot;, false));</span><br><span class="line">    &#x2F;&#x2F; tailSet()</span><br><span class="line">    System.out.printf(&quot;tailSet(ccc, true): %s\n&quot;, tSet.tailSet(&quot;ccc&quot;, true));</span><br><span class="line">    System.out.printf(&quot;tailSet(ccc, false): %s\n&quot;, tSet.tailSet(&quot;ccc&quot;, false));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 删除“ccc”</span><br><span class="line">    tSet.remove(&quot;ccc&quot;);</span><br><span class="line">    &#x2F;&#x2F; 将Set转换为数组</span><br><span class="line">    String[] arr &#x3D; (String[])tSet.toArray(new String[0]);</span><br><span class="line">    for (String str:arr) &#123;</span><br><span class="line">        System.out.printf(&quot;for each : %s\n&quot;, str);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 打印TreeSet</span><br><span class="line">    System.out.printf(&quot;TreeSet:%s\n&quot;, tSet);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 遍历TreeSet</span><br><span class="line">    for(Iterator iter &#x3D; tSet.iterator(); iter.hasNext(); ) &#123;</span><br><span class="line">        System.out.printf(&quot;iter : %s\n&quot;, iter.next());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 删除并返回第一个元素</span><br><span class="line">    val &#x3D; (String)tSet.pollFirst();</span><br><span class="line">    System.out.printf(&quot;pollFirst&#x3D;%s, set&#x3D;%s\n&quot;, val, tSet);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 删除并返回最后一个元素</span><br><span class="line">    val &#x3D; (String)tSet.pollLast();</span><br><span class="line">    System.out.printf(&quot;pollLast&#x3D;%s, set&#x3D;%s\n&quot;, val, tSet);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 清空HashSet</span><br><span class="line">    tSet.clear();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 输出HashSet是否为空</span><br><span class="line">    System.out.printf(&quot;%s\n&quot;, tSet.isEmpty()?&quot;set is empty&quot;:&quot;set is not empty&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Queue-Deque类集合"><a href="#Queue-Deque类集合" class="headerlink" title="Queue/Deque类集合"></a>Queue/Deque类集合</h2><p>Queue和Deque接口继承Collection接口，实现FIFO（先进先出）的集合。二者的区别在于，Queue只能在队尾入队，队头出队，而Deque接口则在队头和队尾都可以执行出/入队操作。</p>
-<p>Queue接口常用方法：</p>
-<ul>
-<li>add(E)/offer(E)：入队，即向队尾追加元素，二者的区别在于如果队列是有界的，add方法在队列已满的情况下会抛出IllegalStateException，而offer方法只会返回false</li>
-<li>remove()/poll()：出队，即从队头移除1个元素，二者的区别在于如果队列是空的，remove方法会抛出NoSuchElementException，而poll只会返回null</li>
-<li>element()/peek()：查看队头元素，二者的区别在于如果队列是空的，element方法会抛出NoSuchElementException，而peek只会返回null</li>
-</ul>
-<p>Deque接口常用方法：</p>
-<ul>
-<li>addFirst(E) / addLast(E) / offerFirst(E) / offerLast(E)</li>
-<li>removeFirst() / removeLast() / pollFirst() / pollLast()</li>
-<li>getFirst() / getLast() / peekFirst() / peekLast()</li>
-<li>removeFirstOccurrence(Object) / removeLastOccurrence(Object)</li>
-</ul>
-<h3 id="Queue接口的常用实现类："><a href="#Queue接口的常用实现类：" class="headerlink" title="Queue接口的常用实现类："></a>Queue接口的常用实现类：</h3><h4 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h4><p>类图：</p>
-<p><img src="/assets/blogImg/ConcurrentLinkedQueue.png" alt=""></p>
-<p>ConcurrentLinkedQueue是基于链表实现的队列，队列中每个Node拥有到下一个Node的引用：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;E&gt; &#123;</span></span><br><span class="line">        <span class="keyword">volatile</span> E item;</span><br><span class="line">        <span class="keyword">volatile</span> Node&lt;E&gt; next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于Node类的成员都是volatile的，所以ConcurrentLinkedQueue自然是线程安全的。能够保证入队和出队操作的原子性和一致性，但在遍历和size()操作时只能保证数据的弱一致性。</p>
-<h4 id="LinkedBlockingQueue"><a href="#LinkedBlockingQueue" class="headerlink" title="LinkedBlockingQueue"></a>LinkedBlockingQueue</h4><p>类图：</p>
-<p><img src="/assets/blogImg/LinkedBlockingQueue.png" alt=""></p>
-<p>与ConcurrentLinkedQueue不同，LinkedBlocklingQueue是一种无界的阻塞队列。所谓阻塞队列，就是在入队时如果队列已满，线程会被阻塞，直到队列有空间供入队再返回；同时在出队时，如果队列已空，线程也会被阻塞，直到队列中有元素供出队时再返回。LinkedBlocklingQueue同样基于链表实现，其出队和入队操作都会使用ReentrantLock进行加锁。所以本身是线程安全的，但同样的，只能保证入队和出队操作的原子性和一致性，在遍历时只能保证数据的弱一致性。</p>
-<h4 id="ArrayBlockingQueue"><a href="#ArrayBlockingQueue" class="headerlink" title="ArrayBlockingQueue"></a>ArrayBlockingQueue</h4><p>类图：</p>
-<p><img src="/assets/blogImg/ArrayBlockingQueue.png" alt=""></p>
-<p>ArrayBlockingQueue是一种有界的阻塞队列，基于数组实现。其同步阻塞机制的实现与LinkedBlocklingQueue基本一致，区别仅在于前者的生产和消费使用同一个锁，后者的生产和消费使用分离的两个锁。</p>
-<p><strong>ConcurrentLinkedQueue vsLinkedBlocklingQueue vs ArrayBlockingQueue</strong></p>
-<blockquote>
-<ul>
-<li>ConcurrentLinkedQueue是非阻塞队列，其他两者为阻塞队列</li>
-<li>三者都是线程安全的</li>
-<li>LinkedBlocklingQueue是无界的，适合实现不限长度的队列， ArrayBlockingQueue适合实现定长的队列</li>
-</ul>
-</blockquote>
-<h4 id="SynchronousQueue"><a href="#SynchronousQueue" class="headerlink" title="SynchronousQueue"></a>SynchronousQueue</h4><p>类图：</p>
-<p><img src="/assets/blogImg/SynchronousQueue.png" alt=""></p>
-<p>SynchronousQueue算是JDK实现的队列中比较奇葩的一个，它不能保存任何元素，size永远是0，peek()永远返回null。向其中插入元素的线程会阻塞，直到有另一个线程将这个元素取走，反之从其中取元素的线程也会阻塞，直到有另一个线程插入元素。</p>
-<p>这种实现机制非常适合传递性的场景。也就是说如果生产者线程需要及时确认到自己生产的任务已经被消费者线程取走后才能执行后续逻辑的场景下，适合使用SynchronousQueue。</p>
-<h4 id="PriorityQueue-amp-PriorityBlockingQueue"><a href="#PriorityQueue-amp-PriorityBlockingQueue" class="headerlink" title="PriorityQueue &amp; PriorityBlockingQueue"></a>PriorityQueue &amp; PriorityBlockingQueue</h4><p>PriorityQueue 类图：</p>
-<p><img src="/assets/blogImg/PriorityQueue.png" alt=""></p>
-<p>PriorityBlockingQueue类图：</p>
-<p><img src="/assets/blogImg/PriorityBlockingQueue.png" alt=""></p>
-<p>这两种Queue并不是FIFO队列，而是根据元素的优先级进行排序，保证最小的元素最先出队，也可以在构造队列时传入Comparator实例，这样PriorityQueue就会按照Comparator实例的要求对元素进行排序。</p>
-<p>PriorityQueue是非阻塞队列，也不是线程安全的，PriorityBlockingQueue是阻塞队列，同时也是线程安全的。</p>
-<p>public class PriorityQueueTest {</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//声明一个PriorityQueue</span></span><br><span class="line">    PriorityQueue priorityQueue = <span class="keyword">new</span> PriorityQueue();</span><br><span class="line">    priorityQueue.offer(<span class="number">6</span>);<span class="comment">//入队</span></span><br><span class="line">    priorityQueue.offer(-<span class="number">3</span>);</span><br><span class="line">    priorityQueue.offer(<span class="number">20</span>);</span><br><span class="line">    priorityQueue.offer(<span class="number">18</span>);</span><br><span class="line">    System.out.println(priorityQueue);</span><br><span class="line">    <span class="comment">//队列不为空取出元素</span></span><br><span class="line">    <span class="keyword">while</span>(!priorityQueue.isEmpty())&#123;</span><br><span class="line">		<span class="comment">//poll方法取出且删除</span></span><br><span class="line">        <span class="comment">//peek()方法取出队列头部元素时候，不删除该元素</span></span><br><span class="line">        System.out.println(priorityQueue.poll());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><ul>
-<li>addAll(Collection&lt;? super T&gt; c, T… elements) </li>
-</ul>
-<p>​     将所有指定元素添加到指定 collection 中。</p>
-<ul>
-<li>binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list, T key) </li>
-</ul>
-<p>​     使用二分搜索法搜索指定列表，以获得指定对象。</p>
-<ul>
-<li>copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src) </li>
-</ul>
-<p>​     将所有元素从一个列表复制到另一个列表。</p>
-<ul>
-<li>fill(List&lt;? super T&gt; list, T obj) </li>
-</ul>
-<p>​     使用指定元素替换指定列表中的所有元素。</p>
-<ul>
-<li>max(Collection&lt;? extends T&gt; coll) </li>
-</ul>
-<p>​     根据元素的自然顺序，返回给定 collection 的最大元素。</p>
-<ul>
-<li>replaceAll(List<T> list, T oldVal, T newVal) </li>
-</ul>
-<p>​     使用另一个值替换列表中出现的所有某一指定值。</p>
-<ul>
-<li>reverse(List&lt;?&gt; list) </li>
-</ul>
-<p>​     反转指定列表中元素的顺序。</p>
-<ul>
-<li>shuffle(List&lt;?&gt; list) </li>
-</ul>
-<p>​     使用默认随机源对指定列表进行置换。</p>
-<ul>
-<li>sort(List<T> list) </li>
-</ul>
-<p>​     根据元素的自然顺序 对指定列表按升序进行排序。  </p>
-<ul>
-<li>sort(List<T> list, Comparator&lt;? super T&gt; c) </li>
-</ul>
-<p>​     根据指定比较器产生的顺序对指定列表进行排序。  </p>
-<ul>
-<li>swap(List&lt;?&gt; list, int i, int j) </li>
-</ul>
-<p>​     在指定列表的指定位置处交换元素。</p>
-<h2 id="Comparator比较器"><a href="#Comparator比较器" class="headerlink" title="Comparator比较器"></a>Comparator比较器</h2><p>Comparable 内部比较器，需要对象去实现该接口，重写其方法</p>
-<p>Comparator  外部比较器，不需要参与比较的对象去实现该接口</p>
-<h2 id="Arrays工具类"><a href="#Arrays工具类" class="headerlink" title="Arrays工具类"></a>Arrays工具类</h2><p>操作数组的工具类</p>
-<ul>
-<li>inarySearch(byte[] a, byte key) </li>
-</ul>
-<p>​     使用二分搜索法来搜索指定的 byte 型数组，以获得指定的值。</p>
-<ul>
-<li>asList(T… a) </li>
-</ul>
-<p>​     返回一个受指定数组支持的固定大小的列表。</p>
-<ul>
-<li>copyOf(boolean[] original, int newLength) </li>
-</ul>
-<p>​     复制指定的数组，截取或用 false 填充（如有必要），以使副本具有指定的长度。</p>
-<ul>
-<li>copyOfRange(boolean[] original, int from, int to) </li>
-</ul>
-<p>​     将指定数组的指定范围复制到一个新数组。</p>
-<ul>
-<li>equals(boolean[] a, boolean[] a2) </li>
-</ul>
-<p>​     如果两个指定的 boolean 型数组彼此相等，则返回 true。</p>
-<ul>
-<li>fill(boolean[] a, boolean val) </li>
-</ul>
-<p>​     将指定的 boolean 值分配给指定 boolean 型数组的每个元素。</p>
-<ul>
-<li>sort(long[] a) </li>
-</ul>
-<p>​     对指定的 long 型数组按数字升序进行排序。</p>
-<ul>
-<li>sort(T[] a, Comparator&lt;? super T&gt; c) </li>
-</ul>
-<p>​      根据指定比较器产生的顺序对指定对象数组进行排序。</p>
-<h1 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h1><p>成对存放(key,value)</p>
-<p>Map接口在Collection的基础上，为其中的每个对象指定了一个key，并使用Entry保存每个key-value对，以实现通过key快速定位到对象(value)。Map接口的主要方法包括：</p>
-<ul>
-<li>size() - 集合内的对象数量</li>
-<li>put(K,V)/putAll(Map) - 向Map内添加单个/批量对象</li>
-<li>get(K) - 返回Key对应的对象</li>
-<li>remove(K) - 删除Key对应的对象</li>
-<li>keySet() - 返回包含Map中所有key的Set</li>
-<li>values() - 返回包含Map中所有value的Collection</li>
-<li>entrySet() - 返回包含Map中所有key-value对的EntrySet</li>
-<li>containsKey(K)/containsValue(V) - 判断Map中是否存在指定key/value</li>
-</ul>
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>类图：</p>
-<p><img src="/assets/blogImg/HashMap.png" alt=""></p>
-<p>HashMap将Entry对象存储在一个数组中，并通过哈希表来实现对Entry的快速访问：<img src="https://upload-images.jianshu.io/upload_images/4840514-d6fce6bccc24a362.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/243/format/webp" alt="img"></p>
-<p>由每个Entry中的key的哈希值决定该Entry在数组中的位置。以这种特性能够实现通过key快速查找到Entry，从而获得该key对应的value。在不发生哈希冲突的前提下，查找的时间复杂度是O(1)。</p>
-<p>如果两个不同的key计算出的index是一样的，就会发生两个不同的key都对应到数组中同一个位置的情况，也就是所谓的哈希冲突。HashMap处理哈 希冲突的方法是拉链法，也就是说数组中每个位置保存的实际是一个Entry链表，链表中每个Entry都拥有指向链表中后一个Entry的引用。在发生哈希冲突时，将冲突的Entry追加至链表的头部。当HashMap在寻址时发现某个key对应的数组index上有多个Entry，便会遍历该位置上的 Entry链表，直到找到目标的Entry。</p>
-<p>注意：JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时，将链表转化为红黑树（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树），以减少搜索时间，具体可以参考 <code>treeifyBin</code>方法。</p>
-<h3 id="HashMap的构造方法"><a href="#HashMap的构造方法" class="headerlink" title="HashMap的构造方法"></a>HashMap的构造方法</h3><p>HashMap提供了四个构造方法：</p>
-<ul>
-<li><p>HashMap()</p>
-<p>无参构造方法</p>
-</li>
-<li><p>HashMap(int initialCapacity)</p>
-<p>有一个初始容量参数的构造方法</p>
-</li>
-<li><p>HashMap(int initialCapacity, float loadFactor)</p>
-<p>参数：initialCapacity 初始容量</p>
-<p>参数：loadFactor 负载因子</p>
-</li>
-<li><p>HashMap(Map&lt;? extends K, ? extends V&gt; m)</p>
-<p>有一个Map类型的参数的构造方法</p>
-</li>
-</ul>
-<h3 id="HashMap的常用方法"><a href="#HashMap的常用方法" class="headerlink" title="HashMap的常用方法"></a>HashMap的常用方法</h3><ul>
-<li>put(K key, V value)：存放键值对</li>
-<li>containsKey(Object key)：键中是否包含这个数据</li>
-<li>get(Object key)：通过键拿值</li>
-<li>isEmpty()：判空、</li>
-<li>remove(Object key)：从键值中删除</li>
-<li>keySet()：获取key的集合</li>
-<li>map.values()：获取value的集合</li>
-<li>map.entrySet():获取映射集合（键值的集合）</li>
-<li>clear()：清空</li>
-</ul>
-<h3 id="HashMap的学习Demo"><a href="#HashMap的学习Demo" class="headerlink" title="HashMap的学习Demo"></a>HashMap的学习Demo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    HashMap&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    map.put(<span class="string">"zhang"</span>, <span class="string">"31"</span>);<span class="comment">//存放键值对</span></span><br><span class="line"></span><br><span class="line">    System.out.println(map.containsKey(<span class="string">"zhang"</span>));<span class="comment">//键中是否包含这个数据</span></span><br><span class="line">    System.out.println(map.containsKey(<span class="string">"daniu"</span>));</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.get(<span class="string">"zhang"</span>));<span class="comment">//通过键拿值</span></span><br><span class="line">    System.out.println(map.get(<span class="string">"daniu"</span>));</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.isEmpty());<span class="comment">//判空</span></span><br><span class="line">    System.out.println(map.size());</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.remove(<span class="string">"zhang"</span>));<span class="comment">//从键值中删除</span></span><br><span class="line">    System.out.println(map.containsKey(<span class="string">"zhang"</span>));</span><br><span class="line">    System.out.println(map.get(<span class="string">"zhang"</span>));<span class="comment">//获取值</span></span><br><span class="line">    System.out.println(map.isEmpty());</span><br><span class="line">    System.out.println(map.size());</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"zhang"</span>, <span class="string">"31"</span>);</span><br><span class="line">    System.out.println(map.get(<span class="string">"zhang"</span>));</span><br><span class="line">    map.put(<span class="string">"zhang"</span>, <span class="string">"32"</span>);</span><br><span class="line">    System.out.println(map.get(<span class="string">"zhang"</span>));</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"zhang"</span>, <span class="string">"31"</span>);</span><br><span class="line">    map.put(<span class="string">"cheng"</span>, <span class="string">"32"</span>);</span><br><span class="line">    map.put(<span class="string">"yun"</span>, <span class="string">"33"</span>);</span><br><span class="line">    <span class="comment">//获取map集合的所有键的set集合，即为map中所有key值得集合</span></span><br><span class="line">    <span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">        System.out.println(key);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line">    <span class="comment">//获取map集合的所有键的值集合，即为map中所有value值得集合</span></span><br><span class="line">    <span class="keyword">for</span> (String values : map.values()) &#123;</span><br><span class="line">        System.out.println(values);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line">    map.clear();</span><br><span class="line">    map.put(<span class="string">"A"</span>, <span class="string">"1"</span>);</span><br><span class="line">    map.put(<span class="string">"B"</span>, <span class="string">"2"</span>);</span><br><span class="line">    map.put(<span class="string">"C"</span>, <span class="string">"3"</span>);</span><br><span class="line">    map.put(<span class="string">"D"</span>, <span class="string">"1"</span>);</span><br><span class="line">    map.put(<span class="string">"E"</span>, <span class="string">"2"</span>);</span><br><span class="line">    map.put(<span class="string">"F"</span>, <span class="string">"3"</span>);</span><br><span class="line">    map.put(<span class="string">"G"</span>, <span class="string">"1"</span>);</span><br><span class="line">    map.put(<span class="string">"H"</span>, <span class="string">"2"</span>);</span><br><span class="line">    map.put(<span class="string">"I"</span>, <span class="string">"3"</span>);</span><br><span class="line">    <span class="comment">//获取键和值的集合</span></span><br><span class="line">    <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        String key = entry.getKey();</span><br><span class="line">        String value = entry.getValue();</span><br><span class="line">        System.out.println(key + <span class="string">","</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; removeKeys = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!entry.getValue().equals(<span class="string">"1"</span>)) &#123;</span><br><span class="line">            removeKeys.add(entry.getKey());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (String removeKey : removeKeys) &#123;</span><br><span class="line">        map.remove(removeKey);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        String key = entry.getKey();</span><br><span class="line">        String value = entry.getValue();</span><br><span class="line">        System.out.println(key + <span class="string">","</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"========================="</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p>类图：</p>
-<p><img src="/assets/blogImg/TreeMap.png" alt=""></p>
-<p>TreeMap是基于红黑树实现的Map结构，其Entry类拥有到左/右叶子节点和父节点的引用，同时还记录了自己的颜色，所以TreeMap是有序不可重复的二叉树。</p>
-<p>注意：</p>
-<p>TreeMap的排序 是排的Key，和value没有任何关系 </p>
-<p>TreeMap要求 key必须是可排序的</p>
-<h3 id="TreeMap的构造方法"><a href="#TreeMap的构造方法" class="headerlink" title="TreeMap的构造方法"></a>TreeMap的构造方法</h3><ul>
-<li><p>TreeMap()</p>
-<p>默认构造函数。使用该构造函数，TreeMap中的元素按照自然排序进行排列。</p>
-</li>
-<li><p>TreeMap(Map&lt;? extends K, ? extends V&gt; copyFrom)</p>
-<p>该构造函数会调用putAll()将m中的所有元素添加到TreeMap中</p>
-</li>
-<li><p>TreeMap(Comparator&lt;? super K&gt; comparator)</p>
-<p>指定Tree的比较器</p>
-</li>
-<li><p>TreeMap(SortedMap&lt;K, ? extends V&gt; copyFrom)</p>
-<p>带SortedMap的构造函数，SortedMap会成为TreeMap的子集</p>
-</li>
-</ul>
-<h3 id="TreeMap的常用方法"><a href="#TreeMap的常用方法" class="headerlink" title="TreeMap的常用方法"></a>TreeMap的常用方法</h3><ul>
-<li><strong>ceilingEntry</strong>(K key)：返回指定的Key大于或等于的最小值的元素，如果没有，则返回null</li>
-<li><strong>ceilingKey</strong>(K key)： 返回指定的Key大于或等于的最小值的Key，如果没有，则返回null</li>
-<li><strong>clone</strong>()：返回集合的副本</li>
-<li><strong>comparator</strong>()：如果使用默认的比较器，就返回null，如果使用其他的比较器，则返回比较器的哈希码值</li>
-<li><strong>descendingKeySet</strong>()：返回集合的全部Key，并且是逆序的</li>
-<li><strong>descendingMap</strong>()：把集合逆序返回</li>
-<li><strong>firstEntry</strong>()：返回集合中最小Key的元素</li>
-<li><strong>firstKey</strong>()：返回集合中最小Key的key</li>
-<li><strong>floorEntry</strong>(K key)：与ceilingEntry()方法相反，是返回小于等于key的最大Key的元素</li>
-<li><strong>floorKey</strong>(K key)：返回小于等于key的最大Key的key</li>
-<li><strong>headMap</strong>(K toKey)：返回Key小于toKey的所有元素</li>
-</ul>
-<h3 id="TreeMap的学习Demo"><a href="#TreeMap的学习Demo" class="headerlink" title="TreeMap的学习Demo"></a>TreeMap的学习Demo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        TreeMap&lt;Student2, String&gt; tm = <span class="keyword">new</span> TreeMap&lt;Student2, String&gt;(<span class="keyword">new</span> Comparator&lt;Student2&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student2 s1, Student2 s2)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 主要条件</span></span><br><span class="line">                <span class="keyword">int</span> num = s1.getAge() - s2.getAge();</span><br><span class="line">                <span class="comment">// 次要条件</span></span><br><span class="line">                <span class="keyword">int</span> num2 = num == <span class="number">0</span> ? s1.getName().compareTo(s2.getName()) : num;</span><br><span class="line">                <span class="keyword">return</span> num2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建学生对象</span></span><br><span class="line">        Student2 s1 = <span class="keyword">new</span> Student2(<span class="string">"潘安"</span>, <span class="number">30</span>);</span><br><span class="line">        Student2 s2 = <span class="keyword">new</span> Student2(<span class="string">"柳下惠"</span>, <span class="number">35</span>);</span><br><span class="line">        Student2 s3 = <span class="keyword">new</span> Student2(<span class="string">"唐伯虎"</span>, <span class="number">33</span>);</span><br><span class="line">        Student2 s4 = <span class="keyword">new</span> Student2(<span class="string">"燕青"</span>, <span class="number">32</span>);</span><br><span class="line">        Student2 s5 = <span class="keyword">new</span> Student2(<span class="string">"唐伯虎"</span>, <span class="number">33</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 存储元素</span></span><br><span class="line">        tm.put(s1, <span class="string">"宋朝"</span>);</span><br><span class="line">        tm.put(s2, <span class="string">"元朝"</span>);</span><br><span class="line">        tm.put(s3, <span class="string">"明朝"</span>);</span><br><span class="line">        tm.put(s4, <span class="string">"清朝"</span>);</span><br><span class="line">        tm.put(s5, <span class="string">"汉朝"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        Set&lt;Student2&gt; set = tm.keySet();</span><br><span class="line">        <span class="keyword">for</span> (Student2 key : set) &#123;</span><br><span class="line">            String value = tm.get(key);</span><br><span class="line">            System.out.println(key.getName() + <span class="string">"---"</span> + key.getAge() + <span class="string">"---"</span></span><br><span class="line">                    + value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student2</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><p>类图：</p>
-<p><img src="/assets/blogImg/Hashtable.png" alt=""></p>
-<p>Hashtable 可以说是HashMap的前身（Hashtable自JDK1.0就存在，而HashMap乃至整个Map接口都是JDK1.2引入的新特性），其实现思 路与HashMap几乎完全一样，都是通过数组存储Entry，以key的哈希值计算Entry在数组中的index，用拉链法解决哈希冲突。二者最大的不同在于，Hashtable是线程安全的，其提供的方法几乎都是同步的。</p>
-<p>已基本不再使用，不做深入了解。</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><p>类图：</p>
-<p><img src="/assets/blogImg/LinkedHashMap.png" alt=""></p>
-<p>LinkedHashMap与HashMap非常类似，唯一的不同在于前者的Entry在HashMap.Entry的基础上增加了到前一个插入和后一个插入的Entry的引用，以实现能够按Entry的插入顺序进行遍历。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><table>
-    <tr>
-        <th>分类</th>
-        <th>实现</th>
-        <th>是否线程安全</th>  
-        <th>排序</th>  
-        <th>特点</th>  
-    </tr >
-    <tr >
-        <td rowspan="4">List</td>
-        <td>ArrayList</td>
-        <td>否</td>
-        <td>插入顺序</td>
-        <td>随机访问性能高</td>
-    </tr>
-    <tr>
-        <td>LinkList</td>
-        <td>否</td>
-        <td>插入顺序</td>
-        <td>随机访问性能低，头尾操作性能高，不占用冗余空间</td>
-    </tr>
-    <tr>
-        <td>Vector</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>并发性能不高，线程越多性能越差</td>
-    </tr>
-    <tr>
-        <td>CopyOnWriteArrayList</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>并发读性能高，占用冗余内存空间</td>
-    </tr>
-    <tr >
-        <td rowspan="6">Map</td>
-        <td>HashMap</td>
-        <td>否</td>
-        <td>无序</td>
-        <td>读写性能高，接近o(1)</td>
-    </tr>
-    <tr>
-        <td>LinkHashMap</td>
-        <td>否</td>
-        <td>插入顺序</td>
-        <td>可按照插入顺序遍历，性能与HashMap接近</td>
-    </tr>
-    <tr>
-        <td>HashTabel</td>
-        <td>是</td>
-        <td>无序</td>
-        <td>并发性能不高</td>
-    </tr>
-    <tr>
-        <td>ConcurrentHashMap</td>
-        <td>是</td>
-        <td>无序</td>
-        <td>并发性能比Table高</td>
-    </tr>
-    <tr>
-        <td>TreeMap</td>
-        <td>否</td>
-        <td>key升序或降序</td>
-        <td>有序读写性能o(logN)</td>
-    </tr>
-    <tr>
-        <td>ConcurrentSkipListMap</td>
-        <td>是</td>
-        <td>key升序或降序</td>
-        <td>线程安全，性能与线程数无关，占用内存空间较大</td>
-    </tr>
-    <tr >
-        <td rowspan="4">Set</td>
-        <td>HashSet</td>
-        <td>否</td>
-        <td>无序</td>
-        <td>同hashMap</td>
-    </tr>
-    <tr>
-        <td>LinkedHashSet</td>
-        <td>否</td>
-        <td>插入顺序</td>
-        <td>同LinkedHashMap</td>
-    </tr>
-     <tr>
-        <td>TreeSet</td>
-        <td>否</td>
-        <td>对象升序或者降序</td>
-        <td>同TreeMap</td>
-    </tr>
-     <tr>
-        <td>ConcurrentSkipListSet</td>
-        <td>否</td>
-        <td>无序</td>
-        <td>同ConcurrentSkipListMap    </td>
-    </tr>
-    <tr >
-        <td rowspan="5">Queue</td>
-        <td>ConcurrentLinkedQueue</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>非阻塞</td>
-    </tr>
-    <tr>
-        <td>LinkedBlockingQueue</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>阻塞无界</td>
-    </tr>
-    <tr>
-        <td>ArrayBlockingQueue</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>阻塞有界</td>
-    </tr>
-    <tr>
-        <td>SynchronousQueue</td>
-        <td>是</td>
-        <td>--</td>
-        <td>向其中插入元素的线程会阻塞，直到有另一个线程将这个元素取走，反之从其中取元素的线程也会阻塞，直到有另一个线程插入元素</td>
-    </tr>
-    <tr>
-        <td>PriorityQueue</td>
-        <td>否</td>
-        <td>对象自然序，或自定义排序</td>
-        <td>根据优先级排序，保证自然序或者自定义序的最小对象先出列</td>
-    </tr>
-     <tr >
-        <td rowspan="2">DeQueue</td>
-        <td>ConcurrentLinkedDeQueue</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>非阻塞</td>
-    </tr>
-    <tr>
-        <td>LinkedBlockingDeQueue</td>
-        <td>是</td>
-        <td>插入顺序</td>
-        <td>阻塞无界</td>
-    </tr>
-
-<p>​    </p>
-<p>​<br>​    </p>
-<pre><code>&lt;/table&gt;</code></pre>
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java集合(Java Util包)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/15/Java%E9%9B%86%E5%90%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Maven坐标"><span class="toc-number">1.</span> <span class="toc-text">一、Maven坐标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Maven仓库"><span class="toc-number">2.</span> <span class="toc-text">二、Maven仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、Maven生命周期"><span class="toc-number">3.</span> <span class="toc-text">三、Maven生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建阶段由插件目标构成"><span class="toc-number">4.</span> <span class="toc-text">构建阶段由插件目标构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clean-生命周期"><span class="toc-number">5.</span> <span class="toc-text">Clean 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Default-Build-生命周期"><span class="toc-number">6.</span> <span class="toc-text">Default (Build) 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Site-生命周期"><span class="toc-number">7.</span> <span class="toc-text">Site 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven把本地Jar打到仓库"><span class="toc-number">8.</span> <span class="toc-text">Maven把本地Jar打到仓库</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="Post-Java异常处理" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">Java异常处理</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-05-14T16:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java的异常"><a href="#Java的异常" class="headerlink" title="Java的异常"></a>Java的异常</h1><p><img src="/assets/blogImg/yichang.png" alt=""></p>
-<p>这是异常的类图。</p>
-<p><strong>Throwable</strong>是Error和Exception的父类，用来定义所有可以作为异常被抛出来的类。</p>
-<p><strong>Erro</strong>r和<strong>Exception</strong>区分：</p>
-<p><strong>Error</strong>:编译时错误和系统错误，系统错误在除特殊情况下，都不需要你来关心，基本不会出现。而编译时错误，如果你使用了编译器，那么编译器会提示。</p>
-<p><strong>Exception</strong>:是可以被抛出的基本类型，我们需要主要关心的也是这个类。</p>
-<p>Exception又分为RunTimeException和其他Exception。</p>
-<p>RunTimeException和其他Exception区分：</p>
-<ol>
-<li>其他Exception，受检查异常。可以理解为错误，必须要开发者解决以后才能编译通过，解决的方法有两种，1：throw到上层，2，try-catch处理。</li>
-<li>RunTimeException：运行时异常，又称不受检查异常，所以在代码中可能会有RunTimeException时Java编译检查时不会告诉你有这个异常，但是在实际运行代码时则会暴露出来，比如经典的1/0，空指针等。如果不处理也会被Java自己处理。</li>
-</ol>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>通常使用try catch finally；</p>
-<h2 id="try-catch"><a href="#try-catch" class="headerlink" title="try/catch"></a>try/catch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">   &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="throws-throw"><a href="#throws-throw" class="headerlink" title="throws/throw"></a>throws/throw</h2><ul>
-<li>如果一个方法没有捕获一个检查性异常，那么该方法必须使用 throws 关键字来声明</li>
-<li>throws 关键字放在方法签名的尾部</li>
-<li>也可以使用 throw 关键字抛出一个异常</li>
-<li>一个方法可以声明抛出多个异常，多个异常之间用逗号隔开</li>
-</ul>
-<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><ul>
-<li>finally 关键字用来创建在 try 代码块后面执行的代码块。</li>
-<li>无论是否发生异常，finally 代码块中的代码总会被执行。</li>
-<li>在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。</li>
-<li>finally 代码块出现在 catch 代码块最后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Throwable下有两个方法需要常用"><a href="#Throwable下有两个方法需要常用" class="headerlink" title="Throwable下有两个方法需要常用"></a>Throwable下有两个方法需要常用</h2><ul>
-<li>public String getMessage() //返回关于发生的异常的详细信息</li>
-<li>public void printStackTrace()//打印toString()结果和栈层次到System.err，即错误输出流</li>
-</ul>
-<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><p>一般会选择继承Exception和RuntimeException，如果不要求调用者一定要处理抛出的异常，就继承RuntimeException。</p>
-<p>Student类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//给Student类的setAge方法做判断</span></span><br><span class="line">        <span class="keyword">if</span>(age&lt;<span class="number">0</span> || age&gt;<span class="number">130</span>)&#123;</span><br><span class="line">            <span class="comment">//throw new ArithmeticException("年龄输入不符合规则");</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AgeException(<span class="string">"年龄输入不符合规则"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>自定义的异常类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeException</span><span class="params">(String msg)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        stu.setAge(-<span class="number">150</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"程序运行结束"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">com.codeyang.jrxtraining.ExceptionStudy.AgeException: 年龄输入不符合规则</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.Student.setAge(Student.java:<span class="number">20</span>)</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.DiyExceptionDemo.main(DiyExceptionDemo.java:<span class="number">13</span>)</span><br><span class="line">程序运行结束</span><br></pre></td></tr></table></figure>
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java异常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="get-时间格式转换" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/17/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">时间格式转化</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/03/17/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2020-03-17T14:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>时间格式转换的几种方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> Date nowdate=<span class="keyword">new</span> Date();</span><br><span class="line">	</span><br><span class="line"> <span class="comment">//DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");</span></span><br><span class="line">SimpleDateFormat simpleDate = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line"><span class="comment">//comment.setRelDate(Timestamp.valueOf(simpleDate.format(nowdate)));</span></span><br><span class="line">driver.setRelDate(Timestamp.valueOf(simpleDate.format(nowdate)));</span><br></pre></td></tr></table></figure>
-
-
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">零碎知识点</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/17/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-AQS详解（面试）" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/03/AQS%E8%AF%A6%E8%A7%A3%EF%BC%88%E9%9D%A2%E8%AF%95%EF%BC%89/">AQS详解</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/03/03/AQS%E8%AF%A6%E8%A7%A3%EF%BC%88%E9%9D%A2%E8%AF%95%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-03-03T02:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>AQS原理</strong><br> AQS：AbstractQuenedSynchronizer抽象的队列式同步器。是除了java自带的synchronized关键字之外的锁机制。<br> AQS的全称为（AbstractQueuedSynchronizer），这个类在java.util.concurrent.locks包</p>
-<p><strong>AQS的核心思想</strong>是，如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并将共享资源设置为锁定状态，如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制，这个机制AQS是用CLH队列锁实现的，即将暂时获取不到锁的线程加入到队列中。<br> CLH（Craig，Landin，and Hagersten）队列是一个虚拟的双向队列，虚拟的双向队列即不存在队列实例，仅存在节点之间的关联关系。<br> <strong>AQS是将每一条请求共享资源的线程封装成一个CLH锁队列的一个结点（Node），来实现锁的分配。</strong></p>
-<p>用大白话来说，AQS就是基于CLH队列，用volatile修饰共享变量state，线程通过CAS去改变状态符，成功则获取锁成功，失败则进入等待队列，等待被唤醒。</p>
-<p><strong>注意：AQS是自旋锁：</strong>在等待唤醒的时候，经常会使用自旋（while(!cas())）的方式，不停地尝试获取锁，直到被其他线程获取成功</p>
-<p><strong>实现了AQS的锁有：自旋锁、互斥锁、读锁写锁、条件产量、信号量、栅栏都是AQS的衍生物</strong><br> AQS实现的具体方式如下：<br> <img src="/assets/blogImg/AQS.png" alt="AQS"><br> 如图示，AQS维护了一个volatile int state和一个FIFO线程等待队列，多线程争用资源被阻塞的时候就会进入这个队列。state就是共享资源，其访问方式有如下三种：<br> getState();setState();compareAndSetState();</p>
-<p>AQS 定义了两种资源共享方式：<br> 1.<strong>Exclusive</strong>：独占，只有一个线程能执行，如ReentrantLock<br> 2.<strong>Share</strong>：共享，多个线程可以同时执行，如Semaphore、CountDownLatch、ReadWriteLock，CyclicBarrier</p>
-<p>不同的自定义的同步器争用共享资源的方式也不同。</p>
-<h5 id="AQS底层使用了模板方法模式"><a href="#AQS底层使用了模板方法模式" class="headerlink" title="AQS底层使用了模板方法模式"></a>AQS底层使用了模板方法模式</h5><p>同步器的设计是基于模板方法模式的，如果需要自定义同步器一般的方式是这样（模板方法模式很经典的一个应用）：</p>
-<ol>
-<li>使用者继承AbstractQueuedSynchronizer并重写指定的方法。（这些重写方法很简单，无非是对于共享资源state的获取和释放）</li>
-<li>将AQS组合在自定义同步组件的实现中，并调用其模板方法，而这些模板方法会调用使用者重写的方法。<br> 这和我们以往通过实现接口的方式有很大区别，这是模板方法模式很经典的一个运用。</li>
-</ol>
-<p>自定义同步器在实现的时候只需要实现共享资源state的获取和释放方式即可，至于具体线程等待队列的维护，AQS已经在顶层实现好了。自定义同步器实现的时候主要实现下面几种方法：<br> isHeldExclusively()：该线程是否正在独占资源。只有用到condition才需要去实现它。<br> tryAcquire(int)：独占方式。尝试获取资源，成功则返回true，失败则返回false。<br> tryRelease(int)：独占方式。尝试释放资源，成功则返回true，失败则返回false。<br> tryAcquireShared(int)：共享方式。尝试获取资源。负数表示失败；0表示成功，但没有剩余可用资源；正数表示成功，且有剩余资源。<br> tryReleaseShared(int)：共享方式。尝试释放资源，如果释放后允许唤醒后续等待结点返回true，否则返回false。</p>
-<p>ReentrantLock为例，（可重入独占式锁）：state初始化为0，表示未锁定状态，A线程lock()时，会调用tryAcquire()独占锁并将state+1.之后其他线程再想tryAcquire的时候就会失败，直到A线程unlock（）到state=0为止，其他线程才有机会获取该锁。A释放锁之前，自己也是可以重复获取此锁（state累加），这就是可重入的概念。<br> 注意：获取多少次锁就要释放多少次锁，保证state是能回到零态的。</p>
-<p>以CountDownLatch为例，任务分N个子线程去执行，state就初始化  为N，N个线程并行执行，每个线程执行完之后countDown（）一次，state就会CAS减一。当N子线程全部执行完毕，state=0，会unpark()主调用线程，主调用线程就会从await()函数返回，继续之后的动作。</p>
-<p>一般来说，自定义同步器要么是独占方法，要么是共享方式，他们也只需实现tryAcquire-tryRelease、tryAcquireShared-tryReleaseShared中的一种即可。但AQS也支持自定义同步器同时<strong>实现独占和共享两种方式，如ReentrantReadWriteLock。</strong><br> 在acquire() acquireShared()两种方式下，线程在等待队列中都是忽略中断的，<strong>acquireInterruptibly()/acquireSharedInterruptibly()是支持响应中断</strong>的。</p>
-<p><strong>AQS的简单应用</strong><br> Mutex：不可重入互斥锁，锁资源（state）只有两种状态：0：未被锁定；1：锁定。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mutex</span> <span class="keyword">implements</span> <span class="title">Lock</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 自定义同步器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Sync</span> <span class="keyword">extends</span> <span class="title">AbstractQueuedSynchronizer</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 判断是否锁定状态</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isHeldExclusively</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> getState() == <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 尝试获取资源，立即返回。成功则返回true，否则false。</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">assert</span> acquires == <span class="number">1</span>; <span class="comment">// 这里限定只能为1个量</span></span><br><span class="line">            <span class="keyword">if</span> (compareAndSetState(<span class="number">0</span>, <span class="number">1</span>)) &#123;<span class="comment">//state为0才设置为1，不可重入！</span></span><br><span class="line">                setExclusiveOwnerThread(Thread.currentThread());<span class="comment">//设置为当前线程独占资源</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 尝试释放资源，立即返回。成功则为true，否则false。</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryRelease</span><span class="params">(<span class="keyword">int</span> releases)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">assert</span> releases == <span class="number">1</span>; <span class="comment">// 限定为1个量</span></span><br><span class="line">            <span class="keyword">if</span> (getState() == <span class="number">0</span>)<span class="comment">//既然来释放，那肯定就是已占有状态了。只是为了保险，多层判断！</span></span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalMonitorStateException();</span><br><span class="line">            setExclusiveOwnerThread(<span class="keyword">null</span>);</span><br><span class="line">            setState(<span class="number">0</span>);<span class="comment">//释放资源，放弃占有状态</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 真正同步类的实现都依赖继承于AQS的自定义同步器！</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Sync sync = <span class="keyword">new</span> Sync();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//lock&lt;--&gt;acquire。两者语义一样：获取资源，即便等待，直到成功才返回。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sync.acquire(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//tryLock&lt;--&gt;tryAcquire。两者语义一样：尝试获取资源，要求立即返回。成功则为true，失败则为false。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sync.tryAcquire(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//unlock&lt;--&gt;release。两者语文一样：释放资源。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sync.release(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//锁是否占有状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLocked</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sync.isHeldExclusively();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/03/AQS%E8%AF%A6%E8%A7%A3%EF%BC%88%E9%9D%A2%E8%AF%95%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-红黑树深入剖析之Java实现" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/02/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B9%8BJava%E5%AE%9E%E7%8E%B0/">红黑树深入剖析及Java实现</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/03/02/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B9%8BJava%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2020-03-01T16:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>红黑树是平衡二叉查找树的一种。为了深入理解红黑树，我们需要从二叉查找树开始讲起。</p>
-<h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><p>二叉查找树（Binary Search Tree，简称BST）是一棵二叉树，它的左子节点的值比父节点的值要小，右节点的值要比父节点的值大。它的高度决定了它的查找效率。
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/02/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B9%8BJava%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="get-给希望留点空间" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/%E7%BB%99%E5%B8%8C%E6%9C%9B%E7%95%99%E7%82%B9%E7%A9%BA%E9%97%B4/">给希望留点空间</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/03/01/%E7%BB%99%E5%B8%8C%E6%9C%9B%E7%95%99%E7%82%B9%E7%A9%BA%E9%97%B4/" class="archive-article-date">
-  	<time datetime="2020-03-01T10:07:53.211Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​                                                                <strong>给希望留点空间</strong></p>
-<p>​                                                                                                                                            –<strong>塔斯格丝</strong></p>
-<p>西西里监狱是一级监狱，虽然坐落在城市的中央，但却感受不到丝毫的繁华与自由。卡洛奇自杀过很多次，可惜，狱警连他自杀的权利都给剥夺了
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">好文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/01/%E7%BB%99%E5%B8%8C%E6%9C%9B%E7%95%99%E7%82%B9%E7%A9%BA%E9%97%B4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="get-随笔 2020-03-15" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/25/%E9%9A%8F%E7%AC%94%202020-03-15/">如何面对</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/25/%E9%9A%8F%E7%AC%94%202020-03-15/" class="archive-article-date">
-  	<time datetime="2020-02-25T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个世界上根本不存在“不会”这件事，当你失去所有依靠后，你自然什么都会了。</p>
-
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/25/%E9%9A%8F%E7%AC%94%202020-03-15/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-抓包自动签到" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/%E6%8A%93%E5%8C%85%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/">指点天下健康日志-抓包破解</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/23/%E6%8A%93%E5%8C%85%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/" class="archive-article-date">
-  	<time datetime="2020-02-23T03:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为什么会有这篇博客的诞生呢？故事还得从一只蝙蝠说起</p>
-<p>…</p>
-<p>疫情期间每天各种签到  工作的，学校的，社区的，烦不胜烦，偶尔总会忘了签到就会带来很严重的后果
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/23/%E6%8A%93%E5%8C%85%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-github高级搜索" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/github%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2/">github高级搜索</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/23/github%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2/" class="archive-article-date">
-  	<time datetime="2020-02-23T03:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>GitHub 提供高级搜索方式。</p>
-<p>一、明确搜索仓库标题、仓库描述、README</p>
-<p>1.只想查找仓库名称包含XX的仓库。语法：</p>
-<p>　　 in:name 关键词</p>
-<p>2.查找描述的内容</p>
-<p>　　in:descripton 关键词</p>
-<p>3.查README文件包含特定关键词</p>
-<p>　　in:readme 关键词</p>
-<p>二、明确搜索 star、fork 数大于多少的</p>
-<ol>
-<li>star 数大于 1000 的XX 仓库</li>
-</ol>
-<p>　　stars: &gt; 数字 关键字</p>
-<p>2.star 数在某个区间 的XX 仓库</p>
-<p>　　stars: 10..20 关键词</p>
-<p> 三、明确搜索仓库大小的</p>
-<p>搜索限定size的仓库</p>
-<p>　　size:&gt;=5000 关键词</p>
-<p>注意：这个数字代表K, 5000代表着5M</p>
-<p>四、明确仓库是否还在更新维护</p>
-<p>　　指定时间之前或之后创建或更新的仓库</p>
-<p> 　pushed:&gt;2019-01-03 关键字  //在xx时间后还有更新</p>
-<p>　　 created:&gt;2019-01-03 关键字  //在xx时间后创建</p>
-<p>五、明确搜索仓库的 LICENSE</p>
-<p>　　寻找协议为 Apache License 2 的代码</p>
-<p>　　license:apache-2.0 关键词</p>
-<p>六、明确搜索仓库的语言</p>
-<p>　　language:java 关键词</p>
-<p>七、明确搜索某个人或组织的仓库</p>
-<p>​    user:userName</p>
-<p>   user:userName language:java</p>
-<p>   org:spring-cloud</p>
-
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/23/github%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
+  
+
+  
+
+  
 
 
           </div>
@@ -1832,8 +568,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
