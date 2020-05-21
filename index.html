@@ -166,6 +166,265 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="Post-Java日期时间" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/Java%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/">Java日期时间</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/05/20/Java%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/" class="archive-article-date">
+  	<time datetime="2020-05-20T03:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h1><h2 id="Date-（java-util-Date）"><a href="#Date-（java-util-Date）" class="headerlink" title="Date （java.util.Date）"></a>Date （java.util.Date）</h2><p>类图：<img src="/assets/blogImg/JavaUtilDate.png" alt=""></p>
+<p>从javadoc 上来看，Date是精确到微秒的。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>Date() : 分配 Date 对象并初始化此对象，以表示分配它的时间（精确到毫秒）。</p>
+<p>Date(long date)：分配 Date 对象并初始化此对象，以表示自从标准基准时间，即 1970 年 1 月 1 日 00:00:00 GMT）以来的指定毫秒数。</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li><p><code>boolean after(Date date)</code></p>
+<p>若当调用此方法的Date对象在指定日期之前返回true,否则返回false。</p>
+</li>
+<li><p><code>boolean before(Date date)</code></p>
+<p>若当调用此方法的Date对象在指定日期之前返回true,否则返回false。</p>
+</li>
+<li><p><code>int compareTo(Date date)</code></p>
+<p>比较当调用此方法的Date对象和指定日期。两者相等时候返回0。调用对象在指定日期之前则返回负数。调用对象在指定日期之后则返回正数。</p>
+</li>
+<li><p><code>long getTime( )</code></p>
+<p>返回自 1970 年 1 月 1 日 00:00:00 GMT 以来此 Date 对象表示的毫秒数。</p>
+</li>
+<li><p><code>String toString( )</code></p>
+<p>转换Date对象为String表示形式，并返回该字符串。</p>
+</li>
+<li><p><code>equals(Object obj)</code></p>
+<p> 比较两个日期的相等性。</p>
+</li>
+</ul>
+<h3 id="学习Demo"><a href="#学习Demo" class="headerlink" title="学习Demo"></a>学习Demo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建日期的对象</span></span><br><span class="line">Date Nowdate = <span class="keyword">new</span> Date();</span><br><span class="line">SimpleDateFormat f = <span class="keyword">new</span> SimpleDateFormat( <span class="string">"yyyy 年 M 月 dd 号 E HH 点 mm 分 ss 秒"</span>);</span><br><span class="line">System.out.println(Nowdate);</span><br><span class="line">System.out.println(<span class="string">"今天是："</span>+f.format(Nowdate));</span><br><span class="line"><span class="comment">//一天的毫秒数</span></span><br><span class="line"><span class="keyword">long</span> longms  =<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>;</span><br><span class="line"><span class="comment">//当前时间的毫秒数</span></span><br><span class="line"><span class="keyword">long</span> longcms   = System.currentTimeMillis();</span><br><span class="line"><span class="comment">//获得昨天当前时间</span></span><br><span class="line">Date yesterday = <span class="keyword">new</span> Date(longcms-longms);</span><br><span class="line">System.out.println(yesterday);</span><br><span class="line">System.out.println(<span class="string">"昨天是："</span>+f.format(yesterday));</span><br><span class="line"><span class="comment">//若当调用此方法的Date对象在指定日期之后返回true,否则返回false。</span></span><br><span class="line">Boolean resed = Nowdate.after(yesterday);</span><br><span class="line"><span class="keyword">if</span>(resed)&#123;</span><br><span class="line">    System.out.println(f.format(yesterday)+<span class="string">"是过往"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//若当调用此方法的Date对象在指定日期之前返回true,否则返回false。</span></span><br><span class="line">Boolean resing = yesterday.before(Nowdate);</span><br><span class="line"><span class="keyword">if</span>(resing)&#123;</span><br><span class="line">    System.out.println(f.format(Nowdate)+<span class="string">"是当下"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//比较当调用此方法的Date对象和指定日期。两者相等时候返回0。调用对象在指定日期之前则返回负数。调用对象在指定日期之后则返回正数。</span></span><br><span class="line"><span class="keyword">int</span> ct1 = yesterday.compareTo(yesterday);</span><br><span class="line">System.out.println(ct1);</span><br><span class="line"><span class="keyword">int</span> ct2 = yesterday.compareTo(Nowdate);</span><br><span class="line">System.out.println(ct2);</span><br><span class="line"><span class="keyword">int</span> ct3 = Nowdate.compareTo(yesterday);</span><br><span class="line">System.out.println(ct3);</span><br><span class="line"><span class="comment">// 比较两个日期的相等性。</span></span><br><span class="line">System.out.println(yesterday.equals(Nowdate));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Date-java-sql-Date"><a href="#Date-java-sql-Date" class="headerlink" title="Date(java.sql.Date)"></a>Date(java.sql.Date)</h3><p>类图：<img src="/assets/blogImg/JavaSQLDate.png" alt=""></p>
+<p>java.sql.Date 是对应sql中的Date类型的。</p>
+<p>日期格式为：年月日[只存储日期数据不存储时间数据] 。</p>
+<p> java.sql.Date类屏蔽了java.util.Date类的时间有关的方法（形如：hh:mm:ss）,因此，不可以通过这个类访问时间有关的信息。</p>
+<h3 id="Time-java-sql-Time-Time"><a href="#Time-java-sql-Time-Time" class="headerlink" title="Time(java.sql.Time)Time"></a>Time(java.sql.Time)Time</h3><p>类图：<img src="/assets/blogImg/JavaSQLTime.png" alt=""></p>
+<p>可见java.sql.Time是继承于java.util.Date，是用对Sql 中Time类型的支持的，其精度，是足以存放sql中的Time类型的。</p>
+<p>java.sql.Time日期格式为：时分秒 。</p>
+<p> Java.sql.Time类屏蔽了java.util.Date的日期有关的字段（形如：yyyy-MM-dd）,因此，不能通过这个类访问日期有关的信息。</p>
+<h3 id="Timestamp-java-sql-Timestamp"><a href="#Timestamp-java-sql-Timestamp" class="headerlink" title="Timestamp (java.sql.Timestamp)"></a>Timestamp (java.sql.Timestamp)</h3><p>类图：<img src="/assets/blogImg/JavaSQLTimestamp.png" alt=""></p>
+<p> 同样java.sql.Timestamp也是继承于java.util.Date，它是对sql中Timestamp的支持，精度达到纳秒级。它是由java.util.Date与单独的纳秒数值共同组合而成的。</p>
+<p>java.sql.Timestamp日期格式为：年月日时分秒纳秒（毫微秒）。</p>
+<p>Java.sql.Timestamp字段则对java.util.Date这个类进行了扩充，它在java.util.Date类的基础上增加了毫秒的时间访问控制，可以通过<code>getNanos（）</code>方法去获取时间的毫微秒数（注意此处获取的时间是以毫微秒为单位的,1秒等于十亿毫微秒）</p>
+<h1 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h1><p>Java库提供了两个用于格式化日期的类：</p>
+<ul>
+<li><p>java.text.DateFormat</p>
+</li>
+<li><p>java.text.SimpleDateFormat</p>
+<p><code>DateFormat</code>是一个抽象类，我们可以使用<code>DateFormat</code>该类以预定义格式设置日期格式。</p>
+</li>
+</ul>
+<p>由于它是抽象的，因此我们无法对<code>DateFormat</code>使用<code>new</code>创建实例。</p>
+<p>我们必须使用其<code>getXxxInstance()</code>方法之一来创建新实例。</p>
+<p>​        <code>SimpleDateFormat</code>继承了<code>DateFormat</code>，要创建自定义日期格式，我们可以使用<code>SimpleDateFormat</code>类。</p>
+<h2 id="DateFormat"><a href="#DateFormat" class="headerlink" title="DateFormat"></a>DateFormat</h2><p>类图：<img src="/assets/blogImg/DateFormat.png" alt=""></p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
+<li><p><code>DateFormat()</code></p>
+<p>创建一个新的日期格式。</p>
+</li>
+</ul>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li><p><code>String format(Date date)</code>–最常用</p>
+<p>将 Date 格式化日期/时间字符串</p>
+</li>
+<li><p><code>Calendar getCalendar()</code></p>
+<p>获取与此日期/时间格式相关联的日历</p>
+</li>
+<li><p><code>static DateFormat getDateInstance()</code></p>
+<p>获取具有默认格式化风格和默认语言环境的日期格式</p>
+</li>
+<li><p><code>static DateFormat getDateInstance(int style)</code></p>
+<p>获取具有指定格式化风格和默认语言环境的日期格式</p>
+</li>
+<li><p><code>static DateFormat getDateInstance(int style,
+Locale locale)</code></p>
+<p>获取具有指定格式化风格和指定语言环境的日期格式</p>
+</li>
+<li><p><code>static DateFormat getDateTimeInstance()</code></p>
+<p>获取具有默认格式化风格和默认语言环境的日期/时间<br>格式</p>
+</li>
+<li><p><code>static DateFormat getDateTimeInstance(int
+dateStyle,int timeStyle)</code></p>
+<p>获取具有指定日期/时间格式化风格和默认语言环境的<br>日期/时间格式</p>
+</li>
+<li><p><code>static DateFormat getDateTimeInstance(int
+dateStyle,int timeStyle,Locale locale)</code></p>
+<p>获取具有指定日期/时间格式化风格和指定语言环境的<br>日期/时间格式</p>
+</li>
+<li><p><code>static DateFormat getDateTimeInstance(int
+dateStyle,int timeStyle,Locale locale)</code></p>
+<p>获取具有默认格式化风格和默认语言环境的时间格式</p>
+</li>
+<li><p><code>static DateFormat getTimeInstance(int style)</code></p>
+<p>获取具有指定格式化风格和默认语言环境的时间格式</p>
+</li>
+<li><p><code>static DateFormat getTimeInstance(int style,
+Locale locale)</code></p>
+<p>获取具有指定格式化风格和指定语言环境的时间格式</p>
+</li>
+<li><p><code>void setCalendar(Calendar newCalendar)</code></p>
+<p>为此格式设置日历</p>
+</li>
+<li><p><code>Date parse(String source)</code></p>
+<p>将给定的字符串解析成日期/时间</p>
+</li>
+</ul>
+<h3 id="DateFormat学习Demo"><a href="#DateFormat学习Demo" class="headerlink" title="DateFormat学习Demo"></a>DateFormat学习Demo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Date today = <span class="keyword">new</span> Date();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以默认语言环境格式打印日期</span></span><br><span class="line">    Locale defaultLocale = Locale.getDefault();</span><br><span class="line">    printLocaleDetails(defaultLocale);</span><br><span class="line">    printDate(defaultLocale, today);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以法语 打印日期</span></span><br><span class="line">    printLocaleDetails(Locale.FRANCE);</span><br><span class="line">    printDate(Locale.FRANCE, today);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLocaleDetails</span><span class="params">(Locale locale)</span> </span>&#123;</span><br><span class="line">    String languageCode = locale.getLanguage();</span><br><span class="line">    String languageName = locale.getDisplayLanguage();</span><br><span class="line">    String countryCode = locale.getCountry();</span><br><span class="line">    String countryName = locale.getDisplayCountry();</span><br><span class="line">    <span class="comment">// 打印语言环境信息</span></span><br><span class="line">    System.out.println(<span class="string">"Language: "</span> + languageName + <span class="string">"("</span> + languageCode + <span class="string">"); "</span></span><br><span class="line">            + <span class="string">"Country: "</span> + countryName + <span class="string">"("</span> + countryCode + <span class="string">")"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printDate</span><span class="params">(Locale locale, Date date)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//SHORT，FULL，MEDIUM，LONG</span></span><br><span class="line">    DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, locale);</span><br><span class="line">    String formattedDate = formatter.format(date);</span><br><span class="line">    System.out.println(<span class="string">"SHORT: "</span> + formattedDate);</span><br><span class="line"></span><br><span class="line">    formatter = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);</span><br><span class="line">    formattedDate = formatter.format(date);</span><br><span class="line">    System.out.println(<span class="string">"MEDIUM: "</span> + formattedDate+<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h3><p>类图：</p>
+<p><img src="/assets/blogImg/SimpleDateFormate.png" alt=""></p>
+<h4 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h4><ul>
+<li><p><code>SimpleDateFormat()</code></p>
+<p>用默认的格式和默认的语言环境构造 SimpleDateFormat。</p>
+</li>
+<li><p><code>SimpleDateFormat(String pattern)</code></p>
+<p>用指定的格式和默认的语言环境构造 SimpleDateF ormat。</p>
+</li>
+<li><p><code>SimpleDateFormat(String pattern,Locale locale)</code></p>
+<p>用指定的格式和指定的语言环境构造 SimpleDateF ormat。</p>
+</li>
+<li><p><code>SimpleDateFormat(String pattern, DateFormatSymbols formatSymbols)</code></p>
+<p>用给定的模式和日期符号构造 SimpleDateFormat。</p>
+</li>
+</ul>
+<h4 id="自定义格式中常用的字母及含义"><a href="#自定义格式中常用的字母及含义" class="headerlink" title="自定义格式中常用的字母及含义"></a>自定义格式中常用的字母及含义</h4><ul>
+<li><p>y:年份。一般用 yy 表示两位年份，yyyy 表示 4 位年份</p>
+</li>
+<li><p>M:月份。一般用 MM 表示月份，如果使用 MMM，则会根据语言环境显示不同语言的月份</p>
+</li>
+<li><p>d:月份中的天数。一般用 dd 表示天数</p>
+</li>
+<li><p>D:年份中的天数。表示当天是当年的第几天， 用 D 表示</p>
+</li>
+<li><p>E:星期几。用 E 表示，会根据语言环境的不同， 显示不同语言的星期几</p>
+</li>
+<li><p>H:一天中的小时数（0~23)。一般用 HH 表示小时数</p>
+</li>
+<li><p>h:一天中的小时数（1~12)。一般使用 hh 表示小时数</p>
+</li>
+<li><p>m:分钟数。一般使用 mm 表示分钟数</p>
+</li>
+<li><p>s:秒数。一般使用 ss 表示秒数</p>
+</li>
+<li><p>S:毫秒数。一般使用 SSS 表示毫秒数</p>
+</li>
+</ul>
+<h4 id="SimpleDateFormat学习Demo"><a href="#SimpleDateFormat学习Demo" class="headerlink" title="SimpleDateFormat学习Demo"></a>SimpleDateFormat学习Demo</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个Date对象，获取当前时间</span></span><br><span class="line">    Date now = <span class="keyword">new</span> Date();</span><br><span class="line">    <span class="comment">// 指定格式化格式</span></span><br><span class="line">    SimpleDateFormat f = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"现在是"</span> + <span class="string">"yyyy 年 M 月 dd 号 E HH 点 mm 分 ss 秒"</span>);</span><br><span class="line">    <span class="comment">// 将当前时间袼式化为指定的格式</span></span><br><span class="line">    System.out.println(f.format(now));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Java8-Date-Time-API"><a href="#Java8-Date-Time-API" class="headerlink" title="Java8-Date Time API"></a>Java8-Date Time API</h1><p>java为什么要重新修订日期包？</p>
+<p>在旧版的 Java 中，日期时间 API 存在诸多问题，其中有：</p>
+<ul>
+<li><strong>非线程安全</strong> − java.util.Date 是非线程安全的，所有的日期类都是可变的，这是Java日期类最大的问题之一。</li>
+<li><strong>设计很差</strong> −  Java的日期/时间类的定义并不一致，在java.util和java.sql的包中都有日期类，此外用于格式化和解析的类在java.text包中定义。java.util.Date同时包含日期和时间，而java.sql.Date仅包含日期，将其纳入java.sql包并不合理。另外这两个类都有相同的名字，这本身就是一个非常糟糕的设计。</li>
+<li><strong>时区处理麻烦</strong> − 日期类并不提供国际化，没有时区支持，因此Java引入了java.util.Calendar和java.util.TimeZone类，但他们同样存在上述所有的问题。</li>
+</ul>
+<p>Java 8日期/时间API是为了克服旧的日期/时间API实现中所有的缺陷，一些设计原则如下：</p>
+<ul>
+<li>不变性：新的日期/时间API中，所有的类都是不可变的，这种设计有利于并发编程。</li>
+<li>关注点分离：新的API将人可读的日期时间和机器时间（unix timestamp）明确分离，它为日期（Date）、时间（Time）、日期时间（DateTime）、时间戳（unix timestamp）以及时区定义了不同的类。</li>
+<li>清晰：在所有的类中，方法都被明确定义用以完成相同的行为。举个例子，要拿到当前实例我们可以使用now()方法，在所有的类中都定义了format()和parse()方法，而不是像以前那样专门有一个独立的类。为了更好的处理问题，所有的类都使用了工厂模式和策略模式，一旦你使用了其中某个类的方法，与其他类协同工作并不困难。</li>
+<li>实用操作：所有新的日期/时间API类都实现了一系列方法用以完成通用的任务，如：加、减、格式化、解析、从日期/时间中提取单独部分等操作。</li>
+<li>可扩展性：新的日期/时间API是工作在ISO-8601日历系统上的，但我们也可以将其应用在非IOS的日历上。</li>
+</ul>
+<h2 id="常用类及其使用"><a href="#常用类及其使用" class="headerlink" title="常用类及其使用"></a>常用类及其使用</h2><p>新的日期时间工具全部都在 <code>java.time</code> 及其子包中；</p>
+<p>时间大致可以分为三个部分：日期、时间、时区；其中日期又细分为年、月、日；时间又细分为时、分、秒。</p>
+<p>一般机器时间用从 1970-01-01T00:00 到现在的秒数来表示时间; ，时间戳指的是秒数，而不是毫秒数。</p>
+<p>几乎所有的时间对象都实现了 <code>Temporal</code> 接口，所以接口参数一般都是 <code>Temporal</code></p>
+<ul>
+<li><strong>Instant：</strong> 表示时间线上的一个点，参考点是标准的Java纪元(epoch)，即1970-01-01T00：00：00Z（1970年1月1日00:00 GMT）</li>
+<li><strong>LocalDate：</strong> 日期值对象如 2019-09-22</li>
+<li><strong>LocalTime：</strong>时间值对象如 21:25:36</li>
+<li><strong>LocalDateTime：</strong>日期+时间值对象</li>
+<li><strong>ZoneId：</strong>时区</li>
+<li><strong>ZonedDateTime：</strong>日期+时间+时区值对象</li>
+<li><strong>DateTimeFormatter：</strong>用于日期时间的格式化</li>
+<li><strong>Period：</strong>用于计算日期间隔</li>
+<li><strong>Duration：</strong>用于计算时间间隔</li>
+</ul>
+<h3 id="Instant-表示时间线上的一个点-瞬时"><a href="#Instant-表示时间线上的一个点-瞬时" class="headerlink" title="Instant 表示时间线上的一个点(瞬时)"></a><code>Instant</code> 表示时间线上的一个点(瞬时)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试执行下面这三行操作使用的时间(纳秒值)</span></span><br><span class="line">Instant begin = Instant.now();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100000</span>;i++)&#123;</span><br><span class="line">    j=j+i+j;</span><br><span class="line">&#125;</span><br><span class="line">Instant end = Instant.now();</span><br><span class="line">System.out.println(Duration.between(begin,end).toNanos());</span><br></pre></td></tr></table></figure>
+
+<h3 id="LocalDate、LocalTime、LocalDateTime、ZonedDateTime-可以规为一组，用于表示时间的"><a href="#LocalDate、LocalTime、LocalDateTime、ZonedDateTime-可以规为一组，用于表示时间的" class="headerlink" title="LocalDate、LocalTime、LocalDateTime、ZonedDateTime 可以规为一组，用于表示时间的"></a><code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>、<code>ZonedDateTime</code> 可以规为一组，用于表示时间的</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以使用 of 方法构建它们的实例,如下面创建了一个 2019-9-22 21:42:59 的时间对象 </span></span><br><span class="line">LocalDate localDate = LocalDate.of(<span class="number">2019</span>, Month.SEPTEMBER, <span class="number">22</span>);</span><br><span class="line">LocalTime localTime = LocalTime.of(<span class="number">21</span>, <span class="number">42</span>, <span class="number">59</span>);</span><br><span class="line">LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);</span><br><span class="line">ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取现在的时间，这是一个静态方法</span></span><br><span class="line">LocalDate now = LocalDate.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每个实例可以获取它们的 part 信息,如获取年 </span></span><br><span class="line"><span class="keyword">int</span> year = localDate.getYear();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以修改 part 信息，这将返回一个新对象，如增加一年</span></span><br><span class="line">LocalDate localDatePlus = localDate.plusYears(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置 part 信息，也会返回新的对象，如设置为 2017 年 </span></span><br><span class="line">LocalDate localDateWithYear = localDate.withYear(<span class="number">2017</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较两个日期 isAfter,isBefore</span></span><br><span class="line"><span class="keyword">boolean</span> after = localDate.isAfter(LocalDate.now());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 格式化日期时间</span></span><br><span class="line"><span class="comment">// yyyy-MM-dd</span></span><br><span class="line">System.out.println(now.format(DateTimeFormatter.ISO_DATE));</span><br><span class="line"><span class="comment">// yyyy-MM-ddTHH:mm:ss</span></span><br><span class="line">System.out.println(now.format(DateTimeFormatter.ISO_DATE_TIME));</span><br><span class="line"><span class="comment">// yyyy-MM-dd HH:mm:ss</span></span><br><span class="line">System.out.println(now.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 日期解析 </span></span><br><span class="line">System.out.println(LocalDate.parse(<span class="string">"2019-09-22"</span>));</span><br><span class="line">System.out.println(LocalDateTime.parse(<span class="string">"2019-09-22T21:05:22"</span>));</span><br><span class="line">System.out.println(LocalDateTime.parse(<span class="string">"2019-09-22 21:05:22"</span>,DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));</span><br></pre></td></tr></table></figure>
+
+<h3 id="ZoneId-用来操作时区，它提供了获取所有时区和本地时区的方法"><a href="#ZoneId-用来操作时区，它提供了获取所有时区和本地时区的方法" class="headerlink" title="ZoneId 用来操作时区，它提供了获取所有时区和本地时区的方法"></a><code>ZoneId</code> 用来操作时区，它提供了获取所有时区和本地时区的方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZoneId zoneId = ZoneId.systemDefault();</span><br><span class="line">Set&lt;String&gt; availableZoneIds = ZoneId.getAvailableZoneIds();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Period，Duration-可以视为一组，用于计算时间间隔"><a href="#Period，Duration-可以视为一组，用于计算时间间隔" class="headerlink" title="Period，Duration  可以视为一组，用于计算时间间隔"></a><code>Period</code>，<code>Duration</code>  可以视为一组，用于计算时间间隔</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个两周的间隔</span></span><br><span class="line">Period periodWeeks = Period.ofWeeks(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一年三个月零二天的间隔</span></span><br><span class="line">Period custom = Period.of(<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一天的时长</span></span><br><span class="line">Duration duration = Duration.ofDays(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算2015/6/16 号到现在 2019/09/22 过了多久，它这个把间隔分到每个 part 了</span></span><br><span class="line">LocalDate now = LocalDate.now();</span><br><span class="line">LocalDate customDate = LocalDate.of(<span class="number">2015</span>, <span class="number">6</span>, <span class="number">16</span>);</span><br><span class="line">Period between = Period.between(customDate, now);</span><br><span class="line"><span class="comment">// 结果为 4:3:6 即过去了 4年3个月6天了</span></span><br><span class="line">System.out.println(between.getYears()+<span class="string">":"</span>+between.getMonths()+<span class="string">":"</span>+between.getDays());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较两个瞬时的时间间隔 </span></span><br><span class="line">Instant begin = Instant.now();</span><br><span class="line">Instant end = Instant.now();</span><br><span class="line">Duration.between(begin,end);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同样可以修改 part 信息和设置 part 信息，都是返回新的对象来表示设置过的值，原来的对象不变</span></span><br><span class="line">Period plusDays = between.plusDays(<span class="number">1</span>);</span><br><span class="line">Period withDays = between.withDays(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="与-Date-Calendar-的转换"><a href="#与-Date-Calendar-的转换" class="headerlink" title="与 Date,Calendar 的转换"></a>与 Date,Calendar 的转换</h3><p>虽然说，这个新的时间工具很好用，但如果不能与以前的旧的 api 兼容的话，一样是没有用的；还好新的工具类能很好的与以前的工具类进行相互转换。</p>
+<p>通过 <code>Instant</code>做中间转换实现<code>Date</code>，<code>Calendar</code> 与 <code>LocalDateTime</code>，<code>ZonedDateTime</code>，<code>LocalDate</code> 的互相转换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LocalDateTime 转 Date</span></span><br><span class="line">Date localDateTimeDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());</span><br><span class="line"><span class="comment">// LocalDateTime 转 Calendar</span></span><br><span class="line">Calendar localDateTimeCalendar = GregorianCalendar.from(ZonedDateTime.of(localDateTime, ZoneId.systemDefault()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Date 转 LocalDateTime</span></span><br><span class="line">LocalDateTime dateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());</span><br><span class="line"><span class="comment">// Calendar 转 LocalDateTime</span></span><br><span class="line">LocalDateTime calendarLocalDateTime = LocalDateTime.ofInstant(calendar.toInstant(), ZoneOffset.systemDefault());</span><br></pre></td></tr></table></figure>
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">java日期及日期格式化</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/20/Java%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-JavaMaven" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -384,6 +643,123 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/15/JavaMaven/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="Post-Java异常处理" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">Java异常处理</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-05-14T16:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java的异常"><a href="#Java的异常" class="headerlink" title="Java的异常"></a>Java的异常</h1><p><img src="/assets/blogImg/yichang.png" alt=""></p>
+<p>这是异常的类图。</p>
+<p><strong>Throwable</strong>是Error和Exception的父类，用来定义所有可以作为异常被抛出来的类。</p>
+<p><strong>Erro</strong>r和<strong>Exception</strong>区分：</p>
+<p><strong>Error</strong>:编译时错误和系统错误，系统错误在除特殊情况下，都不需要你来关心，基本不会出现。而编译时错误，如果你使用了编译器，那么编译器会提示。</p>
+<p><strong>Exception</strong>:是可以被抛出的基本类型，我们需要主要关心的也是这个类。</p>
+<p>Exception又分为RunTimeException和其他Exception。</p>
+<p>RunTimeException和其他Exception区分：</p>
+<ol>
+<li>其他Exception，受检查异常。可以理解为错误，必须要开发者解决以后才能编译通过，解决的方法有两种，1：throw到上层，2，try-catch处理。</li>
+<li>RunTimeException：运行时异常，又称不受检查异常，所以在代码中可能会有RunTimeException时Java编译检查时不会告诉你有这个异常，但是在实际运行代码时则会暴露出来，比如经典的1/0，空指针等。如果不处理也会被Java自己处理。</li>
+</ol>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>通常使用try catch finally；</p>
+<h2 id="try-catch"><a href="#try-catch" class="headerlink" title="try/catch"></a>try/catch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">   &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="throws-throw"><a href="#throws-throw" class="headerlink" title="throws/throw"></a>throws/throw</h2><ul>
+<li>如果一个方法没有捕获一个检查性异常，那么该方法必须使用 throws 关键字来声明</li>
+<li>throws 关键字放在方法签名的尾部</li>
+<li>也可以使用 throw 关键字抛出一个异常</li>
+<li>一个方法可以声明抛出多个异常，多个异常之间用逗号隔开</li>
+</ul>
+<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><ul>
+<li>finally 关键字用来创建在 try 代码块后面执行的代码块。</li>
+<li>无论是否发生异常，finally 代码块中的代码总会被执行。</li>
+<li>在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。</li>
+<li>finally 代码块出现在 catch 代码块最后</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Throwable下有两个方法需要常用"><a href="#Throwable下有两个方法需要常用" class="headerlink" title="Throwable下有两个方法需要常用"></a>Throwable下有两个方法需要常用</h2><ul>
+<li>public String getMessage() //返回关于发生的异常的详细信息</li>
+<li>public void printStackTrace()//打印toString()结果和栈层次到System.err，即错误输出流</li>
+</ul>
+<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><p>一般会选择继承Exception和RuntimeException，如果不要求调用者一定要处理抛出的异常，就继承RuntimeException。</p>
+<p>Student类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//给Student类的setAge方法做判断</span></span><br><span class="line">        <span class="keyword">if</span>(age&lt;<span class="number">0</span> || age&gt;<span class="number">130</span>)&#123;</span><br><span class="line">            <span class="comment">//throw new ArithmeticException("年龄输入不符合规则");</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AgeException(<span class="string">"年龄输入不符合规则"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义的异常类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeException</span><span class="params">(String msg)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        stu.setAge(-<span class="number">150</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"程序运行结束"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">com.codeyang.jrxtraining.ExceptionStudy.AgeException: 年龄输入不符合规则</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.Student.setAge(Student.java:<span class="number">20</span>)</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.DiyExceptionDemo.main(DiyExceptionDemo.java:<span class="number">13</span>)</span><br><span class="line">程序运行结束</span><br></pre></td></tr></table></figure>
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java异常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">展开全文 >></a>
         </p>
       
 
@@ -1084,123 +1460,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="Post-Java异常处理" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">Java异常处理</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-05-14T16:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java的异常"><a href="#Java的异常" class="headerlink" title="Java的异常"></a>Java的异常</h1><p><img src="/assets/blogImg/yichang.png" alt=""></p>
-<p>这是异常的类图。</p>
-<p><strong>Throwable</strong>是Error和Exception的父类，用来定义所有可以作为异常被抛出来的类。</p>
-<p><strong>Erro</strong>r和<strong>Exception</strong>区分：</p>
-<p><strong>Error</strong>:编译时错误和系统错误，系统错误在除特殊情况下，都不需要你来关心，基本不会出现。而编译时错误，如果你使用了编译器，那么编译器会提示。</p>
-<p><strong>Exception</strong>:是可以被抛出的基本类型，我们需要主要关心的也是这个类。</p>
-<p>Exception又分为RunTimeException和其他Exception。</p>
-<p>RunTimeException和其他Exception区分：</p>
-<ol>
-<li>其他Exception，受检查异常。可以理解为错误，必须要开发者解决以后才能编译通过，解决的方法有两种，1：throw到上层，2，try-catch处理。</li>
-<li>RunTimeException：运行时异常，又称不受检查异常，所以在代码中可能会有RunTimeException时Java编译检查时不会告诉你有这个异常，但是在实际运行代码时则会暴露出来，比如经典的1/0，空指针等。如果不处理也会被Java自己处理。</li>
-</ol>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>通常使用try catch finally；</p>
-<h2 id="try-catch"><a href="#try-catch" class="headerlink" title="try/catch"></a>try/catch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">   &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="throws-throw"><a href="#throws-throw" class="headerlink" title="throws/throw"></a>throws/throw</h2><ul>
-<li>如果一个方法没有捕获一个检查性异常，那么该方法必须使用 throws 关键字来声明</li>
-<li>throws 关键字放在方法签名的尾部</li>
-<li>也可以使用 throw 关键字抛出一个异常</li>
-<li>一个方法可以声明抛出多个异常，多个异常之间用逗号隔开</li>
-</ul>
-<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><ul>
-<li>finally 关键字用来创建在 try 代码块后面执行的代码块。</li>
-<li>无论是否发生异常，finally 代码块中的代码总会被执行。</li>
-<li>在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。</li>
-<li>finally 代码块出现在 catch 代码块最后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型1 异常的变量名1)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;catch(异常类型2 异常的变量名2)&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">  &#x2F;&#x2F; 程序代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Throwable下有两个方法需要常用"><a href="#Throwable下有两个方法需要常用" class="headerlink" title="Throwable下有两个方法需要常用"></a>Throwable下有两个方法需要常用</h2><ul>
-<li>public String getMessage() //返回关于发生的异常的详细信息</li>
-<li>public void printStackTrace()//打印toString()结果和栈层次到System.err，即错误输出流</li>
-</ul>
-<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><p>一般会选择继承Exception和RuntimeException，如果不要求调用者一定要处理抛出的异常，就继承RuntimeException。</p>
-<p>Student类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//给Student类的setAge方法做判断</span></span><br><span class="line">        <span class="keyword">if</span>(age&lt;<span class="number">0</span> || age&gt;<span class="number">130</span>)&#123;</span><br><span class="line">            <span class="comment">//throw new ArithmeticException("年龄输入不符合规则");</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AgeException(<span class="string">"年龄输入不符合规则"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>自定义的异常类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeException</span><span class="params">(String msg)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        stu.setAge(-<span class="number">150</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"程序运行结束"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line">com.codeyang.jrxtraining.ExceptionStudy.AgeException: 年龄输入不符合规则</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.Student.setAge(Student.java:<span class="number">20</span>)</span><br><span class="line">	at com.codeyang.jrxtraining.ExceptionStudy.DiyExceptionDemo.main(DiyExceptionDemo.java:<span class="number">13</span>)</span><br><span class="line">程序运行结束</span><br></pre></td></tr></table></figure>
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java异常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/15/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="get-时间格式转换" class="article article-type-get  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1686,114 +1945,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="Post-github高级搜索" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/github%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2/">github高级搜索</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/23/github%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2/" class="archive-article-date">
-  	<time datetime="2020-02-23T03:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>GitHub 提供高级搜索方式。</p>
-<p>一、明确搜索仓库标题、仓库描述、README</p>
-<p>1.只想查找仓库名称包含XX的仓库。语法：</p>
-<p>　　 in:name 关键词</p>
-<p>2.查找描述的内容</p>
-<p>　　in:descripton 关键词</p>
-<p>3.查README文件包含特定关键词</p>
-<p>　　in:readme 关键词</p>
-<p>二、明确搜索 star、fork 数大于多少的</p>
-<ol>
-<li>star 数大于 1000 的XX 仓库</li>
-</ol>
-<p>　　stars: &gt; 数字 关键字</p>
-<p>2.star 数在某个区间 的XX 仓库</p>
-<p>　　stars: 10..20 关键词</p>
-<p> 三、明确搜索仓库大小的</p>
-<p>搜索限定size的仓库</p>
-<p>　　size:&gt;=5000 关键词</p>
-<p>注意：这个数字代表K, 5000代表着5M</p>
-<p>四、明确仓库是否还在更新维护</p>
-<p>　　指定时间之前或之后创建或更新的仓库</p>
-<p> 　pushed:&gt;2019-01-03 关键字  //在xx时间后还有更新</p>
-<p>　　 created:&gt;2019-01-03 关键字  //在xx时间后创建</p>
-<p>五、明确搜索仓库的 LICENSE</p>
-<p>　　寻找协议为 Apache License 2 的代码</p>
-<p>　　license:apache-2.0 关键词</p>
-<p>六、明确搜索仓库的语言</p>
-<p>　　language:java 关键词</p>
-<p>七、明确搜索某个人或组织的仓库</p>
-<p>​    user:userName</p>
-<p>   user:userName language:java</p>
-<p>   org:spring-cloud</p>
-
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/23/github%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1974,6 +2125,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Maven(Java Util包)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java日期及日期格式化</a>
               </li>
             
             <div class="clearfix"></div>
