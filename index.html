@@ -166,6 +166,456 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux端口占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/10/Linux%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/">Linux端口占用</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/09/10/Linux%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-09-10T08:13:35.863Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="查看Linux端口占用，并kill掉相关进程"><a href="#查看Linux端口占用，并kill掉相关进程" class="headerlink" title="查看Linux端口占用，并kill掉相关进程"></a>查看Linux端口占用，并kill掉相关进程</h1><p>介绍Linux常规操作：查看端口占用进程，根据PID kill掉相关进程。另外补充：根据程序名查看进程PID。</p>
+<p>  首先，两条命令，lsof命令和netstat命令。</p>
+<h2 id="方式一：lsof命令"><a href="#方式一：lsof命令" class="headerlink" title="方式一：lsof命令"></a>方式一：lsof命令</h2><p>1、查看占用端口进程的PID：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:&#123;端口号&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180613164038339?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doZHhqYnc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>2、根据PID kill掉相关进程：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 &#123;PID&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180613164428328?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doZHhqYnc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<h2 id="方式二：netstat命令"><a href="#方式二：netstat命令" class="headerlink" title="方式二：netstat命令"></a>方式二：netstat命令</h2><p>1、查看占用端口进程的PID：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp|<span class="keyword">grep</span> &#123;port&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180613164632450?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doZHhqYnc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>2、kill方法如上。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 &#123;PID&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="补充：根据程序名查看对应的PID"><a href="#补充：根据程序名查看对应的PID" class="headerlink" title="补充：根据程序名查看对应的PID"></a>补充：根据程序名查看对应的PID</h2><p>1、用ps命令（zb专用）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep &#123;programName&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kill -9 &#123;PID&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看详细内存占用</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ps aux -u root | grep &#123;programName&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、用pgrep命令：</p>
+<p>pgrep命令的p表明了这个命令是专门用于进程查询的grep。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pgrep &#123;programName&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kill -9 &#123;PID&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>隔很长时间不用，就忘了，故记下！</p>
+
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/10/Linux%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Prometheus + Grafana 监控 SpringBoot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/10/Prometheus%20+%20Grafana%20%E7%9B%91%E6%8E%A7%20SpringBoot/">Prometheus + Grafana 监控 SpringBoot</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/09/10/Prometheus%20+%20Grafana%20%E7%9B%91%E6%8E%A7%20SpringBoot/" class="archive-article-date">
+  	<time datetime="2020-09-10T06:56:34.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Prometheus-Grafana-监控-SpringBoot"><a href="#Prometheus-Grafana-监控-SpringBoot" class="headerlink" title="Prometheus + Grafana 监控 SpringBoot"></a>Prometheus + Grafana 监控 SpringBoot</h1><h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><p><strong>SpringBoot</strong> 的 <code>actuator</code> 提供了监控端点。</p>
+<p><strong>Prometheus</strong> 是监控系统，可以从 Springboot 获取监控数据，以时序数据的形式存储，并提供了监控数据的查询服务。</p>
+<p><strong>Grafana</strong> 是专业的 UI 仪表盘系统，支持非常多的数据源，其中就包括 Prometheus，可以便利的从中获取数据，使用仪表盘展示出来。</p>
+<p>springboot 2 中引入了 <code>micrometer</code>，它可以更方便的对接各种监控系统，包括 Prometheus。</p>
+<p><img src="../images/v2-5cd28dc047776e3624cb7bdf52cecb1b_720w.jpg" alt=""></p>
+<p>所以整体的结构就是：</p>
+<ul>
+<li>springboot（micrometer）产生监控数据。</li>
+<li>Prometheus 获取 springboot 应用的监控数据，存储，并提供数据查询服务。</li>
+<li>Grafana 对接 Prometheus 数据源，调用其数据查询服务，用专业的仪表盘 UI 进行展示。</li>
+</ul>
+<h2 id="实践步骤"><a href="#实践步骤" class="headerlink" title="实践步骤"></a>实践步骤</h2><ul>
+<li>创建应用 – 作为监控目标，产生监控数据。</li>
+<li>集成度量库 micrometer – 以便对接监控系统 Prometheus。</li>
+<li>部署 prometheus</li>
+<li>配置 prometheus – 监控之前创建的 springboot 应用，了解 Prometheus 的查询服务。</li>
+<li>部署 Grafana</li>
+<li>添加 Prometheus 数据源</li>
+<li>添加 JVM 监控仪表盘 – 展示之前 springboot 应用的 JVM 状态。</li>
+<li>自定义监控指标 – 自有的监控指标都是底层基础数据，业务相关指标需要我们自己写代码。</li>
+<li>动态变更监控目标 – 如果监控目标发生变动就改一次 Prometheus 的配置文件，并重新启动，这是不适合的，需要使用动态配置的方式。</li>
+</ul>
+<h3 id="1-创建应用-集成-micrometer"><a href="#1-创建应用-集成-micrometer" class="headerlink" title="1. 创建应用 集成 micrometer"></a>1. 创建应用 集成 micrometer</h3><p>创建一个最简的 springboot 应用，添加 micrometer 依赖。</p>
+<p>pom.xml ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springboot2demo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>springboot2demo<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.micrometer<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>micrometer-registry-prometheus<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>application.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.application.name</span>=<span class="string">springboot2demo</span></span><br><span class="line"><span class="comment"># 打开所有 Actuator 服务</span></span><br><span class="line"><span class="meta">management.endpoints.web.exposure.include</span>=<span class="string">*</span></span><br><span class="line"><span class="comment"># 将应用名称添加到计量器的 tag 中去</span></span><br><span class="line"><span class="comment"># 以便 Prometheus 根据应用名区分不同服务</span></span><br><span class="line"><span class="meta">management.metrics.tags.application</span>=<span class="string">$&#123;spring.application.name&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在启动类中添加Bean，用于监控JVM性能指标：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.springboot2demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.micrometer.core.instrument.MeterRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Springboot2demoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Springboot2demoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">MeterRegistryCustomizer&lt;MeterRegistry&gt; <span class="title">configurer</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @Value(<span class="string">"$&#123;spring.application.name&#125;"</span>)</span> String applicationName) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (registry) -&gt; registry.config().commonTags(<span class="string">"application"</span>, applicationName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动服务。</p>
+<p>查看监控端点信息：localhost:8080/actuator/prometheus</p>
+<h3 id="2-部署-Prometheus"><a href="#2-部署-Prometheus" class="headerlink" title="2. 部署 Prometheus"></a>2. 部署 Prometheus</h3><p>官网：</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//prometheus.io/">https://prometheus.io/</a></p>
+<p>可以下载安装包来安装，但下载速度极其慢，几乎下载不了。</p>
+<p>可以使用 docker 部署，因为国内有docker镜像，所以速度很快。</p>
+<p>docker 方式启动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom&#x2F;prometheus</span><br></pre></td></tr></table></figure>
+
+<p>执行完成后就OK了，可以看一下 Prometheus 的界面。</p>
+<p><a href="https://link.zhihu.com/?target=http%3A//localhost%3A9090/targets">http://localhost:9090/targets</a> 是监控目标列表页：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-a0454866f1ef0cb1e379954b13866d1e_720w.jpg" alt="img"></p>
+<p><a href="https://link.zhihu.com/?target=http%3A//localhost%3A9090/graph">http://localhost:9090/graph</a> 是查询控制台，也有简单的图表展示：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-e573fd00eb5cae58c807a72b3db53078_720w.jpg" alt="img"></p>
+<p>现在还没对接应用，后面对接之后可以看到详细的内容。</p>
+<h3 id="3-Prometheus-Springboot应用"><a href="#3-Prometheus-Springboot应用" class="headerlink" title="3. Prometheus + Springboot应用"></a>3. Prometheus + Springboot应用</h3><p>监控应用，需要在 Prometheus 配置文件中添加应用的相关信息。</p>
+<p>配置文件在容器中的路径：<code>/etc/prometheus</code>。</p>
+<p>查看一下配置文件的默认内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker exec -it [容器ID] cat &#x2F;etc&#x2F;prometheus&#x2F;prometheus.yml</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picb.zhimg.com/80/v2-e2b3986e7b5c4446584b2c9cceb7e2a1_720w.jpg" alt="img"></p>
+<p>红框内是我们要关注的部分，按照这个形式添加我们的应用即可。</p>
+<p>需要添加的内容为：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'springboot_app'</span></span><br><span class="line">    <span class="attr">scrape_interval:</span> <span class="string">5s</span></span><br><span class="line">    <span class="attr">metrics_path:</span> <span class="string">'/actuator/prometheus'</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> <span class="string">['192.168.31.6:8080']</span></span><br><span class="line">        <span class="attr">"labels":</span> <span class="string">&#123;</span></span><br><span class="line">            <span class="attr">"instance":</span> <span class="string">"springboot2-A"</span><span class="string">,</span></span><br><span class="line">            <span class="attr">"service":</span> <span class="string">"springboot2-A-service"</span></span><br><span class="line">        <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>metrics_path</code> 指定监控端点的路径。</p>
+<p><code>targets</code> 指定应用的IP端口，这里使用了IP，没有使用<code>localhost</code>，因为 Prometheus 是容器运行的，如果使用 <code>localhost</code> 就会访问容器内部。</p>
+<p>配置不是直接在容器内部修改，可以把容器内部的配置文件拷贝出来一份，修改后，重启启动容器，挂载本地修改过的配置文件。</p>
+<p>拷贝容器中的配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [容器ID]:&#x2F;etc&#x2F;prometheus&#x2F;prometheus.yml .</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件，添加配置，最终的内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># my global config</span></span><br><span class="line"><span class="attr">global:</span></span><br><span class="line">  <span class="attr">scrape_interval:</span>     <span class="string">15s</span> <span class="comment"># Set the scrape interval to every 15 seconds. Default is every 1 minute.</span></span><br><span class="line">  <span class="attr">evaluation_interval:</span> <span class="string">15s</span> <span class="comment"># Evaluate rules every 15 seconds. The default is every 1 minute.</span></span><br><span class="line">  <span class="comment"># scrape_timeout is set to the global default (10s).</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Alertmanager configuration</span></span><br><span class="line"><span class="attr">alerting:</span></span><br><span class="line">  <span class="attr">alertmanagers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span></span><br><span class="line">      <span class="comment"># - alertmanager:9093</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Load rules once and periodically evaluate them according to the global 'evaluation_interval'.</span></span><br><span class="line"><span class="attr">rule_files:</span></span><br><span class="line">  <span class="comment"># - "first_rules.yml"</span></span><br><span class="line">  <span class="comment"># - "second_rules.yml"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A scrape configuration containing exactly one endpoint to scrape:</span></span><br><span class="line"><span class="comment"># Here it's Prometheus itself.</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="comment"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'prometheus'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># metrics_path defaults to '/metrics'</span></span><br><span class="line">    <span class="comment"># scheme defaults to 'http'.</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span> <span class="string">['localhost:9090']</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'springboot_app'</span></span><br><span class="line">    <span class="attr">scrape_interval:</span> <span class="string">5s</span></span><br><span class="line">    <span class="attr">metrics_path:</span> <span class="string">'/actuator/prometheus'</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> <span class="string">['192.168.31.6:8080']</span></span><br><span class="line">        <span class="attr">"labels":</span> <span class="string">&#123;</span></span><br><span class="line">            <span class="attr">"instance":</span> <span class="string">"springboot2-A"</span><span class="string">,</span></span><br><span class="line">            <span class="attr">"service":</span> <span class="string">"springboot2-A-service"</span></span><br><span class="line">        <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>停掉之前的容器，重新启动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name prometheus -d \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v [PATH]&#x2F;prometheus.yml:&#x2F;etc&#x2F;prometheus&#x2F;prometheus.yml \</span><br><span class="line">    prom&#x2F;prometheus</span><br></pre></td></tr></table></figure>
+
+<p>访问监控列表页 <a href="https://link.zhihu.com/?target=http%3A//localhost%3A9090/targets">http://localhost:9090/targets</a> 就可以看到我们的应用了：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-9161ae99640cdfa839bb5ecf69b8acec_720w.jpg" alt="img"></p>
+<p>点击端点链接，可以看到监控数据，例如：</p>
+<p><img src="https://picb.zhimg.com/80/v2-733b26051d5a3f95e662fa8eef59f63b_720w.jpg" alt="img"></p>
+<p>进入查询控制台页面 <a href="https://link.zhihu.com/?target=http%3A//localhost%3A9090/graph">http://localhost:9090/graph</a>，可以查询一个指标，例如 <code>http_server_requests_seconds_sum</code>，效果：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-ca9e1abc5b710a050b9824d891111a9b_720w.jpg" alt="img"></p>
+<h3 id="4-部署-Grafana"><a href="#4-部署-Grafana" class="headerlink" title="4. 部署 Grafana"></a>4. 部署 Grafana</h3><p>docker方式运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 3000:3000 \</span><br><span class="line">    --name&#x3D;grafana \</span><br><span class="line">    grafana&#x2F;grafana</span><br></pre></td></tr></table></figure>
+
+<p>启动后，访问：<a href="https://link.zhihu.com/?target=http%3A//localhost%3A3000/">http://localhost:3000</a>，默认用户名密码 <code>admin/admin</code>。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-83971baf6d8d2a3b1b530b43cbd8d41f_720w.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-8f10c2a725a10e2943d85cf2dc2fbbc3_720w.jpg" alt="img"></p>
+<h3 id="5-添加-Prometheus-数据源"><a href="#5-添加-Prometheus-数据源" class="headerlink" title="5. 添加 Prometheus 数据源"></a>5. 添加 Prometheus 数据源</h3><p><img src="https://picb.zhimg.com/80/v2-5178037fe8fac1412e7f25d1a55e55e6_720w.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-d268817cf3c2e589220ad9429686926d_720w.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-3b595cb919dd66720819729461b0f3bc_720w.jpg" alt="img"></p>
+<h3 id="6-展示应用的-JVM-信息"><a href="#6-展示应用的-JVM-信息" class="headerlink" title="6. 展示应用的 JVM 信息"></a>6. 展示应用的 JVM 信息</h3><p>Grafana 中已经有现成的 JVM 仪表盘，我们直接导入使用即可。</p>
+<p>这个仪表盘的编号为 <code>4701</code>。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-8cbe19b59f041365c663ee0372f035ee_720w.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-1d1fcc72cf44212fb5445b20a73ecbfd_720w.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-8b5f7fed91683fb2ff1b0cf5e413665a_720w.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-5f373f7f1f2c5e45f16920a7e936ed53_720w.jpg" alt="img"></p>
+<p>至此，Prometheus + Grafana + Springboot 的整体流程已经跑通了。</p>
+<p>但是，这些指标都是底层通用指标，在业务层面一定会有个性需求，下面我们自己定义一些监控指标。</p>
+<h3 id="7-自定义监控指标"><a href="#7-自定义监控指标" class="headerlink" title="7. 自定义监控指标"></a>7. 自定义监控指标</h3><p>需求：监控所有接口的请求次数。</p>
+<p>应用中添加依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjrt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用AOP方式对接口请求计数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.springboot2demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.micrometer.core.instrument.Counter;</span><br><span class="line"><span class="keyword">import</span> io.micrometer.core.instrument.MeterRegistry;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterReturning;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.PostConstruct;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">APICounterAop</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(public * com.example.springboot2demo.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pointCut</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ThreadLocal&lt;Long&gt; startTime = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    MeterRegistry registry;</span><br><span class="line">    <span class="keyword">private</span> Counter counter;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        counter = registry.counter(<span class="string">"requests_total"</span>, <span class="string">"status"</span>, <span class="string">"success"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"pointCut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doBefore</span><span class="params">(JoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"do before"</span>);</span><br><span class="line">        counter.increment(); <span class="comment">//请求计数</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(returning = <span class="string">"returnVal"</span>, pointcut = <span class="string">"pointCut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfterReturning</span><span class="params">(Object returnVal)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"do after"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个测试接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.springboot2demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启应用，多访问几次测试接口，然后查看 Prometheus 中的应用监控端点页面，就可以看到监控结果：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-05f4dab07cc8e1dc29875e11c475783d_720w.jpg" alt="img"></p>
+<p>然后，我们把这个指标在 Grafana 中显示出来。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-0904514577f65675c91ae65920bacc12_720w.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-f904b78901cf92bfee3166a28828165c_720w.jpg" alt="img"></p>
+<h3 id="8-动态变更监控目标"><a href="#8-动态变更监控目标" class="headerlink" title="8. 动态变更监控目标"></a>8. 动态变更监控目标</h3><p>上面 Prometheus 配置文件中定义的监控目标使用的是静态方式，改配置文件后需要重启。</p>
+<p>如果服务变更了，或者增加服务了，经常重启 Prometheus 肯定不合适。</p>
+<p>Prometheus 提供了动态加载的方式，把服务信息放到一个单独的文件中，Prometheus 配置中指定这个外部文件，内容变化后，Prometheus 就会自动重新加载。</p>
+<p>服务信息配置文件例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"targets"</span>: [</span><br><span class="line">            <span class="string">"192.168.31.6:8080"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"labels"</span>: &#123;</span><br><span class="line">            <span class="attr">"instance"</span>: <span class="string">"springboot2-A"</span>,</span><br><span class="line">            <span class="attr">"service"</span>: <span class="string">"springboot2-A-service"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>Prometheus 配置文件中的写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'springboot_app'</span></span><br><span class="line">    <span class="attr">scrape_interval:</span> <span class="string">5s</span></span><br><span class="line">    <span class="attr">metrics_path:</span> <span class="string">'/actuator/prometheus'</span></span><br><span class="line">    <span class="attr">file_sd_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">files:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/*.json</span></span><br><span class="line">      <span class="attr">refresh_interval:</span> <span class="string">1m</span></span><br></pre></td></tr></table></figure>
+
+<p>启动 Prometheus 容器时要挂载这个服务信息配置文件的目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name prometheus -d -p 9090:9090 \</span><br><span class="line">    -v [PATH]&#x2F;prometheus.yml:&#x2F;etc&#x2F;prometheus&#x2F;prometheus.yml \</span><br><span class="line">    -v [PATH]:&#x2F;home \</span><br><span class="line">    prom&#x2F;prometheus</span><br></pre></td></tr></table></figure>
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/10/Prometheus%20+%20Grafana%20%E7%9B%91%E6%8E%A7%20SpringBoot/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Prometheus安装部署和监控MySQL，并在grafana上展示" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/10/Prometheus%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E5%92%8C%E7%9B%91%E6%8E%A7MySQL%EF%BC%8C%E5%B9%B6%E5%9C%A8grafana%E4%B8%8A%E5%B1%95%E7%A4%BA/">Prometheus安装部署和监控MySQL，并在grafana上展示</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/09/10/Prometheus%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E5%92%8C%E7%9B%91%E6%8E%A7MySQL%EF%BC%8C%E5%B9%B6%E5%9C%A8grafana%E4%B8%8A%E5%B1%95%E7%A4%BA/" class="archive-article-date">
+  	<time datetime="2020-09-10T06:42:30.453Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Prometheus安装部署和监控MySQL，并在grafana上展示"><a href="#Prometheus安装部署和监控MySQL，并在grafana上展示" class="headerlink" title="Prometheus安装部署和监控MySQL，并在grafana上展示"></a><strong>Prometheus安装部署和监控MySQL，并在grafana上展示</strong></h2><h3 id="1-下载mysqld-exporter"><a href="#1-下载mysqld-exporter" class="headerlink" title="1.下载mysqld_exporter"></a>1.下载mysqld_exporter</h3><p> https://<a href="https://prometheus.io/download/#mysqld_exporter" target="_blank" rel="noopener">prometheus.io/download/#mysqld_exporter</a></p>
+<h3 id="2-上传-rz"><a href="#2-上传-rz" class="headerlink" title="2.  上传   rz"></a>2.  上传   rz</h3><h3 id="3-解压-tar-xvf-mysqld-exporter-0-12-1-linux-amd64-tar-gz-C-home-devops"><a href="#3-解压-tar-xvf-mysqld-exporter-0-12-1-linux-amd64-tar-gz-C-home-devops" class="headerlink" title="3.解压   tar -xvf mysqld_exporter-0.12.1.linux-amd64.tar.gz -C /home/devops"></a>3.解压   tar -xvf mysqld_exporter-0.12.1.linux-amd64.tar.gz -C /home/devops</h3><h3 id="4-配置连接MySQL的信息"><a href="#4-配置连接MySQL的信息" class="headerlink" title="4.配置连接MySQL的信息"></a>4.配置连接MySQL的信息</h3><p>首先执行下面命令创建mysql_monitor用户并进行赋权：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION CLIENT,PROCESS ON *.* TO &#39;mysql_monitor&#39;@&#39;%&#39; identified by &#39;mysql_monitor&#39;; GRANT SELECT ON*.* TO &#39;mysql_monitor&#39;@&#39;%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>创建并编辑配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;home&#x2F;devops&#x2F;mysqld_exporter-0.12.1.linux-amd64&#x2F;.my.cnf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[client] </span><br><span class="line">host&#x3D;172.16.101.106 </span><br><span class="line">port&#x3D;3306 </span><br><span class="line">user&#x3D;mysql_monitor </span><br><span class="line">password&#x3D;mysql_monitor</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-运行mysqld-exporter"><a href="#5-运行mysqld-exporter" class="headerlink" title="5.运行mysqld_exporter"></a>5.运行mysqld_exporter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup &#x2F;home&#x2F;devops&#x2F;mysqld_exporter-0.12.1.linux-amd64&#x2F;mysqld_exporter --config.my-cnf&#x3D;&#x2F;home&#x2F;devops&#x2F;mysqld_exporter-0.12.1.linux-amd64&#x2F;my.cnf &amp;</span><br></pre></td></tr></table></figure>
+
+<p>已封装，直接执行 ./start.sh </p>
+<h3 id="6-配置prometheus-yml"><a href="#6-配置prometheus-yml" class="headerlink" title="6.配置prometheus.yml"></a>6.配置prometheus.yml</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line">  <span class="attr">scrape_interval:</span>     <span class="string">15s</span> <span class="comment"># Set the scrape interval to every 15 seconds. Default is every 1 minute.</span></span><br><span class="line">  <span class="attr">evaluation_interval:</span> <span class="string">15s</span> <span class="comment"># Evaluate rules every 15 seconds. The default is every 1 minute.</span></span><br><span class="line">  <span class="comment"># scrape_timeout is set to the global default (10s).</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Alertmanager configuration</span></span><br><span class="line"><span class="attr">alerting:</span></span><br><span class="line">  <span class="attr">alertmanagers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span></span><br><span class="line">      <span class="comment"># - alertmanager:9093</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Load rules once and periodically evaluate them according to the global 'evaluation_interval'.</span></span><br><span class="line"><span class="attr">rule_files:</span></span><br><span class="line">  <span class="comment"># - "first_rules.yml"</span></span><br><span class="line">  <span class="comment"># - "second_rules.yml"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A scrape configuration containing exactly one endpoint to scrape:</span></span><br><span class="line"><span class="comment"># Here it's Prometheus itself.</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="comment"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'prometheus'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># metrics_path defaults to '/metrics'</span></span><br><span class="line">    <span class="comment"># scheme defaults to 'http'.</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span> <span class="string">['localhost:9090']</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'mysql'</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span> <span class="string">['localhost:9104']</span></span><br><span class="line">      <span class="attr">labels:</span> </span><br><span class="line">        <span class="attr">instance:</span> <span class="string">'anyschedule'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-热重启Promethus：curl-XPOST-http-localhost-9090-reload"><a href="#7-热重启Promethus：curl-XPOST-http-localhost-9090-reload" class="headerlink" title="7.热重启Promethus：curl -XPOST http://localhost:9090/-/reload ;"></a>7.热重启Promethus：curl -XPOST <a href="http://localhost:9090/-/reload" target="_blank" rel="noopener">http://localhost:9090/-/reload</a> ;</h3><p>​    直接执行 reload.sh</p>
+<p>​    访问 <a href="http://172.16.102.102:9090/targets" target="_blank" rel="noopener">http://172.16.102.102:9090/targets</a></p>
+<p><img src="../../../YunNote/ys2016814@163.com/93a9c1c413e847518a5dac5ec9017e34/1599638063(1).png" alt="img"></p>
+<p>访问：<a href="http://172.16.102.102:3000/d/FogKaQvMk/prometheus-2-0-stats?orgId=1" target="_blank" rel="noopener">http://172.16.102.102:3000/d/FogKaQvMk/prometheus-2-0-stats?orgId=1</a></p>
+<p><img src="../../../YunNote/ys2016814@163.com/a6a941d6661f457c893a8ed523bec31f/1599638133(1).png" alt="img"></p>
+<h3 id="8-从Grafana导入mysql监控面板"><a href="#8-从Grafana导入mysql监控面板" class="headerlink" title="8.从Grafana导入mysql监控面板"></a>8.从Grafana导入mysql监控面板</h3><p><img src="../../../YunNote/ys2016814@163.com/6ee3484555744e7d9ec7eb484a7fd531/1599641927(1).png" alt="img"></p>
+<p>MySQL_Overview.json（<a href="https://github.com/percona/grafana-dashboards/blob/master/dashboards/MySQL_Overview.json）" target="_blank" rel="noopener">https://github.com/percona/grafana-dashboards/blob/master/dashboards/MySQL_Overview.json）</a></p>
+
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/10/Prometheus%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E5%92%8C%E7%9B%91%E6%8E%A7MySQL%EF%BC%8C%E5%B9%B6%E5%9C%A8grafana%E4%B8%8A%E5%B1%95%E7%A4%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="get-随笔2020-5 -31 " class="article article-type-get  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/31/%E9%9A%8F%E7%AC%942020-5%20-31%20/">那就这样吧</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/05/31/%E9%9A%8F%E7%AC%942020-5%20-31%20/" class="archive-article-date">
+  	<time datetime="2020-05-31T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>什么才是一生最正确的浪费？</p>
+<p>大概就是顺其自然，回头看时都是回忆，不必悔恨多想，哪怕是不如意的事，也是自己人生的一部分，全部完整才是自己，世事一切都无条件接受。</p>
+
+      
+	  
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/31/%E9%9A%8F%E7%AC%942020-5%20-31%20/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="Post-Java日期时间" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1651,322 +2101,9 @@ Locale locale)</code></p>
 
 
   
-    <article id="Post-红黑树深入剖析之Java实现" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/02/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B9%8BJava%E5%AE%9E%E7%8E%B0/">红黑树深入剖析及Java实现</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/03/02/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B9%8BJava%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2020-03-01T16:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>红黑树是平衡二叉查找树的一种。为了深入理解红黑树，我们需要从二叉查找树开始讲起。</p>
-<h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><p>二叉查找树（Binary Search Tree，简称BST）是一棵二叉树，它的左子节点的值比父节点的值要小，右节点的值要比父节点的值大。它的高度决定了它的查找效率。
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/02/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B9%8BJava%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="get-给希望留点空间" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/%E7%BB%99%E5%B8%8C%E6%9C%9B%E7%95%99%E7%82%B9%E7%A9%BA%E9%97%B4/">给希望留点空间</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/03/01/%E7%BB%99%E5%B8%8C%E6%9C%9B%E7%95%99%E7%82%B9%E7%A9%BA%E9%97%B4/" class="archive-article-date">
-  	<time datetime="2020-03-01T10:07:53.211Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​                                                                <strong>给希望留点空间</strong></p>
-<p>​                                                                                                                                            –<strong>塔斯格丝</strong></p>
-<p>西西里监狱是一级监狱，虽然坐落在城市的中央，但却感受不到丝毫的繁华与自由。卡洛奇自杀过很多次，可惜，狱警连他自杀的权利都给剥夺了
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">好文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/01/%E7%BB%99%E5%B8%8C%E6%9C%9B%E7%95%99%E7%82%B9%E7%A9%BA%E9%97%B4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="get-随笔 2020-03-15" class="article article-type-get  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/25/%E9%9A%8F%E7%AC%94%202020-03-15/">如何面对</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/25/%E9%9A%8F%E7%AC%94%202020-03-15/" class="archive-article-date">
-  	<time datetime="2020-02-25T04:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个世界上根本不存在“不会”这件事，当你失去所有依靠后，你自然什么都会了。</p>
-
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/25/%E9%9A%8F%E7%AC%94%202020-03-15/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="Post-抓包自动签到" class="article article-type-Post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/%E6%8A%93%E5%8C%85%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/">指点天下健康日志-抓包破解</a>
-    </h1>
-  
-
-        
-        
-<a href="/2020/02/23/%E6%8A%93%E5%8C%85%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/" class="archive-article-date">
-  	<time datetime="2020-02-23T03:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为什么会有这篇博客的诞生呢？故事还得从一只蝙蝠说起</p>
-<p>…</p>
-<p>疫情期间每天各种签到  工作的，学校的，社区的，烦不胜烦，偶尔总会忘了签到就会带来很严重的后果
-        
-      
-	  
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">奇淫技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/23/%E6%8A%93%E5%8C%85%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
